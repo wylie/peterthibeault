@@ -1,2 +1,3 @@
 admin/!dbconnect.php
+admin/.htpasswd
 .DS_Store
