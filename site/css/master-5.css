@@ -1,0 +1,318 @@
+/* -------------------------------- */
+/* UNIVERSAL ---------------------- */
+/* -------------------------------- */
+html, body {
+	font-family: arial, helvetica, sans-serif;
+	color: #FFF;
+	height: 100%;
+	background: #CCC;
+	background: rgba(250,156,69,1);
+	background-image: url('images/texture.png');
+}
+/* all a tags */
+.link {
+	color: inherit;
+	text-decoration: inherit;			
+}
+* {
+	box-sizing: border-box;
+}
+.heading {
+	font-weight: normal;
+	font-size: 2em;
+}
+.subheading {
+	font-weight: normal;
+	font-size: 1.75em;	
+}
+.text {
+	font-size: 1.5em;
+	color: #FFF;
+	text-shadow: -1px 1px 1px rgba(255,255,255,.5);
+}
+.item {
+	cursor: pointer;
+	opacity: .5;
+}		
+.item.active {
+	opacity: 1;
+}	
+.item:hover {
+	opacity: 1;
+}
+/* -------------------------------- */
+/* END UNIVERSAL ------------------ */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* MASTER LAYOUT ------------------ */
+/* -------------------------------- */
+#wrap {
+	height: 100%;
+}
+#left {
+	width:  320px;
+	height: 100%;
+	position: fixed;
+	top:0;
+	bottom:0;
+	left:0;
+}
+#right {
+	margin-left: 350px;
+	height: 100%;
+}
+/* -------------------------------- */
+/* END LAYOUT --------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* SIDEBAR ------------------------ */
+/* -------------------------------- */
+.sidebar {
+	height: 100%;
+	padding: 15px;
+	background-color: rgba(15,66,135,1);
+	border-right: 5px solid rgba(255, 255, 255,.25);
+	box-shadow: 5px 0 5px rgba(0, 0, 0, .25);
+	background-image: url('images/texture.png');
+	text-align: right;
+}
+.sidebar .nav {
+	margin: 50px 0;
+}
+.sidebar .nav .item {
+	padding: 10px 5px 10px 0;
+	border-bottom: 1px solid rgba(255,255,255,.25);
+	cursor: pointer;
+}
+.sidebar .item.active {
+	background-color: rgba(255,255,255,.125);
+}
+.sidebar .nav .item:hover {
+	background-color: rgba(255,255,255,.25);
+}		
+.sidebar .nav .item:last-child {
+	margin-bottom: 0;
+	border-bottom: none;
+}
+.sidebar .more {
+	font-size: .5em;
+	display: block;
+	margin-top: 20px;
+	text-decoration: underline;
+	cursor: pointer;
+	color: rgba(255,255,255,.5);
+	text-shadow: none;
+}
+.sidebar .copyright {
+	font-size: .75em;
+}
+/* -------------------------------- */
+/* END SIDEBAR -------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* MODULE ------------------------- */
+/* -------------------------------- */
+.module {
+	max-width: 1000px;
+	min-width: 600px;
+	padding: 20px;
+	margin-top: 150px;
+	position: relative;
+}
+.module > section {
+	clear: both;
+	width: 100%;
+	border-radius: 4px;
+	box-shadow: 0 0 1px #FFF;
+	border: 5px solid rgba(255,255,255,.25);
+	position: relative;
+}
+.module.logo {
+	margin-top: 0;
+	padding: 0;
+}
+.module.logo + .module {
+	margin-top: 50px;
+}
+.module .logo .heading {
+	font-size: 8em;
+}
+.module .heading {
+	position: absolute;
+	left: 20px;
+	top: -20px;
+	font-size: 2em;
+	color: rgba(255, 255, 255, .25);			
+}
+.module .nav {
+	border-top: 5px solid rgba(255, 255, 255, .75);
+	background-color: black;
+}
+.module .nav-list {
+	position: relative;
+	height: 100px;
+	list-style-type: none;
+}
+.module .nav-list .item {
+	display: inline-block;
+	height: 80%;
+	width: 11%;
+	float: left;
+	margin: 0 5px;
+	margin-top: 10px;
+	cursor: pointer;
+	overflow: hidden;
+}
+.module .nav-list .item:nth-child(2) {
+	margin-left: 18px;
+}
+.module .nav-list .item .nav-image {
+	background-image: url('image/default.png');
+	background-size: 150%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+.module .arrow {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 40px;
+	background: rgba(255, 255, 255, 0.25);
+	font-size: 3em;
+	text-align: center;
+	line-height: 2em;
+	cursor: pointer;
+}
+.module .arrow.left {
+	left: 0;
+	border-right: 1px solid rgba(255,255,255,.35);
+}
+.module .arrow.right {
+	right: 0;
+	border-left: 1px solid rgba(255,255,255,.35);
+}
+.module .arrow .dir {
+	color: rgba(255,255,255,.5);
+}
+.module .arrow:hover {
+	background: rgba(255, 255, 255, 0.45);
+}
+.module .arrow:hover .dir {
+	color: rgba(255,255,255,.75);
+}
+.module .arrow.disabled {
+	position: absolute;
+	left:-9999px;
+}
+.module .bg {
+	position: relative;
+	margin-right: 200px;
+}
+.module .bg .bg-image {
+	width: 100%;
+	margin-bottom: -2px;
+}
+.module .caption {
+	position: absolute;
+	margin-right: -200px;
+	height: 100%;
+	background-color: rgb(0, 0, 0);
+	color: white;
+	text-shadow: none;
+	width: 200px;
+	padding: 10px;
+}
+.module .text {
+	padding: 20px;
+	line-height: 1.25em;
+}
+.module .caption.left {
+	text-align: right;
+	left: 0;
+	border-right: 5px solid rgba(255, 255, 255, .5);
+	box-shadow: 5px 0 10px rgba(0, 0, 0, .25);
+}
+.module .caption.right {
+	text-align: left;
+	right: 0;
+	border-left: 5px solid rgba(255, 255, 255, .5);
+	box-shadow: -5px 0 10px rgba(0, 0, 0, .25);
+}
+.module .caption .caption-content {
+	height: 300px;
+}
+.module .caption .caption-heading {
+	font-size: 1.2em;
+	margin-bottom:10px;
+	border-bottom: 1px dotted rgba(255,255,255, .25);
+	padding-bottom: 10px;
+}
+/* -------------------------------- */
+/* END MODULE --------------------- */
+/* -------------------------------- */
+
+.caption-module {
+	height: 25%;
+}
+.caption .item {
+	background-image: url('http://www.peterthibeault.com/temp/img/chest-2.png');
+	float: left;
+	width: 30px;
+	height: 30px;
+	background-size: 150%;
+	display: inline-block;
+	background-repeat: no-repeat;
+	margin: 5px 5px 0 0;
+	background-position: center center;
+	cursor: pointer;
+	opacity: .5;
+}		
+.caption .item.active {
+	border: 2px solid white;
+	background-size: 170%;
+}	
+	
+
+
+
+.news {
+	text-align: right;
+}
+
+.furniture .nav-list .nav-image {
+	background-image: url('http://www.peterthibeault.com/temp/img/chest-2.png');
+}
+.furniture .image {
+	 height: 475px;
+}
+.furniture .image {
+	background-image: url(images/chest.jpg);
+}
+.copyright {
+	position: absolute;
+	bottom: 20px;
+	font-size: .4em;
+	color: rgba(255,255,255,.25);
+	text-shadow: none;
+	text-align: right;
+	width: 290px;
+	text-shadow: none;
+}
+.copyright .link {
+	color: rgba(255,255,255,.5);
+}
+.copyright .link:hover {
+	color: rgba(255,255,255,.75);
+}

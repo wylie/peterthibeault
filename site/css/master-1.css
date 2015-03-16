@@ -1,0 +1,312 @@
+@import url(reset.css);
+
+/* -------------------------------- */
+/* UNIVERSAL ---------------------- */
+/* -------------------------------- */
+html, body {
+	background-color: #CCC;
+	font-family: helvetica, arial, sans-serif;
+	text-shadow: -1px 1px 1px  rgba(255,255,255,.5);
+}
+* {
+	box-sizing: border-box;
+}
+a {
+	color: inherit;
+}
+.wrap {
+	width: 800px;
+	margin: auto;
+}
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+}
+/* -------------------------------- */
+/* END UNIVERSAL ------------------ */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* COLUMNS ------------------------ */
+/* -------------------------------- */
+.col {display: inline-block;float: left;position: relative;overflow: hidden;}
+.one-col .col {width: 100%;}
+.two-col .col {width: 50%;}
+.two-col-left .col {width: 25%;}
+.two-col-left .col:last-child {width: 75%;}
+.two-col-right .col {width: 75%;}
+.two-col-right .col:last-child {width: 25%;}
+.three-col .col {width: 33.3333333333%;}
+.three-col-left .col {width: 33.3333333333%;}
+.three-col-left .col:last-child {width: 66.6666666666%;}
+.three-col-right .col {width: 66.6666666666%;}
+.three-col-right .col:last-child {width: 33.3333333333%;}
+.four-col .col {width: 25%;}
+.five-col .col {width: 25%;}
+.six-col .col {width: 16.6666666667%;}
+.seven-col .col {width: 14.2857142857%;}
+.eight-col .col {width: 12.5%;}
+.nine-col .col {width: 11.1111111111%;}
+.ten-col .col {width: 10%;}
+/* -------------------------------- */
+/* END COLUMNS -------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* MODULES ------------------------ */
+/* -------------------------------- */
+.module {
+	width: 100%;
+	margin-bottom: 200px;
+	background-color: rgba(0,0,0,.25);
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 1);
+	position: relative;
+	z-index: 9999;
+}
+.module:nth-child(1) {
+	margin: 25px 0 75px 0;
+}
+/* -------------------------------- */
+/* END MODULES -------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* HEADERS ------------------------ */
+/* -------------------------------- */
+.module-header {
+	margin-bottom: 25px;
+}
+.module-heading {
+	position: absolute;
+	left: -200px;
+	font-size: 5em;
+	top: -55px;
+	opacity: 0.15;
+	text-shadow: 0 0 2px black;
+	color: #FFF;
+}
+
+.module-heading-1 {
+	font-size: 3.6em;
+	margin-bottom: 10px;
+}
+.module-heading-2 {
+	font-size: 1.75em;
+}
+.module-heading-3 {
+	font-size: 1.5em;
+}
+.module-heading-4 {
+	font-size: 1.25em;
+}
+/* -------------------------------- */
+/* END HEADERS -------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* NAV ---------------------------- */
+/* -------------------------------- */
+.header .nav-item {
+	cursor: pointer;
+	text-align: center;
+	padding: 10px;
+	border-right: 1px dotted rgba(0,0,0,.25);
+}
+.header .nav-item:last-child {
+	border-right: none;
+}
+.header .nav-item:nth-child(odd) {
+	/*background-color: rgba(255,255,255,.125);*/
+}
+.header .nav-item:hover {
+	color: #333;
+	background-color: rgba(255,255,255,.25);
+}
+/* -------------------------------- */
+/* END NAV ------------------------ */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* IMAGES ------------------------- */
+/* -------------------------------- */
+.studio .col {
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.studio .image {
+	min-height: 400px;
+	box-shadow: inset 0 0 10px rgba(0,0,0,.5);
+}
+.image {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100%;
+}
+.studio .image {
+	background-image: url(../images/studio.jpg);
+}
+.caption {
+	position: absolute;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .5);
+	color: white;
+	text-shadow: none;
+	width: 200px;
+	padding: 10px;
+}
+.caption.left {
+	text-align: right;
+	left: 0;
+	border-right: 1px solid rgba(255, 255, 255, .3);
+	box-shadow: 5px 0 10px rgba(0, 0, 0, .25);
+}
+.caption.right {
+	text-align: left;
+	right: 0;
+	border-left: 1px solid rgba(255, 255, 255, .3);
+	box-shadow: -5px 0 10px rgba(0, 0, 0, .25);
+}
+.caption .close {
+	position: absolute;
+	bottom: 10px;
+	font-size: 0.7em;
+	color: rgba(255,255,255,.75);
+	width: 15%;
+	cursor: pointer;
+}
+.caption .close:hover {
+	text-decoration: underline;
+}
+.caption.right .close {
+	right: 10px;
+}
+.caption.right .close {
+	left: 10px;
+}
+.caption .module-heading-3 {
+	font-size: 1.2em;
+	margin-bottom:10px;
+	border-bottom: 1px dotted rgba(255,255,255, .25);
+	padding-bottom: 10px;
+}
+/* -------------------------------- */
+/* END IMAGES --------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* MISC --------------------------- */
+/* -------------------------------- */
+.module {
+	border-radius: 5px;
+}
+.module-header .module-heading-4 {
+	font-size: 2em;
+}
+.news-link {
+	text-decoration: underline;
+	cursor: pointer;
+	display: block;
+}
+.news-link.active:after {
+	content: " -->";
+}
+.news .module-heading-2 {
+	font-size: 2em;
+}
+.news-story {
+	font-size: 2em;
+}
+/* -------------------------------- */
+/* END MISC ----------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* MISC --------------------------- */
+/* -------------------------------- */
+.furniture .nav .nav-item {
+	height: 80px;
+	overflow: hidden;
+	float: left;
+	border-right: 2px solid transparent;
+	background-image: url('http://www.peterthibeault.com/temp/img/chest-2.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+}
+.furniture .image {
+	 height: 500px;
+}
+.furniture .col .image {
+	background-image: url(../images/chest.jpg);
+}
+/* -------------------------------- */
+/* END MISC ----------------------- */
+/* -------------------------------- */
+
+
+
+/* -------------------------------- */
+/* MISC --------------------------- */
+/* -------------------------------- */
+.contact label {
+	display: block;
+	width: 20%;
+	float: left;
+	text-align: right;
+	padding-right: 10px;
+	margin-top: 5px;
+	font-size: 1.25em;
+}
+.contact input,
+.contact textarea {
+	display: block;
+	border: 1px solid #666;
+	font-size: 1em;
+	padding: 5px;
+	width: 75%;
+	border-radius: 3px;
+	background-color: #EFEFEF;
+	box-shadow: inset 0 0 20px rgba(255,255,255,1);
+}
+.contact textarea {
+	resize:vertical;
+}
+.contact button {
+	display: block;
+	border: 1px solid #999;
+	font-size: 1em;
+	padding: 5px;
+	width: 25%;
+	text-align: center;
+	margin-left: 20%;
+	background-color: #666;
+	color: #FFF;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.contact button:hover {
+	background-color: #333;
+}
+/* -------------------------------- */
+/* END MISC ----------------------- */
+/* -------------------------------- */
