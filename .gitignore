@@ -1,3 +1,6 @@
-admin/!dbconnect.php
-admin/.htpasswd
+dev/admin/!dbconnect.php
+dev/admin/!dbconnect.php
+dev/admin/.htpasswd
+node_modules/
+dist/
 .DS_Store
