@@ -4,3 +4,4 @@ dev/admin/.htpasswd
 node_modules/
 dist/
 .DS_Store
+notes/

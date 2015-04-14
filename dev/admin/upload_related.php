@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="wrap">
+<div id="related" class="wrap">
 	<?php require('login.php'); ?>
 	<article class="admin" data-page="upload-related">
 		<nav class="pages">
@@ -51,8 +51,8 @@ if( $name || $num ) {
 
 		echo '
 		<form action="upload_related.php?name=' . $name . '&num=' . $num . '&rnum='. $rnum . '" method="post" enctype="multipart/form-data">		
-			<input size="25" name="related_image" type="file" /><br/>
-			<input type="submit" value="Upload this related work" class="button primary-action"><br/>
+			<input id="fileUpload" size="25" name="related_image" type="file" /><br/>
+			<input id="submitRelated" type="submit" value="Upload this related work" class="button primary-action" disabled><br/>
 			<input type="hidden" name="risubmitted" value="true">
 		</form>';
 	
@@ -161,6 +161,8 @@ if( $name || $num ) {
 						// convert name to lowercase
 						$workname = strtolower($name);
 						
+						$workname = preg_replace('/[^A-Za-z0-9\-]/', '', $workname); // Removes special chars
+						
 						// rename the file
 						$filename_l = $upload_path . $workname . '-' . $rnum . '_' . $num . '_l.' . $extension;
 						$filename_m = $upload_path . $workname . '-' . $rnum . '_' . $num . '_m.' . $extension;
@@ -199,6 +201,15 @@ if( $name || $num ) {
 		
 	</article>
 </div>
+
+<script>
+		var fileUpload = document.getElementById('fileUpload');
+		var submitRelated = document.getElementById('submitRelated');
+		fileUpload.onclick = removeDisabled;
+		function removeDisabled() {
+			submitRelated.removeAttribute('disabled');
+		}
+</script>
 
 </body>
 </html>

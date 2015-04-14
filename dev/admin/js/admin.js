@@ -96,7 +96,7 @@ $(function() {
 
 		$(function() {
 			$.get('../../resume-raw.php', function(data) {
-				console.log('data = ' + data);
+				// console.log('data = ' + data);
 				$('[data-page="resume"] [name="content"]').html(data);
 			});
 		});

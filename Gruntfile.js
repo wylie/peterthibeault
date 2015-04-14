@@ -12,8 +12,7 @@ module.exports = function(grunt) {
 					keepalive: true,
 					open: true
 				}
-			},
-			watch: {}
+			}
 		},
 		copy: {
 			dev: {
@@ -79,7 +78,15 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			html: {
-				files: ['dev/*.html'],
+				files: ['dev/*.php'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
+			site: {
+				files: ['dev/site/*.php'],
 				tasks: ['copy'],
 				options: {
 					spawn: false,

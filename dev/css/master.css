@@ -149,7 +149,7 @@ a:visited {
 
 /* header ------------------------------------- */
 .sidebar .sub-header {
-	min-height: 195px;
+	min-height: 75px;
 	vertical-align: bottom;
 	position: relative;
 	margin-bottom: 50px;
@@ -721,3 +721,13 @@ a:visited {
 /* -------------------------------------------- */
 /* -------------------------------- END CONTACT */
 /* -------------------------------------------- */
+
+
+
+
+
+
+/* NEW STUFF */
+.module:first-child {
+	margin-top: 40px;
+}

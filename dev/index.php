@@ -12,23 +12,15 @@
 	<link href="css/master.css" rel="stylesheet" />
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script src="js/master.js"></script>
+	<script src="js/script.js"></script>
 	
 </head>
 <body class="bg-1">
 
 	<div class="l-left">
 		
-		<div class="stage"></div>
-		
 		<!-- sidebar -->
 		<div class="sidebar bg-2">
-			
-			<!-- alert -->
-			<div class="alert wip">
-				This site is a work in progress. New works will be added shortly. Check back often to see what's new!
-			</div>
-			<!-- end alert -->
 			
 			<!-- sub-header -->
 			<div class="sub-header">
@@ -37,9 +29,10 @@
 			<!-- end sub-header -->
 			
 			<!-- nav -->
-			<div class="nav">
-				<?php navDisplay() ?>
-			</div>
+			<!-- <div class="nav">
+				<?php // navDisplay() ?>
+			</div> -->
+			<ul class="nav" id="nav"></ul>
 			<!-- end nav -->
 			
 			<!-- copyright -->
@@ -77,21 +70,65 @@
 		</div>
 		<!-- end header -->
 		
-		<?php buildModule('furnishings', 'work'); ?>
+		<ul id="results"></ul>
 
-		<?php buildModule('sculpture', 'work'); ?>
+		<div id="works"></div>
 
-		<?php buildModule('drawing', 'work'); ?>
-
-		<?php buildModule('painting', 'work'); ?>
-
-		<?php buildModule('design', 'work'); ?>
-
-		<?php buildModule('students', 'work'); ?>
-
-		<?php buildModule('studio', 'studio'); ?>
-
-		<?php buildModule('news', 'news'); ?>
+		<!--
+		<div class="module group" id="result">
+			<div class="header">FURNISHINGS</div>
+			<div class="left">
+				<div class="module-main bg-3">
+					<img id="resultImg" class="main-image" alt="main image" />
+				</div>
+				<div class="module-sidebar">
+					<ul class="sidebar-items-list bg-3 group">
+						<li class="sidebar-header">
+							<h2 class="sidebar-list-heading">INFO</h2>
+						</li>
+						<li class="sidebar-header"></li>
+						<li class="sidebar-header">
+							<h2 class="sidebar-list-heading">RELATED IMAGES</h2>
+						</li>
+						<li class="sidebar-item">
+						<ul class="info bg-3">
+							<li class="sidebar-list-heading">TITLE</li>
+							<li class="sidebar-list-item" id="resultTitle"></li>
+							<li class="sidebar-list-heading">
+								MEDIA
+							</li>
+							<li class="sidebar-list-item" id="resultMedia"></li>
+							<li class="sidebar-list-heading">DESCRIPTION</li>
+							<li class="sidebar-list-item" id="resultDescription"></li>
+							<li class="sidebar-list-heading">DIMENSIONS</li>
+							<li class="sidebar-list-item" id="resultDimensions"></li>
+						</ul>
+						</li>
+						<li class="sidebar-item">
+							<ul class="related sidebar-list bg-3">
+								<li class="sidebar-list-item active">
+									<a href="#furnishings" style="background-image: url(../img/works/chest-645_0_s.jpg);"></a>
+								</li>
+								<li class="sidebar-list-item extra">
+									<a href="#furnishings" style="background-image: url(../img/works/chest-645_1_s.jpg);"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="right">
+				<div class="module-nav bg-3">
+					<h3 class="sub-header">Additional<br>Furnishings</h3>
+					<div class="list-wrap">
+						<ul class="module-list">
+							<li class="list-item active" style="background-image: url(../img/works/mantle-clock-297_0_m.jpg);"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
 
 		<!-- cv module -->
 		<div class="module group" id="cv">
