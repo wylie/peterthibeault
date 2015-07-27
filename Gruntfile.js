@@ -49,6 +49,18 @@ module.exports = function(grunt) {
 					},
 					{
 						expand: true,
+						src: 'dev/img/works/*',
+						dest: 'dist/img/works/',
+						flatten: true
+					},
+					{
+						expand: true,
+						src: 'dev/img/studio/*',
+						dest: 'dist/img/studio/',
+						flatten: true
+					},
+					{
+						expand: true,
 						src: 'dev/temp/*',
 						dest: 'dist/temp/',
 						flatten: true
@@ -57,6 +69,12 @@ module.exports = function(grunt) {
 						expand: true,
 						src: 'dev/admin/*',
 						dest: 'dist/admin/',
+						flatten: true
+					},
+					{
+						expand: true,
+						src: 'dev/data/*',
+						dest: 'dist/data/',
 						flatten: true
 					},
 					{
@@ -119,7 +137,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('dev', [
-		'sass:live',
 		'watch'
 	]);
 
@@ -128,7 +145,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('live', [
-		'sass:live',
 		'copy'
 	]);
 	

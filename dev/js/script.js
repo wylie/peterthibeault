@@ -78,14 +78,76 @@ function listWorks(kind) {
 	var keys = Object.keys(kind);
 
 	for(var i = 0; i < keys.length; i++) {
+		// console.log(keys[i]);
 		var module = document.createElement('div');
-		module.setAttribute('class', 'module');
+		module.setAttribute('class', 'module group');
 		module.setAttribute('id', keys[i]);
+		var anchor = document.createElement('a');
+		anchor.setAttribute('class', 'test');
+		anchor.setAttribute('name', keys[i]);
+		module.appendChild(anchor);
+
+		// heading
 		var h2 = document.createElement('h2');
 		h2.setAttribute('class',  'header');
 		h2.innerHTML = keys[i].toUpperCase();
 		theTypeIs = keys[i];
 		module.appendChild(h2);
+		// left module div
+		var leftDiv = document.createElement('div');
+		leftDiv.setAttribute('class', 'left');
+
+		// module main div
+		var moduleMainDiv = document.createElement('div');
+		moduleMainDiv.setAttribute('class', 'module-main bg-3');
+		// main image div
+		var mainImgDiv = document.createElement('img');
+		mainImgDiv.setAttribute('class', 'main-image');
+		mainImgDiv.setAttribute('id', 'resultImg');
+		mainImgDiv.setAttribute('src', '../img/works/chest-645_0_l.jpg')
+		moduleMainDiv.appendChild(mainImgDiv);
+
+		// sidebar div
+		var moduleSidebarDiv = document.createElement('div');
+		moduleSidebarDiv.setAttribute('class', 'module-sidebar');
+		// sidebar items div
+		var sidebarItemsDiv = document.createElement('div');
+		sidebarItemsDiv.setAttribute('class', 'sidebar-items-list bg-3 group');
+		moduleSidebarDiv.appendChild(sidebarItemsDiv);
+
+		leftDiv.appendChild(moduleMainDiv);
+		leftDiv.appendChild(moduleSidebarDiv);
+
+		// right div
+		var rightDiv = document.createElement('div');
+		rightDiv.setAttribute('class', 'right');
+		// module nav div
+		var moduleNavDiv = document.createElement('div');
+		moduleNavDiv.setAttribute('class', 'module-nav bg-3');
+		// sub-header div
+		var subHeader = document.createElement('h3');
+		subHeader.setAttribute('class', 'sub-header');
+		subHeader.innerHTML = 'Additional ' + capitalizeFirstLetter(keys[i]);
+		// list div
+		var listDiv = document.createElement('div');
+		listDiv.setAttribute('class', 'list-wrap');
+		// module list div
+		var moduleList = document.createElement('ul');
+		moduleList.setAttribute('class', 'module-list');
+		listDiv.appendChild(moduleList);
+		// li 
+		var listLi = document.createElement('li');
+		listLi.setAttribute('class', 'list-item active');
+		listLi.setAttribute('style', 'background-image: url(../img/works/chest-645_0_m.jpg)');
+		moduleList.appendChild(listLi);
+
+		moduleNavDiv.appendChild(subHeader);
+		moduleNavDiv.appendChild(listDiv);
+		rightDiv.appendChild(moduleNavDiv);
+
+		module.appendChild(leftDiv);
+		module.appendChild(rightDiv);
+
 		worksDiv.appendChild(module);
 	}
 }
@@ -98,9 +160,9 @@ function displayNav() {
 		var kind = dataKinds[i];
 	
 		var kind = JSON.parse(localStorage.getItem('"' + kind + '"'));
-		var eval(kind + 'Keys') = Object.keys(kind);
+		eval(kind + 'Keys') = Object.keys(kind);
 
-		var sheep= "dynamicVariableName";
+		var sheep = "dynamicVariableName";
 		eval("var " + sheep + "= new Array();");
 	}
 	
