@@ -3,17 +3,17 @@ module.exports = function(grunt) {
 	// project config
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		php: {
-			serve: {
+
+		express: {
+			server: {
 				options: {
-					port: 7020,
-					hostname: 'localhost',
-					base: 'dist/',
-					keepalive: true,
-					open: true
+					port: 8040,
+					host: 'http://localhost',
+					bases: 'dist'
 				}
 			}
 		},
+
 		copy: {
 			dev: {
 				files: [
@@ -94,9 +94,29 @@ module.exports = function(grunt) {
 				]
 			}
 		},
+
+		less: {
+			development: {
+				options: {
+					paths: ['dev/css']
+				},
+				files: {
+					'dist/css/master.css': 'dev/css/master.css'
+				}
+			}
+		},
+		
 		watch: {
-			html: {
+			php: {
 				files: ['dev/*.php'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
+			html: {
+				files: ['dev/*.html'],
 				tasks: ['copy'],
 				options: {
 					spawn: false,
@@ -123,29 +143,34 @@ module.exports = function(grunt) {
 
 	});
 
-	grunt.loadNpmTasks('grunt-php');
+	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-express');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('phpwatch', [
-		'php',
+	grunt.registerTask('default', [
+		'build',
+		'server'
+	]);
+
+	grunt.registerTask('build', [
+		'copy',
+		'less'
+	]);
+
+	grunt.registerTask('dev', [
+		'express:dev',
+		'less',
+		'copy',
 		'watch'
 	]);
 
 	grunt.registerTask('server', [
-		'phpwatch'
-	]);
-
-	grunt.registerTask('dev', [
-		'watch'
-	]);
-
-	grunt.registerTask('build', [
-		'copy'
-	]);
-
-	grunt.registerTask('live', [
-		'copy'
+		'express',
+		'watch',
+		'less',
+		'copy',
+		'express-keepalive'
 	]);
 	
 };
