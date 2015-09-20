@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Peter Thibeault - Admin</title>
+	<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,user-scalable=no">
+
+	<link href="../site/css/reset.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="js/jquery.cookie.js"></script>
+	<script src="js/admin.js"></script>
+
+</head>
+<body>
+
+<div class="wrap">
+	<article class="admin" data-page="studio-manage">
+		<nav class="pages">
+            <!-- NAV HERE -->
+		</nav>
+		<section class="module">
+			<header class="section-header">
+				<h1>Manage Works</h1>
+			</header>
+			<div class="works-edit">
+				<h2>A Stat:</h2><br/>
+				<p>You have a total of <!-- display number of studio shots --> studio shots in the database!</p>
+			</div>
+			<div class="content" id="<?php echo $studio_entry_id ?>">
+				<form action="studio-delete.php" method="POST" id="uploadworks" enctype="multipart/form-data">
+					<hr class="module-divider"/>
+
+					<div class="work">
+						<div class="works-edit">
+							<h3>Date Added:</h3>
+							<!-- DATE HERE -->
+
+						</div><!-- end class="works-edit" -->
+					</div><!-- end of class="work" -->
+
+					<div class="module-main bg-3">
+						<img src="<?php echo $studio_image; ?>" alt="" class="main-image" />
+					</div><!-- end of class="module-main bg-3" -->
+
+					<div class="works-edit group" id="studio_entry_id-<?php echo $studio_entry_id; ?>">
+						<button type="submit" name="edit" value="delete" class="delete button">Delete this studio shot</button>
+						<input type="hidden" name="id" value="<?php echo $studio_entry_id; ?>" />
+						<input type="hidden" name="submitted" value="true" />
+					</div>
+				</form>
+			</div>
+		</section><!-- end of class="module" -->
+	</article><!-- end of class="admin" -->
+</div><!-- end of class="wrap" -->
+
+</body>
+</html>

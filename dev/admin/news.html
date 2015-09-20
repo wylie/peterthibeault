@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Peter Thibeault - Admin</title>
+	<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,user-scalable=no">
+
+	<link href="../site/css/reset.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<div class="wrap">
+	<article class="admin" data-page="nav">
+		<nav class="pages">
+            <!-- NAV HERE -->
+		</nav>
+
+		<section class="module">
+			<header class="section-header">
+				<h1>New News</h1>
+			</header>
+			<div class="content">
+				<form action="news.php" method="post">
+					<textarea class="editor" name="content" style="width: 100%;"></textarea>
+					<input type="submit" value="Save This News" class="button primary-action" />
+					<input type="hidden" name="submitted" value="true" />
+					<p><!-- ADD NEWS HERE --></p>
+				</form>
+				<hr />
+				<header class="section-header">
+					<h1>Old News</h1>
+				</header>
+				<div class="content">
+					<!-- SHOW NEWS HERE -->
+				</div>
+			</div>
+		</section>
+
+	</article>
+</div>
+
+</body>
+</html>
