@@ -2,7 +2,7 @@
 
 
 @font-face {
-	font-family: Futura; src: url('../fonts/futura/FuturaStd-Book.otf');	
+	font-family: Futura; src: url('../fonts/futura/FuturaStd-Book.otf');
 }
 @font-face {
 	font-family: Futura-bold; src: url('../fonts/futura/FuturaStd-Bold.otf');
@@ -17,13 +17,13 @@
 html, body {
 	font-family: Futura, arial, helvetica, sans-serif;
 	color: #FFF;
-	
+
 }
 * {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	
+
 	/* -moz-user-select: none;
 	-webkit-user-select: none;
 	user-select: none; */
@@ -134,17 +134,17 @@ a:visited {
 	box-shadow: 5px 0 5px rgba(0,0,0,.25);
 	width: 100%;
 	height: 100%;
-	
+
 	padding: 0 10px 0;
-	
+
 	text-align: right;
-	
+
 	min-height: 635px;
 	position: absolute;
 	top:0;
 	left:0;
 	bottom:0;
-	
+
 }
 
 /* header ------------------------------------- */
@@ -195,10 +195,13 @@ a:visited {
 	position: absolute;
 	bottom: 10px;
 	right: 10px;
-	
+
 	font-size: .7em;
 	color: rgb(255,255,255);
 	color: rgba(255,255,255,.3);
+}
+.copyright .text {
+	cursor: default;
 }
 /* ------------------------------ end copyright */
 
@@ -344,7 +347,7 @@ a:visited {
 	cursor: pointer;
 	overflow: hidden;
 	-webkit-transition: .125s linear all;
-	
+
 }
 */
 .module .module-list .list-item:hover {
