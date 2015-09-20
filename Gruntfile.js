@@ -90,12 +90,20 @@ module.exports = function(grunt) {
 		},
 
 		less: {
-			development: {
+			dev: {
 				options: {
 					paths: ['dev/css']
 				},
 				files: {
-					'dist/css/master.css': 'dev/less/master.less'
+					'dist/css/styles.css': 'dev/less/styles.less'
+				}
+			},
+			admin: {
+				options: {
+					paths: ['dev/css']
+				},
+				files: {
+					'dist/admin/css/styles.css': 'dev/admin/less/styles.less'
 				}
 			}
 		},
@@ -135,6 +143,14 @@ module.exports = function(grunt) {
 			},
 			less: {
 				files: ['dev/less/*'],
+				tasks: ['less'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
+			adminless: {
+				files: ['dev/admin/less/*'],
 				tasks: ['less'],
 				options: {
 					spawn: false,
