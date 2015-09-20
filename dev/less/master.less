@@ -1,0 +1,713 @@
+@import url('reset.css');
+
+
+@font-face {
+	font-family: Futura; src: url('../fonts/futura/FuturaStd-Book.otf');
+}
+@font-face {
+	font-family: Futura-bold; src: url('../fonts/futura/FuturaStd-Bold.otf');
+}
+@font-face {
+	font-family: Futura-light; src: url('../fonts/futura/FuturaStd-Light.otf');
+}
+
+/* -------------------------------------------- */
+/* UNIVERSAL ---------------------------------- */
+/* -------------------------------------------- */
+html, body {
+	font-family: Futura, arial, helvetica, sans-serif;
+	color: #FFF;
+
+}
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+
+	/* -moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none; */
+}
+a,
+a:active,
+a:hover,
+a:visited {
+	color: inherit;
+	text-decoration: none;
+}
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+}
+.error {
+	background-color: red;
+	font-weight: bold;
+	margin: 5px 0;
+	padding: 4px;
+	color: #FFF;
+	border: 5px solid #333;
+}
+.success {
+	background-color: #0bac03;
+	font-weight: bold;
+	margin: 5px 0;
+	padding: 4px;
+	color: #FFF;
+	border: 5px solid #333;
+}
+.alert {
+	font-size: 1.25em;
+	line-height: 1.25em;
+}
+.alert.wip {
+	font-size: 1em;
+	line-height: 1.25em;
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	color: #ffe09f;
+}
+#contact .success,
+#contact .error {
+	margin: 20px 0;
+}
+#contact .success:last-child,
+#contact .error:last-child {
+	margin-bottom: 0;
+}
+/* -------------------------------------------- */
+/* ------------------------------ END UNIVERSAL */
+/* -------------------------------------------- */
+
+
+
+/* -------------------------------------------- */
+/* MAIN COLUMNS ------------------------------- */
+/* -------------------------------------------- */
+.bg-1 {
+	/* background-color: rgb(255, 132, 0); */
+	background-color: rgb(253, 138, 40);
+}
+.bg-2 {
+	background-color: rgb(57,38,77);
+}
+.bg-3 {
+	background-color: #666;
+}
+/* -------------------------------------------- */
+/* ------------------------------ END UNIVERSAL */
+/* -------------------------------------------- */
+
+
+
+/* -------------------------------------------- */
+/* MAIN COLUMNS ------------------------------- */
+/* -------------------------------------------- */
+.l-left {
+	width: 250px;
+	height: 100%;
+	position: fixed;
+	overflow: auto;
+	margin-top: -20px;
+}
+.l-right {
+	width: 100%;
+	max-width: 1180px;
+	padding: 0 30px 0 280px;
+}
+/* -------------------------------------------- */
+/* --------------------------- END MAIN COLUMNS */
+/* -------------------------------------------- */
+
+
+
+/* -------------------------------------------- */
+/* SIDEBAR ------------------------------------ */
+/* -------------------------------------------- */
+.sidebar {
+	border-width: 0 10px 0 0;
+	border-style: solid;
+	border-color: rgba(255,255,255,.1);
+	box-shadow: 5px 0 5px rgba(0,0,0,.25);
+	width: 100%;
+	height: 100%;
+
+	padding: 0 10px 0;
+
+	text-align: right;
+
+	min-height: 635px;
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+
+}
+
+/* header ------------------------------------- */
+.sidebar {
+	.sub-header {
+		min-height: 75px;
+		vertical-align: bottom;
+		position: relative;
+		margin-bottom: 50px;
+	}
+	.sub-heading {
+		position: absolute;
+		bottom: -8px;
+		right: 0;
+		font-size: 1.45em;
+		line-height: 1.25em;
+	}
+}
+/* --------------------------------- end header */
+
+/* info --------------------------------------- */
+.sidebar .nav {
+	height: 45%;
+	min-height: 345px;
+	.item {
+		padding: 5px 5px 5px 0;
+		cursor: pointer;
+		&:last-child {
+			border-bottom: none;
+		}
+		&.active {
+			background-color: rgba(255,255,255,.125);
+		}
+		&:hover {
+			background-color: rgba(255,255,255,.25);
+		}
+	}
+}
+/* ----------------------------------- end info */
+
+/* info --------------------------------------- */
+.sidebar .info .text {
+	font-size: 1.5em;
+}
+/* ----------------------------------- end info */
+
+/* copyright ---------------------------------- */
+.copyright {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+
+	font-size: .7em;
+	color: rgb(255,255,255);
+	color: rgba(255,255,255,.3);
+	.text {
+		cursor: default;
+	}
+}
+/* ------------------------------ end copyright */
+
+/* -------------------------------------------- */
+/* -------------------------------- END SIDEBAR */
+/* -------------------------------------------- */
+
+
+
+/* -------------------------------------------- */
+/* HEADER ------------------------------------- */
+/* -------------------------------------------- */
+.logo {
+	height: 225px;
+	.logo-image {
+		height: 100%;
+		margin: 20px 0;
+		background-image: url(../img/logo-fff-30.png);
+		background-repeat: no-repeat;
+		background-size: 100%;
+		text-indent: -9999px;
+	}
+}
+/* -------------------------------------------- */
+/* --------------------------------- END HEADER */
+/* -------------------------------------------- */
+
+
+
+/* -------------------------------------------- */
+/* MODULE ------------------------------------- */
+/* -------------------------------------------- */
+.module {
+	position: relative;
+	/* background-color: rgba(255,255,255,.2); */
+	background-color: rgba(255,255,255,.3);
+	margin-top: 200px;
+	padding: 10px;
+	min-width: 700px;
+}
+.logo + .module {
+	margin-top: 40px;
+}
+.module:last-child {
+	margin-bottom: 100px;
+}
+.module .header {
+	position: absolute;
+	top: -40px;
+	left: -3px;
+	font-size: 2em;
+	color: rgba(255, 255, 255, .2);
+	font-weight: bold;
+}
+.module .sub-header {
+	background-color: #555;
+	color: #888;
+	font-size: 1em;
+}
+.module .left {
+	width: 85%;
+	float: left;
+}
+.module .right {
+	width: 15%;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	bottom: 10px;
+	border-left: 12px solid transparent;
+}
+
+/* main image --------------------------------- */
+.module .module-main {
+	min-height: 250px;
+}
+.module .module-main .main-image {
+	width: 100%;
+	margin-bottom: -3px;
+}
+/* ----------------------------- end main image */
+
+/* ------------------------------------ end nav */
+.module .module-nav {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.module .module-nav .sub-header {
+	width: 100%;
+/* 	max-height: 65px; */
+	text-align: center;
+	border-bottom: 1px solid #444;
+	box-sizing: border-box;
+	line-height: 1.4em;
+	padding-top: 10px;
+	height: 65px;
+}
+.module .module-nav .list-wrap {
+	overflow: auto;
+	position: absolute;
+	top: 65px;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+.module .module-list {
+	position: relative;
+	height: 100px;
+	list-style-type: none;
+	text-align: center;
+}
+.module .module-list .list-item {
+	background-position: center center;
+	background-repeat: no-repeat;
+	opacity: .4;
+
+
+	display: inline-block;
+	height: 65px;
+	width: 65px;
+	background-color: #555;
+	margin-top: 15px;
+	cursor: pointer;
+	overflow: hidden;
+	-webkit-transition: .125s linear all;
+}
+.module .module-list .list-item.active {
+	opacity: 1;
+}
+/*
+.module .module-list .list-item {
+	display: inline-block;
+	height: 65px;
+	width: 65px;
+	background-color: #555;
+	margin-top: 15px;
+	cursor: pointer;
+	overflow: hidden;
+	-webkit-transition: .125s linear all;
+
+}
+*/
+.module .module-list .list-item:hover {
+	background-color: #777;
+}
+
+.module .module-list .list-item.active .nav-item-image {
+	border: 3px solid white;
+	background-size: 166%;
+}
+/*
+.module .module-list .list-item .nav-item-image {
+	background-image: url('../images/chest.jpg');
+	background-size: 150%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+*/
+
+
+
+/* ------------------------------------ end nav */
+
+/* sidebar ------------------------------------ */
+.module .sidebar-items-list .sidebar-header {
+	float: left;
+	width: 31%;
+	padding: 2.5% 1% 0;
+	margin: 0 1%;
+	border-bottom: 1px solid #555;
+	cursor: pointer;
+}
+.module .sidebar-items-list .sidebar-item {
+	float: left;
+	width: 50%;
+	position: relative;
+}
+.module .sidebar-items-list .sidebar-item:last-child {
+	float: right;
+}
+.module .sidebar-items-list .sidebar-header,
+.module .sidebar-items-list .sidebar-header,
+.module .sidebar-items-list .sidebar-header .sidebar-list-heading {
+	border: none;
+	padding: 1%;
+	font-size: 1.15em;
+}
+.module .sidebar-items-list .sidebar-header:nth-child(3) {
+	text-align: right;
+}
+.module .sidebar-items-list .sidebar-item:first-child {
+	left: 0;
+}
+/* -------------------------------- end sidebar */
+
+/* sidebar universal -------------------------- */
+.module-sidebar {
+	border-top: 10px solid transparent;
+	margin-right: -10px;
+	.info {
+		&.sidebar-list * {
+			-moz-user-select: text;
+			-webkit-user-select: text;
+			user-select: text;
+		}
+		.sidebar-list-item {
+			list-style-type: none;
+			margin: 0 0 10px 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+	}
+	.sidebar-list-heading {
+		color: #888;
+		border-bottom: 1px solid #555;
+		padding-bottom: 3px;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+	.sidebar-list {
+		list-style-type: none;
+		display: none;
+		width: 100%;
+		left: 0;
+		padding: 0 4% 4% 4%;
+		position: relative;
+		&.related {
+			max-width: 250px;
+			float: right;
+			margin-right: 5px;
+		}
+	}
+	.sidebar-list-item {
+		color: #999;
+		margin: 5px 0;
+		line-height: 1.25em;
+		a {
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+	}
+}
+/* ---------------------- end sidebar universal */
+
+
+
+
+/* available ---------------------------------- */
+/*.available .sidebar-list-heading {
+	padding-bottom: 0;
+	border: none;
+}
+*/
+.form-input,
+.available .form-input,
+.available .form-submit {
+	background-color: #555;
+	/* border: 1px solid #444; */
+	border: none;
+	font-size: .8em;
+	color: #888;
+	padding: 2px;
+	width: 100%;
+	-webkit-transition: .125s linear all;
+	resize: none;
+}
+.available .form-submit {
+	color: #888;
+	width: 50%;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.form-input:hover,
+.available .form-input:hover,
+.available .form-input:focus,
+.available .form-submit:hover {
+	background-color: #777;
+	color: #444;
+}
+.available .form-submit:hover {
+	color: #555;
+}
+/* ------------------------------ end available */
+
+/* related ------------------------------------ */
+.related .sidebar-list-item {
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	background-color: #555;
+	float: right;
+	margin: 6px;
+	-webkit-transition: .125s linear all;
+	background-position: center center;
+	background-repeat: no-repeat;
+	opacity: .4;
+	&.active {
+		opacity: 1;
+	}
+	&:hover {
+		background-color: #777;
+	}
+}
+/* -------------------------------- end related */
+
+/* -------------------------------------------- */
+/* --------------------------------- END MODULE */
+/* -------------------------------------------- */
+
+
+
+
+/* -------------------------------------------- */
+/* MODULE UNIVERSAL --------------------------- */
+/* -------------------------------------------- */
+[data-kind="news"] .module-main {
+	padding: 20px;
+	font-size: 1.5em;
+	line-height: 1.25em;
+	position: relative;
+}
+/* -------------------------------------------- */
+/* ----------------------- END MODULE UNIVERSAL */
+/* -------------------------------------------- */
+
+
+/* -------------------------------------------- */
+/* NEWS & STUDIO ------------------------------ */
+/* -------------------------------------------- */
+[data-kind="news"] .text {
+	line-height: 1.25em;
+	margin-bottom: 40px;
+}
+[data-kind="studio"] .display-date,
+[data-kind="news"] .display-date {
+	font-size: .8em;
+	text-align: right;
+	border-top: 5px solid rgba(255, 255, 255, .05);
+	margin-top: 5px;
+	padding-top: 15px;
+	line-height: .8em;
+	position: absolute;
+	left: 20px;
+	right: 20px;
+	bottom: 10px;
+}
+[data-kind="studio"] .module-list .list-item,
+[data-kind="news"] .module-list .list-item {
+	line-height: 5.5em;
+	font-size: 0.75em;
+}
+[data-kind="studio"] .module-list .list-item.active,
+[data-kind="news"] .module-list .list-item.active {
+	font-weight: bold;
+}
+[data-kind="studio"] .module-list .list-item.active {
+	text-shadow: 0 0 4px black;
+}
+/* -------------------------------------------- */
+/* -------------------------- END NEWS & STUDIO */
+/* -------------------------------------------- */
+
+
+/* -------------------------------------------- */
+/* STUDIO ------------------------------------- */
+/* -------------------------------------------- */
+[data-kind="studio"] .module-main {
+	position: relative;
+	padding: 0;
+	font-size: 1.5em;
+	line-height: 1.8em;
+	/* overflow: hidden; */
+}
+.module[data-kind="studio"] .main-image {
+	margin-bottom: -14px;
+}
+[data-kind="studio"] .display-date {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	border: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	text-shadow: 0 0 2px #000;
+}
+
+/* -------------------------------------------- */
+/* --------------------------------- END STUDIO */
+/* -------------------------------------------- */
+
+
+/* -------------------------------------------- */
+/* CV ----------------------------------------- */
+/* -------------------------------------------- */
+.module-main .cv {
+	font-size: 1em;
+	margin: 0 10px;
+	padding: 20px 10px;
+	line-height: 1.2em;
+}
+.cv-date {
+	font-size: 2.4em;
+	border-bottom: 5px solid rgba(255, 255, 255, .05);
+	padding-bottom: 15px;
+	text-align: right;
+	margin: 0 10px 0 10px;
+	padding: 10px 0 5px;
+	font-size: 1.2em;
+}
+.module-main .cv h1 {
+	font-size: 3em;
+	margin-bottom: 30px;
+}
+.module-main .cv h2 {
+	font-size: 2.5em;
+	margin-bottom: 25px;
+}
+.module-main .cv h3 {
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+.module-main .cv h4 {
+	font-size: 1.5em;
+	margin-bottom: 15px;
+}
+.module-main .cv h5 {
+	font-size: 1.25em;
+	margin-bottom: 10px;
+}
+.module-main .cv h6 {
+	font-size: 1em;
+	margin-bottom: 10px;
+}
+.cv sup {
+	vertical-align: super;
+	font-size: .7em;
+}
+.cv sub {
+	vertical-align: sub;
+	font-size: .7em;
+}
+.cv ul,
+.cv ol {
+	margin-left:30px;
+}
+/* -------------------------------------------- */
+/* ------------------------------------- END CV */
+/* -------------------------------------------- */
+
+
+/* -------------------------------------------- */
+/* CONTACT ------------------------------------ */
+/* -------------------------------------------- */
+#contact:last-child form {
+	margin: 0 20px;
+	padding: 20px 0;
+}
+#contact:last-child input,
+#contact:last-child textarea,
+#contact:last-child button {
+	width: 100%;
+	background: #999;
+	border: 0;
+	padding: 5px;
+	margin-bottom: 20px;
+	font-size: 1.5em;
+}
+#contact:last-child input:focus,
+#contact:last-child textarea:focus {
+	background: #CCC;
+}
+#contact:last-child button:hover {
+	background: #AAA;
+}
+#contact:last-child button:active {
+	background: #777;
+}
+#contact:last-child input {
+	display: block;
+}
+#contact:last-child textarea {
+	height: 250px;
+}
+#contact:last-child button {
+	padding: 5px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+/* -------------------------------------------- */
+/* -------------------------------- END CONTACT */
+/* -------------------------------------------- */
+
+
+
+
+
+
+/* NEW STUFF */
+.module:first-child {
+	margin-top: 40px;
+}

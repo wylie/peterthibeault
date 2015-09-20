@@ -94,18 +94,20 @@ a {
 	margin-bottom: 10px;		
 }
 .pages-list-item {
-	display: inline-block;
+	display: block;
 	float: left;
 	width: 16%;
-	padding: 1% 0;
-	text-align: center;
-	cursor: pointer;
 }
-.pages-list-item.active {
+.pages-list-item .txt-link {
+	padding: 10px 0;
+	display: block;
+	text-align: center;
+}
+.pages-list-item.active .txt-link {
 	background-color: #888;
 }
-.pages-list-item:hover {
-	background-color: #CCC;
+.pages-list-item:hover .txt-link {
+	background-color: #ccc;
 }
 /* END NAV SECTION */
 
@@ -153,6 +155,7 @@ a {
 /* END NEWS SECTION */
 
 
+
 /* ADD IMAGES SECTION */
 .module {
 	margin: 0
@@ -163,6 +166,7 @@ a {
 	margin-bottom: 0;
 }
 .module .module-main {
+	min-height: 110px;
 	background-color: #555;
 }
 #uploadworks .module-main {
@@ -171,7 +175,7 @@ a {
 .module .module-main input {
 	margin: auto;
 	width: 30%;
-	padding-top: 13%;
+	padding-top: 5%;
 }
 .module .module-main .input-restrictions {
 	margin: 10px 0 0 -50px;
@@ -291,3 +295,63 @@ input#price {
 	-webkit-appearance: push-button;
 	white-space: pre;
 }
+
+
+
+.module .works-edit {
+	margin-left: 50px;
+}
+.module .works-edit:before {
+    content: '1';
+    display: block;
+    position: absolute;
+    left: 15px;
+    font-size:  48px;
+}
+.module .module-main {
+	margin-left: 50px;
+}
+.module .module-main:before {
+    content: '2';
+    display: block;
+    position: absolute;
+    left: 15px;
+    font-size:  48px;
+}
+.module .module-sidebar {
+	margin-left: 50px;
+}
+.module .module-sidebar:before {
+    content: '3';
+    display: block;
+    position: absolute;
+    left: 15px;
+    font-size:  48px;
+}
+.module .button.primary-action {
+	margin-left: 50px;
+}
+/*.module .button.primary-action {
+	margin-left: 50px;
+	height: 50px;
+	display: block;
+	border: none;
+	width: 200px;
+	background-color: white;
+	border-width: 3px;
+	border-color: #666;
+	font-weight: bold;
+	border-style: solid;
+	font-size: 16px;
+	cursor: pointer;
+}
+.module .button.primary-action disabled {
+	background-color: gray;
+}
+.module .button.primary-action:hover {
+	background-color: #ccc;
+}
+.module .button.primary-action:active {
+	background-color: rgba(255,0,0,.5);
+	color: #fff;
+}*/

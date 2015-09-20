@@ -34,7 +34,7 @@
 <?php
 
 // where to redirect to after uploading the first image
-$baseURL = 'http://peterthibeault.com/admin/upload_related.php';
+$baseURL = '/admin/upload_related.php';
 
 $ref = $_POST['ref'];
 $page = array('studio','work');
@@ -289,6 +289,8 @@ if( isset($_POST['submitted']) ) {
 						// remove spaces and extra characters from filename
 						$workname = str_replace(" ","-",$workname);
 						$workname = strtolower($workname);
+						
+						$workname = preg_replace('/[^A-Za-z0-9\-]/', '', $workname); // Removes special chars
 						
 						//echo $workname;
 								

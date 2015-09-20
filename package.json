@@ -1,19 +1,20 @@
 {
-  "name": "AnalRV",
-  "description": "A road trip game.",
+  "name": "PeterThibeault",
+  "description": "The website for Peter Thibeault",
   "version": "0.1.0",
   "keywords": [
-    "Anal RV"
+    "Peter Thibeault artist"
   ],
   "author": "Wylie",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wylie/analrv.git"
+    "url": "https://github.com/wylie/peterthibeault.git"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-php": "~0.2.0",
-    "grunt-contrib-copy": "~0.5.0"
+    "grunt-express": "^1.4.1"
   }
 }
