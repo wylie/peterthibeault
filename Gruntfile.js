@@ -25,12 +25,6 @@ module.exports = function(grunt) {
 					},
 					{
 						expand: true,
-						src: 'dev/css/*',
-						dest: 'dist/css/',
-						flatten: true
-					},
-					{
-						expand: true,
 						src: 'dev/js/*',
 						dest: 'dist/js/',
 						flatten: true
@@ -101,11 +95,11 @@ module.exports = function(grunt) {
 					paths: ['dev/css']
 				},
 				files: {
-					'dist/css/master.css': 'dev/css/master.css'
+					'dist/css/master.css': 'dev/css/master.less'
 				}
 			}
 		},
-		
+
 		watch: {
 			php: {
 				files: ['dev/*.php'],
@@ -134,6 +128,14 @@ module.exports = function(grunt) {
 			js: {
 				files: ['dev/js/*'],
 				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
+			less: {
+				files: ['dev/css/*'],
+				tasks: ['less'],
 				options: {
 					spawn: false,
 					livereload: false
@@ -172,5 +174,5 @@ module.exports = function(grunt) {
 		'copy',
 		'express-keepalive'
 	]);
-	
+
 };
