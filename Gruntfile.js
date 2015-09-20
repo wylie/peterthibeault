@@ -55,18 +55,6 @@ module.exports = function(grunt) {
 					},
 					{
 						expand: true,
-						src: 'dev/temp/*',
-						dest: 'dist/temp/',
-						flatten: true
-					},
-					{
-						expand: true,
-						src: 'dev/admin/*',
-						dest: 'dist/admin/',
-						flatten: true
-					},
-					{
-						expand: true,
 						src: 'dev/data/*',
 						dest: 'dist/data/',
 						flatten: true
@@ -86,6 +74,35 @@ module.exports = function(grunt) {
 						filter: 'isFile'
 					}
 				]
+			},
+			admin: {
+				files: [
+					{
+						expand: true,
+						src: 'dev/admin/images/*',
+						dest: 'dist/admin/images/',
+						flatten: true
+					},
+					{
+						expand: true,
+						src: 'dev/admin/js/*',
+						dest: 'dist/admin/js/',
+						flatten: true
+					},
+					{
+						expand: true,
+						src: 'dev/admin/resume/*',
+						dest: 'dist/admin/resume/',
+						flatten: true
+					},
+					{
+						expand: true,
+						flatten: true,
+						src: 'dev/admin/*.html',
+						dest: 'dist/admin/',
+						filter: 'isFile'
+					}
+				]
 			}
 		},
 
@@ -100,7 +117,7 @@ module.exports = function(grunt) {
 			},
 			admin: {
 				options: {
-					paths: ['dev/css']
+					paths: ['dev/admin/css']
 				},
 				files: {
 					'dist/admin/css/styles.css': 'dev/admin/less/styles.less'
@@ -143,7 +160,7 @@ module.exports = function(grunt) {
 			},
 			less: {
 				files: ['dev/less/*'],
-				tasks: ['less'],
+				tasks: ['less:dev'],
 				options: {
 					spawn: false,
 					livereload: false
@@ -151,7 +168,7 @@ module.exports = function(grunt) {
 			},
 			adminless: {
 				files: ['dev/admin/less/*'],
-				tasks: ['less'],
+				tasks: ['less:admin'],
 				options: {
 					spawn: false,
 					livereload: false
