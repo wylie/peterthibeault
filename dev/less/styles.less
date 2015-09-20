@@ -2,27 +2,30 @@
 
 
 @font-face {
-	font-family: Futura; src: url('../fonts/futura/FuturaStd-Book.otf');
+	font-family: Futura;
+	src: url('../fonts/futura/FuturaStd-Book.otf');
 }
 @font-face {
-	font-family: Futura-bold; src: url('../fonts/futura/FuturaStd-Bold.otf');
+	font-family: Futura-bold;
+	src: url('../fonts/futura/FuturaStd-Bold.otf');
 }
 @font-face {
-	font-family: Futura-light; src: url('../fonts/futura/FuturaStd-Light.otf');
+	font-family: Futura-light;
+	src: url('../fonts/futura/FuturaStd-Light.otf');
 }
 
 /* -------------------------------------------- */
 /* UNIVERSAL ---------------------------------- */
 /* -------------------------------------------- */
-html, body {
+html,
+body {
 	font-family: Futura, arial, helvetica, sans-serif;
-	color: #FFF;
-
+	color: #fff;
 }
 * {
-	-moz-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+	        box-sizing: border-box;
 }
 a {
 	&:active,
@@ -35,7 +38,7 @@ a {
 .group:after {
 	visibility: hidden;
 	display: block;
-	content: "";
+	content: '';
 	clear: both;
 	height: 0;
 }
@@ -44,7 +47,7 @@ a {
 	font-weight: bold;
 	margin: 5px 0;
 	padding: 4px;
-	color: #FFF;
+	color: #fff;
 	border: 5px solid #333;
 }
 .success {
@@ -52,7 +55,7 @@ a {
 	font-weight: bold;
 	margin: 5px 0;
 	padding: 4px;
-	color: #FFF;
+	color: #fff;
 	border: 5px solid #333;
 }
 .alert {
@@ -119,23 +122,20 @@ a {
 /* -------------------------------------------- */
 /* SIDEBAR ------------------------------------ */
 /* -------------------------------------------- */
-.sidebar
+.sidebar {
 	border-width: 0 10px 0 0;
 	border-style: solid;
 	border-color: rgba(255,255,255,.1);
 	box-shadow: 5px 0 5px rgba(0,0,0,.25);
 	width: 100%;
 	height: 100%;
-
 	padding: 0 10px 0;
-
 	text-align: right;
-
 	min-height: 635px;
 	position: absolute;
-	top:0;
-	left:0;
-	bottom:0;
+	top: 0;
+	left: 0;
+	bottom: 0;
 	.sub-header {
 		min-height: 75px;
 		vertical-align: bottom;
@@ -177,7 +177,6 @@ a {
 	position: absolute;
 	bottom: 10px;
 	right: 10px;
-
 	font-size: .7em;
 	color: rgb(255,255,255);
 	color: rgba(255,255,255,.3);
@@ -298,8 +297,6 @@ a {
 			background-position: center center;
 			background-repeat: no-repeat;
 			opacity: .4;
-
-
 			display: inline-block;
 			height: 65px;
 			width: 65px;
@@ -354,7 +351,7 @@ a {
 	&:first-child {
 		margin-top: 40px;
 	}
-	&[data-kind="studio"] .main-image {
+	&[data-kind='studio'] .main-image {
 		margin-bottom: -14px;
 	}
 }
@@ -372,9 +369,9 @@ a {
 	margin-right: -10px;
 	.info {
 		&.sidebar-list * {
-			-moz-user-select: text;
+			   -moz-user-select: text;
 			-webkit-user-select: text;
-			user-select: text;
+			        user-select: text;
 		}
 		.sidebar-list-item {
 			list-style-type: none;
@@ -486,7 +483,7 @@ a {
 /* -------------------------------------------- */
 /* MODULE UNIVERSAL --------------------------- */
 /* -------------------------------------------- */
-[data-kind="news"] {
+[data-kind='news'] {
 	.module-main {
 		padding: 20px;
 		font-size: 1.5em;
@@ -495,7 +492,7 @@ a {
 	}
 	.module-list .list-item {
 		line-height: 5.5em;
-		font-size: 0.75em;
+		font-size: .75em;
 		&.active {
 			font-weight: bold;
 		}
@@ -525,10 +522,10 @@ a {
 /* -------------------------------------------- */
 /* STUDIO ------------------------------------- */
 /* -------------------------------------------- */
-[data-kind="studio"] {
+[data-kind='studio'] {
 	.module-list .list-item {
 		line-height: 5.5em;
-		font-size: 0.75em;
+		font-size: .75em;
 		&.active {
 			text-shadow: 0 0 4px black;
 			font-weight: bold;
@@ -610,7 +607,7 @@ a {
 		}
 		ul,
 		ol {
-			margin-left:30px;
+			margin-left: 30px;
 		}
 	}
 	.cv-date {
@@ -656,24 +653,24 @@ a {
 		}
 		input:focus,
 		textarea:focus {
-			background: #CCC;
+			background: #ccc;
 		}
-		button:hover {
-			background: #AAA;
-		}
-		button:active {
-			background: #777;
+		button {
+			padding: 5px;
+			font-weight: bold;
+			margin-bottom: 0;
+			&:hover {
+				background: #aaa;
+			}
+			&:active {
+				background: #777;
+			}
 		}
 		input {
 			display: block;
 		}
 		textarea {
 			height: 250px;
-		}
-		button {
-			padding: 5px;
-			font-weight: bold;
-			margin-bottom: 0;
 		}
 	}
 }
