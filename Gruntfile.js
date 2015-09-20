@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 					paths: ['dev/css']
 				},
 				files: {
-					'dist/css/master.css': 'dev/css/master.less'
+					'dist/css/master.css': 'dev/less/master.less'
 				}
 			}
 		},
@@ -134,7 +134,7 @@ module.exports = function(grunt) {
 				}
 			},
 			less: {
-				files: ['dev/css/*'],
+				files: ['dev/less/*'],
 				tasks: ['less'],
 				options: {
 					spawn: false,
