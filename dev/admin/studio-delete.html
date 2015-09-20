@@ -17,7 +17,7 @@
 <div class="wrap">
 	<article class="admin" data-page="works-delete">
 		<nav class="pages">
-			<?php require('nav.php'); ?>
+            <!-- NAV HERE -->
 		</nav>
 
 		<section class="module">
@@ -27,24 +27,8 @@
 			<div class="content">
 					<div class="module-main bg-3">
 						<div class="delete-success news">
-<?php
-
-	$value = $_POST['id'];
-
-	require('!dbconnect.php');
-	if($dbc) {
-
-	    $sql_delete = "DELETE FROM studio WHERE studio_entry_id=" . $value;
-	    mysql_query($sql_delete);
-
-		echo 'Success, that studio shot has been deleted from the database!';
-
-		mysql_close($dbc);
-	}
-	/*
-	*/
-
-?>						</div>
+                            <!-- DELETE NEWS HERE -->
+						</div>
 					</div>
 				</form>
 			</div>

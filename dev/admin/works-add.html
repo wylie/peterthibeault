@@ -16,10 +16,9 @@
 <body>
 
 <div class="wrap">
-	<?php require('login.php'); ?>
 	<article class="admin" data-page="works-add">
 		<nav class="pages">
-			<?php require('nav.php'); ?>
+			<!-- NAV HERE -->
 		</nav>
 
 		<section class="module">
@@ -86,26 +85,6 @@
 												<option value="yes">Yes</option>
 											</select>
 										</li>
-										<!--
-										<script type="text/javascript">
-											$(function() {
-												$('#available').change(function() {
-													var related = $('#available option:selected').val();
-													console.log(related);
-													if(related == 'yes') {
-														$('.price').slideDown(250);
-													}
-													if(related == 'no') {
-														$('.price').slideUp(250);
-													}
-												});
-											});
-										</script>
-										<div class="price" style="display: none;">
-											<li class="sidebar-list-heading">PRICE</li>
-											<li class="sidebar-list-item">$<input id="price" name="price" type="text" class="form-input" /></li>
-										</div>
-										-->
 									</ul>
 								</div>
 								<!-- END AVAILABLE ************** -->
@@ -120,7 +99,7 @@
 					<input type="hidden" name="number" value="0" />
 					<input type="hidden" name="submitted" value="true" />
 
-					<p><?php //addWorks(); ?></p>
+					<p><!-- ADD WORK --></p>
 				</form>
 			</div>
 		</section>
