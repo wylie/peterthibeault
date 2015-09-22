@@ -35,7 +35,7 @@ function News(id, description, added) {
 
 // list the kinds of data available
 var kind = ['works', 'news', 'studio'];
-// loop through the kinds and get all the data available 
+// loop through the kinds and get all the data available
 for(var i = 0; i < kind.length; i++) {
 	getData(kind[i]);
 }
@@ -63,16 +63,69 @@ function repeat() {
 	var studio = JSON.parse(localStorage.getItem('studio'));
 	var works = JSON.parse(localStorage.getItem('works'));
 
-	if( works.furnishings ) {
+	if( works ) {
 		listWorks(works);
 	}
-	if( studio.shots ) {
+	if( studio ) {
 		listWorks(studio);
 	}
-	if( news.story ) {
+	if( news ) {
 		listWorks(news);
 	}
 }
+
+var localData = ['news', 'studio', 'works'];
+function displayNav() {
+	var news = JSON.parse(localStorage.getItem('news'));
+	var studio = JSON.parse(localStorage.getItem('studio'));
+	var works = JSON.parse(localStorage.getItem('works'));
+
+	var workKeys = Object.keys(works);
+	for(var i = 0; i < workKeys.length; i++) {
+		var nav = document.getElementById('nav');
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		var title = workKeys[i];
+		a.innerHTML = capitalizeFirstLetter(title);
+		a.setAttribute('class', 'link');
+		a.setAttribute('href', '#' + workKeys[i]);
+		a.setAttribute('title', 'View my ' + workKeys[i]);
+		li.appendChild(a);
+		li.setAttribute('class', 'item');
+		nav.appendChild(li);
+	}
+
+	var studioKeys = Object.keys(studio);
+	for(var i = 0; i < studioKeys.length; i++) {
+		var nav = document.getElementById('nav');
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		var title = studioKeys[i];
+		a.innerHTML = capitalizeFirstLetter(title);
+		a.setAttribute('class', 'link');
+		a.setAttribute('href', '#' + studioKeys[i]);
+		a.setAttribute('title', 'View my ' + studioKeys[i]);
+		li.appendChild(a);
+		li.setAttribute('class', 'item');
+		nav.appendChild(li);
+	}
+
+	var newsKeys = Object.keys(news);
+	for(var i = 0; i < newsKeys.length; i++) {
+		var nav = document.getElementById('nav');
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		var title = newsKeys[i];
+		a.innerHTML = capitalizeFirstLetter(title);
+		a.setAttribute('class', 'link');
+		a.setAttribute('href', '#' + newsKeys[i]);
+		a.setAttribute('title', 'View my ' + newsKeys[i]);
+		li.appendChild(a);
+		li.setAttribute('class', 'item');
+		nav.appendChild(li);
+	}
+}
+
 function listWorks(kind) {
 	var worksDiv = document.getElementById('works');
 	var keys = Object.keys(kind);
@@ -135,7 +188,7 @@ function listWorks(kind) {
 		var moduleList = document.createElement('ul');
 		moduleList.setAttribute('class', 'module-list');
 		listDiv.appendChild(moduleList);
-		// li 
+		// li
 		var listLi = document.createElement('li');
 		listLi.setAttribute('class', 'list-item active');
 		listLi.setAttribute('style', 'background-image: url(../img/works/chest-645_0_m.jpg)');
@@ -152,90 +205,6 @@ function listWorks(kind) {
 	}
 }
 
-var dataKinds = ['works', 'studio', 'news'];
-// display the navigation
-function displayNav() {
-	for(var i = 0; i < dataKinds.length; i++) {
-		console.log(dataKinds[i]);
-		var kind = dataKinds[i];
-	
-		var kind = JSON.parse(localStorage.getItem('"' + kind + '"'));
-		eval(kind + 'Keys') = Object.keys(kind);
-
-		var sheep = "dynamicVariableName";
-		eval("var " + sheep + "= new Array();");
-	}
-	
-	var studio = JSON.parse(localStorage.getItem('studio'));
-	var studioKeys = Object.keys(studio);
-
-	var news = JSON.parse(localStorage.getItem('news'));
-	var newsKeys = Object.keys(news);
-
-	var nav = document.getElementById('nav');
-
-	for(var i = 0; i < workKeys.length; i++) {
-		if( works[workKeys[i]].length > 0) {
-			var li = document.createElement('li');
-			var a = document.createElement('a');
-			var title = capitalizeFirstLetter(workKeys[i]);
-			a.innerHTML = title;
-			a.setAttribute('class', 'link');
-			a.setAttribute('href', '#' + workKeys[i]);
-			a.setAttribute('title', 'View my ' + workKeys[i]);
-			li.appendChild(a);
-			li.setAttribute('class', 'item');
-			nav.appendChild(li);
-		}
-	}
-
-	for(var i = 0; i < studioKeys.length; i++) {
-		if( studio[studioKeys[i]].length > 0) {
-			var li = document.createElement('li');
-			var a = document.createElement('a');
-			var title = capitalizeFirstLetter(studioKeys[i]);
-			a.innerHTML = title;
-			a.setAttribute('class', 'link');
-			a.setAttribute('href', '#' + studioKeys[i]);
-			a.setAttribute('title', 'View my ' + studioKeys[i]);
-			li.appendChild(a);
-			li.setAttribute('class', 'item');
-			nav.appendChild(li);
-		}
-	}
-
-	for(var i = 0; i < newsKeys.length; i++) {
-		if( news[newsKeys[i]].length > 0) {
-			var li = document.createElement('li');
-			var a = document.createElement('a');
-			var title = capitalizeFirstLetter(newsKeys[i]);
-			a.innerHTML = title;
-			a.setAttribute('class', 'link');
-			a.setAttribute('href', '#' + newsKeys[i]);
-			a.setAttribute('title', 'View my ' + newsKeys[i]);
-			li.appendChild(a);
-			li.setAttribute('class', 'item');
-			nav.appendChild(li);
-		}
-	}
-}
-
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
