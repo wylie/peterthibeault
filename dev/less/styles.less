@@ -28,8 +28,12 @@ body {
 	        box-sizing: border-box;
 }
 a {
+	text-decoration: none;
 	&:active,
-	&:hover,
+	&:hover {
+		color: inherit;
+		text-decoration: underline;
+	}
 	&:visited {
 		color: inherit;
 		text-decoration: none;
