@@ -216,7 +216,7 @@ function listWorks() {
 	var mainImgDiv = document.createElement('img');
 	mainImgDiv.setAttribute('class', 'main-image');
 	mainImgDiv.setAttribute('id', 'resultImg');
-	mainImgDiv.setAttribute('src', '../img/works/chest-645_0_l.jpg')
+	mainImgDiv.setAttribute('src', keys.image)
 	moduleMainDiv.appendChild(mainImgDiv);
 
 	// sidebar div
@@ -250,7 +250,7 @@ function listWorks() {
 	// li
 	var listLi = document.createElement('li');
 	listLi.setAttribute('class', 'list-item active');
-	listLi.setAttribute('style', 'background-image: url(../img/works/chest-645_0_m.jpg)');
+	listLi.setAttribute('style', 'background-image: url(' + keys.image + ')');
 	moduleList.appendChild(listLi);
 
 	moduleNavDiv.appendChild(subHeader);
