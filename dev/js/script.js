@@ -43,11 +43,11 @@ function buildNav() {
 	for(var i = 0; i < kindsArr.length; i++ ) {
 		// get the locally stored data
 		var dataKeys = JSON.parse(localStorage.getItem(kindsArr[i]));
-		var keys = Object.keys(dataKeys);
-		// loop through the arrays so we can get the first level keys
-		for(var j = 0; j < keys.length; j++) {
-			// add these to the navArr
-			navArr.push(keys[j]);
+		// console.log(dataKeys);
+		for (var key in dataKeys) {
+			if(dataKeys[key].length > 0) {
+				navArr.push(key);
+			}
 		}
 	}
 	// add extra sections to the navigation
@@ -55,6 +55,8 @@ function buildNav() {
 	// now, display the navigation
 	displayNav();
 }
+
+
 
 // capitalize the first letter of a string
 function capitalizeFirstLetter(string) {
