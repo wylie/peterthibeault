@@ -85,7 +85,6 @@ function displayNav() {
 
 function createModules() {
 	for(var i = 0; i < navArr.length; i++ ) {
-		console.log(navArr[i]);
 		var worksDiv = document.getElementById('works');
 		var module = document.createElement('div');
 		module.setAttribute('class', 'module group');
@@ -106,12 +105,7 @@ function createModules() {
 		var wrapDiv = document.createElement('div');
 		wrapDiv.setAttribute('class', 'module-wrap group');
 
-		// left module div
-		// var leftDiv = document.createElement('div');
-		// leftDiv.setAttribute('class', 'left');
-
 		module.appendChild(wrapDiv);
-
 		worksDiv.appendChild(module);
 	}
 }
@@ -214,95 +208,69 @@ function listWorks() {
 		    for (var key2 in item) {
 				if(kindsArr[i] === 'works') {
 					var keys = item[key2];
-					// console.log(item[key2]);
-// 					showWorks(item[key2]);
-// 				}
-// 		    }
-// 		}
-// 	}
-// }
-//
-// function showWorks(keys) {
-	// console.log( key.title );
-	var worksDiv = document.getElementById('works');
-	var module = document.createElement('div');
-	module.setAttribute('class', 'shazam group');
-	module.setAttribute('id', keys.id);
-	var anchor = document.createElement('a');
-	anchor.setAttribute('name', keys.id);
-	module.appendChild(anchor);
 
-	// heading
-	var h2 = document.createElement('h2');
-	h2.setAttribute('class',  'header');
-	h2.innerHTML = keys.id;
-	theTypeIs = keys.id;
-	module.appendChild(h2);
+					var worksDiv = document.getElementById('works');
 
-	// wrap module div
-	var wrapDiv = document.createElement('div');
-	wrapDiv.setAttribute('class', 'module group');
+					// left module div
+					var leftDiv = document.createElement('div');
+					leftDiv.setAttribute('class', 'left');
 
-	// left module div
-	var leftDiv = document.createElement('div');
-	leftDiv.setAttribute('class', 'left');
+					// module main div
+					var moduleMainDiv = document.createElement('div');
+					moduleMainDiv.setAttribute('class', 'module-main bg-3');
+					// main image div
+					var mainImgDiv = document.createElement('img');
+					mainImgDiv.setAttribute('class', 'main-image');
+					mainImgDiv.setAttribute('id', 'resultImg');
+					mainImgDiv.setAttribute('src', keys.image)
+					moduleMainDiv.appendChild(mainImgDiv);
 
-	// module main div
-	var moduleMainDiv = document.createElement('div');
-	moduleMainDiv.setAttribute('class', 'module-main bg-3');
-	// main image div
-	var mainImgDiv = document.createElement('img');
-	mainImgDiv.setAttribute('class', 'main-image');
-	mainImgDiv.setAttribute('id', 'resultImg');
-	mainImgDiv.setAttribute('src', keys.image)
-	moduleMainDiv.appendChild(mainImgDiv);
+					// sidebar div
+					var moduleSidebarDiv = document.createElement('div');
+					moduleSidebarDiv.setAttribute('class', 'module-sidebar');
+					// sidebar items div
+					var sidebarItemsDiv = document.createElement('div');
+					sidebarItemsDiv.setAttribute('class', 'sidebar-items-list bg-3 group');
+					moduleSidebarDiv.appendChild(sidebarItemsDiv);
 
-	// sidebar div
-	var moduleSidebarDiv = document.createElement('div');
-	moduleSidebarDiv.setAttribute('class', 'module-sidebar');
-	// sidebar items div
-	var sidebarItemsDiv = document.createElement('div');
-	sidebarItemsDiv.setAttribute('class', 'sidebar-items-list bg-3 group');
-	moduleSidebarDiv.appendChild(sidebarItemsDiv);
+					leftDiv.appendChild(moduleMainDiv);
+					leftDiv.appendChild(moduleSidebarDiv);
 
-	leftDiv.appendChild(moduleMainDiv);
-	leftDiv.appendChild(moduleSidebarDiv);
+					// right div
+					var rightDiv = document.createElement('div');
+					rightDiv.setAttribute('class', 'right');
+					// module nav div
+					var moduleNavDiv = document.createElement('div');
+					moduleNavDiv.setAttribute('class', 'module-nav bg-3');
+					// sub-header div
+					var subHeader = document.createElement('h3');
+					subHeader.setAttribute('class', 'sub-header');
+					subHeader.innerHTML = 'Additional ' + keys.title;
+					// list div
+					var listDiv = document.createElement('div');
+					listDiv.setAttribute('class', 'list-wrap');
+					// module list div
+					var moduleList = document.createElement('ul');
+					moduleList.setAttribute('class', 'module-list');
+					listDiv.appendChild(moduleList);
+					// li
+					var listLi = document.createElement('li');
+					listLi.setAttribute('class', 'list-item active');
+					listLi.setAttribute('style', 'background-image: url(' + keys.image + ')');
+					moduleList.appendChild(listLi);
 
-	// right div
-	var rightDiv = document.createElement('div');
-	rightDiv.setAttribute('class', 'right');
-	// module nav div
-	var moduleNavDiv = document.createElement('div');
-	moduleNavDiv.setAttribute('class', 'module-nav bg-3');
-	// sub-header div
-	var subHeader = document.createElement('h3');
-	subHeader.setAttribute('class', 'sub-header');
-	subHeader.innerHTML = 'Additional ' + keys.title;
-	// list div
-	var listDiv = document.createElement('div');
-	listDiv.setAttribute('class', 'list-wrap');
-	// module list div
-	var moduleList = document.createElement('ul');
-	moduleList.setAttribute('class', 'module-list');
-	listDiv.appendChild(moduleList);
-	// li
-	var listLi = document.createElement('li');
-	listLi.setAttribute('class', 'list-item active');
-	listLi.setAttribute('style', 'background-image: url(' + keys.image + ')');
-	moduleList.appendChild(listLi);
+					moduleNavDiv.appendChild(subHeader);
+					moduleNavDiv.appendChild(listDiv);
+					rightDiv.appendChild(moduleNavDiv);
 
-	moduleNavDiv.appendChild(subHeader);
-	moduleNavDiv.appendChild(listDiv);
-	rightDiv.appendChild(moduleNavDiv);
+					wrapDiv.appendChild(leftDiv);
+					wrapDiv.appendChild(rightDiv);
 
-	wrapDiv.appendChild(leftDiv);
-	wrapDiv.appendChild(rightDiv);
+					module.appendChild(wrapDiv);
 
-	module.appendChild(wrapDiv);
-
-	worksDiv.appendChild(module);
-}
-}
-}
-}
+					worksDiv.appendChild(module);
+				}
+			}
+		}
+	}
 }
