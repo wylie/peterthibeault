@@ -4,7 +4,7 @@ window.onload = init;
 function init() {
 	dataTypes();
 	buildNav();
-	listWorks();
+	// listWorks();
 }
 
 // some arrays we will need as we go along
@@ -53,7 +53,7 @@ function buildNav() {
 		}
 	}
 	// add extra sections to the navigation
-	navArr.push('CV', 'contact');
+	navArr.push('CV', 'Contact');
 	// now, display the navigation
 	displayNav();
 }
@@ -79,6 +79,40 @@ function displayNav() {
 		li.appendChild(a);
 		li.setAttribute('class', 'item');
 		nav.appendChild(li);
+	}
+	createModules();
+}
+
+function createModules() {
+	for(var i = 0; i < navArr.length; i++ ) {
+		console.log(navArr[i]);
+		var worksDiv = document.getElementById('works');
+		var module = document.createElement('div');
+		module.setAttribute('class', 'module group');
+
+		module.setAttribute('id', navArr[i]);
+		var anchor = document.createElement('a');
+		anchor.setAttribute('name', navArr[i]);
+		module.appendChild(anchor);
+
+		// heading
+		var h2 = document.createElement('h2');
+		h2.setAttribute('class',  'header');
+		h2.innerHTML = navArr[i].toUpperCase();
+		theTypeIs = navArr[i];
+		module.appendChild(h2);
+
+		// wrap module div
+		var wrapDiv = document.createElement('div');
+		wrapDiv.setAttribute('class', 'module-wrap group');
+
+		// left module div
+		// var leftDiv = document.createElement('div');
+		// leftDiv.setAttribute('class', 'left');
+
+		module.appendChild(wrapDiv);
+
+		worksDiv.appendChild(module);
 	}
 }
 
