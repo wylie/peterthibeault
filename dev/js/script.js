@@ -45,7 +45,9 @@ function buildNav() {
 		var dataKeys = JSON.parse(localStorage.getItem(kindsArr[i]));
 		// console.log(dataKeys);
 		for (var key in dataKeys) {
+			// check to see if we have at least 1 item in the category
 			if(dataKeys[key].length > 0) {
+				// add the categories with more than 1 item to the navArr
 				navArr.push(key);
 			}
 		}
