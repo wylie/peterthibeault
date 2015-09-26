@@ -140,65 +140,6 @@ function createModules() {
 // 	this.added = added
 // }
 
-// list the kinds of data available
-// var kind = ['works', 'news', 'studio'];
-// loop through the kinds and get all the data available
-// for(var i = 0; i < kind.length; i++) {
-// 	getData(kind[i]);
-// }
-
-// var localData = ['news', 'studio', 'works'];
-// function displayNav() {
-// 	for(var i = 0; i < localData.length; i++ ) {
-// 		var localData[i] = JSON.parse(localStorage.getItem(localData[i]));
-// 	}
-//
-// 	var workKeys = Object.keys(works);
-// 	for(var i = 0; i < workKeys.length; i++) {
-// 		var nav = document.getElementById('nav');
-// 		var li = document.createElement('li');
-// 		var a = document.createElement('a');
-// 		var title = workKeys[i];
-// 		a.innerHTML = capitalizeFirstLetter(title);
-// 		a.setAttribute('class', 'link');
-// 		a.setAttribute('href', '#' + workKeys[i]);
-// 		a.setAttribute('title', 'View my ' + workKeys[i]);
-// 		li.appendChild(a);
-// 		li.setAttribute('class', 'item');
-// 		nav.appendChild(li);
-// 	}
-//
-// 	var studioKeys = Object.keys(studio);
-// 	for(var i = 0; i < studioKeys.length; i++) {
-// 		var nav = document.getElementById('nav');
-// 		var li = document.createElement('li');
-// 		var a = document.createElement('a');
-// 		var title = studioKeys[i];
-// 		a.innerHTML = capitalizeFirstLetter(title);
-// 		a.setAttribute('class', 'link');
-// 		a.setAttribute('href', '#' + studioKeys[i]);
-// 		a.setAttribute('title', 'View my ' + studioKeys[i]);
-// 		li.appendChild(a);
-// 		li.setAttribute('class', 'item');
-// 		nav.appendChild(li);
-// 	}
-//
-// 	var newsKeys = Object.keys(news);
-// 	for(var i = 0; i < newsKeys.length; i++) {
-// 		var nav = document.getElementById('nav');
-// 		var li = document.createElement('li');
-// 		var a = document.createElement('a');
-// 		var title = newsKeys[i];
-// 		a.innerHTML = capitalizeFirstLetter(title);
-// 		a.setAttribute('class', 'link');
-// 		a.setAttribute('href', '#' + newsKeys[i]);
-// 		a.setAttribute('title', 'View my ' + newsKeys[i]);
-// 		li.appendChild(a);
-// 		li.setAttribute('class', 'item');
-// 		nav.appendChild(li);
-// 	}
-// }
-
 function listWorks() {
 	for(var i = 0; i < kindsArr.length; i++ ) {
 		// get the locally stored data
