@@ -4,12 +4,40 @@ window.onload = init;
 function init() {
 	dataTypes();
 	buildNav();
-	// listWorks();
+	// createModules();
 }
 
 // some arrays we will need as we go along
 var kindsArr = ['works', 'studio', 'news'];
 var navArr = [];
+
+// function Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, image, related_images, added) {
+// 	this.id = id,
+// 	this.title = title,
+// 	this.year = year,
+// 	this.media = media,
+// 	this.description = description,
+// 	this.dimension_d = dimension_d,
+// 	this.dimension_w = dimension_w,
+// 	this.dimension_h = dimension_h,
+// 	this.available = available,
+// 	this.image = image,
+// 	this.related_images = related_images,
+// 	this.added = added
+// }
+
+// function Studio(id, image, description, added) {
+// 	this.id = id,
+// 	this.image = image,
+// 	this.description = description,
+// 	this.added = added
+// }
+
+// function News(id, description, added) {
+// 	this.id = id,
+// 	this.description = description,
+// 	this.added = added
+// }
 
 // loop through the kinds and get all the data available
 function dataTypes() {
@@ -53,12 +81,10 @@ function buildNav() {
 		}
 	}
 	// add extra sections to the navigation
-	navArr.push('CV', 'Contact');
+	navArr.push('CV', 'contact');
 	// now, display the navigation
 	displayNav();
 }
-
-
 
 // capitalize the first letter of a string
 function capitalizeFirstLetter(string) {
@@ -108,110 +134,85 @@ function createModules() {
 		module.appendChild(wrapDiv);
 		worksDiv.appendChild(module);
 	}
+	listWorks();
 }
 
-
-
-// function Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, image, related_images, added) {
-// 	this.id = id,
-// 	this.title = title,
-// 	this.year = year,
-// 	this.media = media,
-// 	this.description = description,
-// 	this.dimension_d = dimension_d,
-// 	this.dimension_w = dimension_w,
-// 	this.dimension_h = dimension_h,
-// 	this.available = available,
-// 	this.image = image,
-// 	this.related_images = related_images,
-// 	this.added = added
-// }
-
-// function Studio(id, image, description, added) {
-// 	this.id = id,
-// 	this.image = image,
-// 	this.description = description,
-// 	this.added = added
-// }
-
-// function News(id, description, added) {
-// 	this.id = id,
-// 	this.description = description,
-// 	this.added = added
-// }
-
 function listWorks() {
-	for(var i = 0; i < kindsArr.length; i++ ) {
-		// get the locally stored data
-		var dataKeys = JSON.parse(localStorage.getItem(kindsArr[i]));
-		for (var key in dataKeys) {
-			var item = dataKeys[key];
-		    for (var key2 in item) {
-				if(kindsArr[i] === 'works') {
-					var keys = item[key2];
+	for(var i = 0; i < navArr.length - 2; i++ ) {
+		var mod = document.getElementById(navArr[i]).getElementsByClassName('module-wrap');
+		for(var j = 0; j < mod.length; j++ ) {
+			// left module div
+			var leftDiv = document.createElement('div');
+			leftDiv.setAttribute('class', 'left');
 
-					var worksDiv = document.getElementById('works');
+			// right div
+			var rightDiv = document.createElement('div');
+			rightDiv.setAttribute('class', 'right');
 
-					// left module div
-					var leftDiv = document.createElement('div');
-					leftDiv.setAttribute('class', 'left');
+			// module main div
+			var moduleMainDiv = document.createElement('div');
+			moduleMainDiv.setAttribute('class', 'module-main bg-3');
 
-					// module main div
-					var moduleMainDiv = document.createElement('div');
-					moduleMainDiv.setAttribute('class', 'module-main bg-3');
-					// main image div
-					var mainImgDiv = document.createElement('img');
-					mainImgDiv.setAttribute('class', 'main-image');
-					mainImgDiv.setAttribute('id', 'resultImg');
-					mainImgDiv.setAttribute('src', keys.image)
-					moduleMainDiv.appendChild(mainImgDiv);
+			// main image div
+			var mainImgDiv = document.createElement('img');
+			mainImgDiv.setAttribute('class', 'main-image');
+			mainImgDiv.setAttribute('id', 'resultImg');
+			mainImgDiv.setAttribute('src', 'http://peterthibeault.com/img/works/chest-645_0_l.jpg');//keys.image)
 
-					// sidebar div
-					var moduleSidebarDiv = document.createElement('div');
-					moduleSidebarDiv.setAttribute('class', 'module-sidebar');
-					// sidebar items div
-					var sidebarItemsDiv = document.createElement('div');
-					sidebarItemsDiv.setAttribute('class', 'sidebar-items-list bg-3 group');
-					moduleSidebarDiv.appendChild(sidebarItemsDiv);
+			// info div
+			var moduleInfoDiv = document.createElement('div');
+			moduleInfoDiv.setAttribute('class', 'module-info grid');
+			var gridCol1 = document.createElement('div');
+			gridCol1.setAttribute('class', 'col4');
+			var gridCol2 = document.createElement('div');
+			gridCol2.setAttribute('class', 'col4');
+			var gridCol3 = document.createElement('div');
+			gridCol3.setAttribute('class', 'col4');
 
-					leftDiv.appendChild(moduleMainDiv);
-					leftDiv.appendChild(moduleSidebarDiv);
+			// info items div
+			var infoItemsUl = document.createElement('ul');
+			infoItemsUl.setAttribute('class', 'info-items-list bg-3 group');
+			var infoItemsLi = document.createElement('li');
+			infoItemsLi.setAttribute('class', 'info-header');
 
-					// right div
-					var rightDiv = document.createElement('div');
-					rightDiv.setAttribute('class', 'right');
-					// module nav div
-					var moduleNavDiv = document.createElement('div');
-					moduleNavDiv.setAttribute('class', 'module-nav bg-3');
-					// sub-header div
-					var subHeader = document.createElement('h3');
-					subHeader.setAttribute('class', 'sub-header');
-					subHeader.innerHTML = 'Additional ' + keys.title;
-					// list div
-					var listDiv = document.createElement('div');
-					listDiv.setAttribute('class', 'list-wrap');
-					// module list div
-					var moduleList = document.createElement('ul');
-					moduleList.setAttribute('class', 'module-list');
-					listDiv.appendChild(moduleList);
-					// li
-					var listLi = document.createElement('li');
-					listLi.setAttribute('class', 'list-item active');
-					listLi.setAttribute('style', 'background-image: url(' + keys.image + ')');
-					moduleList.appendChild(listLi);
+			// module nav div
+			var moduleNavDiv = document.createElement('div');
+			moduleNavDiv.setAttribute('class', 'module-nav bg-3');
 
-					moduleNavDiv.appendChild(subHeader);
-					moduleNavDiv.appendChild(listDiv);
-					rightDiv.appendChild(moduleNavDiv);
+			// sub-header div
+			var subHeader = document.createElement('h3');
+			subHeader.setAttribute('class', 'sub-header');
+			subHeader.innerHTML = 'Additional Works';// + keys.title;
 
-					wrapDiv.appendChild(leftDiv);
-					wrapDiv.appendChild(rightDiv);
+			// module list div
+			var moduleList = document.createElement('ul');
+			moduleList.setAttribute('class', 'module-list');
 
-					module.appendChild(wrapDiv);
+			// li
+			var listLi = document.createElement('li');
+			listLi.setAttribute('class', 'list-item active');
+			listLi.setAttribute('style', 'background-image: url(../img/works/chest-645_0_l.jpg)');//' + keys.image + ')');
 
-					worksDiv.appendChild(module);
-				}
-			}
+			// add the things
+			infoItemsUl.appendChild(infoItemsLi);
+
+			gridCol1.appendChild(infoItemsUl);
+
+			moduleInfoDiv.appendChild(gridCol1);
+			moduleInfoDiv.appendChild(gridCol2);
+			moduleInfoDiv.appendChild(gridCol3);
+
+			moduleMainDiv.appendChild(mainImgDiv);
+			leftDiv.appendChild(moduleMainDiv);
+			leftDiv.appendChild(moduleInfoDiv);
+			moduleList.appendChild(listLi);
+			moduleNavDiv.appendChild(subHeader);
+			moduleNavDiv.appendChild(moduleList);
+			rightDiv.appendChild(moduleNavDiv);
+
+			// add the things to their mod
+			mod[j].appendChild(leftDiv);
+			mod[j].appendChild(rightDiv);
 		}
 	}
 }
