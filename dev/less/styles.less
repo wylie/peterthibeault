@@ -1,18 +1,18 @@
 @import 'reset.less';
+@import 'grid.less';
 
-
-@font-face {
-	font-family: Futura;
-	src: url('../fonts/futura/FuturaStd-Book.otf');
-}
-@font-face {
-	font-family: Futura-bold;
-	src: url('../fonts/futura/FuturaStd-Bold.otf');
-}
-@font-face {
-	font-family: Futura-light;
-	src: url('../fonts/futura/FuturaStd-Light.otf');
-}
+// @font-face {
+// 	font-family: Futura;
+// 	src: url('../fonts/futura/FuturaStd-Book.otf');
+// }
+// @font-face {
+// 	font-family: Futura-bold;
+// 	src: url('../fonts/futura/FuturaStd-Bold.otf');
+// }
+// @font-face {
+// 	font-family: Futura-light;
+// 	src: url('../fonts/futura/FuturaStd-Light.otf');
+// }
 
 /* -------------------------------------------- */
 /* UNIVERSAL ---------------------------------- */
@@ -230,16 +230,16 @@ a {
 	.header {
 		font-size: 2em;
 		color: rgba(255, 255, 255, .2);
+		margin-bottom: 10px;
 	}
 	.module-wrap {
 		position: relative;
 		background-color: rgba(255,255,255,.3);
-		margin-top: 10px;
 		padding: 10px;
 		min-width: 700px;
-		&:last-child {
-			margin-bottom: 100px;
-		}
+		// &:last-child {
+		// 	margin-bottom: 100px;
+		// }
 		.logo + & {
 			margin-top: 40px;
 		}
@@ -258,13 +258,13 @@ a {
 			right: 10px;
 			top: 10px;
 			bottom: 10px;
-			border-left: 12px solid transparent;
+			padding-left: 12px;
 		}
 		.module-main {
 			min-height: 250px;
 			.main-image {
 				width: 100%;
-				margin-bottom: -3px;
+				display: block;
 			}
 		}
 	}
@@ -273,26 +273,29 @@ a {
 		height: 100%;
 		position: relative;
 		.sub-header {
-			width: 100%;
+			// width: 100%;
 			text-align: center;
 			border-bottom: 1px solid #444;
 			box-sizing: border-box;
 			line-height: 1.4em;
-			padding-top: 10px;
-			height: 65px;
+			padding: 10px 0;
 		}
-		.list-wrap {
-			overflow: auto;
-			position: absolute;
-			top: 65px;
-			bottom: 0;
-			right: 0;
-			left: 0;
-		}
+		// .list-wrap {
+		// 	overflow: auto;
+		// 	position: absolute;
+		// 	top: 65px;
+		// 	bottom: 0;
+		// 	right: 0;
+		// 	left: 0;
+		// }
 	}
 	.module-list {
-		position: relative;
-		height: 100px;
+		overflow: auto;
+		position: absolute;
+		top: 65px;
+		bottom: 0;
+		right: 0;
+		left: 0;
 		list-style-type: none;
 		text-align: center;
 		.list-item {
@@ -319,8 +322,12 @@ a {
 			}
 		}
 	}
-	.sidebar-items-list {
-		.sidebar-header {
+	.info-items-list {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		.info-header {
 			float: left;
 			width: 31%;
 			padding: 2.5% 1% 0;
@@ -328,7 +335,7 @@ a {
 			border-bottom: 1px solid #555;
 			cursor: pointer;
 		}
-		.sidebar-item {
+		.info-item {
 			float: left;
 			width: 50%;
 			position: relative;
@@ -339,16 +346,11 @@ a {
 				left: 0;
 			}
 		}
-		.sidebar-header {
-			.sidebar-list-heading {
-				border: none;
-				padding: 1%;
-				font-size: 1.15em;
-			}
-			&:nth-child(3) {
-				text-align: right;
-			}
-		}
+	}
+	.info-heading {
+		border: none;
+		padding: 1%;
+		font-size: 1.15em;
 	}
 	&:first-child {
 		margin-top: 40px;
@@ -359,37 +361,36 @@ a {
 }
 
 
-
 /* ------------------------------------ end nav */
 
-/* sidebar ------------------------------------ */
-/* -------------------------------- end sidebar */
+/* info ------------------------------------ */
+/* -------------------------------- end info */
 
-/* sidebar universal -------------------------- */
-.module-sidebar {
+/* info universal -------------------------- */
+.module-info {
 	border-top: 10px solid transparent;
 	margin-right: -10px;
 	.info {
-		&.sidebar-list * {
+		&.info-list * {
 			   -moz-user-select: text;
 			-webkit-user-select: text;
 			        user-select: text;
 		}
-		.sidebar-list-item {
+		.info-list-item {
 			list-style-type: none;
 			margin: 0 0 10px 0;
 			padding: 0;
 			box-sizing: border-box;
 		}
 	}
-	.sidebar-list-heading {
+	.info-list-heading {
 		color: #888;
 		border-bottom: 1px solid #555;
 		padding-bottom: 3px;
 		text-transform: uppercase;
 		font-weight: bold;
 	}
-	.sidebar-list {
+	.info-list {
 		list-style-type: none;
 		display: none;
 		width: 100%;
@@ -415,7 +416,7 @@ a {
 		}
 	}
 }
-/* ---------------------- end sidebar universal */
+/* ---------------------- end info universal */
 
 
 
@@ -455,7 +456,7 @@ a {
 /* ------------------------------ end available */
 
 /* related ------------------------------------ */
-.related .sidebar-list-item {
+.related .info-list-item {
 	cursor: pointer;
 	width: 30px;
 	height: 30px;
