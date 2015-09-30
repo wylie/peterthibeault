@@ -101,7 +101,7 @@ function displayNav() {
 		a.innerHTML = title;
 		a.setAttribute('class', 'link');
 		a.setAttribute('href', '#' + navArr[i]);
-		a.setAttribute('title', 'View my ' + navArr[i]);
+		a.setAttribute('title', 'View My ' + capitalizeFirstLetter(navArr[i]));
 		li.appendChild(a);
 		li.setAttribute('class', 'item');
 		nav.appendChild(li);
@@ -131,15 +131,120 @@ function createModules() {
 		var wrapDiv = document.createElement('div');
 		wrapDiv.setAttribute('class', 'module-wrap group');
 
+		// create the left div
+		var leftDiv = document.createElement('div');
+		leftDiv.setAttribute('class', 'left');
+		leftDiv.setAttribute('id', 'left');
+
+		// create the container for the hero images
+		var heroDiv = document.createElement('div');
+		heroDiv.setAttribute('class', 'module-main bg-3');
+
+		// create an empty img for the hero images
+		var heroImg = document.createElement('img');
+		heroImg.setAttribute('class', 'main-image');
+		heroImg.setAttribute('src', 'http://peterthibeault.com/img/works/chest-645_0_l.jpg');
+
+		// create the container for the hero images
+		var infoDiv = document.createElement('div');
+		infoDiv.setAttribute('class', 'module-info grid');
+
+		// create the grid in the info
+		var col1 = document.createElement('div');
+		col1.setAttribute('class', 'col4');
+		var col2 = document.createElement('div');
+		col2.setAttribute('class', 'col4');
+		var col3 = document.createElement('div');
+		col3.setAttribute('class', 'col4');
+
+		// create a list for the first column
+		var infoUl = document.createElement('ul');
+		infoUl.setAttribute('class', 'sidebar-items-list bg-3 group');
+		var infoLi = document.createElement('li');
+		infoLi.setAttribute('class', 'list-item');
+		infoLi.innerHTML = 'BOOM';
+		// add that list to the first column
+		infoUl.appendChild(infoLi);
+		col1.appendChild(infoUl);
+
+		// create a list for the first column
+		var infoUl = document.createElement('ul');
+		infoUl.setAttribute('class', 'sidebar-items-list bg-3 group');
+		var infoLi = document.createElement('li');
+		infoLi.setAttribute('class', 'list-item');
+		infoLi.innerHTML = 'BOOM';
+		// add that list to the first column
+		infoUl.appendChild(infoLi);
+		col2.appendChild(infoUl);
+
+		// create a list for the first column
+		var infoUl = document.createElement('ul');
+		infoUl.setAttribute('class', 'sidebar-items-list bg-3 group');
+		var infoLi = document.createElement('li');
+		infoLi.setAttribute('class', 'list-item');
+		infoLi.innerHTML = 'BOOM';
+		// add that list to the first column
+		infoUl.appendChild(infoLi);
+		col3.appendChild(infoUl);
+
+		// add the columns to the grid
+		infoDiv.appendChild(col1);
+		infoDiv.appendChild(col2);
+		infoDiv.appendChild(col3);
+
+		// add things to the leftDiv
+		heroDiv.appendChild(heroImg);
+		leftDiv.appendChild(heroDiv);
+		leftDiv.appendChild(infoDiv);
+
+		// create the right div
+		var rightDiv = document.createElement('div');
+		rightDiv.setAttribute('class', 'right');
+		rightDiv.setAttribute('id', 'right');
+
+		// add the nav div
+		var navDiv = document.createElement('div');
+		navDiv.setAttribute('class', 'module-nav bg-3');
+
+		// add the nav div sub-header
+		var navSubHeaderDiv = document.createElement('h3');
+		navSubHeaderDiv.setAttribute('class', 'sub-header');
+		navSubHeaderDiv.innerHTML = 'Additional Furnishings';
+		navDiv.appendChild(navSubHeaderDiv);
+
+		// add the nav div list
+		var navList = document.createElement('ul');
+		navList.setAttribute('class', 'module-list');
+
+		var navListItem = document.createElement('li');
+		navListItem.setAttribute('class', 'list-item active');
+		navList.appendChild(navListItem);
+		navDiv.appendChild(navList);
+
+
+		// add things to the rightDiv
+		rightDiv.appendChild(navDiv);
+
+		// add the left and right divs to the wrapDiv
+		wrapDiv.appendChild(leftDiv);
+		wrapDiv.appendChild(rightDiv);
+
+		// add it all to the module
 		module.appendChild(wrapDiv);
 		worksDiv.appendChild(module);
 	}
-	listWorks();
+	heroImg();
+	// listWorks();
+}
+
+function heroImg() {
+
 }
 
 function listWorks() {
 	for(var i = 0; i < navArr.length - 2; i++ ) {
 		var mod = document.getElementById(navArr[i]).getElementsByClassName('module-wrap');
+		console.log(mod);
 		for(var j = 0; j < mod.length; j++ ) {
 			// left module div
 			var leftDiv = document.createElement('div');
