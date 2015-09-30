@@ -16,23 +16,24 @@
 	<article class="admin" data-page="works-manage">
 		<nav class="pages">
 			<ul class="pages-list group">
-				<li class="pages-list-item"><a href="works-add.html">Add Works</a></li>
-				<li class="pages-list-item"><a href="works-manage.html">Manage Works</a></li>
-				<li class="pages-list-item"><a href="studio-add.html">Add Studio</a></li>
-				<li class="pages-list-item"><a href="studio-manage.html">Manage Studio</a></li>
-				<li class="pages-list-item"><a href="news.html">News</a></li>
-				<li class="pages-list-item"><a href="resume.html">Resume/CV</a></li>
+				<li class="pages-list-item"><a class="txt-link" href="works-add.html">Add Works</a></li>
+				<li class="pages-list-item"><a class="txt-link active" href="works-manage.html">Manage Works</a></li>
+				<li class="pages-list-item"><a class="txt-link" href="studio-add.html">Add Studio</a></li>
+				<li class="pages-list-item"><a class="txt-link" href="studio-manage.html">Manage Studio</a></li>
+				<li class="pages-list-item"><a class="txt-link" href="news.html">News</a></li>
+				<li class="pages-list-item"><a class="txt-link" href="resume.html">Resume/CV</a></li>
 			</ul>
 		</nav>
 		<section class="module manage">
 			<header class="section-header">
 				<h1>Manage Works</h1>
 			</header>
-			<div class="works-edit">
+			<div class="module-info">
 				<h2>A Stat:</h2>
 				<p>You have a total of <!-- number here --> items in the database!</p>
+			</div>
 
-				<hr class="module-divider"/>
+			<div class="module-info">
 
 				<h2>Filter Works By Section</h2>
 				<ul class="list filter group">
@@ -69,8 +70,6 @@
 			</div>
 			<div class="content" id="<!-- WORKS ID>">
 				<form action="works-edit.php" method="POST" id="uploadworks" enctype="multipart/form-data">
-
-					<hr class="module-divider"/>
 
 					<div class="work">
 						<div class="works-edit">
