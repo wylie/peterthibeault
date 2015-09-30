@@ -232,17 +232,45 @@ input#price {
 		width: 30px;
 	}
 }
-.filter .label,
-.sections .label {
-	width: 13%;
-	display: inline-block;
-	margin: 0 0 0 25px;
-	font-size: .8em;
+.filter {
+	list-style-type: none;
+	.list-item {
+		display: block;
+	    float: left;
+	    margin: 0;
+	    padding: 0;
+	    text-align: left;
+		input {
+			display: none;
+			&:checked {
+				+ label {
+					background-color: #ccc;
+				}
+			}
+		}
+		label {
+			cursor: pointer;
+			font-size: .8em;
+		    width: auto;
+		    padding: 10px;
+		    display: block;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }
-.filter input[type="radio"],
-.sections input[type="checkbox"] {
-	margin-right: -20px;
-}
+// .filter .label,
+// .sections .label {
+// 	width: 13%;
+// 	display: inline-block;
+// 	margin: 0 0 0 25px;
+// 	font-size: .8em;
+// }
+// .filter input[type="radio"],
+// .sections input[type="checkbox"] {
+// 	margin-right: -20px;
+// }
 
 .content.hidden {
 	display: none;
@@ -286,41 +314,4 @@ input#price {
 	-webkit-user-select: text;
 	-webkit-appearance: push-button;
 	white-space: pre;
-}
-
-
-.module {
-	.button.primary-action {
-		margin: 15px 10px -2px 50px;
-	}
-	.works-edit {
-		margin-left: 50px;
-		&:before {
-		    content: '1';
-		    display: block;
-		    position: absolute;
-		    left: 15px;
-		    font-size:  48px;
-		}
-	}
-	.module-main {
-		margin-left: 50px;
-		&:before {
-		    content: '2';
-		    display: block;
-		    position: absolute;
-		    left: 15px;
-		    font-size:  48px;
-		}
-	}
-	.module-sidebar {
-		margin-left: 50px;
-		&:before {
-		    content: '3';
-		    display: block;
-		    position: absolute;
-		    left: 15px;
-		    font-size:  48px;
-		}
-	}
 }

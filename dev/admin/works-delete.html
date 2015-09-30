@@ -31,25 +31,7 @@
 			</header>
 			<div class="content">
 					<div class="module-main bg-3">
-						<div class="delete-success news">
-<?php
-
-	$value = $_POST['id'];
-
-	require('!dbconnect.php');
-	if($dbc) {
-
-	    $sql_delete = "DELETE FROM works WHERE works_entry_id=" . $value;
-	    mysql_query($sql_delete);
-
-		echo 'Success, that work has been deleted from the database!';
-
-		mysql_close($dbc);
-	}
-	/*
-	*/
-
-?>						</div>
+						<div class="delete-success news"></div>
 					</div>
 				</form>
 			</div>
