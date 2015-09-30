@@ -37,7 +37,7 @@ a {
 
 /* WRAP */
 .wrap {
-	width: 750px;
+	width: 900px;
 	margin: 30px auto 0;
 }
 /* END WRAP */
@@ -84,8 +84,13 @@ a {
 	margin-bottom: 10px;
 	&-item {
 		display: block;
-		float: left;
-		width: 16%;
+	    float: left;
+		width: percentage((100/6)/100);
+	    text-align: center;
+	    border-left: 1px solid #fff;
+		&:first-child {
+			border-left: none;
+		}
 		.txt-link {
 			padding: 10px 0;
 			display: block;
