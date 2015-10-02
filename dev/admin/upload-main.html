@@ -12,45 +12,38 @@
 </head>
 <body>
 
-<div class="wrap">
-	<article class="admin" data-page="upload-main">
-		<nav class="pages">
-			<ul class="pages-list group">
-				<li class="pages-list-item"><a class="txt-link" href="works-add.html">Add Works</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="works-manage.html">Manage Works</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="studio-add.html">Add Studio</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="studio-manage.html">Manage Studio</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="news.html">News</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="resume.html">Resume/CV</a></li>
-			</ul>
-		</nav>
+	<ul class="list nav inline">
+		<li class="list-item"><a class="txt-link" href="works-add.html">Add Works</a></li>
+		<li class="list-item"><a class="txt-link" href="works-manage.html">Manage Works</a></li>
+		<li class="list-item"><a class="txt-link" href="studio-add.html">Add Studio</a></li>
+		<li class="list-item"><a class="txt-link" href="studio-manage.html">Manage Studio</a></li>
+		<li class="list-item"><a class="txt-link" href="news.html">News</a></li>
+		<li class="list-item"><a class="txt-link" href="resume.html">Resume/CV</a></li>
+	</ul>
 
-		<section class="module">
-			<header class="section-header">
-				<h1>Add A Studio Shot</h1>
-			</header>
-			<div class="content">
-				<form action="upload_main.php" method="post" id="uploadworks" enctype="multipart/form-data">
+	<section class="module">
+		<header class="section-header">
+			<h1>Add A Studio Shot</h1>
+		</header>
+		<div class="content">
+			<form action="upload_main.php" method="post" id="uploadworks" enctype="multipart/form-data">
 
-					<input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-					<div class="module-main bg-3">
-						<div class="upload-success"></div>
-                    </div>
-                </form>
-				<h1>Add Works</h1>
-			</header>
-			<div class="content">
-				<form action="upload_main.php" method="post" id="uploadworks" enctype="multipart/form-data">
-					<input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-					<div class="module-main bg-3">
-						<div class="upload-success"></div>
-					</div>
-				</form>
-			</div>
-		</section>
-
-	</article>
-</div>
+				<input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+				<div class="module-main bg-3">
+					<div class="upload-success"></div>
+                </div>
+            </form>
+			<h1>Add Works</h1>
+		</header>
+		<div class="content">
+			<form action="upload_main.php" method="post" id="uploadworks" enctype="multipart/form-data">
+				<input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+				<div class="module-main bg-3">
+					<div class="upload-success"></div>
+				</div>
+			</form>
+		</div>
+	</section>
 
 </body>
 </html>

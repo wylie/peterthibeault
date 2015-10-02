@@ -12,126 +12,100 @@
 </head>
 <body>
 
-<div class="wrap">
-	<article class="admin" data-page="works-manage">
-		<nav class="pages">
-			<ul class="pages-list group">
-				<li class="pages-list-item"><a class="txt-link" href="works-add.html">Add Works</a></li>
-				<li class="pages-list-item"><a class="txt-link active" href="works-manage.html">Manage Works</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="studio-add.html">Add Studio</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="studio-manage.html">Manage Studio</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="news.html">News</a></li>
-				<li class="pages-list-item"><a class="txt-link" href="resume.html">Resume/CV</a></li>
+	<ul class="list nav inline">
+		<li class="list-item"><a class="txt-link" href="works-add.html">Add Works</a></li>
+		<li class="list-item"><a class="txt-link active" href="works-manage.html">Manage Works</a></li>
+		<li class="list-item"><a class="txt-link" href="studio-add.html">Add Studio</a></li>
+		<li class="list-item"><a class="txt-link" href="studio-manage.html">Manage Studio</a></li>
+		<li class="list-item"><a class="txt-link" href="news.html">News</a></li>
+		<li class="list-item"><a class="txt-link" href="resume.html">Resume/CV</a></li>
+	</ul>
+
+	<section class="module manage">
+		<header class="section-header">
+			<h1>Manage Works</h1>
+		</header>
+		<div class="module-section">
+			<h2>A Stat:</h2>
+			<p>You have a total of <!-- number here --> items in the database!</p>
+		</div>
+
+		<div class="module-section">
+
+			<h2>Filter By Section</h2>
+			<ul class="list filter inline">
+				<li class="list-item">
+					<input type="radio" name="section" id="furnishings">
+					<label class="label" for="furnishings">Furnishings</label>
+				</li>
+				<li class="list-item">
+					<input type="radio" name="section" id="sculpture">
+					<label class="label" for="sculpture">Sculpture</label>
+				</li>
+				<li class="list-item">
+					<input type="radio" name="section" id="drawing">
+					<label class="label" for="drawing">Drawing</label>
+				</li>
+				<li class="list-item">
+					<input type="radio" name="section" id="painting">
+					<label class="label" for="painting">Painting</label>
+				</li>
+				<li class="list-item">
+					<input type="radio" name="section" id="design">
+					<label class="label" for="design">Design</label>
+				</li>
+				<li class="list-item">
+					<input type="radio" name="section" id="students">
+					<label class="label" for="students">Students</label>
+				</li>
+				<li class="list-item">
+					<input type="radio" name="section" id="all" checked="checked" />
+					<label class="label" for="all">Display all</label>
+				</li>
 			</ul>
-		</nav>
-		<section class="module manage">
-			<header class="section-header">
-				<h1>Manage Works</h1>
-			</header>
-			<div class="module-info">
-				<h2>A Stat:</h2>
-				<p>You have a total of <!-- number here --> items in the database!</p>
-			</div>
 
-			<div class="module-info">
+		</div>
+		<div class="content">
 
-				<h2>Filter Works By Section</h2>
-				<ul class="list filter group">
-					<li class="list-item">
-						<input type="radio" name="section" id="furnishings">
-						<label class="label" for="furnishings">Furnishings</label>
-					</li>
-					<li class="list-item">
-						<input type="radio" name="section" id="sculpture">
-						<label class="label" for="sculpture">Sculpture</label>
-					</li>
-					<li class="list-item">
-						<input type="radio" name="section" id="drawing">
-						<label class="label" for="drawing">Drawing</label>
-					</li>
-					<li class="list-item">
-						<input type="radio" name="section" id="painting">
-						<label class="label" for="painting">Painting</label>
-					</li>
-					<li class="list-item">
-						<input type="radio" name="section" id="design">
-						<label class="label" for="design">Design</label>
-					</li>
-					<li class="list-item">
-						<input type="radio" name="section" id="students">
-						<label class="label" for="students">Students</label>
-					</li>
-					<li class="list-item">
-						<input type="radio" name="section" id="all" checked="checked" />
-						<label class="label" for="all">Display all</label>
+			<div class="module-section work">
+				<div class="works-edit">
+					<h3>Date Added:</h3>
+				</div>
+
+				<img src="#" alt="" class="main-image" />
+
+				<ul class="list module-list">
+					<li class="module-list-heading">TITLE</li>
+					<li class="module-list-item"><input id="workname" name="workname" type="text" class="form-input" value="" /></li>
+
+					<li class="module-list-heading">YEAR</li>
+					<li class="module-list-item"><input id="year" name="year" type="text" class="form-input" value="" /></li>
+
+					<li class="module-list-heading">MEDIA</li>
+					<li class="module-list-item"><input id="media" name="media" type="text" class="form-input" value="" /></li>
+					<li class="module-list-heading">DESCRIPTION</li>
+					<li class="module-list-item"><textarea id="description" name="description" type="text" class="form-input" rows="5"></textarea></li>
+					<li class="module-list-heading">DIMENSIONS</li>
+					<li class="module-list-item"><input id="dimension_d" name="dimension_d" type="text" class="form-input" style="width: 25px;" value="" />D x <input id="dimension_w" name="dimension_w" type="text" style="width: 25px;" class="form-input" value="<?php echo $dimension_w; ?>" />W x <input id="dimension_h" name="dimension_h" type="text" style="width: 25px;" class="form-input" value="<?php echo $dimension_h; ?>" />H</li>
+					<li class="module-list-heading">Available</li>
+					<li class="module-list-item">
+						<select id="available">
+							<option>Select One</option>
+							<option value="yes">Yes</option>
+							<option value="no">No</option>
+						</select>
 					</li>
 				</ul>
 
+				<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
+					<button type="submit" name="edit" value="save" class="save button">Save</button>
+					<button type="submit" name="edit" value="delete" class="delete button">Delete</button>
+					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
+					<input type="hidden" name="submitted" value="true" />
+				</div>
 			</div>
-			<div class="content" id="<!-- WORKS ID>">
-				<form action="works-edit.php" method="POST" id="uploadworks" enctype="multipart/form-data">
-
-					<div class="work">
-						<div class="works-edit">
-							<h3>Date Added:</h3>
-						</div><!-- end class="works-edit" -->
-					</div><!-- end of class="work" -->
-
-					<div class="module-main bg-3">
-						<img src="<?php echo $main_image; ?>" alt="" class="main-image" />
-					</div><!-- end of class="module-main bg-3" -->
-					<div class="module-sidebar">
-						<ul class="sidebar-items-list bg-3 group">
-							<li class="sidebar-item">
-								<!-- START INFO ***************** -->
-								<div class="info">
-									<ul class="sidebar-list">
-										<li class="sidebar-list-heading">TITLE</li>
-										<li class="sidebar-list-item"><input id="workname" name="workname" type="text" class="form-input" value="" /></li>
-
-										<li class="sidebar-list-heading">YEAR</li>
-										<li class="sidebar-list-item"><input id="year" name="year" type="text" class="form-input" value="" /></li>
-
-										<li class="sidebar-list-heading">MEDIA</li>
-										<li class="sidebar-list-item"><input id="media" name="media" type="text" class="form-input" value="" /></li>
-										<li class="sidebar-list-heading">DESCRIPTION</li>
-										<li class="sidebar-list-item"><textarea id="description" name="description" type="text" class="form-input" rows="5"></textarea></li>
-										<li class="sidebar-list-heading">DIMENSIONS</li>
-										<li class="sidebar-list-item"><input id="dimension_d" name="dimension_d" type="text" class="form-input" style="width: 25px;" value="" />D x <input id="dimension_w" name="dimension_w" type="text" style="width: 25px;" class="form-input" value="<?php echo $dimension_w; ?>" />W x <input id="dimension_h" name="dimension_h" type="text" style="width: 25px;" class="form-input" value="<?php echo $dimension_h; ?>" />H</li>
-									</ul>
-								</div>
-								<!-- END INFO ******************* -->
-							</li>
-							<li class="sidebar-item">
-								<!-- START AVAILABLE ************ -->
-								<div class="available">
-									<ul class="sidebar-list">
-										<li class="sidebar-list-heading">Available</li>
-										<li class="sidebar-list-item">
-											<select id="available">
-												<option>Select One</option>
-												<option value="yes">Yes</option>
-												<option value="no">No</option>
-											</select>
-										</li>
-									</ul>
-								</div>
-								<!-- END AVAILABLE ************** -->
-							</li>
-						</ul>
-					</div><!-- end class="module-sidebar" -->
-
-					<div class="works-edit group" id="works_entry_id-<?php echo $works_entry_id; ?>">
-						<button type="submit" name="edit" value="save" class="save button">Save this work</button>
-						<button type="submit" name="edit" value="delete" class="delete button">Delete this work</button>
-						<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
-						<input type="hidden" name="submitted" value="true" />
-					</div>
-				</form>
-			</div>
-		</section><!-- end of class="module" -->
-	</article><!-- end of class="admin" -->
-</div><!-- end of class="wrap" -->
+		</div>
+	</section>
 
 </body>
 </html>
