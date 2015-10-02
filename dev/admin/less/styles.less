@@ -21,6 +21,14 @@ a {
 * {
 	box-sizing: border-box;
 }
+.header {
+	font-size: 1.5em;
+	margin: 20px 0;
+}
+.subheader {
+	font-size: 1em;
+	margin: 0 0 20px;
+}
 .module-divider {
 	border-color: black;
 	border-style: solid;
@@ -253,16 +261,14 @@ input#price {
 // 		width: 30px;
 // 	}
 // }
-h2 {
-	margin: 0 0 20px;
-}
 .filter {
 	margin: -10px;
 	input {
 		display: none;
 		&:checked {
 			+ label {
-				background-color: #ccc;
+				background-color: #666;
+			    color: #fff;
 			}
 		}
 	}
