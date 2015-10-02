@@ -3,43 +3,48 @@
 <head>
 	<meta charset="utf-8">
 	<title>Peter Thibeault - Admin</title>
-	<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,user-scalable=no">
 
 	<link href="../site/css/reset.css" rel="stylesheet" />
 	<link href="css/styles.css" rel="stylesheet" />
 
+	<script src="js/script.js"></script>
+
 </head>
 <body>
 
-<div class="wrap">
-	<article class="admin" data-page="nav">
-		<nav class="pages">
-            <!-- NAV HERE -->
-		</nav>
+	<ul class="list nav inline">
+		<li class="list-item"><a class="txt-link" href="works-add.html">Add Works</a></li>
+		<li class="list-item"><a class="txt-link" href="works-manage.html">Manage Works</a></li>
+		<li class="list-item"><a class="txt-link" href="studio-add.html">Add Studio</a></li>
+		<li class="list-item"><a class="txt-link" href="studio-manage.html">Manage Studio</a></li>
+		<li class="list-item"><a class="txt-link active" href="news.html">News</a></li>
+		<li class="list-item"><a class="txt-link" href="resume.html">Resume/CV</a></li>
+	</ul>
 
-		<section class="module">
-			<header class="section-header">
-				<h1>New News</h1>
-			</header>
-			<div class="content">
-				<form action="news.php" method="post">
-					<textarea class="editor" name="content" style="width: 100%;"></textarea>
-					<input type="submit" value="Save This News" class="button primary-action" />
-					<input type="hidden" name="submitted" value="true" />
-					<p><!-- ADD NEWS HERE --></p>
-				</form>
-				<hr />
-				<header class="section-header">
-					<h1>Old News</h1>
-				</header>
-				<div class="content">
-					<!-- SHOW NEWS HERE -->
-				</div>
+	<section class="module">
+		<header class="section-header">
+			<h1>News</h1>
+		</header>
+		<div class="module-section">
+			<h2>A Stat:</h2>
+			<p>You have a total of <!-- display number of studio shots --> news stories in the database!</p>
+		</div>
+		<div class="module-section content">
+			<textarea class="editor" name="content" style="width: 100%;"></textarea>
+			<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
+				<button type="submit" name="edit" value="save" class="save button">Save</button>
+				<button type="submit" name="edit" value="cancel" class="cancel button">Cancel</button>
+				<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
+				<input type="hidden" name="submitted" value="true" />
 			</div>
-		</section>
-
-	</article>
-</div>
+		</div>
+		<header class="section-header">
+			<h1>Old News</h1>
+		</header>
+		<div class="module-section content">
+			<!-- SHOW NEWS HERE -->
+		</div>
+	</section>
 
 </body>
 </html>

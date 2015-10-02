@@ -173,6 +173,22 @@ module.exports = function(grunt) {
 					spawn: false,
 					livereload: false
 				}
+			},
+			adminjs: {
+				files: ['dev/admin/js/*'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
+			adminhtml: {
+				files: ['dev/admin/*.html'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
 			}
 		}
 
