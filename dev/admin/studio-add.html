@@ -22,26 +22,20 @@
 	</ul>
 
 	<section class="module">
-		<header class="section-header">
-			<h1>Add A Studio Shot</h1>
-		</header>
+		<h1 class="header">Add A Studio Shot</h1>
 		<div class="content">
-			<form action="upload_main.php" method="post" id="uploadworks" enctype="multipart/form-data">
-
-				<input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-				<div class="module-section">
-					<input size="25" name="studio_image" type="file" />
-					<div class="input-restrictions">
-						jpg and png files only
-					</div>
-					<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
-						<button type="submit" name="edit" value="save" class="save button">Save</button>
-						<button type="submit" name="edit" value="cancel" class="cancel button">Cancel</button>
-						<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
-						<input type="hidden" name="submitted" value="true" />
-					</div>
+			<div class="module-section">
+				<input size="25" name="studio_image" type="file" />
+				<div class="input-restrictions">
+					jpg and png files only
 				</div>
-			</form>
+				<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
+					<button type="submit" name="edit" value="save" class="save button">Save</button>
+					<button type="submit" name="edit" value="cancel" class="cancel button">Cancel</button>
+					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
+					<input type="hidden" name="submitted" value="true" />
+				</div>
+			</div>
 		</div>
 	</section>
 
