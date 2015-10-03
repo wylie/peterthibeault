@@ -3,6 +3,9 @@ window.onload = init;
 function init() {
     dataTypes();
     displayNews();
+
+    var cancelNews = document.getElementById('cancelNews');
+    cancelNews.onclick = clearNews;
 }
 
 // some arrays we will need as we go along
@@ -48,6 +51,7 @@ function displayNews() {
             var oldNews = document.getElementById('oldNews');
             var div = document.createElement('div');
             div.setAttribute('class', 'news-item');
+            div.setAttribute('id', news[i].id);
             div.innerHTML = news[i].description;
 
             var span = document.createElement('span');
@@ -66,4 +70,8 @@ function displayNews() {
             oldNews.appendChild(div);
         }
     }
+}
+
+function clearNews() {
+    document.getElementById('newsContent').value = '';
 }
