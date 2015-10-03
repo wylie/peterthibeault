@@ -28,12 +28,10 @@
 		</div>
 		<div class="content">
 			<div class="module-section">
-				<textarea class="news-adder" name="content"></textarea>
-				<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
-					<button type="submit" name="edit" value="save" class="save button">Save</button>
-					<button type="submit" name="edit" value="cancel" class="cancel button">Cancel</button>
-					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
-					<input type="hidden" name="submitted" value="true" />
+				<textarea class="news-add" id="newsContent" name="content"></textarea>
+				<div class="module-save">
+					<button class="save button" id="saveNews" type="submit" name="edit" value="save">Save</button>
+					<button class="cancel button" id="cancelNews" type="submit" name="edit" value="cancel">Cancel</button>
 				</div>
 			</div>
 		</div>
