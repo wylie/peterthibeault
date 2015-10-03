@@ -233,7 +233,7 @@ function createModules() {
 		module.appendChild(wrapDiv);
 		worksDiv.appendChild(module);
 	}
-	heroImg();
+	// heroImg();
 	// listWorks();
 }
 
