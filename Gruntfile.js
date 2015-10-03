@@ -166,6 +166,14 @@ module.exports = function(grunt) {
 					livereload: false
 				}
 			},
+			data: {
+				files: ['dev/data/*'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
 			adminless: {
 				files: ['dev/admin/less/*'],
 				tasks: ['less:admin'],

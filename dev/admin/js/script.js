@@ -2,6 +2,7 @@ window.onload = init;
 
 function init() {
     dataTypes();
+    displayNews();
 }
 
 // some arrays we will need as we go along
@@ -31,4 +32,38 @@ function getData(kind) {
 		}
 	}
 	request.send();
+}
+
+// DISPLAY THE OLD NEWS
+function displayNews() {
+    var news = JSON.parse( localStorage.getItem('news') );
+    for (var key in news) {
+        var news = news[key].reverse();
+        var newsNum = document.getElementById('newsNum');
+        // display the number of news items saved
+        newsNum.innerHTML = news.length;
+
+        for(var i = 0; i < news.length; i++) {
+
+            var oldNews = document.getElementById('oldNews');
+            var div = document.createElement('div');
+            div.setAttribute('class', 'news-item');
+            div.innerHTML = news[i].description;
+
+            var span = document.createElement('span');
+            span.setAttribute('class', 'news-item-date');
+            span.innerHTML = news[i].date;
+
+            var button = document.createElement('button');
+            button.setAttribute('type', 'submit');
+            button.setAttribute('name', 'edit');
+            button.setAttribute('value', 'delete');
+            button.setAttribute('class', 'delete button');
+            button.innerHTML = 'Delete';
+
+            div.appendChild(button);
+            div.insertBefore(span, div.firstChild);
+            oldNews.appendChild(div);
+        }
+    }
 }

@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 	<title>Peter Thibeault - Admin</title>
 
-	<link href="../site/css/reset.css" rel="stylesheet" />
 	<link href="css/styles.css" rel="stylesheet" />
 
 	<script src="js/script.js"></script>
@@ -24,17 +23,19 @@
 	<section class="module">
 		<h1 class="header">Add A Studio Shot</h1>
 		<div class="content">
-				<div class="module-main bg-3">
-					<div class="upload-success related">
-                		<form action="upload_related.php?name=' . $name . '&num=' . $num . '&rnum='. $rnum . '" method="post" enctype="multipart/form-data">
-                			<input id="fileUpload" size="25" name="related_image" type="file" /><br/>
-                			<input id="submitRelated" type="submit" value="Upload this related work" class="button primary-action" disabled><br/>
-                			<input type="hidden" name="risubmitted" value="true">
-                		</form>
-					</div>
+			<div class="module-section">
+				<div class="upload-success related">
+            		<form action="upload_related.php?name=' . $name . '&num=' . $num . '&rnum='. $rnum . '" method="post" enctype="multipart/form-data">
+            			<input id="fileUpload" size="25" name="related_image" type="file" /><br/>
+            			<input id="submitRelated" type="submit" value="Upload this related work" class="button primary-action" disabled><br/>
+            			<input type="hidden" name="risubmitted" value="true">
+            		</form>
 				</div>
-			</form>
-			<a href="http://peterthibeault.com/admin/works-add.php" class="myButton finished" style="position: relative;top: -40px;left: 40%;">I'm Finished</button>
+				<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
+					<button type="submit" name="edit" value="save" class="save button">Save</button>
+					<button type="submit" name="edit" value="cancel" class="cancel button">Cancel</button>
+				</div>
+			</div>
 		</div>
 	</section>
 
