@@ -13,11 +13,34 @@
 
 	<ul class="list nav inline center">
 		<li class="list-item"><a class="txt-link" href="works.html">Works</a></li>
-		<li class="list-item"><a class="txt-link active" href="studio.html">Studio</a></li>
+		<li class="list-item"><a class="txt-link" href="studio.html">Studio</a></li>
 		<li class="list-item"><a class="txt-link" href="news.html">News</a></li>
 		<li class="list-item"><a class="txt-link" href="cv.html">CV</a></li>
 		<li class="list-item"><a class="txt-link" href="contact.html">Contact</a></li>
 	</ul>
+	<section class="module">
+		<h1 class="header">Studio</h1>
+		<div class="module-section">
+			<h2 class="subheader">Stats:</h2>
+			<p>You have a total of <!-- display number of studio shots --> studio shots in the database!</p>
+		</div>
+		<div class="content">
+			<div class="module-section work">
+				<div class="works-edit">
+					<h2 class="subheader">Date Added:</h2>
+				</div>
+
+				<img src="<?php echo $studio_image; ?>" alt="" class="main-image" />
+
+				<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
+					<button type="submit" name="edit" value="save" class="save button">Save</button>
+					<button type="submit" name="edit" value="delete" class="delete button">Delete</button>
+					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
+					<input type="hidden" name="submitted" value="true" />
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<section class="module">
 		<h1 class="header">Add A Studio Shot</h1>
