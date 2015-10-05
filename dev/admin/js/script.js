@@ -81,24 +81,10 @@ function displayWorks() {
             span.setAttribute('class', 'date');
             span.innerHTML = works[key][i].date;
 
-            // create the list
-            var ul = document.createElement('ul');
-            ul.setAttribute('class', 'sidebar-list list');
-
-            // create the title list item
-            var li1 = document.createElement('li');
-            li1.setAttribute('class', 'sidebar-list-item');
-
             // create the title heading
             var heading1 = document.createElement('h3');
             heading1.setAttribute('class', 'heading');
             heading1.innerHTML = 'Title';
-
-            li1.appendChild(heading1);
-
-            // create the title list item
-            var li2 = document.createElement('li');
-            li2.setAttribute('class', 'sidebar-list-item');
 
             // create the title heading
             var input1 = document.createElement('input');
@@ -106,22 +92,10 @@ function displayWorks() {
             input1.setAttribute('type', 'text');
             input1.setAttribute('value', works[key][i].title);
 
-            li2.appendChild(input1);
-
-            // create the year list item
-            var li3 = document.createElement('li');
-            li3.setAttribute('class', 'sidebar-list-item');
-
             // create the year heading
             var heading2 = document.createElement('h3');
             heading2.setAttribute('class', 'heading');
             heading2.innerHTML = 'Year';
-
-            li3.appendChild(heading2);
-
-            // create the year list item
-            var li4 = document.createElement('li');
-            li4.setAttribute('class', 'sidebar-list-item');
 
             // create the year heading
             var input2 = document.createElement('input');
@@ -129,22 +103,10 @@ function displayWorks() {
             input2.setAttribute('type', 'text');
             input2.setAttribute('value', works[key][i].year);
 
-            li4.appendChild(input2);
-
-            // create the media list item
-            var li5 = document.createElement('li');
-            li5.setAttribute('class', 'sidebar-list-item');
-
             // create the media heading
             var heading3 = document.createElement('h3');
             heading3.setAttribute('class', 'heading');
             heading3.innerHTML = 'Media';
-
-            li5.appendChild(heading3);
-
-            // create the media list item
-            var li6 = document.createElement('li');
-            li6.setAttribute('class', 'sidebar-list-item');
 
             // create the media heading
             var input3 = document.createElement('input');
@@ -152,22 +114,10 @@ function displayWorks() {
             input3.setAttribute('type', 'text');
             input3.setAttribute('value', works[key][i].media);
 
-            li6.appendChild(input3);
-
-            // create the description list item
-            var li7 = document.createElement('li');
-            li7.setAttribute('class', 'sidebar-list-item');
-
             // create the description heading
             var heading4 = document.createElement('h3');
             heading4.setAttribute('class', 'heading');
             heading4.innerHTML = 'Description';
-
-            li7.appendChild(heading4);
-
-            // create the description list item
-            var li8 = document.createElement('li');
-            li8.setAttribute('class', 'sidebar-list-item');
 
             // create the description heading
             var input4 = document.createElement('textarea');
@@ -175,80 +125,49 @@ function displayWorks() {
             input4.setAttribute('type', 'text');
             input4.innerHTML = works[key][i].description;
 
-            li8.appendChild(input4);
-
-            // create the dimensions list item
-            var li9 = document.createElement('li');
-            li9.setAttribute('class', 'sidebar-list-item');
-
             // create the dimensions heading
             var heading4 = document.createElement('h3');
             heading4.setAttribute('class', 'heading');
             heading4.innerHTML = 'Dimensions';
 
-            li9.appendChild(heading4);
-
-            // create the dimensions list item
-            var li10 = document.createElement('li');
-            li10.setAttribute('class', 'sidebar-list-item');
-
             // create the dimensions heading
             var input4 = document.createElement('input');
-            input4.setAttribute('class', 'form-input');
+            input4.setAttribute('class', 'form-input dimension');
             input4.setAttribute('type', 'text');
             input4.setAttribute('value', works[key][i].dimension_d);
 
             // create the dimensions heading
             var input5 = document.createElement('input');
-            input5.setAttribute('class', 'form-input');
+            input5.setAttribute('class', 'form-input dimension');
             input5.setAttribute('type', 'text');
             input5.setAttribute('value', works[key][i].dimension_w);
 
             // create the dimensions heading
             var input6 = document.createElement('input');
-            input6.setAttribute('class', 'form-input');
+            input6.setAttribute('class', 'form-input dimension');
             input6.setAttribute('type', 'text');
             input6.setAttribute('value', works[key][i].dimension_h);
 
-            li10.appendChild(input4);
-            li10.appendChild(input5);
-            li10.appendChild(input6);
-
-            // create the description list item
-            var li11 = document.createElement('li');
-            li11.setAttribute('class', 'sidebar-list-item');
-
-            // create the description heading
+            // create the available heading
             var heading5 = document.createElement('h3');
             heading5.setAttribute('class', 'heading');
             heading5.innerHTML = 'Available';
 
-            li11.appendChild(heading5);
-
-            // create the description list item
-            var li12 = document.createElement('li');
-            li12.setAttribute('class', 'sidebar-list-item');
-
-            // create the description heading
+            // create the available heading
             var input7 = document.createElement('input');
             input7.setAttribute('class', 'form-input');
             input7.setAttribute('type', 'text');
             input7.setAttribute('value', works[key][i].available);
 
-            li12.appendChild(input7);
+            // create the related images heading
+            var heading6 = document.createElement('h3');
+            heading6.setAttribute('class', 'heading');
+            heading6.innerHTML = 'Additional Images';
 
-            ul.appendChild(li1);
-            ul.appendChild(li2);
-            ul.appendChild(li3);
-            ul.appendChild(li4);
-            ul.appendChild(li5);
-            ul.appendChild(li6);
-            ul.appendChild(li7);
-            ul.appendChild(li8);
-            ul.appendChild(li9);
-            ul.appendChild(li10);
-            ul.appendChild(li11);
-            ul.appendChild(li12);
+            // create the related images heading
+            var p8 = document.createElement('p');
+            p8.setAttribute('class', 'txt');
+            p8.innerHTML = works[key][i].related_images;
 
             var saveDiv = document.createElement('div');
             saveDiv.setAttribute('class', 'module-save');
@@ -271,8 +190,24 @@ function displayWorks() {
 
             // append everything
             div.appendChild(img);
+            div.appendChild(heading1);
+            div.appendChild(input1);
+            div.appendChild(heading2);
+            div.appendChild(input2);
+            div.appendChild(heading3);
+            div.appendChild(input3);
+            div.appendChild(heading4);
+            div.appendChild(input4);
+            div.appendChild(heading4);
+            div.appendChild(input4);
+            div.appendChild(input5);
+            div.appendChild(input6);
+            div.appendChild(heading5);
+            div.appendChild(input7);
+            div.appendChild(heading6);
+            div.appendChild(p8);
+
             div.insertBefore(span, div.firstChild);
-            div.appendChild(ul);
             saveDiv.appendChild(button1);
             saveDiv.appendChild(button2);
             div.appendChild(saveDiv);
