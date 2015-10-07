@@ -22,7 +22,6 @@ a {
 	box-sizing: border-box;
 	font-family: Futura, helvetica, arial, sans-serif;
 }
-@header-size: 36px;
 h1 {
 	font-size: 36px;
 	color: #000;
@@ -238,17 +237,9 @@ input#price {
 	margin-left: 5px;
 }
 .admin {
-	// background: #fff;
-	// border: 1px solid #000;
-	// padding: 10px;
-	// margin-bottom: 30px;
 	.module .sidebar-items-list .sidebar-item {
 		width: 33%;
 	}
-	// .module-sidebar .module-list {
-	// 	display: inline-block;
-	// 	padding: 4%;
-	// }
 }
 .module-save {
 	margin: 20px 0 0;
@@ -275,6 +266,10 @@ input#price {
 	background-color: red;
 	&:hover {
 		background-color: darken(red, 10%)
+	}
+	.studio & {
+		width: 100%;
+		margin-top: 15px;
 	}
 }
 .cancel {
@@ -313,14 +308,13 @@ input#price {
 	}
 }
 
-.content.hidden {
-	display: none;
-}
-/* END ADD IMAGES SECTION */
-
 .content {
 	.group;
+	&.hidden {
+		display: none;
+	}
 }
+/* END ADD IMAGES SECTION */
 
 /* MANAGE WORKS */
 .module-section {
@@ -337,6 +331,19 @@ input#price {
 		&:nth-child(2n+2) {
 		    float: right;
 		    margin-right: 0;
+		}
+		.heading {
+	    	margin: 10px 0 0;
+		}
+		.form-input {
+		    width: 100%;
+		    font-size:  16px;
+			margin-top: 5px;
+			&.dimension {
+				width: 20% !important;
+				display: inline-block;
+			    margin-right: 10px;
+			}
 		}
 	}
 	.inner-section {
@@ -360,26 +367,8 @@ input#price {
 	    left: 30px;
 	    font-size: 20px;
 	}
-	.delete.button {
-		width: 100%;
-		margin-top: 15px;
-	}
 }
 
-.module-section.work .heading {
-    margin: 10px 0 0;
-}
-
-.module-section.work .form-input {
-    width: 100%;
-    font-size:  16px;
-	margin-top: 5px;
-	&.dimension {
-		width: 20% !important;
-		display: inline-block;
-	    margin-right: 10px;
-	}
-}
 .hide {
 	display: none;
 }
