@@ -4,7 +4,6 @@
 - remove copy on upper left front page
 - blank image showing up in related images sometimes
 - on upload related images screen grey out upload this work until an image is uploaded
-
 - check why other images are showing up under related images
 - add a status thing for when clicking on images
 - show steps to upload images
