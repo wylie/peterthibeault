@@ -1,11 +1,6 @@
 {
   "name": "PeterThibeault",
-  "description": "The website for Peter Thibeault",
-  "version": "0.1.0",
-  "keywords": [
-    "Peter Thibeault artist"
-  ],
-  "author": "Wylie",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/wylie/peterthibeault.git"
