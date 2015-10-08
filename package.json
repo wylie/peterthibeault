@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/wylie/peterthibeault.git"
   },
-  "peerDependencies": {
+  "dependencies": {
     "grunt": "~0.4.1"
   },
   "devDependencies": {
@@ -15,6 +15,5 @@
     "grunt-contrib-copy": "~0.7.0"
   },
   "main": "Gruntfile.js",
-  "readme": "README.md",
-  "dependencies": {}
+  "readme": "README.md"
 }
