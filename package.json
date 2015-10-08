@@ -10,11 +10,16 @@
     "type": "git",
     "url": "https://github.com/wylie/peterthibeault.git"
   },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-less": "^0.12.0",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-express": "^1.4.1"
-  }
+    "grunt-express": "^1.4.1",
+    "grunt-contrib-copy": "~0.7.0"
+  },
+  "main": "Gruntfile.js",
+  "readme": "README.md",
+  "dependencies": {}
 }
