@@ -315,7 +315,20 @@ input#price {
 	}
 }
 /* END ADD IMAGES SECTION */
-
+#oldWorks {
+	-webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    -webkit-column-fill: auto;
+    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -moz-column-fill: auto;
+    column-count: 2;
+    column-gap: 15px;
+    column-fill: auto;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;	
+}
 /* MANAGE WORKS */
 .module-section {
 	border: 3px solid #333;
@@ -325,9 +338,10 @@ input#price {
 	.group;
 	&.work {
 		.group;
-		float: left;
-	    width: 48%;
-	    margin: 1%;
+		display: inline-block;
+		// float: left;
+	    // width: 48%;
+	    // margin: 1%;
 		.heading {
 	    	margin: 10px 0 0;
 		}
