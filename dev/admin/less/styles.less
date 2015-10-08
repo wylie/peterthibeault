@@ -247,6 +247,11 @@ input#price {
 
 }
 
+.button {
+	+ .button {
+		float: right;
+	}
+}
 .save,
 .delete,
 .cancel {
@@ -256,11 +261,6 @@ input#price {
 	font-weight: bold;
 	font-size: 16px;
 	cursor: pointer;
-}
-.button {
-	+ .button {
-		float: right;
-	}
 }
 .save {
 	background-color: #1DB91C;
