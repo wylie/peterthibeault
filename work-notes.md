@@ -24,5 +24,3 @@
 - 'Available Work' as first category
 - 'Contact Me' instead of 'Available' in new 'Available Works' section
 - ability to add related images from manage  
-
-wylie:91bananas
