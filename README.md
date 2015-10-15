@@ -5,6 +5,9 @@ The professional site of artist, Peter Thibeault.
 ---
 
 `npm install`
+
 `bower install`
+
 `grunt build`
+
 `grunt server`
