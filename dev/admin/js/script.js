@@ -2,27 +2,39 @@ window.onload = init;
 
 function init() {
     dataTypes();
-
     var elements = document.getElementsByTagName('body');
-	var page = elements[0].id;
+    var page = elements[0].id;
 
-	switch(page) {
-		case 'works':
-            displayWorks();
-			break;
-		case 'studio':
-            displayStudio();
-			break;
-		case 'news':
-            displayNews();
-            var cancelNews = document.getElementById('cancelNews');
-            cancelNews.onclick = clearNews;
-			break;
-		case 'cv':
-            break;
-        case 'contact':
-            break;
-    }
+    switch(page) {
+      case 'works':
+        displayWorks();
+        // filter the old works
+        filterWorks();
+        break;
+      case 'studio':
+        displayStudio();
+        break;
+      case 'news':
+        displayNews();
+        var cancelNews = document.getElementById('cancelNews');
+        cancelNews.onclick = clearNews;
+        break;
+      case 'cv':
+        break;
+      case 'contact':
+        break;
+  }
+}
+function filterWorks() {
+  // get all of the work filters
+  $('#filterWorks .list-item label').click(function() {
+    // get the attribute of each label
+    var kind = $(this).attr('for');
+    // remove any hiding going on
+    $('#oldWorks').children('.works').show();
+    // add hiding to the siblings of the type clicked on
+    $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
+  });
 }
 
 // some arrays we will need as we go along
@@ -68,7 +80,7 @@ function displayWorks() {
 
             // create the main div
             var div = document.createElement('div');
-            div.setAttribute('class', 'module-section work works');
+            div.setAttribute('class', 'module-section work works ' + key);
             div.setAttribute('id', works[key][i].id);
 
             // create the image
