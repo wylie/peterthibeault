@@ -12,7 +12,10 @@ function init() {
         filterWorks();
         break;
       case 'studio':
+        // display all the old studio photos
         displayStudio();
+        // delete old studio after clicking on the button
+        deleteStudio();
         break;
       case 'news':
         displayNews();
@@ -25,6 +28,7 @@ function init() {
         break;
   }
 }
+
 function filterWorks() {
   // get all of the work filters
   $('#filterWorks .list-item label').click(function() {
@@ -34,6 +38,15 @@ function filterWorks() {
     $('#oldWorks').children('.works').show();
     // add hiding to the siblings of the type clicked on
     $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
+  });
+}
+
+function deleteStudio() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this);
+    // for now, just console log the id passed in
+    console.log( deleteBtn[0].parentElement.id );
   });
 }
 
@@ -243,6 +256,7 @@ function displayStudio() {
             var oldStudio = document.getElementById('oldStudio');
             var div = document.createElement('div');
             div.setAttribute('class', 'module-section work studio');
+            div.setAttribute('id', studio[i].id);
 
             var img = document.createElement('img');
             img.setAttribute('class', 'studio-img');
