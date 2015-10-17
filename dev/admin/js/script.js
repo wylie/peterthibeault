@@ -10,6 +10,8 @@ function init() {
         displayWorks();
         // filter the old works
         filterWorks();
+        // delete old works after clicking on the button
+        deleteWorks();
         break;
       case 'studio':
         // display all the old studio photos
@@ -21,6 +23,8 @@ function init() {
         displayNews();
         var cancelNews = document.getElementById('cancelNews');
         cancelNews.onclick = clearNews;
+        // delete old news after clicking on the button
+        deleteNews();
         break;
       case 'cv':
         break;
@@ -41,7 +45,25 @@ function filterWorks() {
   });
 }
 
+function deleteWorks() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this).parents('.works');
+    // for now, just console log the id passed in
+    console.log( deleteBtn[0].id );
+  });
+}
+
 function deleteStudio() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this);
+    // for now, just console log the id passed in
+    console.log( deleteBtn[0].parentElement.id );
+  });
+}
+
+function deleteNews() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
