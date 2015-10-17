@@ -30,11 +30,11 @@
 		<h2 class="header">Add New Studio Shot</h2>
 		<div class="module-section">
 			<h3 class="subheader">Choose An Image:</h2>
-			<input size="25" name="studio_image" type="file" />
-
-			<div class="module-save" id="works_entry_id-<?php echo $works_entry_id; ?>">
-				<button type="submit" name="edit" value="save" class="save button">Save</button>
-				<button type="submit" name="edit" value="cancel" class="cancel button">Cancel</button>
+			<input class="studio-add" size="25" name="studio_image" type="file" />
+			<div class="msg error"></div>
+			<div class="module-save">
+				<button class="save button" id="saveStudio" type="submit" name="edit" value="save">Save</button>
+				<button class="cancel button" id="cancelStudio" type="submit" name="edit" value="cancel">Cancel</button>
 				<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
 				<input type="hidden" name="submitted" value="true" />
 			</div>

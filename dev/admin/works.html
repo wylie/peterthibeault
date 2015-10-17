@@ -29,10 +29,10 @@
 		</div>
 
 		<h2 class="header">Add New Works</h1>
-		<div class="module-section">
+		<div class="module-section" id="addNewWork">
 			<div class="inner-section">
 				<h3 class="subheader">Choose A Section:</h2>
-				<ul class="list filter inline">
+				<ul class="list filter inline" id="addWorkCategory">
 					<li class="list-item">
 						<input type="radio" name="section" id="furnishings">
 						<label class="label" for="furnishings">Furnishings</label>
@@ -67,7 +67,7 @@
 
 			<div class="inner-section">
 				<h3 class="subheader">Add Some Info:</h2>
-				<ul class="list module-list">
+				<ul class="list module-list" id="addWorkInfo">
 					<li class="module-list"><h4>TITLE</h4></li>
 					<li class="module-list-item"><input id="workname" name="workname" type="text" class="form-input" /></li>
 					<li class="module-list"><h4>YEAR</h4></li>
@@ -93,8 +93,8 @@
 					</li>
 				</ul>
 				<div class="module-save">
-					<button type="submit" name="edit" value="save" class="save button">Save</button>
-					<button type="submit" name="edit" value="cancel" class="cancel button">Cancel</button>
+					<button class="save button" id="saveWork" type="submit" name="edit" value="save">Save</button>
+					<button class="cancel button" id="cancelWork" type="submit" name="edit" value="cancel">Cancel</button>
 					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
 					<input type="hidden" name="submitted" value="true" />
 				</div>

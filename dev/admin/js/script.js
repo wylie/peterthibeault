@@ -7,24 +7,42 @@ function init() {
 
     switch(page) {
       case 'works':
+        // display the old works
         displayWorks();
+        // cancel the studio in the textarea
+        var cancelWork = document.getElementById('cancelWork');
+        cancelWork.onclick = clearWork;
         // filter the old works
         filterWorks();
         // delete old works after clicking on the button
         deleteWorks();
+        // grab the new studio
+        var saveWork = document.getElementById('saveWork');
+        saveWork.onclick = getWork;
         break;
       case 'studio':
         // display all the old studio photos
         displayStudio();
+        // cancel the studio in the textarea
+        var cancelStudio = document.getElementById('cancelStudio');
+        cancelStudio.onclick = clearStudio;
         // delete old studio after clicking on the button
-        deleteStudio();
+        deleteOld();
+        // grab the new studio
+        var saveStudio = document.getElementById('saveStudio');
+        saveStudio.onclick = getStudio;
         break;
       case 'news':
+        // display the old news
         displayNews();
+        // cancel the news in the textarea
         var cancelNews = document.getElementById('cancelNews');
         cancelNews.onclick = clearNews;
         // delete old news after clicking on the button
-        deleteNews();
+        deleteOld();
+        // grab the new news
+        var saveNews = document.getElementById('saveNews');
+        saveNews.onclick = getNews;
         break;
       case 'cv':
         break;
@@ -33,37 +51,9 @@ function init() {
   }
 }
 
-function filterWorks() {
-  // get all of the work filters
-  $('#filterWorks .list-item label').click(function() {
-    // get the attribute of each label
-    var kind = $(this).attr('for');
-    // remove any hiding going on
-    $('#oldWorks').children('.works').show();
-    // add hiding to the siblings of the type clicked on
-    $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
-  });
-}
 
-function deleteWorks() {
-  $('.delete').click(function() {
-    // give this a var
-    var deleteBtn = $(this).parents('.works');
-    // for now, just console log the id passed in
-    console.log( deleteBtn[0].id );
-  });
-}
-
-function deleteStudio() {
-  $('.delete').click(function() {
-    // give this a var
-    var deleteBtn = $(this);
-    // for now, just console log the id passed in
-    console.log( deleteBtn[0].parentElement.id );
-  });
-}
-
-function deleteNews() {
+// delete the old studio & news
+function deleteOld() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
@@ -82,7 +72,6 @@ function dataTypes() {
 		getData(kindsArr[i]);
 	}
 }
-
 // GET ALL THE DATA
 function getData(kind) {
 	var request = new XMLHttpRequest();
@@ -102,6 +91,53 @@ function getData(kind) {
 	request.send();
 }
 
+
+
+
+// GET THE NEW TEXT AREA
+function getWork() {
+  // get the category filters
+  var addWorkCategory = $('#addWorkCategory');
+  // get the children of the list
+  var addWorkItems = addWorkCategory[0].children;
+  // loop through all the items in the filter list
+  for(var i = 0; i < addWorkItems.length; i++) {
+    // make sure that the radio button is checked
+    if( addWorkItems[i].children[0].checked === true ) {
+      // log the id of the selected section
+      console.log( 'Section: ' + addWorkItems[i].children[0].id );
+    }
+  }
+
+  // get the work info
+  var addWorkInfo = $('#addWorkInfo');
+  // get all the children that are inputs
+  var addWorkInfoItems = addWorkInfo.children('.module-list-item');
+  // loop through all of those inputs
+  for(var i = 0; i < addWorkInfoItems.length; i++) {
+    // make sure that they contain stuff
+    if( addWorkInfoItems[i].children[0].value != undefined ) {
+      // log the calue of the text input
+      console.log( addWorkInfoItems[i].children[0].value );
+    }
+  }
+  // console.log( addWorkInfoItems );
+}
+// CLEAR THE NEW TEXT AREA
+function clearWork() {
+  console.log('KER-POW');
+}
+function filterWorks() {
+  // get all of the work filters
+  $('#filterWorks .list-item label').click(function() {
+    // get the attribute of each label
+    var kind = $(this).attr('for');
+    // remove any hiding going on
+    $('#oldWorks').children('.works').show();
+    // add hiding to the siblings of the type clicked on
+    $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
+  });
+}
 var workNums = [];
 var workSum = 0;
 // DISPLAY THE WORKS
@@ -263,9 +299,35 @@ function displayWorks() {
     }
     dbNum('works', workSum);
 }
+function deleteWorks() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this).parents('.works');
+    // for now, just console log the id passed in
+    console.log( deleteBtn[0].id );
+  });
+}
 
 
 
+// GET THE NEW TEXT AREA
+function getStudio() {
+  var studioVal = $('.studio-add').val();
+  console.log(studioVal);
+  var studioErr = $('.msg.error');
+  if(studioVal === '') {
+    $(studioErr).text('please add a studio shot...');
+  } else {
+    $(studioErr).text('');
+    console.log(studioVal);
+  }
+}
+// CLEAR THE NEW TEXT AREA
+function clearStudio() {
+  var newsErr = $('.msg.error');
+  $(newsErr).text('');
+  document.getElementById('newsContent').value = '';
+}
 // DISPLAY THE STUDIO
 function displayStudio() {
     var studio = JSON.parse( localStorage.getItem('studio') );
@@ -335,9 +397,22 @@ function displayNews() {
         }
     }
 }
+// GET THE NEW TEXT AREA
+function getNews() {
+  var newsVal = $('.news-add').val();
+  var newsErr = $('.msg.error');
+  if(newsVal === '') {
+    $(newsErr).text('please add some news...');
+  } else {
+    $(newsErr).text('');
+    console.log(newsVal);
+  }
+}
 // CLEAR THE NEW TEXT AREA
 function clearNews() {
-    document.getElementById('newsContent').value = '';
+  var newsErr = $('.msg.error');
+  $(newsErr).text('');
+  document.getElementById('newsContent').value = '';
 }
 
 // GET NUMBER OF ITEMS IN DB
