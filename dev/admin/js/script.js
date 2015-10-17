@@ -10,6 +10,8 @@ function init() {
         displayWorks();
         // filter the old works
         filterWorks();
+        // delete old works after clicking on the button
+        deleteWorks();
         break;
       case 'studio':
         // display all the old studio photos
@@ -40,6 +42,15 @@ function filterWorks() {
     $('#oldWorks').children('.works').show();
     // add hiding to the siblings of the type clicked on
     $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
+  });
+}
+
+function deleteWorks() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this).parents('.works');
+    // for now, just console log the id passed in
+    console.log( deleteBtn[0].id );
   });
 }
 
