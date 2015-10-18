@@ -18,7 +18,7 @@ function init() {
         deleteWorks();
         // grab the new studio
         var saveWork = document.getElementById('saveWork');
-        saveWork.onclick = getWork;
+        saveWork.onclick = addWork;
         break;
       case 'studio':
         // display all the old studio photos
@@ -30,7 +30,7 @@ function init() {
         deleteOld();
         // grab the new studio
         var saveStudio = document.getElementById('saveStudio');
-        saveStudio.onclick = getStudio;
+        saveStudio.onclick = addStudio;
         break;
       case 'news':
         // display the old news
@@ -42,7 +42,7 @@ function init() {
         deleteOld();
         // grab the new news
         var saveNews = document.getElementById('saveNews');
-        saveNews.onclick = getNews;
+        saveNews.onclick = addNews;
         break;
       case 'cv':
         break;
@@ -50,6 +50,36 @@ function init() {
         break;
   }
 }
+
+// create new work
+function Work(section, id, title, year, media, description, dimension_d, dimension_w, dimension_h, available) {
+  this.section = section,
+  this.id = id,
+  this.title = title,
+  this.year = year,
+  this.media = media,
+  this.description = description,
+  this.dimension_d = dimension_d,
+  this.dimension_w = dimension_w,
+  this.dimension_h = dimension_h,
+  this.available = available//,
+  // this.image = image,
+  // this.related_images = related_images
+}
+// create new studio
+function User(id, image, description, date) {
+	this.id = id,
+	this.image = image,
+	this.description = description,
+	this.date = date
+}
+// create new news
+function User(id, description, date) {
+	this.id = id,
+	this.description = description,
+	this.date = date
+}
+
 
 
 // delete the old studio & news
@@ -93,9 +123,7 @@ function getData(kind) {
 
 
 
-
-// GET THE NEW TEXT AREA
-function getWork() {
+function getSection() {
   // get the category filters
   var addWorkCategory = $('#addWorkCategory');
   // get the children of the list
@@ -104,24 +132,43 @@ function getWork() {
   for(var i = 0; i < addWorkItems.length; i++) {
     // make sure that the radio button is checked
     if( addWorkItems[i].children[0].checked === true ) {
-      // log the id of the selected section
-      console.log( 'Section: ' + addWorkItems[i].children[0].id );
+      // return the section
+      return newSection = addWorkItems[i].children[0].id;
+    }
+  }
+}
+// GET THE NEW TEXT AREA
+function addWork() {
+  var id = (new Date()).getTime();
+  getSection();
+  // grab all the values from the new work inputs
+  var newTitle = document.getElementById('newTitle').value;
+  var newYear = document.getElementById('newYear').value;
+  var newMedia = document.getElementById('newMedia').value;
+  var newDescription = document.getElementById('newDescription').value;
+  var newDimension_d = document.getElementById('newDimension_d').value;
+  var newDimension_w = document.getElementById('newDimension_w').value;
+  var newDimension_h = document.getElementById('newDimension_h').value;
+  // get the availableToBuy wrapper
+  var availableToBuy = $('#availableToBuy');
+  // get the children of the list
+  var availableToBuyItems = availableToBuy[0].children;
+  // loop through all the items in the filter list
+  for(var i = 0; i < availableToBuyItems.length; i++) {
+    // make sure that the radio button is checked
+    if( availableToBuyItems[i].children[0].checked === true ) {
+      // save the selected section as a global
+      newAvailable = availableToBuyItems[i].children[0].id;
     }
   }
 
-  // get the work info
-  var addWorkInfo = $('#addWorkInfo');
-  // get all the children that are inputs
-  var addWorkInfoItems = addWorkInfo.children('.module-list-item');
-  // loop through all of those inputs
-  for(var i = 0; i < addWorkInfoItems.length; i++) {
-    // make sure that they contain stuff
-    if( addWorkInfoItems[i].children[0].value != undefined ) {
-      // log the calue of the text input
-      console.log( addWorkInfoItems[i].children[0].value );
-    }
-  }
-  // console.log( addWorkInfoItems );
+  // save the new work
+  var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
+	var stringWork = JSON.stringify(newWork);
+  console.log(stringWork);
+
+  // TODO: error logging...
+
 }
 // CLEAR THE NEW TEXT AREA
 function clearWork() {
@@ -311,7 +358,7 @@ function deleteWorks() {
 
 
 // GET THE NEW TEXT AREA
-function getStudio() {
+function addStudio() {
   var studioVal = $('.studio-add').val();
   console.log(studioVal);
   var studioErr = $('.msg.error');
@@ -398,7 +445,7 @@ function displayNews() {
     }
 }
 // GET THE NEW TEXT AREA
-function getNews() {
+function addNews() {
   var newsVal = $('.news-add').val();
   var newsErr = $('.msg.error');
   if(newsVal === '') {
