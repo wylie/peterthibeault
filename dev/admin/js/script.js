@@ -311,7 +311,28 @@ function displayWorks() {
           // create the related images heading
           var p8 = document.createElement('p');
           p8.setAttribute('class', 'txt');
-          p8.innerHTML = allWorks[key][j].related_images;
+          // p8.innerHTML = allWorks[key][j].related_images;
+
+          if( 0 < allWorks[key][j].related_images ) {
+            for( var m = 1; m < allWorks[key][j].related_images + 1; m++ ) {
+
+              var splitName = allWorks[key][j].image.split('-', 2);
+              var splitID = splitName[0].split('_', 1);
+              var splitSize = splitName[0].split('_', 2);
+              var splitName = allWorks[key][j].image.split('-', 2);
+              var splitTwo = splitName[1].split('.', 2);
+              var splitLast = splitName[0]
+              // console.log(String(splitTwo[1]).split('.', 2)[0]);
+              // console.log( splitSize[1] );
+              // console.log( splitID + '_' + 's' + '-' + m + '.' + splitTwo[1] );
+
+              var relatedImg = document.createElement('img');
+              relatedImg.setAttribute('class', 'studio-img-thmb');
+              relatedImg.setAttribute('src', splitID + '_' + 'm' + '-' + m + '.' + splitTwo[1]);
+              console.log( relatedImg );
+              p8.appendChild(relatedImg);
+            }
+          }
 
           var saveDiv = document.createElement('div');
           saveDiv.setAttribute('class', 'module-save');
