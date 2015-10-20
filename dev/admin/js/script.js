@@ -185,8 +185,10 @@ function filterWorks() {
     $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
   });
 }
+
+
 var workNums = [];
-var workSum = 0;
+var workSum = [];
 var workAll = [];
 // DISPLAY THE WORKS
 function displayWorks() {
@@ -199,7 +201,13 @@ function displayWorks() {
       var allWorks = workAll[i];
       var allWorks = JSON.parse( localStorage.getItem( allWorks ) );
       for( var key in allWorks ) {
+
+        // get the length of each section
+        dbNum( allWorks[key].length );
+
+        // console.log(allWorks[key].length);
         for( var j = 0; j < allWorks[key].length; j++ ) {
+
           var oldWorks = document.getElementById('oldWorks');
 
           // create the main div
@@ -351,7 +359,6 @@ function displayWorks() {
         }
       }
     }
-    dbNum('works', workSum);
 }
 function deleteWorks() {
   $('.delete').click(function() {
@@ -387,7 +394,8 @@ function displayStudio() {
     var studio = JSON.parse( localStorage.getItem('studio') );
     for (var key in studio) {
         var studio = studio[key].reverse();
-        dbNum('studio', studio.length);
+        // get the length of each section
+        dbNum( studio.length );
 
         for(var i = 0; i < studio.length; i++) {
 
@@ -424,7 +432,8 @@ function displayNews() {
     var news = JSON.parse( localStorage.getItem('news') );
     for (var key in news) {
         var news = news[key].reverse();
-        dbNum('news', news.length);
+        // get the length of each section
+        dbNum( news.length );
 
         for(var i = 0; i < news.length; i++) {
 
@@ -470,17 +479,17 @@ function clearNews() {
 }
 
 // GET NUMBER OF ITEMS IN DB
-function dbNum(kind, num) {
-    var dbNum = document.getElementById('dbNum');
-
-    if(kind === 'works') {
-        for(var i=0; i < workNums.length; i++){
-            workSum = workSum + parseInt(workNums[i]);
-            // display the number of news items saved
-            dbNum.innerHTML = workSum;
-        }
-    } else {
-        // display the number of news items saved
-        dbNum.innerHTML = num;
-    }
+function dbNum(num) {
+  // get the element where the numbers will live
+  var dbNum = document.getElementById('dbNum');
+  // push the num to the workSum array
+  workSum.push( num );
+  // create a var at 0 so we can add to it
+  var totalWorks = 0;
+  // loop through and add the numbers in the array
+  $.each(workSum,function() {
+      totalWorks += this;
+  });
+  // display the number of news items saved
+  dbNum.innerHTML = totalWorks;
 }
