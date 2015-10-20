@@ -93,7 +93,7 @@ function deleteOld() {
 }
 
 // some arrays we will need as we go along
-var kindsArr = ['works', 'studio', 'news'];
+var kindsArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students', 'studio', 'news'];
 
 // loop through the kinds and get all the data available
 function dataTypes() {
@@ -185,166 +185,180 @@ function filterWorks() {
     $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
   });
 }
+
+
 var workNums = [];
-var workSum = 0;
+var workSum = [];
+var workAll = [];
 // DISPLAY THE WORKS
 function displayWorks() {
-    var works = JSON.parse( localStorage.getItem('works') );
-    for (var key in works) {
-        // push the numbers of each work section to the empty array... we need this so we can display the total number of works in the DB
-        workNums.push(works[key].length);
-        for(var i = 0; i < works[key].length; i++) {
-            var oldWorks = document.getElementById('oldWorks');
 
-            // create the main div
-            var div = document.createElement('div');
-            div.setAttribute('class', 'module-section work works ' + key);
-            div.setAttribute('id', works[key][i].id);
-
-            // create the image
-            var img = document.createElement('img');
-            img.setAttribute('class', 'studio-img');
-            img.setAttribute('src', works[key][i].image);
-
-            // create the date span
-            var span = document.createElement('span');
-            span.setAttribute('class', 'date');
-            span.innerHTML = works[key][i].date;
-
-            // create the title heading
-            var heading1 = document.createElement('h3');
-            heading1.setAttribute('class', 'heading');
-            heading1.innerHTML = 'Title';
-
-            // create the title heading
-            var input1 = document.createElement('input');
-            input1.setAttribute('class', 'form-input');
-            input1.setAttribute('type', 'text');
-            input1.setAttribute('value', works[key][i].title);
-
-            // create the year heading
-            var heading2 = document.createElement('h3');
-            heading2.setAttribute('class', 'heading');
-            heading2.innerHTML = 'Year';
-
-            // create the year heading
-            var input2 = document.createElement('input');
-            input2.setAttribute('class', 'form-input');
-            input2.setAttribute('type', 'text');
-            input2.setAttribute('value', works[key][i].year);
-
-            // create the media heading
-            var heading3 = document.createElement('h3');
-            heading3.setAttribute('class', 'heading');
-            heading3.innerHTML = 'Media';
-
-            // create the media heading
-            var input3 = document.createElement('input');
-            input3.setAttribute('class', 'form-input');
-            input3.setAttribute('type', 'text');
-            input3.setAttribute('value', works[key][i].media);
-
-            // create the description heading
-            var heading4 = document.createElement('h3');
-            heading4.setAttribute('class', 'heading');
-            heading4.innerHTML = 'Description';
-
-            // create the description heading
-            var input4 = document.createElement('textarea');
-            input4.setAttribute('class', 'form-input');
-            input4.setAttribute('type', 'text');
-            input4.innerHTML = works[key][i].description;
-
-            // create the dimensions heading
-            var heading4 = document.createElement('h3');
-            heading4.setAttribute('class', 'heading');
-            heading4.innerHTML = 'Dimensions';
-
-            // create the dimensions heading
-            var input4 = document.createElement('input');
-            input4.setAttribute('class', 'form-input dimension');
-            input4.setAttribute('type', 'text');
-            input4.setAttribute('value', works[key][i].dimension_d);
-
-            // create the dimensions heading
-            var input5 = document.createElement('input');
-            input5.setAttribute('class', 'form-input dimension');
-            input5.setAttribute('type', 'text');
-            input5.setAttribute('value', works[key][i].dimension_w);
-
-            // create the dimensions heading
-            var input6 = document.createElement('input');
-            input6.setAttribute('class', 'form-input dimension');
-            input6.setAttribute('type', 'text');
-            input6.setAttribute('value', works[key][i].dimension_h);
-
-            // create the available heading
-            var heading5 = document.createElement('h3');
-            heading5.setAttribute('class', 'heading');
-            heading5.innerHTML = 'Available';
-
-            // create the available heading
-            var input7 = document.createElement('input');
-            input7.setAttribute('class', 'form-input');
-            input7.setAttribute('type', 'text');
-            input7.setAttribute('value', works[key][i].available);
-
-            // create the related images heading
-            var heading6 = document.createElement('h3');
-            heading6.setAttribute('class', 'heading');
-            heading6.innerHTML = 'Additional Images';
-
-            // create the related images heading
-            var p8 = document.createElement('p');
-            p8.setAttribute('class', 'txt');
-            p8.innerHTML = works[key][i].related_images;
-
-            var saveDiv = document.createElement('div');
-            saveDiv.setAttribute('class', 'module-save');
-
-            // create the save button
-            var button1 = document.createElement('button');
-            button1.setAttribute('class', 'save button');
-            button1.setAttribute('type', 'submit');
-            button1.setAttribute('name', 'edit');
-            button1.setAttribute('value', 'save');
-            button1.innerHTML = 'Save';
-
-            // create the delete button
-            var button2 = document.createElement('button');
-            button2.setAttribute('class', 'delete button');
-            button2.setAttribute('type', 'submit');
-            button2.setAttribute('name', 'edit');
-            button2.setAttribute('value', 'delete');
-            button2.innerHTML = 'Delete';
-
-            // append everything
-            div.appendChild(img);
-            div.appendChild(heading1);
-            div.appendChild(input1);
-            div.appendChild(heading2);
-            div.appendChild(input2);
-            div.appendChild(heading3);
-            div.appendChild(input3);
-            div.appendChild(heading4);
-            div.appendChild(input4);
-            div.appendChild(heading4);
-            div.appendChild(input4);
-            div.appendChild(input5);
-            div.appendChild(input6);
-            div.appendChild(heading5);
-            div.appendChild(input7);
-            div.appendChild(heading6);
-            div.appendChild(p8);
-
-            div.insertBefore(span, div.firstChild);
-            saveDiv.appendChild(button1);
-            saveDiv.appendChild(button2);
-            div.appendChild(saveDiv);
-            oldWorks.appendChild(div);
-        }
+    for(var i = 0; i < kindsArr.length - 2; i++) {
+      workAll.push(kindsArr[i]);
     }
-    dbNum('works', workSum);
+
+    for(var i = 0; i < workAll.length; i++) {
+      var allWorks = workAll[i];
+      var allWorks = JSON.parse( localStorage.getItem( allWorks ) );
+      for( var key in allWorks ) {
+
+        // get the length of each section
+        dbNum( allWorks[key].length );
+
+        // console.log(allWorks[key].length);
+        for( var j = 0; j < allWorks[key].length; j++ ) {
+
+          var oldWorks = document.getElementById('oldWorks');
+
+          // create the main div
+          var div = document.createElement('div');
+          div.setAttribute('class', 'module-section work works ' + key);
+          div.setAttribute('id', allWorks[key][j].id);
+
+          // create the image
+          var img = document.createElement('img');
+          img.setAttribute('class', 'studio-img');
+          img.setAttribute('src', allWorks[key][j].image);
+
+          // create the date span
+          var span = document.createElement('span');
+          span.setAttribute('class', 'date');
+          span.innerHTML = allWorks[key][j].date;
+
+          // create the title heading
+          var heading1 = document.createElement('h3');
+          heading1.setAttribute('class', 'heading');
+          heading1.innerHTML = 'Title';
+
+          // create the title heading
+          var input1 = document.createElement('input');
+          input1.setAttribute('class', 'form-input');
+          input1.setAttribute('type', 'text');
+          input1.setAttribute('value', allWorks[key][j].title);
+
+          // create the year heading
+          var heading2 = document.createElement('h3');
+          heading2.setAttribute('class', 'heading');
+          heading2.innerHTML = 'Year';
+
+          // create the year heading
+          var input2 = document.createElement('input');
+          input2.setAttribute('class', 'form-input');
+          input2.setAttribute('type', 'text');
+          input2.setAttribute('value', allWorks[key][j].year);
+
+          // create the media heading
+          var heading3 = document.createElement('h3');
+          heading3.setAttribute('class', 'heading');
+          heading3.innerHTML = 'Media';
+
+          // create the media heading
+          var input3 = document.createElement('input');
+          input3.setAttribute('class', 'form-input');
+          input3.setAttribute('type', 'text');
+          input3.setAttribute('value', allWorks[key][j].media);
+
+          // create the description heading
+          var heading4 = document.createElement('h3');
+          heading4.setAttribute('class', 'heading');
+          heading4.innerHTML = 'Description';
+
+          // create the description heading
+          var input4 = document.createElement('textarea');
+          input4.setAttribute('class', 'form-input');
+          input4.setAttribute('type', 'text');
+          input4.innerHTML = allWorks[key][j].description;
+
+          // create the dimensions heading
+          var heading4 = document.createElement('h3');
+          heading4.setAttribute('class', 'heading');
+          heading4.innerHTML = 'Dimensions';
+
+          // create the dimensions heading
+          var input4 = document.createElement('input');
+          input4.setAttribute('class', 'form-input dimension');
+          input4.setAttribute('type', 'text');
+          input4.setAttribute('value', allWorks[key][j].dimension_d);
+
+          // create the dimensions heading
+          var input5 = document.createElement('input');
+          input5.setAttribute('class', 'form-input dimension');
+          input5.setAttribute('type', 'text');
+          input5.setAttribute('value', allWorks[key][j].dimension_w);
+
+          // create the dimensions heading
+          var input6 = document.createElement('input');
+          input6.setAttribute('class', 'form-input dimension');
+          input6.setAttribute('type', 'text');
+          input6.setAttribute('value', allWorks[key][j].dimension_h);
+
+          // create the available heading
+          var heading5 = document.createElement('h3');
+          heading5.setAttribute('class', 'heading');
+          heading5.innerHTML = 'Available';
+
+          // create the available heading
+          var input7 = document.createElement('input');
+          input7.setAttribute('class', 'form-input');
+          input7.setAttribute('type', 'text');
+          input7.setAttribute('value', allWorks[key][j].available);
+
+          // create the related images heading
+          var heading6 = document.createElement('h3');
+          heading6.setAttribute('class', 'heading');
+          heading6.innerHTML = 'Additional Images';
+
+          // create the related images heading
+          var p8 = document.createElement('p');
+          p8.setAttribute('class', 'txt');
+          p8.innerHTML = allWorks[key][j].related_images;
+
+          var saveDiv = document.createElement('div');
+          saveDiv.setAttribute('class', 'module-save');
+
+          // create the save button
+          var button1 = document.createElement('button');
+          button1.setAttribute('class', 'save button');
+          button1.setAttribute('type', 'submit');
+          button1.setAttribute('name', 'edit');
+          button1.setAttribute('value', 'save');
+          button1.innerHTML = 'Save';
+
+          // create the delete button
+          var button2 = document.createElement('button');
+          button2.setAttribute('class', 'delete button');
+          button2.setAttribute('type', 'submit');
+          button2.setAttribute('name', 'edit');
+          button2.setAttribute('value', 'delete');
+          button2.innerHTML = 'Delete';
+
+          // append everything
+          div.appendChild(img);
+          div.appendChild(heading1);
+          div.appendChild(input1);
+          div.appendChild(heading2);
+          div.appendChild(input2);
+          div.appendChild(heading3);
+          div.appendChild(input3);
+          div.appendChild(heading4);
+          div.appendChild(input4);
+          div.appendChild(heading4);
+          div.appendChild(input4);
+          div.appendChild(input5);
+          div.appendChild(input6);
+          div.appendChild(heading5);
+          div.appendChild(input7);
+          div.appendChild(heading6);
+          div.appendChild(p8);
+
+          div.insertBefore(span, div.firstChild);
+          saveDiv.appendChild(button1);
+          saveDiv.appendChild(button2);
+          div.appendChild(saveDiv);
+          oldWorks.appendChild(div);
+        }
+      }
+    }
 }
 function deleteWorks() {
   $('.delete').click(function() {
@@ -380,7 +394,8 @@ function displayStudio() {
     var studio = JSON.parse( localStorage.getItem('studio') );
     for (var key in studio) {
         var studio = studio[key].reverse();
-        dbNum('studio', studio.length);
+        // get the length of each section
+        dbNum( studio.length );
 
         for(var i = 0; i < studio.length; i++) {
 
@@ -417,7 +432,8 @@ function displayNews() {
     var news = JSON.parse( localStorage.getItem('news') );
     for (var key in news) {
         var news = news[key].reverse();
-        dbNum('news', news.length);
+        // get the length of each section
+        dbNum( news.length );
 
         for(var i = 0; i < news.length; i++) {
 
@@ -463,17 +479,17 @@ function clearNews() {
 }
 
 // GET NUMBER OF ITEMS IN DB
-function dbNum(kind, num) {
-    var dbNum = document.getElementById('dbNum');
-
-    if(kind === 'works') {
-        for(var i=0; i < workNums.length; i++){
-            workSum = workSum + parseInt(workNums[i]);
-            // display the number of news items saved
-            dbNum.innerHTML = workSum;
-        }
-    } else {
-        // display the number of news items saved
-        dbNum.innerHTML = num;
-    }
+function dbNum(num) {
+  // get the element where the numbers will live
+  var dbNum = document.getElementById('dbNum');
+  // push the num to the workSum array
+  workSum.push( num );
+  // create a var at 0 so we can add to it
+  var totalWorks = 0;
+  // loop through and add the numbers in the array
+  $.each(workSum,function() {
+      totalWorks += this;
+  });
+  // display the number of news items saved
+  dbNum.innerHTML = totalWorks;
 }

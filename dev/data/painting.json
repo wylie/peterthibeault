@@ -1,0 +1,18 @@
+{
+    "painting": [
+        {
+            "id": 1443894931825,
+            "title": "untitled",
+            "year": "1970",
+            "media": "Acrylic on Primed Canvas",
+            "description": "Part of my BFA Thesis",
+            "dimension_d": "3\"",
+            "dimension_w": "10'",
+            "dimension_h": "3'",
+            "available": false,
+            "image": "../img/works/1443894931825_0_l.jpg",
+            "related_images": 0,
+            "date": "10-01-2012"
+        }
+    ]
+}
