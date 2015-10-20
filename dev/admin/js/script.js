@@ -306,12 +306,30 @@ function displayWorks() {
           // create the related images heading
           var heading6 = document.createElement('h3');
           heading6.setAttribute('class', 'heading');
-          heading6.innerHTML = 'Additional Images';
+          heading6.innerHTML = 'All Images';
 
           // create the related images heading
-          var p8 = document.createElement('p');
-          p8.setAttribute('class', 'txt');
-          p8.innerHTML = allWorks[key][j].related_images;
+          var ulRelated = document.createElement('ul');
+          ulRelated.setAttribute('class', 'list inline related');
+
+          for( var m = 0; m <= allWorks[key][j].related_images; m++ ) {
+            var liRelated = document.createElement('li');
+            liRelated.setAttribute('class', 'list-item');
+
+            var splitName = allWorks[key][j].image.split('-', 2);
+            var splitID = splitName[0].split('_', 1);
+            var splitSize = splitName[0].split('_', 2);
+            var splitName = allWorks[key][j].image.split('-', 2);
+            var splitTwo = splitName[1].split('.', 2);
+            var splitLast = splitName[0]
+
+            var relatedImg = document.createElement('img');
+            relatedImg.setAttribute('class', 'studio-img-thmb');
+            relatedImg.setAttribute('src', splitID + '_' + 'm' + '-' + m + '.' + splitTwo[1]);
+
+            liRelated.appendChild(relatedImg);
+            ulRelated.appendChild(liRelated);
+          }
 
           var saveDiv = document.createElement('div');
           saveDiv.setAttribute('class', 'module-save');
@@ -349,7 +367,7 @@ function displayWorks() {
           div.appendChild(heading5);
           div.appendChild(input7);
           div.appendChild(heading6);
-          div.appendChild(p8);
+          div.appendChild(ulRelated);
 
           div.insertBefore(span, div.firstChild);
           saveDiv.appendChild(button1);
