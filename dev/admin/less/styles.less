@@ -65,11 +65,9 @@ h4 {
 }
 .group() {
 	&:after {
-		visibility: hidden;
-		display: block;
 		content: "";
-		clear: both;
-		height: 0;
+	  display: table;
+	  clear: both;
 	}
 }
 /* END UNIVERSAL */
@@ -77,9 +75,6 @@ h4 {
 .list {
 	list-style-type: none;
 	.group;
-	.list-item {
-		foo: bar;
-	}
 	&.inline {
 		.list-item {
 			float: left;
@@ -90,6 +85,15 @@ h4 {
 		.list-item {
 			float: none;
 			display: inline-block;
+		}
+	}
+	&.related {
+		.group;
+		.list-item {
+			width: 75px;
+			height: 75px;
+			overflow: hidden;
+    	margin: 5px 5px 0 5px;
 		}
 	}
 }
@@ -218,7 +222,7 @@ h4 {
 	width: 100%;
 	display: block;
 	&-thmb {
-		width: 90px;
+		width: 100%;
 		height: auto;
 	}
 }
@@ -251,7 +255,6 @@ input#price {
 }
 .module-save {
 	margin: 20px 0 0;
-
 }
 
 .button {
