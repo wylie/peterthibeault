@@ -51,8 +51,17 @@ function init() {
   }
 }
 
+
+
+
+
+
+
+
+
+
 // create new work
-function Work(section, id, title, year, media, description, dimension_d, dimension_w, dimension_h, available) {
+function Work(section, id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, image) {
   this.section = section,
   this.id = id,
   this.title = title,
@@ -62,23 +71,29 @@ function Work(section, id, title, year, media, description, dimension_d, dimensi
   this.dimension_d = dimension_d,
   this.dimension_w = dimension_w,
   this.dimension_h = dimension_h,
-  this.available = available//,
-  // this.image = image,
+  this.available = available,
+  this.image = image//,
   // this.related_images = related_images
 }
 // create new studio
-function User(id, image, description, date) {
+function Studio(id, image, date) {
 	this.id = id,
 	this.image = image,
-	this.description = description,
 	this.date = date
 }
 // create new news
-function User(id, description, date) {
+function News(id, description, date) {
 	this.id = id,
 	this.description = description,
 	this.date = date
 }
+
+
+
+
+
+
+
 
 
 
@@ -91,10 +106,8 @@ function deleteOld() {
     console.log( deleteBtn[0].parentElement.id );
   });
 }
-
 // some arrays we will need as we go along
 var kindsArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students', 'studio', 'news'];
-
 // loop through the kinds and get all the data available
 function dataTypes() {
 	for(var i = 0; i < kindsArr.length; i++) {
@@ -123,7 +136,14 @@ function getData(kind) {
 
 
 
-function getSection() {
+
+
+
+
+
+
+
+function getWorkSection() {
   // get the category filters
   var addWorkCategory = $('#addWorkCategory');
   // get the children of the list
@@ -140,11 +160,12 @@ function getSection() {
 // GET THE NEW TEXT AREA
 function addWork() {
   var id = (new Date()).getTime();
-  getSection();
+  getWorkSection();
   // grab all the values from the new work inputs
   var newTitle = document.getElementById('newTitle').value;
   var newYear = document.getElementById('newYear').value;
   var newMedia = document.getElementById('newMedia').value;
+  var newWorkImage = document.getElementById('newWorkImage').value;
   var newDescription = document.getElementById('newDescription').value;
   var newDimension_d = document.getElementById('newDimension_d').value;
   var newDimension_w = document.getElementById('newDimension_w').value;
@@ -161,14 +182,11 @@ function addWork() {
       newAvailable = availableToBuyItems[i].children[0].id;
     }
   }
-
   // save the new work
-  var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
+  var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable, newWorkImage);
 	var stringWork = JSON.stringify(newWork);
   console.log(stringWork);
-
   // TODO: error logging...
-
 }
 // CLEAR THE NEW TEXT AREA
 function clearWork() {
@@ -185,8 +203,6 @@ function filterWorks() {
     $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
   });
 }
-
-
 var workNums = [];
 var workSum = [];
 var workAll = [];
@@ -389,16 +405,44 @@ function deleteWorks() {
 
 
 
+
+
+
+
+
+
+
 // GET THE NEW TEXT AREA
 function addStudio() {
-  var studioVal = $('.studio-add').val();
-  console.log(studioVal);
-  var studioErr = $('.msg.error');
-  if(studioVal === '') {
-    $(studioErr).text('please add a studio shot...');
+  // get today's date
+  var today = new Date();
+  // create an id
+  var id = today.getTime();
+  // grab the news content
+  var studioImage = document.getElementById('studioImage').value;
+  // get the day
+  var dd = today.getDate();
+  // get the month
+  var mm = today.getMonth() + 1; //January is 0!
+  // get the year
+  var yyyy = today.getFullYear();
+  // build out the date
+  var date = yyyy + '-' + mm + '-' + dd;
+  // get the error div
+  var newsErr = $('.msg.error');
+  // check to see if the
+  if(studioImage === '') {
+    // display the error
+    $(newsErr).text('please add a studio shot...');
   } else {
-    $(studioErr).text('');
-    console.log(studioVal);
+    // clear the error when new is entrered
+    $(newsErr).text('');
+    // build out the news
+    var newStudio = new News(id, studioImage, date);
+    // stringify the news
+  	var stringStudio = JSON.stringify(newStudio);
+    // do something with the news
+    console.log(stringStudio);
   }
 }
 // CLEAR THE NEW TEXT AREA
@@ -445,6 +489,15 @@ function displayStudio() {
     }
 }
 
+
+
+
+
+
+
+
+
+
 // DISPLAY THE OLD NEWS
 function displayNews() {
     var news = JSON.parse( localStorage.getItem('news') );
@@ -480,13 +533,35 @@ function displayNews() {
 }
 // GET THE NEW TEXT AREA
 function addNews() {
-  var newsVal = $('.news-add').val();
+  // get today's date
+  var today = new Date();
+  // create an id
+  var id = today.getTime();
+  // grab the news content
+  var newsContent = document.getElementById('newsContent').value;
+  // get the day
+  var dd = today.getDate();
+  // get the month
+  var mm = today.getMonth() + 1; //January is 0!
+  // get the year
+  var yyyy = today.getFullYear();
+  // build out the date
+  var date = yyyy + '-' + mm + '-' + dd;
+  // get the error div
   var newsErr = $('.msg.error');
-  if(newsVal === '') {
+  // check to see if the
+  if(newsContent === '') {
+    // display the error
     $(newsErr).text('please add some news...');
   } else {
+    // clear the error when new is entrered
     $(newsErr).text('');
-    console.log(newsVal);
+    // build out the news
+    var newNews = new News(id, newsContent, date);
+    // stringify the news
+  	var stringNews = JSON.stringify(newNews);
+    // do something with the news
+    console.log(stringNews);
   }
 }
 // CLEAR THE NEW TEXT AREA
@@ -495,6 +570,15 @@ function clearNews() {
   $(newsErr).text('');
   document.getElementById('newsContent').value = '';
 }
+
+
+
+
+
+
+
+
+
 
 // GET NUMBER OF ITEMS IN DB
 function dbNum(num) {
