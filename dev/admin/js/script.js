@@ -1,53 +1,53 @@
 window.onload = init;
 
 function init() {
-    dataTypes();
-    var elements = document.getElementsByTagName('body');
-    var page = elements[0].id;
+  dataTypes();
+  var elements = document.getElementsByTagName('body');
+  var page = elements[0].id;
 
-    switch(page) {
-      case 'works':
-        // display the old works
-        displayWorks();
-        // cancel the studio in the textarea
-        var cancelWork = document.getElementById('cancelWork');
-        cancelWork.onclick = clearWork;
-        // filter the old works
-        filterWorks();
-        // delete old works after clicking on the button
-        deleteWorks();
-        // grab the new studio
-        var saveWork = document.getElementById('saveWork');
-        saveWork.onclick = addWork;
-        break;
-      case 'studio':
-        // display all the old studio photos
-        displayStudio();
-        // cancel the studio in the textarea
-        var cancelStudio = document.getElementById('cancelStudio');
-        cancelStudio.onclick = clearStudio;
-        // delete old studio after clicking on the button
-        deleteOld();
-        // grab the new studio
-        var saveStudio = document.getElementById('saveStudio');
-        saveStudio.onclick = addStudio;
-        break;
-      case 'news':
-        // display the old news
-        displayNews();
-        // cancel the news in the textarea
-        var cancelNews = document.getElementById('cancelNews');
-        cancelNews.onclick = clearNews;
-        // delete old news after clicking on the button
-        deleteOld();
-        // grab the new news
-        var saveNews = document.getElementById('saveNews');
-        saveNews.onclick = addNews;
-        break;
-      case 'cv':
-        break;
-      case 'contact':
-        break;
+  switch(page) {
+    case 'works':
+      // display the old works
+      displayWorks();
+      // cancel the studio in the textarea
+      var cancelWork = document.getElementById('cancelWork');
+      cancelWork.onclick = clearWork;
+      // filter the old works
+      filterWorks();
+      // delete old works after clicking on the button
+      deleteWorks();
+      // grab the new studio
+      var saveWork = document.getElementById('saveWork');
+      saveWork.onclick = addWork;
+      break;
+    case 'studio':
+      // display all the old studio photos
+      displayStudio();
+      // cancel the studio in the textarea
+      var cancelStudio = document.getElementById('cancelStudio');
+      cancelStudio.onclick = clearStudio;
+      // delete old studio after clicking on the button
+      deleteOld();
+      // grab the new studio
+      var saveStudio = document.getElementById('saveStudio');
+      saveStudio.onclick = addStudio;
+      break;
+    case 'news':
+      // display the old news
+      displayNews();
+      // cancel the news in the textarea
+      var cancelNews = document.getElementById('cancelNews');
+      cancelNews.onclick = clearNews;
+      // delete old news after clicking on the button
+      deleteOld();
+      // grab the new news
+      var saveNews = document.getElementById('saveNews');
+      saveNews.onclick = addNews;
+      break;
+    case 'cv':
+      break;
+    case 'contact':
+      break;
   }
 }
 
@@ -183,7 +183,7 @@ function addWork() {
     }
   }
   // save the new work
-  var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable, newWorkImage);
+  var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
 	var stringWork = JSON.stringify(newWork);
   console.log(stringWork);
   // TODO: error logging...
@@ -208,191 +208,166 @@ var workSum = [];
 var workAll = [];
 // DISPLAY THE WORKS
 function displayWorks() {
-
-    for(var i = 0; i < kindsArr.length - 2; i++) {
-      workAll.push(kindsArr[i]);
-    }
-
-    for(var i = 0; i < workAll.length; i++) {
-      var allWorks = workAll[i];
-      var allWorks = JSON.parse( localStorage.getItem( allWorks ) );
-      for( var key in allWorks ) {
-
-        // get the length of each section
-        dbNum( allWorks[key].length );
-
-        // console.log(allWorks[key].length);
-        for( var j = 0; j < allWorks[key].length; j++ ) {
-
-          var oldWorks = document.getElementById('oldWorks');
-
-          // create the main div
-          var div = document.createElement('div');
-          div.setAttribute('class', 'module-section work works ' + key);
-          div.setAttribute('id', allWorks[key][j].id);
-
-          // create the image
-          var img = document.createElement('img');
-          img.setAttribute('class', 'studio-img');
-          img.setAttribute('src', allWorks[key][j].image);
-
-          // create the date span
-          var span = document.createElement('span');
-          span.setAttribute('class', 'date');
-          span.innerHTML = allWorks[key][j].date;
-
-          // create the title heading
-          var heading1 = document.createElement('h3');
-          heading1.setAttribute('class', 'heading');
-          heading1.innerHTML = 'Title';
-
-          // create the title heading
-          var input1 = document.createElement('input');
-          input1.setAttribute('class', 'form-input');
-          input1.setAttribute('type', 'text');
-          input1.setAttribute('value', allWorks[key][j].title);
-
-          // create the year heading
-          var heading2 = document.createElement('h3');
-          heading2.setAttribute('class', 'heading');
-          heading2.innerHTML = 'Year';
-
-          // create the year heading
-          var input2 = document.createElement('input');
-          input2.setAttribute('class', 'form-input');
-          input2.setAttribute('type', 'text');
-          input2.setAttribute('value', allWorks[key][j].year);
-
-          // create the media heading
-          var heading3 = document.createElement('h3');
-          heading3.setAttribute('class', 'heading');
-          heading3.innerHTML = 'Media';
-
-          // create the media heading
-          var input3 = document.createElement('input');
-          input3.setAttribute('class', 'form-input');
-          input3.setAttribute('type', 'text');
-          input3.setAttribute('value', allWorks[key][j].media);
-
-          // create the description heading
-          var heading4 = document.createElement('h3');
-          heading4.setAttribute('class', 'heading');
-          heading4.innerHTML = 'Description';
-
-          // create the description heading
-          var input4 = document.createElement('textarea');
-          input4.setAttribute('class', 'form-input');
-          input4.setAttribute('type', 'text');
-          input4.innerHTML = allWorks[key][j].description;
-
-          // create the dimensions heading
-          var heading4 = document.createElement('h3');
-          heading4.setAttribute('class', 'heading');
-          heading4.innerHTML = 'Dimensions';
-
-          // create the dimensions heading
-          var input4 = document.createElement('input');
-          input4.setAttribute('class', 'form-input dimension');
-          input4.setAttribute('type', 'text');
-          input4.setAttribute('value', allWorks[key][j].dimension_d);
-
-          // create the dimensions heading
-          var input5 = document.createElement('input');
-          input5.setAttribute('class', 'form-input dimension');
-          input5.setAttribute('type', 'text');
-          input5.setAttribute('value', allWorks[key][j].dimension_w);
-
-          // create the dimensions heading
-          var input6 = document.createElement('input');
-          input6.setAttribute('class', 'form-input dimension');
-          input6.setAttribute('type', 'text');
-          input6.setAttribute('value', allWorks[key][j].dimension_h);
-
-          // create the available heading
-          var heading5 = document.createElement('h3');
-          heading5.setAttribute('class', 'heading');
-          heading5.innerHTML = 'Available';
-
-          // create the available heading
-          var input7 = document.createElement('input');
-          input7.setAttribute('class', 'form-input');
-          input7.setAttribute('type', 'text');
-          input7.setAttribute('value', allWorks[key][j].available);
-
-          // create the related images heading
-          var heading6 = document.createElement('h3');
-          heading6.setAttribute('class', 'heading');
-          heading6.innerHTML = 'All Images';
-
-          // create the related images heading
-          var ulRelated = document.createElement('ul');
-          ulRelated.setAttribute('class', 'list inline related');
-
-          for( var m = 0; m <= allWorks[key][j].related_images; m++ ) {
-            var liRelated = document.createElement('li');
-            liRelated.setAttribute('class', 'list-item');
-
-            var splitName = allWorks[key][j].image.split('-', 2);
-            var splitID = splitName[0].split('_', 1);
-            var splitSize = splitName[0].split('_', 2);
-            var splitName = allWorks[key][j].image.split('-', 2);
-            var splitTwo = splitName[1].split('.', 2);
-            var splitLast = splitName[0]
-
-            var relatedImg = document.createElement('img');
-            relatedImg.setAttribute('class', 'studio-img-thmb');
-            relatedImg.setAttribute('src', splitID + '_' + 'm' + '-' + m + '.' + splitTwo[1]);
-
-            liRelated.appendChild(relatedImg);
-            ulRelated.appendChild(liRelated);
-          }
-
-          var saveDiv = document.createElement('div');
-          saveDiv.setAttribute('class', 'module-save');
-
-          // create the save button
-          var button1 = document.createElement('button');
-          button1.setAttribute('class', 'save button');
-          button1.setAttribute('type', 'submit');
-          button1.setAttribute('name', 'edit');
-          button1.setAttribute('value', 'save');
-          button1.innerHTML = 'Save';
-
-          // create the delete button
-          var button2 = document.createElement('button');
-          button2.setAttribute('class', 'delete button');
-          button2.setAttribute('type', 'submit');
-          button2.setAttribute('name', 'edit');
-          button2.setAttribute('value', 'delete');
-          button2.innerHTML = 'Delete';
-
-          // append everything
-          div.appendChild(img);
-          div.appendChild(heading1);
-          div.appendChild(input1);
-          div.appendChild(heading2);
-          div.appendChild(input2);
-          div.appendChild(heading3);
-          div.appendChild(input3);
-          div.appendChild(heading4);
-          div.appendChild(input4);
-          div.appendChild(heading4);
-          div.appendChild(input4);
-          div.appendChild(input5);
-          div.appendChild(input6);
-          div.appendChild(heading5);
-          div.appendChild(input7);
-          div.appendChild(heading6);
-          div.appendChild(ulRelated);
-
-          div.insertBefore(span, div.firstChild);
-          saveDiv.appendChild(button1);
-          saveDiv.appendChild(button2);
-          div.appendChild(saveDiv);
-          oldWorks.appendChild(div);
+  // loop through the kindsArr
+  for(var i = 0; i < kindsArr.length - 2; i++) {
+    // add to the workAll arr
+    workAll.push(kindsArr[i]);
+  }
+  for(var i = 0; i < workAll.length; i++) {
+    var allWorks = workAll[i];
+    var allWorks = JSON.parse( localStorage.getItem( allWorks ) );
+    for( var key in allWorks ) {
+      // get the length of each section
+      dbNum( allWorks[key].length );
+      // console.log(allWorks[key].length);
+      for( var j = 0; j < allWorks[key].length; j++ ) {
+        var oldWorks = document.getElementById('oldWorks');
+        // create the main div
+        var div = document.createElement('div');
+        div.setAttribute('class', 'module-section work works ' + key);
+        div.setAttribute('id', allWorks[key][j].id);
+        // create the image
+        var img = document.createElement('img');
+        img.setAttribute('class', 'studio-img');
+        img.setAttribute('src', allWorks[key][j].image);
+        // create the date span
+        var span = document.createElement('span');
+        span.setAttribute('class', 'date');
+        span.innerHTML = allWorks[key][j].date;
+        // create the title heading
+        var heading1 = document.createElement('h3');
+        heading1.setAttribute('class', 'heading');
+        heading1.innerHTML = 'Title';
+        // create the title heading
+        var input1 = document.createElement('input');
+        input1.setAttribute('class', 'form-input');
+        input1.setAttribute('type', 'text');
+        input1.setAttribute('value', allWorks[key][j].title);
+        // create the year heading
+        var heading2 = document.createElement('h3');
+        heading2.setAttribute('class', 'heading');
+        heading2.innerHTML = 'Year';
+        // create the year heading
+        var input2 = document.createElement('input');
+        input2.setAttribute('class', 'form-input');
+        input2.setAttribute('type', 'text');
+        input2.setAttribute('value', allWorks[key][j].year);
+        // create the media heading
+        var heading3 = document.createElement('h3');
+        heading3.setAttribute('class', 'heading');
+        heading3.innerHTML = 'Media';
+        // create the media heading
+        var input3 = document.createElement('input');
+        input3.setAttribute('class', 'form-input');
+        input3.setAttribute('type', 'text');
+        input3.setAttribute('value', allWorks[key][j].media);
+        // create the description heading
+        var heading4 = document.createElement('h3');
+        heading4.setAttribute('class', 'heading');
+        heading4.innerHTML = 'Description';
+        // create the description heading
+        var input4 = document.createElement('textarea');
+        input4.setAttribute('class', 'form-input');
+        input4.setAttribute('type', 'text');
+        input4.innerHTML = allWorks[key][j].description;
+        // create the dimensions heading
+        var heading4 = document.createElement('h3');
+        heading4.setAttribute('class', 'heading');
+        heading4.innerHTML = 'Dimensions';
+        // create the dimensions heading
+        var input4 = document.createElement('input');
+        input4.setAttribute('class', 'form-input dimension');
+        input4.setAttribute('type', 'text');
+        input4.setAttribute('value', allWorks[key][j].dimension_d);
+        // create the dimensions heading
+        var input5 = document.createElement('input');
+        input5.setAttribute('class', 'form-input dimension');
+        input5.setAttribute('type', 'text');
+        input5.setAttribute('value', allWorks[key][j].dimension_w);
+        // create the dimensions heading
+        var input6 = document.createElement('input');
+        input6.setAttribute('class', 'form-input dimension');
+        input6.setAttribute('type', 'text');
+        input6.setAttribute('value', allWorks[key][j].dimension_h);
+        // create the available heading
+        var heading5 = document.createElement('h3');
+        heading5.setAttribute('class', 'heading');
+        heading5.innerHTML = 'Available';
+        // create the available heading
+        var input7 = document.createElement('input');
+        input7.setAttribute('class', 'form-input');
+        input7.setAttribute('type', 'text');
+        input7.setAttribute('value', allWorks[key][j].available);
+        // create the related images heading
+        var heading6 = document.createElement('h3');
+        heading6.setAttribute('class', 'heading');
+        heading6.innerHTML = 'All Images';
+        // create the related images heading
+        var ulRelated = document.createElement('ul');
+        ulRelated.setAttribute('class', 'list inline related');
+        // loop through it all
+        for( var m = 0; m <= allWorks[key][j].related_images; m++ ) {
+          var liRelated = document.createElement('li');
+          liRelated.setAttribute('class', 'list-item');
+          // split apart the name
+          var splitName = allWorks[key][j].image.split('-', 2);
+          var splitID = splitName[0].split('_', 1);
+          var splitSize = splitName[0].split('_', 2);
+          var splitName = allWorks[key][j].image.split('-', 2);
+          var splitTwo = splitName[1].split('.', 2);
+          var splitLast = splitName[0]
+          // img stuff
+          var relatedImg = document.createElement('img');
+          relatedImg.setAttribute('class', 'studio-img-thmb');
+          relatedImg.setAttribute('src', splitID + '_' + 'm' + '-' + m + '.' + splitTwo[1]);
+          // append it all
+          liRelated.appendChild(relatedImg);
+          ulRelated.appendChild(liRelated);
         }
+        // save module
+        var saveDiv = document.createElement('div');
+        saveDiv.setAttribute('class', 'module-save');
+        // create the save button
+        var button1 = document.createElement('button');
+        button1.setAttribute('class', 'save button');
+        button1.setAttribute('type', 'submit');
+        button1.setAttribute('name', 'edit');
+        button1.setAttribute('value', 'save');
+        button1.innerHTML = 'Save';
+        // create the delete button
+        var button2 = document.createElement('button');
+        button2.setAttribute('class', 'delete button');
+        button2.setAttribute('type', 'submit');
+        button2.setAttribute('name', 'edit');
+        button2.setAttribute('value', 'delete');
+        button2.innerHTML = 'Delete';
+        // append everything
+        div.appendChild(img);
+        div.appendChild(heading1);
+        div.appendChild(input1);
+        div.appendChild(heading2);
+        div.appendChild(input2);
+        div.appendChild(heading3);
+        div.appendChild(input3);
+        div.appendChild(heading4);
+        div.appendChild(input4);
+        div.appendChild(heading4);
+        div.appendChild(input4);
+        div.appendChild(input5);
+        div.appendChild(input6);
+        div.appendChild(heading5);
+        div.appendChild(input7);
+        div.appendChild(heading6);
+        div.appendChild(ulRelated);
+        // insert bigtime
+        div.insertBefore(span, div.firstChild);
+        saveDiv.appendChild(button1);
+        saveDiv.appendChild(button2);
+        div.appendChild(saveDiv);
+        oldWorks.appendChild(div);
       }
     }
+  }
 }
 function deleteWorks() {
   $('.delete').click(function() {
@@ -453,40 +428,39 @@ function clearStudio() {
 }
 // DISPLAY THE STUDIO
 function displayStudio() {
-    var studio = JSON.parse( localStorage.getItem('studio') );
-    for (var key in studio) {
-        var studio = studio[key].reverse();
-        // get the length of each section
-        dbNum( studio.length );
-
-        for(var i = 0; i < studio.length; i++) {
-
-            var oldStudio = document.getElementById('oldStudio');
-            var div = document.createElement('div');
-            div.setAttribute('class', 'module-section work studio');
-            div.setAttribute('id', studio[i].id);
-
-            var img = document.createElement('img');
-            img.setAttribute('class', 'studio-img');
-            img.setAttribute('src', studio[i].image);
-
-            var span = document.createElement('span');
-            span.setAttribute('class', 'date');
-            span.innerHTML = studio[i].date;
-
-            var button = document.createElement('button');
-            button.setAttribute('class', 'delete button');
-            button.setAttribute('type', 'submit');
-            button.setAttribute('name', 'edit');
-            button.setAttribute('value', 'delete');
-            button.innerHTML = 'Delete';
-
-            div.appendChild(img);
-            div.insertBefore(span, div.firstChild);
-            div.appendChild(button);
-            oldStudio.appendChild(div);
-        }
+  var studio = JSON.parse( localStorage.getItem('studio') );
+  for (var key in studio) {
+    var studio = studio[key].reverse();
+    // get the length of each section
+    dbNum( studio.length );
+    for(var i = 0; i < studio.length; i++) {
+      // old studio stuff
+      var oldStudio = document.getElementById('oldStudio');
+      var div = document.createElement('div');
+      div.setAttribute('class', 'module-section work studio');
+      div.setAttribute('id', studio[i].id);
+      // img stuff
+      var img = document.createElement('img');
+      img.setAttribute('class', 'studio-img');
+      img.setAttribute('src', studio[i].image);
+      // span stuff
+      var span = document.createElement('span');
+      span.setAttribute('class', 'date');
+      span.innerHTML = studio[i].date;
+      // button stuff
+      var button = document.createElement('button');
+      button.setAttribute('class', 'delete button');
+      button.setAttribute('type', 'submit');
+      button.setAttribute('name', 'edit');
+      button.setAttribute('value', 'delete');
+      button.innerHTML = 'Delete';
+      // append it all
+      div.appendChild(img);
+      div.insertBefore(span, div.firstChild);
+      div.appendChild(button);
+      oldStudio.appendChild(div);
     }
+  }
 }
 
 
@@ -500,36 +474,35 @@ function displayStudio() {
 
 // DISPLAY THE OLD NEWS
 function displayNews() {
-    var news = JSON.parse( localStorage.getItem('news') );
-    for (var key in news) {
-        var news = news[key].reverse();
-        // get the length of each section
-        dbNum( news.length );
-
-        for(var i = 0; i < news.length; i++) {
-
-            var oldNews = document.getElementById('oldNews');
-            var div = document.createElement('div');
-            div.setAttribute('class', 'news-item');
-            div.setAttribute('id', news[i].id);
-            div.innerHTML = news[i].description;
-
-            var span = document.createElement('span');
-            span.setAttribute('class', 'news-item-date');
-            span.innerHTML = news[i].date;
-
-            var button = document.createElement('button');
-            button.setAttribute('class', 'delete button');
-            button.setAttribute('type', 'submit');
-            button.setAttribute('name', 'edit');
-            button.setAttribute('value', 'delete');
-            button.innerHTML = 'Delete';
-
-            div.appendChild(button);
-            div.insertBefore(span, div.firstChild);
-            oldNews.appendChild(div);
-        }
+  var news = JSON.parse( localStorage.getItem('news') );
+  for (var key in news) {
+    var news = news[key].reverse();
+    // get the length of each section
+    dbNum( news.length );
+    for(var i = 0; i < news.length; i++) {
+      // old news stuff
+      var oldNews = document.getElementById('oldNews');
+      var div = document.createElement('div');
+      div.setAttribute('class', 'news-item');
+      div.setAttribute('id', news[i].id);
+      div.innerHTML = news[i].description;
+      // span stuff
+      var span = document.createElement('span');
+      span.setAttribute('class', 'news-item-date');
+      span.innerHTML = news[i].date;
+      // button stuff
+      var button = document.createElement('button');
+      button.setAttribute('class', 'delete button');
+      button.setAttribute('type', 'submit');
+      button.setAttribute('name', 'edit');
+      button.setAttribute('value', 'delete');
+      button.innerHTML = 'Delete';
+      // append it all
+      div.appendChild(button);
+      div.insertBefore(span, div.firstChild);
+      oldNews.appendChild(div);
     }
+  }
 }
 // GET THE NEW TEXT AREA
 function addNews() {
