@@ -212,6 +212,7 @@ function createModules(mod) {
 		worksDiv.appendChild(module);
 	}
 	heroImg(mod);
+	relatedWorks(mod);
 }
 
 
@@ -238,6 +239,39 @@ function heroImg(mod) {
 				heroImg.setAttribute('src', imgPath + imgId + imgSuff);
 				// append the hero image
 				heroElem[0].appendChild( heroImg );
+			}
+		}
+	}
+}
+
+function relatedWorks(mod) {
+	for (var key in mod) {
+		// create an ID from the key
+		var kindMod = $('#' + key);
+		// build the hero ID
+		var additionalSel = kindMod.selector + '-additional';
+		var additionalElem = $(additionalSel).children('.module-list');
+
+		var heroElem = $(additionalSel);
+		// do that old key thing
+		for (var key in mod) {
+			// build out the main image
+			for(var i = 0; i < mod[key].length; i++ ) {
+				var listItem = document.createElement('li');
+				listItem.setAttribute('class', 'list-item');
+
+				var imgPath = 'img/works/';''
+				var imgId = mod[key][i].id;
+				var imgNum = mod[key][i].images;
+				var imgSuff = '_l-0.jpg';
+
+				listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
+
+				// make sure we're doing this for sections with images
+				if(imgNum != undefined) {
+					// append the list-item
+					additionalElem[0].appendChild( listItem );
+				}
 			}
 		}
 	}
