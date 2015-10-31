@@ -8,14 +8,18 @@ function init() {
 }
 
 // some arrays we will need as we go along
-var kindsArr = ['works', 'studio', 'news'];
+var dataArr = [];
 var navArr = [];
+// build out the dataArr array
+for (var key in localStorage){
+   dataArr.push(key);
+}
 
 // loop through the kinds and get all the data available
 function dataTypes() {
-	for(var i = 0; i < kindsArr.length; i++) {
+	for(var i = 0; i < dataArr.length; i++) {
 		// lets get the data and store it locally
-		getData(kindsArr[i]);
+		getData(dataArr[i]);
 	}
 }
 
@@ -23,7 +27,6 @@ function dataTypes() {
 function getData(kind) {
 	var request = new XMLHttpRequest();
 	request.open('GET', 'data/' + kind + '.json');
-
 	request.onreadystatechange = function() {
 		var div = document.getElementById('results');
 		if(this.readyState == this.DONE && this.status == 200) {
@@ -38,12 +41,21 @@ function getData(kind) {
 	request.send();
 }
 
+
+
+
+
+
+
+
+
+
+// build out the navigation
 function buildNav() {
 	// loop through that kinds array
-	for(var i = 0; i < kindsArr.length; i++ ) {
+	for(var i = 0; i < dataArr.length; i++ ) {
 		// get the locally stored data
-		var dataKeys = JSON.parse(localStorage.getItem(kindsArr[i]));
-		// console.log(dataKeys);
+		var dataKeys = JSON.parse(localStorage.getItem(dataArr[i]));
 		for (var key in dataKeys) {
 			// check to see if we have at least 1 item in the category
 			if(dataKeys[key].length > 0) {
@@ -57,12 +69,10 @@ function buildNav() {
 	// now, display the navigation
 	displayNav();
 }
-
 // capitalize the first letter of a string
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
 // display the navigation
 function displayNav() {
 	for(var i = 0; i < navArr.length; i++ ) {
@@ -78,25 +88,53 @@ function displayNav() {
 		li.setAttribute('class', 'item');
 		nav.appendChild(li);
 	}
-	createModules();
+	getDataForDisplay();
+	// createModules();
 }
 
-function createModules() {
-	for(var i = 0; i < navArr.length; i++ ) {
+
+
+
+
+
+
+
+
+
+function getDataForDisplay() {
+	for(var i = 0; i < dataArr.length; i++ ) {
+		var dataKeys = JSON.parse(localStorage.getItem(dataArr[i]));
+		// pass along the data and create modules
+		createModules(dataKeys);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+function createModules(mod) {
+	// get the keys
+	for (var key in mod) {
+		// build out the module skeleton
 		var worksDiv = document.getElementById('works');
 		var module = document.createElement('div');
 		module.setAttribute('class', 'module group');
 
-		module.setAttribute('id', navArr[i]);
+		module.setAttribute('id', key);
 		var anchor = document.createElement('a');
-		anchor.setAttribute('name', navArr[i]);
+		anchor.setAttribute('name', key);
 		module.appendChild(anchor);
 
 		// heading
 		var h2 = document.createElement('h2');
 		h2.setAttribute('class',  'header');
-		h2.innerHTML = navArr[i].toUpperCase();
-		theTypeIs = navArr[i];
+		h2.innerHTML = key.toUpperCase();
 		module.appendChild(h2);
 
 		// wrap module div
@@ -110,62 +148,33 @@ function createModules() {
 
 		// create the container for the hero images
 		var heroDiv = document.createElement('div');
-		heroDiv.setAttribute('class', 'module-main bg-3');
-
-		// create an empty img for the hero images
-		var heroImg = document.createElement('img');
-		heroImg.setAttribute('class', 'main-image');
-		heroImg.setAttribute('src', 'http://peterthibeault.com/img/works/chest-645_0_l.jpg');
+		heroDiv.setAttribute('class', 'module-main');
+		heroDiv.setAttribute('id', key + '-hero');
 
 		// create the container for the hero images
 		var infoDiv = document.createElement('div');
 		infoDiv.setAttribute('class', 'module-info grid');
-
-		// create the grid in the info
-		var col1 = document.createElement('div');
-		col1.setAttribute('class', 'col4');
-		var col2 = document.createElement('div');
-		col2.setAttribute('class', 'col4');
-		var col3 = document.createElement('div');
-		col3.setAttribute('class', 'col4');
+		infoDiv.setAttribute('id', key + '-tray');
 
 		// create a list for the first column
-		var infoUl = document.createElement('ul');
-		infoUl.setAttribute('class', 'sidebar-items-list bg-3 group');
-		var infoLi = document.createElement('li');
-		infoLi.setAttribute('class', 'list-item');
-		infoLi.innerHTML = 'BOOM';
-		// add that list to the first column
-		infoUl.appendChild(infoLi);
-		col1.appendChild(infoUl);
+		var infoUl1 = document.createElement('ul');
+		infoUl1.setAttribute('class', 'sidebar-items-list bg-3 group col4');
+		infoDiv.appendChild(infoUl1);
 
 		// create a list for the first column
-		var infoUl = document.createElement('ul');
-		infoUl.setAttribute('class', 'sidebar-items-list bg-3 group');
-		var infoLi = document.createElement('li');
-		infoLi.setAttribute('class', 'list-item');
-		infoLi.innerHTML = 'BOOM';
-		// add that list to the first column
-		infoUl.appendChild(infoLi);
-		col2.appendChild(infoUl);
+		var infoUl2 = document.createElement('ul');
+		infoUl2.setAttribute('class', 'sidebar-items-list bg-3 group col4');
+		infoDiv.appendChild(infoUl2);
 
 		// create a list for the first column
-		var infoUl = document.createElement('ul');
-		infoUl.setAttribute('class', 'sidebar-items-list bg-3 group');
-		var infoLi = document.createElement('li');
-		infoLi.setAttribute('class', 'list-item');
-		infoLi.innerHTML = 'BOOM';
-		// add that list to the first column
-		infoUl.appendChild(infoLi);
-		col3.appendChild(infoUl);
+		var infoUl3 = document.createElement('ul');
+		infoUl3.setAttribute('class', 'sidebar-items-list bg-3 group col4');
+		infoDiv.appendChild(infoUl3);
 
 		// add the columns to the grid
-		infoDiv.appendChild(col1);
-		infoDiv.appendChild(col2);
-		infoDiv.appendChild(col3);
+		leftDiv.appendChild(infoDiv);
 
 		// add things to the leftDiv
-		heroDiv.appendChild(heroImg);
 		leftDiv.appendChild(heroDiv);
 		leftDiv.appendChild(infoDiv);
 
@@ -177,22 +186,19 @@ function createModules() {
 		// add the nav div
 		var navDiv = document.createElement('div');
 		navDiv.setAttribute('class', 'module-nav bg-3');
+		navDiv.setAttribute('id', key + '-additional');
 
 		// add the nav div sub-header
 		var navSubHeaderDiv = document.createElement('h3');
 		navSubHeaderDiv.setAttribute('class', 'sub-header');
-		navSubHeaderDiv.innerHTML = 'Additional Furnishings';
+		navSubHeaderDiv.innerHTML = 'Additional ' + key;
 		navDiv.appendChild(navSubHeaderDiv);
 
 		// add the nav div list
 		var navList = document.createElement('ul');
 		navList.setAttribute('class', 'module-list');
 
-		var navListItem = document.createElement('li');
-		navListItem.setAttribute('class', 'list-item active');
-		navList.appendChild(navListItem);
 		navDiv.appendChild(navList);
-
 
 		// add things to the rightDiv
 		rightDiv.appendChild(navDiv);
@@ -205,91 +211,68 @@ function createModules() {
 		module.appendChild(wrapDiv);
 		worksDiv.appendChild(module);
 	}
-	// heroImg();
-	// listWorks();
+	heroImg(mod);
+	relatedWorks(mod);
 }
 
-function heroImg() {
 
+function heroImg(mod) {
+	for (var key in mod) {
+		// create an ID from the key
+		var kindMod = $('#' + key);
+		// build the hero ID
+		var heroSel = kindMod.selector + '-hero';
+		// get the hero element
+		var heroElem = $(heroSel);
+		// do that old key thing
+		for (var key in mod) {
+			// build out the main image
+			var imgPath = 'img/works/';''
+			var imgId = mod[key][0].id;
+			var imgNum = mod[key][0].images;
+			var imgSuff = '_l-0.jpg';
+			// make sure we're doing this for sections with images
+			if(imgNum != undefined) {
+				// create the hero image
+				var heroImg = document.createElement('img');
+				heroImg.setAttribute('class', 'main-image');
+				heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+				// append the hero image
+				heroElem[0].appendChild( heroImg );
+			}
+		}
+	}
 }
 
-function listWorks() {
-	for(var i = 0; i < navArr.length - 2; i++ ) {
-		var mod = document.getElementById(navArr[i]).getElementsByClassName('module-wrap');
-		console.log(mod);
-		for(var j = 0; j < mod.length; j++ ) {
-			// left module div
-			var leftDiv = document.createElement('div');
-			leftDiv.setAttribute('class', 'left');
+function relatedWorks(mod) {
+	for (var key in mod) {
+		// create an ID from the key
+		var kindMod = $('#' + key);
+		// build the hero ID
+		var additionalSel = kindMod.selector + '-additional';
+		var additionalElem = $(additionalSel).children('.module-list');
 
-			// right div
-			var rightDiv = document.createElement('div');
-			rightDiv.setAttribute('class', 'right');
+		var heroElem = $(additionalSel);
+		// do that old key thing
+		for (var key in mod) {
+			// build out the main image
+			for(var i = 0; i < mod[key].length; i++ ) {
+				var listItem = document.createElement('li');
+				listItem.setAttribute('class', 'list-item');
 
-			// module main div
-			var moduleMainDiv = document.createElement('div');
-			moduleMainDiv.setAttribute('class', 'module-main bg-3');
+				var imgPath = 'img/works/';''
+				var imgId = mod[key][i].id;
+				var imgNum = mod[key][i].images;
+				var imgSuff = '_m-0.jpg';
 
-			// main image div
-			var mainImgDiv = document.createElement('img');
-			mainImgDiv.setAttribute('class', 'main-image');
-			mainImgDiv.setAttribute('id', 'resultImg');
-			mainImgDiv.setAttribute('src', 'http://peterthibeault.com/img/works/chest-645_0_l.jpg');//keys.image)
+				listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 
-			// info div
-			var moduleInfoDiv = document.createElement('div');
-			moduleInfoDiv.setAttribute('class', 'module-info grid');
-			var gridCol1 = document.createElement('div');
-			gridCol1.setAttribute('class', 'col4');
-			var gridCol2 = document.createElement('div');
-			gridCol2.setAttribute('class', 'col4');
-			var gridCol3 = document.createElement('div');
-			gridCol3.setAttribute('class', 'col4');
-
-			// info items div
-			var infoItemsUl = document.createElement('ul');
-			infoItemsUl.setAttribute('class', 'info-items-list bg-3 group');
-			var infoItemsLi = document.createElement('li');
-			infoItemsLi.setAttribute('class', 'info-header');
-
-			// module nav div
-			var moduleNavDiv = document.createElement('div');
-			moduleNavDiv.setAttribute('class', 'module-nav bg-3');
-
-			// sub-header div
-			var subHeader = document.createElement('h3');
-			subHeader.setAttribute('class', 'sub-header');
-			subHeader.innerHTML = 'Additional Works';// + keys.title;
-
-			// module list div
-			var moduleList = document.createElement('ul');
-			moduleList.setAttribute('class', 'module-list');
-
-			// li
-			var listLi = document.createElement('li');
-			listLi.setAttribute('class', 'list-item active');
-			listLi.setAttribute('style', 'background-image: url(../img/works/chest-645_0_l.jpg)');//' + keys.image + ')');
-
-			// add the things
-			infoItemsUl.appendChild(infoItemsLi);
-
-			gridCol1.appendChild(infoItemsUl);
-
-			moduleInfoDiv.appendChild(gridCol1);
-			moduleInfoDiv.appendChild(gridCol2);
-			moduleInfoDiv.appendChild(gridCol3);
-
-			moduleMainDiv.appendChild(mainImgDiv);
-			leftDiv.appendChild(moduleMainDiv);
-			leftDiv.appendChild(moduleInfoDiv);
-			moduleList.appendChild(listLi);
-			moduleNavDiv.appendChild(subHeader);
-			moduleNavDiv.appendChild(moduleList);
-			rightDiv.appendChild(moduleNavDiv);
-
-			// add the things to their mod
-			mod[j].appendChild(leftDiv);
-			mod[j].appendChild(rightDiv);
+				// make sure we're doing this for sections with images
+				if(imgNum != undefined) {
+					// append the list-item
+					additionalElem[0].appendChild( listItem );
+				}
+			}
 		}
 	}
 }
