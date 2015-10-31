@@ -11,34 +11,6 @@ function init() {
 var kindsArr = ['works', 'studio', 'news'];
 var navArr = [];
 
-// function Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, image, related_images, added) {
-// 	this.id = id,
-// 	this.title = title,
-// 	this.year = year,
-// 	this.media = media,
-// 	this.description = description,
-// 	this.dimension_d = dimension_d,
-// 	this.dimension_w = dimension_w,
-// 	this.dimension_h = dimension_h,
-// 	this.available = available,
-// 	this.image = image,
-// 	this.related_images = related_images,
-// 	this.added = added
-// }
-
-// function Studio(id, image, description, added) {
-// 	this.id = id,
-// 	this.image = image,
-// 	this.description = description,
-// 	this.added = added
-// }
-
-// function News(id, description, added) {
-// 	this.id = id,
-// 	this.description = description,
-// 	this.added = added
-// }
-
 // loop through the kinds and get all the data available
 function dataTypes() {
 	for(var i = 0; i < kindsArr.length; i++) {

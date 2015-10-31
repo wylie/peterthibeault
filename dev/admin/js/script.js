@@ -379,6 +379,7 @@ function displayWorks() {
 // lets swap the main image with related ones
 function swapWorks() {
   $('.studio-img-thmb').click(function() {
+    // AND THIS ISN'T WORKING BECAUSE...? $(this).addCLass('active');
     // get this and it's parent
     var imgId = $(this).attr('data-imgid');
     var parent = $(this).closest('.module-section');
