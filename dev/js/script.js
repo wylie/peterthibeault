@@ -8,19 +8,18 @@ function init() {
 }
 
 // some arrays we will need as we go along
-var kindsArr = [];
+var dataArr = [];
 var navArr = [];
-
-// build out the kindsArr array
+// build out the dataArr array
 for (var key in localStorage){
-   kindsArr.push(key);
+   dataArr.push(key);
 }
 
 // loop through the kinds and get all the data available
 function dataTypes() {
-	for(var i = 0; i < kindsArr.length; i++) {
+	for(var i = 0; i < dataArr.length; i++) {
 		// lets get the data and store it locally
-		getData(kindsArr[i]);
+		getData(dataArr[i]);
 	}
 }
 
@@ -45,9 +44,9 @@ function getData(kind) {
 
 function buildNav() {
 	// loop through that kinds array
-	for(var i = 0; i < kindsArr.length; i++ ) {
+	for(var i = 0; i < dataArr.length; i++ ) {
 		// get the locally stored data
-		var dataKeys = JSON.parse(localStorage.getItem(kindsArr[i]));
+		var dataKeys = JSON.parse(localStorage.getItem(dataArr[i]));
 		for (var key in dataKeys) {
 			// check to see if we have at least 1 item in the category
 			if(dataKeys[key].length > 0) {
@@ -61,7 +60,6 @@ function buildNav() {
 	// now, display the navigation
 	displayNav();
 }
-
 // capitalize the first letter of a string
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
