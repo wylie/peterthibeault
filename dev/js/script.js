@@ -263,7 +263,7 @@ function relatedWorks(mod) {
 				var imgPath = 'img/works/';''
 				var imgId = mod[key][i].id;
 				var imgNum = mod[key][i].images;
-				var imgSuff = '_l-0.jpg';
+				var imgSuff = '_m-0.jpg';
 
 				listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 
