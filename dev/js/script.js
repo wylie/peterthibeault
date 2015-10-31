@@ -8,8 +8,13 @@ function init() {
 }
 
 // some arrays we will need as we go along
-var kindsArr = ['works', 'studio', 'news'];
+var kindsArr = [];
 var navArr = [];
+
+// build out the kindsArr array
+for (var key in localStorage){
+   kindsArr.push(key);
+}
 
 // loop through the kinds and get all the data available
 function dataTypes() {
@@ -43,7 +48,6 @@ function buildNav() {
 	for(var i = 0; i < kindsArr.length; i++ ) {
 		// get the locally stored data
 		var dataKeys = JSON.parse(localStorage.getItem(kindsArr[i]));
-		// console.log(dataKeys);
 		for (var key in dataKeys) {
 			// check to see if we have at least 1 item in the category
 			if(dataKeys[key].length > 0) {
