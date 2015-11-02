@@ -8,12 +8,8 @@ function init() {
 }
 
 // some arrays we will need as we go along
-var dataArr = [];
+var dataArr = ['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students', 'studio', 'news', ];
 var navArr = [];
-// build out the dataArr array
-for (var key in localStorage){
-   dataArr.push(key);
-}
 
 // loop through the kinds and get all the data available
 function dataTypes() {
@@ -258,12 +254,14 @@ function relatedWorks(mod) {
 			// build out the main image
 			for(var i = 0; i < mod[key].length; i++ ) {
 				var listItem = document.createElement('li');
-				listItem.setAttribute('class', 'list-item');
-
 				var imgPath = 'img/works/';''
 				var imgId = mod[key][i].id;
 				var imgNum = mod[key][i].images;
 				var imgSuff = '_m-0.jpg';
+
+				listItem.setAttribute('class', 'list-item');
+				listItem.setAttribute('id', imgId);
+
 
 				listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 
