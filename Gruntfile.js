@@ -92,6 +92,12 @@ module.exports = function(grunt) {
 					},
 					{
 						expand: true,
+						src: 'dev/admin/data/*',
+						dest: 'dist/admin/data/',
+						flatten: true
+					},
+					{
+						expand: true,
 						src: 'dev/admin/js/*',
 						dest: 'dist/admin/js/',
 						flatten: true
