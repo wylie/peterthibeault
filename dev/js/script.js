@@ -2,28 +2,74 @@ window.onload = init;
 
 // run after loading everything
 function init() {
-	dataTypes();
+	// do the nav stuff
+	navData();
+	// do the work stuff
+	workData();
 }
 
 // some arrays we will need as we go along
-var dataArr = ['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students', 'studio', 'news', ];
+var dataArr = ['design', 'drawing',	'furnishings', 'news', 'painting', 'sculpture', 'students', 'studio'];
 var navArr = [];
+var items = [];
+
+// get the navigation from admin
+function navData() {
+	// get the data from admin
+	$.getJSON( '../admin/data/nav.json', function( data ) {
+		$.each( data, function( key, val ) {
+			// send off each value of the array to the showNav function
+			showNav( val );
+		});
+	});
+}
+// build out the navigation
+function showNav(navItem) {
+	// loop through the navItem array
+	for(var i = 0; i < navItem.length; i++) {
+		// get the nav element on the page. it's a list
+		var nav = document.getElementById('nav');
+		// create an list-item
+		var li = document.createElement('li');
+		// create a link
+		var a = document.createElement('a');
+		// capitalize each navItem
+		var title = capitalizeFirstLetter( navItem[i] );
+		// add the text to the link
+		a.innerHTML = title;
+		// add a class to the link
+		a.setAttribute('class', 'link');
+		// add the link to the anchor on the page
+		a.setAttribute('href', '#' +  navItem[i].toLowerCase() );
+		// give the link a title
+		a.setAttribute('title', 'View My ' + capitalizeFirstLetter( navItem[i] ));
+		// append the link to the li
+		li.appendChild(a);
+		// git the list-item a class
+		li.setAttribute('class', 'item');
+		// append the list-item to the nav list
+		nav.appendChild(li);
+	}
+}
+
+
+
+
+
+
+
 
 // loop through the kinds and get all the data available
-function dataTypes() {
+function workData() {
+	// loop through the data JSON files
 	for(var i = 0; i < dataArr.length; i++) {
-		// lets get the data and store it locally
-
 		$.getJSON( 'data/' + dataArr[i] + '.json', function( data ) {
-			var items = [];
 			$.each( data, function( key, val ) {
-				items.push( key );
+				// save each bit of data to localStorage
+				localStorage.setItem( key, JSON.stringify( val ) );
 			});
-			console.log( items );
 		});
-
 	}
-	buildNav();
 }
 
 
@@ -35,25 +81,6 @@ function dataTypes() {
 
 
 
-// build out the navigation
-function buildNav() {
-	// loop through that kinds array
-	for(var i = 0; i < dataArr.length; i++ ) {
-		// get the locally stored data
-		var dataKeys = JSON.parse(localStorage.getItem(dataArr[i]));
-		for (var key in dataKeys) {
-			// check to see if we have at least 1 item in the category
-			if(dataKeys[key].length > 0) {
-				// add the categories with more than 1 item to the navArr
-				navArr.push(key);
-			}
-		}
-	}
-	// add extra sections to the navigation
-	navArr.push('CV', 'contact');
-	// now, display the navigation
-	displayNav();
-}
 // capitalize the first letter of a string
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -78,7 +105,7 @@ function displayNav() {
 		nav.appendChild(li);
 	}
 	// getDataForDisplay();
-	createModules();
+	// createModules();
 }
 
 
@@ -108,6 +135,7 @@ function getDataForDisplay() {
 
 
 function createModules() {
+	console.log( 'SHAZAM' );
 	for(var i = 0; i < navArr.length - 2; i++ ) {
 		// build out the module skeleton
 		var worksDiv = document.getElementById('works');
@@ -224,8 +252,7 @@ function createModules() {
 		module.appendChild(wrapDiv);
 		worksDiv.appendChild(module);
 	}
-	// heroImg();
-	// relatedWorks( navArr[i] );
+	relatedWorks();
 }
 function heroImg() {
 
@@ -260,6 +287,10 @@ function heroImg() {
 	}
 }
 function relatedWorks(mod) {
+	// console.log( 'boom' );
+	//
+	// console.log( items );
+
 	for (var key in mod) {
 		// create an ID from the key
 		var kindMod = $('#' + key);
