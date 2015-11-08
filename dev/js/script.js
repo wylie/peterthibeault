@@ -3,8 +3,6 @@ window.onload = init;
 // run after loading everything
 function init() {
 	dataTypes();
-	buildNav();
-	// createModules();
 }
 
 // some arrays we will need as we go along
@@ -15,26 +13,17 @@ var navArr = [];
 function dataTypes() {
 	for(var i = 0; i < dataArr.length; i++) {
 		// lets get the data and store it locally
-		getData(dataArr[i]);
-	}
-}
 
-// get the data from the JSON files
-function getData(kind) {
-	var request = new XMLHttpRequest();
-	request.open('GET', 'data/' + kind + '.json');
-	request.onreadystatechange = function() {
-		var div = document.getElementById('results');
-		if(this.readyState == this.DONE && this.status == 200) {
-			var type = request.getResponseHeader('Content-Type');
-			if(this.responseText != null) {
-				var json = JSON.parse(this.responseText);
-				var keys = Object.keys(json);
-				localStorage.setItem(kind, JSON.stringify(json));
-			}
-		}
+		$.getJSON( 'data/' + dataArr[i] + '.json', function( data ) {
+			var items = [];
+			$.each( data, function( key, val ) {
+				items.push( key );
+			});
+			console.log( items );
+		});
+
 	}
-	request.send();
+	buildNav();
 }
 
 
@@ -67,7 +56,11 @@ function buildNav() {
 }
 // capitalize the first letter of a string
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+// capitalize the first letter of a string
+function capitalizeNoLetter(string) {
+  return string.toLowerCase();
 }
 // display the navigation
 function displayNav() {
@@ -84,8 +77,8 @@ function displayNav() {
 		li.setAttribute('class', 'item');
 		nav.appendChild(li);
 	}
-	getDataForDisplay();
-	// createModules();
+	// getDataForDisplay();
+	createModules();
 }
 
 
@@ -98,10 +91,10 @@ function displayNav() {
 
 
 function getDataForDisplay() {
-	for(var i = 0; i < dataArr.length; i++ ) {
-		var dataKeys = JSON.parse(localStorage.getItem(dataArr[i]));
+	for(var i = 0; i < navArr.length; i++ ) {
+		var dataKeys = JSON.parse(localStorage.getItem(navArr[i]));
 		// pass along the data and create modules
-		createModules(dataKeys);
+		// createModules(dataKeys);
 	}
 }
 
@@ -114,23 +107,22 @@ function getDataForDisplay() {
 
 
 
-function createModules(mod) {
-	// get the keys
-	for (var key in mod) {
+function createModules() {
+	for(var i = 0; i < navArr.length - 2; i++ ) {
 		// build out the module skeleton
 		var worksDiv = document.getElementById('works');
 		var module = document.createElement('div');
 		module.setAttribute('class', 'module group');
 
-		module.setAttribute('id', key);
+		module.setAttribute('id', capitalizeNoLetter( navArr[i]) );
 		var anchor = document.createElement('a');
-		anchor.setAttribute('name', key);
+		anchor.setAttribute('name', capitalizeNoLetter( navArr[i]) );
 		module.appendChild(anchor);
 
 		// heading
 		var h2 = document.createElement('h2');
 		h2.setAttribute('class',  'header');
-		h2.innerHTML = key.toUpperCase();
+		h2.innerHTML = navArr[i].toUpperCase();
 		module.appendChild(h2);
 
 		// wrap module div
@@ -145,12 +137,12 @@ function createModules(mod) {
 		// create the container for the hero images
 		var heroDiv = document.createElement('div');
 		heroDiv.setAttribute('class', 'module-main');
-		heroDiv.setAttribute('id', key + '-hero');
+		heroDiv.setAttribute('id', navArr[i] + '-hero');
 
 		// create the container for the hero images
 		var infoDiv = document.createElement('div');
 		infoDiv.setAttribute('class', 'module-info grid');
-		infoDiv.setAttribute('id', key + '-tray');
+		infoDiv.setAttribute('id', navArr[i] + '-tray');
 
 		// create a list for the first column
 		var infoUl1 = document.createElement('ul');
@@ -182,12 +174,12 @@ function createModules(mod) {
 		// add the nav div
 		var navDiv = document.createElement('div');
 		navDiv.setAttribute('class', 'module-nav bg-3');
-		navDiv.setAttribute('id', key + '-additional');
+		navDiv.setAttribute('id', navArr[i] + '-additional');
 
 		// add the nav div sub-header
 		var navSubHeaderDiv = document.createElement('h3');
 		navSubHeaderDiv.setAttribute('class', 'sub-header');
-		navSubHeaderDiv.innerHTML = 'Additional ' + key;
+		navSubHeaderDiv.innerHTML = 'Additional ' + navArr[i];
 		navDiv.appendChild(navSubHeaderDiv);
 
 		// add the nav div list
@@ -207,12 +199,40 @@ function createModules(mod) {
 		module.appendChild(wrapDiv);
 		worksDiv.appendChild(module);
 	}
-	heroImg(mod);
-	relatedWorks(mod);
+	for(var i = navArr.length - 2; i < navArr.length; i++ ) {
+		// build out the module skeleton
+		var worksDiv = document.getElementById('works');
+		var module = document.createElement('div');
+		module.setAttribute('class', 'module group');
+
+		module.setAttribute('id', capitalizeNoLetter( navArr[i]) );
+		var anchor = document.createElement('a');
+		anchor.setAttribute('name', capitalizeNoLetter( navArr[i]) );
+		module.appendChild(anchor);
+
+		// heading
+		var h2 = document.createElement('h2');
+		h2.setAttribute('class',  'header');
+		h2.innerHTML = navArr[i].toUpperCase();
+		module.appendChild(h2);
+
+		// wrap module div
+		var wrapDiv = document.createElement('div');
+		wrapDiv.setAttribute('class', 'module-wrap group');
+
+		// add it all to the module
+		module.appendChild(wrapDiv);
+		worksDiv.appendChild(module);
+	}
+	// heroImg();
+	// relatedWorks( navArr[i] );
 }
+function heroImg() {
 
+	// for(var i = 0; i < navArr.length; i++ ) {
+	// 	console.log( navArr[i] );
+	// }
 
-function heroImg(mod) {
 	for (var key in mod) {
 		// create an ID from the key
 		var kindMod = $('#' + key);
@@ -239,7 +259,6 @@ function heroImg(mod) {
 		}
 	}
 }
-
 function relatedWorks(mod) {
 	for (var key in mod) {
 		// create an ID from the key
@@ -262,7 +281,6 @@ function relatedWorks(mod) {
 				listItem.setAttribute('class', 'list-item');
 				listItem.setAttribute('id', imgId);
 
-
 				listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 
 				// make sure we're doing this for sections with images
@@ -273,4 +291,13 @@ function relatedWorks(mod) {
 			}
 		}
 	}
+}
+
+
+
+
+
+function displayNews() {
+	var news = document.getElementById('news');
+	console.log( news );
 }
