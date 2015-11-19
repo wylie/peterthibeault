@@ -287,5 +287,4 @@ function heroInfo( section, id ) {
 
 function displayNews() {
 	var news = document.getElementById('news');
-	console.log( news );
 }
