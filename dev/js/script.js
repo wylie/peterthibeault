@@ -3,7 +3,6 @@ var dataArr = ['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'stu
 var navArr = [];
 var extraNav = ['CV', 'Contact'];
 var totalNav = [];
-var items = [];
 
 // GET THE WORK DATA
 workData();
