@@ -49,6 +49,9 @@ function navData() {
 
 // BUILD THE NAVIGATION
 function buildNav(navArr) {
+
+	// console.log( 'buildNav' ); // 1
+
 	// loop through the navArr array
 	for(var i = 0; i < navArr.length; i++) {
 		// get the nav element on the page. it's a list
@@ -78,27 +81,36 @@ function buildNav(navArr) {
 }
 
 function prepModules(navArr) {
+
+	// console.log( 'prepModules: ' + navArr ); // 1
+
 	for(var i = 0; i < navArr.length; i++) {
 		buildModule( navArr[i] );
-		// relatedWorks( navArr[i] );
+
+		// console.log( 'prepModules' ); // 10
+		relatedWorks( navArr[i] );
+
 	}
 }
 
-function buildModule(x) {
+function buildModule( navItem ) {
+
+	// console.log( 'buildModule' ); // 10
+
 	// start building things
 	var worksDiv = document.getElementById('works');
 	var module = document.createElement('div');
 	module.setAttribute('class', 'module group');
 
-	module.setAttribute('id', x.toLowerCase() );
+	module.setAttribute('id', navItem.toLowerCase() );
 	var anchor = document.createElement('a');
-	anchor.setAttribute('name', x.toLowerCase() );
+	anchor.setAttribute('name', navItem.toLowerCase() );
 	module.appendChild(anchor);
 
 	// heading
 	var h2 = document.createElement('h2');
 	h2.setAttribute('class',  'header');
-	h2.innerHTML = x.toUpperCase();
+	h2.innerHTML = navItem.toUpperCase();
 	module.appendChild(h2);
 
 	// wrap module div
@@ -113,12 +125,12 @@ function buildModule(x) {
 	// create the container for the hero images
 	var heroDiv = document.createElement('div');
 	heroDiv.setAttribute('class', 'module-main');
-	heroDiv.setAttribute('id', x.toLowerCase() + '-hero');
+	heroDiv.setAttribute('id', navItem.toLowerCase() + '-hero');
 
 	// create the container for the hero images
 	var infoDiv = document.createElement('div');
 	infoDiv.setAttribute('class', 'module-info grid');
-	infoDiv.setAttribute('id', x.toLowerCase() + '-tray');
+	infoDiv.setAttribute('id', navItem.toLowerCase() + '-tray');
 
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
@@ -145,7 +157,7 @@ function buildModule(x) {
 	// add the left div to the wrapDiv
 	wrapDiv.appendChild(leftDiv);
 
-	if( (x == 'Furnishings' ) || (x == 'Sculpture') || (x == 'Drawing') || (x == 'Painting') || (x == 'Design') || (x == 'Students') || (x == 'Studio') || (x == 'News') ) {
+	if( (navItem == 'Furnishings' ) || (navItem == 'Sculpture') || (navItem == 'Drawing') || (navItem == 'Painting') || (navItem == 'Design') || (navItem == 'Students') || (navItem == 'Studio') || (navItem == 'News') ) {
 		// create the right div
 		var rightDiv = document.createElement('div');
 		rightDiv.setAttribute('class', 'right');
@@ -154,12 +166,12 @@ function buildModule(x) {
 		// add the nav div
 		var navDiv = document.createElement('div');
 		navDiv.setAttribute('class', 'module-nav bg-3');
-		navDiv.setAttribute('id', x.toLowerCase() + '-additional');
+		navDiv.setAttribute('id', navItem.toLowerCase() + '-additional');
 
 		// add the nav div sub-header
 		var navSubHeaderDiv = document.createElement('h3');
 		navSubHeaderDiv.setAttribute('class', 'sub-header');
-		navSubHeaderDiv.innerHTML = 'Additional ' + x;
+		navSubHeaderDiv.innerHTML = 'Additional ' + navItem;
 		navDiv.appendChild(navSubHeaderDiv);
 
 		// add the nav div list
@@ -180,21 +192,25 @@ function buildModule(x) {
 	module.appendChild(wrapDiv);
 	worksDiv.appendChild(module);
 
-	relatedWorks( x );
+	relatedWorks( navItem );
 }
 
-function relatedWorks(x) {
-	// get the localStorage data
-	var tst = JSON.parse(localStorage.getItem( x.toLowerCase() ) );
+function relatedWorks(navItem) {
 
-	switch ( x ) {
+	// console.log( 'relatedWorks: ' + navItem ); // 10
+
+	// get the localStorage data
+	var data = JSON.parse(localStorage.getItem( navItem.toLowerCase() ) );
+
+	switch ( navItem ) {
 		case 'Furnishings':
 		case 'Sculpture':
 		case 'Drawing':
 		case 'Painting':
 		case 'Design':
 		case 'Students':
-			displayAddtnlWork( x, tst );
+			displayAddtnlWork( navItem, data );
+			// console.log( 'test' );
 			break;
 		case 'Studio':
 			// buildModule(navArr[i]);
@@ -211,17 +227,20 @@ function relatedWorks(x) {
 	}
 }
 
-function displayAddtnlWork(x, tst) {
+function displayAddtnlWork(x, data) {
+
+	console.log( 'displayAddtnlWork' ); // 6
+
 	var x = x.toLowerCase();
 	var id = '#' + x + '-additional';
 	var mod = $( id );
 	var blammo = $(x + '.module-list');
 
-	for(var i = 0; i < tst.length; i++ ) {
+	for(var i = 0; i < data.length; i++ ) {
 		var listItem = document.createElement('li');
 		var imgPath = 'img/works/';''
-		var imgId = tst[i].id;
-		var imgNum = tst[i].images;
+		var imgId = data[i].id;
+		var imgNum = data[i].images;
 		var imgSuff = '_m-0.jpg';
 
 		listItem.setAttribute('class', 'list-item');
@@ -237,21 +256,20 @@ function displayAddtnlWork(x, tst) {
 function getClickedAddtl(x) {
 	$('.module-list .list-item').click(function() {
 		var section = $(this).parents('.module.group').attr('id');
-		// console.log( section );
-		var bam = $(this).attr('id');
-		heroImg( section, bam );
+		var section = section.toLowerCase();
+		var id = $(this).attr('id');
+		heroImg( section, id );
+		heroInfo( section, id );
 	});
 }
 
-function heroImg( section, bam ) {
-	var section = section.toLowerCase();
-	var id = '#' + section + '-hero';
-	var mod = $( id );
+function heroImg( section, id ) {
 	// get the hero element
-	var heroElem = $(section + '-hero');
+	var idName = '#' + section + '-hero';
+	var mod = $( idName );
 	// build out the main image
 	var imgPath = 'img/works/';''
-	var imgId = bam;
+	var imgId = id;
 	var imgNum = 1;
 	var imgSuff = '_l-0.jpg';
 	// make sure we're doing this for sections with images
@@ -265,6 +283,25 @@ function heroImg( section, bam ) {
 		// append the hero image
 		mod[0].appendChild( heroImg );
 	}
+}
+
+function heroInfo( section, id ) {
+	var idName = '#' + section + '-tray';
+	var mod = $( idName );
+
+	var data = JSON.parse(localStorage.getItem( section ) );
+
+	var ulOne = $( mod[0].children[0] );
+	var ulTwo = $( mod[0].children[1] );
+	var ulThree = $( mod[0].children[2] );
+
+	var liHead = document.createElement('li');
+	liHead.setAttribute('class', 'sidebar-header');
+	liHead.innerHTML = 'INFO';
+
+	// console.log( liHead );
+	ulOne[0].appendChild( liHead );
+	// console.log( ulOne[0] );
 }
 
 
