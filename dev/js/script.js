@@ -279,9 +279,7 @@ function heroInfo( section, id ) {
 	liHead.setAttribute('class', 'sidebar-header');
 	liHead.innerHTML = 'INFO';
 
-	// console.log( liHead );
 	ulOne[0].appendChild( liHead );
-	// console.log( ulOne[0] );
 }
 
 
