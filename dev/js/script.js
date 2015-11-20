@@ -145,15 +145,30 @@ function buildModule(nav, data) {
 	infoUl1.setAttribute('class', 'sidebar-items-list bg-3 group col4');
 	infoDiv.appendChild(infoUl1);
 
+	var infoUl1Li = document.createElement('li');
+	infoUl1Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl1Li.innerHTML = 'INFO';
+	infoUl1.appendChild(infoUl1Li);
+
 	// create a list for the first column
 	var infoUl2 = document.createElement('ul');
 	infoUl2.setAttribute('class', 'sidebar-items-list bg-3 group col4');
 	infoDiv.appendChild(infoUl2);
 
+	var infoUl2Li = document.createElement('li');
+	infoUl2Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl2Li.innerHTML = 'INFO';
+	infoUl2.appendChild(infoUl2Li);
+
 	// create a list for the first column
 	var infoUl3 = document.createElement('ul');
 	infoUl3.setAttribute('class', 'sidebar-items-list bg-3 group col4');
 	infoDiv.appendChild(infoUl3);
+
+	var infoUl3Li = document.createElement('li');
+	infoUl3Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl3Li.innerHTML = 'INFO';
+	infoUl3.appendChild(infoUl3Li);
 
 	// add the columns to the grid
 	leftDiv.appendChild(infoDiv);
@@ -275,8 +290,8 @@ function heroInfo( section, id ) {
 	var ulThree = $( mod[0].children[2] );
 
 	var liHead = document.createElement('li');
-	liHead.setAttribute('class', 'sidebar-header');
-	liHead.innerHTML = 'INFO';
+	liHead.setAttribute('class', 'sidebar-list-heading');
+	liHead.innerHTML = 'TITLE';
 
 	ulOne[0].appendChild( liHead );
 }
