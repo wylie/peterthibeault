@@ -1,7 +1,8 @@
 // ARRAYS WE WILL NEED
-var dataArr = ['design', 'drawing',	'furnishings', 'news', 'painting', 'sculpture', 'students', 'studio'];
+var dataArr = ['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students', 'studio', 'news'];
 var navArr = [];
-var items = [];
+var extraNav = ['CV', 'Contact'];
+var totalNav = [];
 
 // GET THE WORK DATA
 workData();
@@ -11,8 +12,10 @@ window.onload = init;
 
 // INITITAL FUNCTION
 function init() {
-	// do the nav stuff
-	navData();
+	buildNav()
+	relatedWorks();
+	getClickedAddtl();
+	// displayAddtnlWork();
 }
 
 // CAPITALIZE FIRST LETTER OF A STRING
@@ -37,39 +40,52 @@ function workData() {
 	}
 }
 
-// GET THE NAV DATA
-function navData() {
-	$.getJSON( '../admin/data/nav.json', function( data ) {
-		$.each( data, function( key, val ) {
-			// send off each value of the array to the buildNav function
-			buildNav( val );
-		});
-	});
-}
-
 // BUILD THE NAVIGATION
-function buildNav(navArr) {
-
-	// console.log( 'buildNav' ); // 1
-
-	// loop through the navArr array
-	for(var i = 0; i < navArr.length; i++) {
-		// get the nav element on the page. it's a list
-		var nav = document.getElementById('nav');
+function buildNav() {
+	var nav = document.getElementById('nav');
+	for(var i = 0; i < dataArr.length; i++) {
+		var data = JSON.parse(localStorage.getItem( dataArr[i].toLowerCase() ) );
+		if( (data != null) && (data.length > 0) ) {
+			totalNav.push(dataArr[i]);
+			// create an list-item
+			var li = document.createElement('li');
+			// create a link
+			var a = document.createElement('a');
+			// capitalize each dataArr
+			var title = capitalizeFirstLetter( dataArr[i] );
+			// add the text to the link
+			a.innerHTML = title;
+			// add a class to the link
+			a.setAttribute('class', 'link');
+			// add the link to the anchor on the page
+			a.setAttribute('href', '#' +  dataArr[i].toLowerCase() );
+			// give the link a title
+			a.setAttribute('title', 'View My ' + dataArr[i]);
+			// append the link to the li
+			li.appendChild(a);
+			// git the list-item a class
+			li.setAttribute('class', 'item');
+			// append the list-item to the nav list
+			nav.appendChild(li);
+		}
+	}
+	// ugh...
+	for(var i = 0; i < extraNav.length; i++) {
+		totalNav.push(extraNav[i]);
 		// create an list-item
 		var li = document.createElement('li');
 		// create a link
 		var a = document.createElement('a');
 		// capitalize each navArr
-		var title = capitalizeFirstLetter( navArr[i] );
+		var title = capitalizeFirstLetter( extraNav[i] );
 		// add the text to the link
 		a.innerHTML = title;
 		// add a class to the link
 		a.setAttribute('class', 'link');
 		// add the link to the anchor on the page
-		a.setAttribute('href', '#' +  navArr[i].toLowerCase() );
+		a.setAttribute('href', '#' +  extraNav[i].toLowerCase() );
 		// give the link a title
-		a.setAttribute('title', 'View My ' + capitalizeFirstLetter( navArr[i] ));
+		a.setAttribute('title', extraNav[i]);
 		// append the link to the li
 		li.appendChild(a);
 		// git the list-item a class
@@ -77,40 +93,32 @@ function buildNav(navArr) {
 		// append the list-item to the nav list
 		nav.appendChild(li);
 	}
-	prepModules(navArr);
+	prepModules();
 }
 
-function prepModules(navArr) {
-
-	// console.log( 'prepModules: ' + navArr ); // 1
-
-	for(var i = 0; i < navArr.length; i++) {
-		buildModule( navArr[i] );
-
-		// console.log( 'prepModules' ); // 10
-		relatedWorks( navArr[i] );
-
+function prepModules() {
+	for(var i = 0; i < dataArr.length; i++) {
+		var data = JSON.parse(localStorage.getItem( dataArr[i].toLowerCase() ) );
+		if( (data != null) && (data.length > 0) ) {
+			buildModule(dataArr[i], data);
+		}
 	}
 }
 
-function buildModule( navItem ) {
-
-	// console.log( 'buildModule' ); // 10
-
-	// start building things
+function buildModule(nav, data) {
 	var worksDiv = document.getElementById('works');
 	var module = document.createElement('div');
 	module.setAttribute('class', 'module group');
 
-	module.setAttribute('id', navItem.toLowerCase() );
+	module.setAttribute('id', nav.toLowerCase() );
 	var anchor = document.createElement('a');
-	anchor.setAttribute('name', navItem.toLowerCase() );
+	anchor.setAttribute('name', nav.toLowerCase() );
 	module.appendChild(anchor);
 
 	// heading
 	var h2 = document.createElement('h2');
 	h2.setAttribute('class',  'header');
-	h2.innerHTML = navItem.toUpperCase();
+	h2.innerHTML = nav.toUpperCase();
 	module.appendChild(h2);
 
 	// wrap module div
@@ -125,27 +133,42 @@ function buildModule( navItem ) {
 	// create the container for the hero images
 	var heroDiv = document.createElement('div');
 	heroDiv.setAttribute('class', 'module-main');
-	heroDiv.setAttribute('id', navItem.toLowerCase() + '-hero');
+	heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
 
 	// create the container for the hero images
 	var infoDiv = document.createElement('div');
 	infoDiv.setAttribute('class', 'module-info grid');
-	infoDiv.setAttribute('id', navItem.toLowerCase() + '-tray');
+	infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
 
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
 	infoUl1.setAttribute('class', 'sidebar-items-list bg-3 group col4');
 	infoDiv.appendChild(infoUl1);
 
+	var infoUl1Li = document.createElement('li');
+	infoUl1Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl1Li.innerHTML = 'INFO';
+	infoUl1.appendChild(infoUl1Li);
+
 	// create a list for the first column
 	var infoUl2 = document.createElement('ul');
 	infoUl2.setAttribute('class', 'sidebar-items-list bg-3 group col4');
 	infoDiv.appendChild(infoUl2);
 
+	var infoUl2Li = document.createElement('li');
+	infoUl2Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl2Li.innerHTML = 'INFO';
+	infoUl2.appendChild(infoUl2Li);
+
 	// create a list for the first column
 	var infoUl3 = document.createElement('ul');
 	infoUl3.setAttribute('class', 'sidebar-items-list bg-3 group col4');
 	infoDiv.appendChild(infoUl3);
+
+	var infoUl3Li = document.createElement('li');
+	infoUl3Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl3Li.innerHTML = 'INFO';
+	infoUl3.appendChild(infoUl3Li);
 
 	// add the columns to the grid
 	leftDiv.appendChild(infoDiv);
@@ -157,84 +180,54 @@ function buildModule( navItem ) {
 	// add the left div to the wrapDiv
 	wrapDiv.appendChild(leftDiv);
 
-	if( (navItem == 'Furnishings' ) || (navItem == 'Sculpture') || (navItem == 'Drawing') || (navItem == 'Painting') || (navItem == 'Design') || (navItem == 'Students') || (navItem == 'Studio') || (navItem == 'News') ) {
-		// create the right div
-		var rightDiv = document.createElement('div');
-		rightDiv.setAttribute('class', 'right');
-		rightDiv.setAttribute('id', 'right');
+	// create the right div
+	var rightDiv = document.createElement('div');
+	rightDiv.setAttribute('class', 'right');
+	rightDiv.setAttribute('id', 'right');
 
-		// add the nav div
-		var navDiv = document.createElement('div');
-		navDiv.setAttribute('class', 'module-nav bg-3');
-		navDiv.setAttribute('id', navItem.toLowerCase() + '-additional');
+	// add the nav div
+	var navDiv = document.createElement('div');
+	navDiv.setAttribute('class', 'module-nav bg-3');
+	navDiv.setAttribute('id', nav.toLowerCase() + '-additional');
 
-		// add the nav div sub-header
-		var navSubHeaderDiv = document.createElement('h3');
-		navSubHeaderDiv.setAttribute('class', 'sub-header');
-		navSubHeaderDiv.innerHTML = 'Additional ' + navItem;
-		navDiv.appendChild(navSubHeaderDiv);
+	// add the nav div sub-header
+	var navSubHeaderDiv = document.createElement('h3');
+	navSubHeaderDiv.setAttribute('class', 'sub-header');
+	navSubHeaderDiv.innerHTML = 'Additional ' + nav;
+	navDiv.appendChild(navSubHeaderDiv);
 
-		// add the nav div list
-		var navList = document.createElement('ul');
-		navList.setAttribute('class', 'module-list');
+	// add the nav div list
+	var navList = document.createElement('ul');
+	navList.setAttribute('class', 'module-list');
 
-		// append navDiv to the navList
-		navDiv.appendChild(navList);
+	// append navDiv to the navList
+	navDiv.appendChild(navList);
 
-		// add things to the rightDiv
-		rightDiv.appendChild(navDiv);
+	// add things to the rightDiv
+	rightDiv.appendChild(navDiv);
 
-		// add the right div to the wrapDiv
-		wrapDiv.appendChild(rightDiv);
-	}
+	// add the right div to the wrapDiv
+	wrapDiv.appendChild(rightDiv);
 
 	// add it all to the module
 	module.appendChild(wrapDiv);
 	worksDiv.appendChild(module);
-
-	relatedWorks( navItem );
 }
 
-function relatedWorks(navItem) {
-
-	// console.log( 'relatedWorks: ' + navItem ); // 10
-
-	// get the localStorage data
-	var data = JSON.parse(localStorage.getItem( navItem.toLowerCase() ) );
-
-	switch ( navItem ) {
-		case 'Furnishings':
-		case 'Sculpture':
-		case 'Drawing':
-		case 'Painting':
-		case 'Design':
-		case 'Students':
-			displayAddtnlWork( navItem, data );
-			// console.log( 'test' );
-			break;
-		case 'Studio':
-			// buildModule(navArr[i]);
-			break;
-		case 'News':
-			// buildModule(navArr[i]);
-			break;
-		case 'CV':
-			// buildModule(navArr[i]);
-			break;
-		case 'Contact':
-			// buildModule(navArr[i]);
-			break;
+function relatedWorks() {
+	for(var i = 0; i < dataArr.length; i++ ) {
+		var data = JSON.parse(localStorage.getItem( dataArr[i].toLowerCase() ) );
+		if(data.length > 0) {
+			displayAddtnlWork(dataArr[i], data);
+		}
 	}
 }
 
-function displayAddtnlWork(x, data) {
-
-	console.log( 'displayAddtnlWork' ); // 6
-
-	var x = x.toLowerCase();
-	var id = '#' + x + '-additional';
+function displayAddtnlWork(module, data) {
+	var module = module.toLowerCase();
+	var id = '#' + module + '-additional';
 	var mod = $( id );
-	var blammo = $(x + '.module-list');
+	var blammo = $(module + '.module-list');
 
 	for(var i = 0; i < data.length; i++ ) {
 		var listItem = document.createElement('li');
@@ -245,15 +238,16 @@ function displayAddtnlWork(x, data) {
 
 		listItem.setAttribute('class', 'list-item');
 		listItem.setAttribute('id', imgId);
-
 		listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
+		listItem.setAttribute('data-id', i);
 
 		mod[0].children[1].appendChild( listItem );
 	}
-	getClickedAddtl(x);
 }
 
-function getClickedAddtl(x) {
+
+
+function getClickedAddtl() {
 	$('.module-list .list-item').click(function() {
 		var section = $(this).parents('.module.group').attr('id');
 		var section = section.toLowerCase();
@@ -296,12 +290,10 @@ function heroInfo( section, id ) {
 	var ulThree = $( mod[0].children[2] );
 
 	var liHead = document.createElement('li');
-	liHead.setAttribute('class', 'sidebar-header');
-	liHead.innerHTML = 'INFO';
+	liHead.setAttribute('class', 'sidebar-list-heading');
+	liHead.innerHTML = 'TITLE';
 
-	// console.log( liHead );
 	ulOne[0].appendChild( liHead );
-	// console.log( ulOne[0] );
 }
 
 
@@ -310,5 +302,4 @@ function heroInfo( section, id ) {
 
 function displayNews() {
 	var news = document.getElementById('news');
-	console.log( news );
 }
