@@ -56,6 +56,12 @@ function init() {
 
 
 
+$(function() {
+  $.get('../resume-raw.php', function(data) {
+    console.log('data = ' + data);
+    $('.resume .resume-content').html(data);
+  });
+});
 
 
 

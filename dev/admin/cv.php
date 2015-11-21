@@ -68,22 +68,22 @@
 	<!-- TinyMCE END -->
 
 </head>
-<body>
+<body class="resume">
 
 	<ul class="list nav inline center">
-		<li class="list-item"><a class="txt-link" href="nav.html">Nav</a></li>
+		<!-- <li class="list-item"><a class="txt-link" href="nav.html">Nav</a></li> -->
 		<li class="list-item"><a class="txt-link" href="works.html">Works</a></li>
 		<li class="list-item"><a class="txt-link" href="studio.html">Studio</a></li>
 		<li class="list-item"><a class="txt-link" href="news.html">News</a></li>
-		<li class="list-item"><a class="txt-link active" href="cv.html">CV</a></li>
-		<li class="list-item"><a class="txt-link" href="contact.html">Contact</a></li>
+		<li class="list-item"><a class="txt-link active" href="cv.php">CV</a></li>
+		<!-- <li class="list-item"><a class="txt-link" href="contact.html">Contact</a></li> -->
 	</ul>
 
 	<section class="module">
 		<h1 class="header">CV</h1>
 		<div class="module-main content" style="color: #000 !important;">
 			<form method="post" action="resume/show.php">
-                <textarea name="content" cols="50" rows="50" style="width: 100%;resize: none !important;">This is some content that will be editable with TinyMCE.</textarea>
+        <textarea class="resume-content" name="content" cols="50" rows="50" style="width: 100%;resize: none !important;">This is some content that will be editable with TinyMCE.</textarea>
 			</form>
 		</div>
 	</section>
