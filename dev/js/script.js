@@ -171,11 +171,14 @@ function buildModule(nav, data) {
 	infoUl3.appendChild(infoUl3Li);
 
 	// add the columns to the grid
-	leftDiv.appendChild(infoDiv);
 
 	// add things to the leftDiv
 	leftDiv.appendChild(heroDiv);
-	leftDiv.appendChild(infoDiv);
+	console.log(nav);
+
+	if( (nav != 'studio') && (nav != 'news') ) {
+		leftDiv.appendChild(infoDiv);
+	}
 
 	// add the left div to the wrapDiv
 	wrapDiv.appendChild(leftDiv);
@@ -224,6 +227,7 @@ function relatedWorks() {
 }
 
 function displayAddtnlWork(module, data) {
+	console.log( data );
 	var module = module.toLowerCase();
 	var id = '#' + module + '-additional';
 	var mod = $( id );
@@ -245,6 +249,8 @@ function displayAddtnlWork(module, data) {
 		listItem.setAttribute('id', imgId);
 		if( module === 'studio' ) {
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
+		} else if( module === 'news' ) {
+			listItem.setAttribute('style', 'background-image: none');
 		} else {
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 		}
