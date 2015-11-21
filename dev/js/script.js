@@ -147,7 +147,7 @@ function buildModule(nav, data) {
 
 	var infoUl1Li = document.createElement('li');
 	infoUl1Li.setAttribute('class', 'sidebar-list-heading');
-	infoUl1Li.innerHTML = 'INFO';
+	infoUl1Li.innerHTML = '<h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2>';
 	infoUl1.appendChild(infoUl1Li);
 
 	// create a list for the first column
@@ -157,7 +157,7 @@ function buildModule(nav, data) {
 
 	var infoUl2Li = document.createElement('li');
 	infoUl2Li.setAttribute('class', 'sidebar-list-heading');
-	infoUl2Li.innerHTML = 'INFO';
+	infoUl2Li.innerHTML = '<a href="#" target="_blank" class="sidebar-list-heading" title="Send me an email">AVAILABLE</a>';
 	infoUl2.appendChild(infoUl2Li);
 
 	// create a list for the first column
@@ -167,7 +167,7 @@ function buildModule(nav, data) {
 
 	var infoUl3Li = document.createElement('li');
 	infoUl3Li.setAttribute('class', 'sidebar-list-heading');
-	infoUl3Li.innerHTML = 'INFO';
+	infoUl3Li.innerHTML = '<h2 class="sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
 	infoUl3.appendChild(infoUl3Li);
 
 	// add the columns to the grid
@@ -231,14 +231,23 @@ function displayAddtnlWork(module, data) {
 
 	for(var i = 0; i < data.length; i++ ) {
 		var listItem = document.createElement('li');
-		var imgPath = 'img/works/';''
+		if( module === 'studio' ) {
+			var imgPath = 'img/studio/';''
+			var imgSuff = '_m.jpg';
+		} else {
+			var imgPath = 'img/works/';''
+			var imgSuff = '_m-0.jpg';
+		}
 		var imgId = data[i].id;
 		var imgNum = data[i].images;
-		var imgSuff = '_m-0.jpg';
 
 		listItem.setAttribute('class', 'list-item');
 		listItem.setAttribute('id', imgId);
-		listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
+		if( module === 'studio' ) {
+			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
+		} else {
+			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
+		}
 		listItem.setAttribute('data-id', i);
 
 		mod[0].children[1].appendChild( listItem );
