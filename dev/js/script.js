@@ -28,7 +28,7 @@ function allLowerCase(string) {
 }
 
 $(function() {
-	$('#cv .cv').load('../resume-raw.php');
+	$('#cv .cv').load('resume-raw.php');
 });
 
 // LOOP THROUGH DATAARR AND GET ALL DATA AVAILABLE... SAVE TO LOCALSTORAGE

@@ -6,14 +6,14 @@
 	echo 'Your new resume is being saved, please wait...';
 
 	//echo $content;
-	
+
 	$myFile = "../../resume-raw.php";
 	$fh = fopen($myFile, 'w') or die("can't open file");
 	$stringData = $content;
 	fwrite($fh, $stringData);
 	fclose($fh);
 
-	echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://peterthibeault.com/admin/resume.php">';    
+	echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://dukeofcheese.com/dev/pt/admin/cv.php">';
 	exit;
 
 	/*
