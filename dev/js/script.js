@@ -27,6 +27,10 @@ function allLowerCase(string) {
   return string.toLowerCase();
 }
 
+$(function() {
+	$('#cv .cv').load('../resume-raw.php');
+});
+
 // LOOP THROUGH DATAARR AND GET ALL DATA AVAILABLE... SAVE TO LOCALSTORAGE
 function workData() {
 	// loop through the data JSON files
@@ -223,6 +227,10 @@ function relatedWorks() {
 			displayAddtnlWork(dataArr[i], data);
 		}
 	}
+}
+
+function displayCV() {
+
 }
 
 function displayAddtnlWork(module, data) {
