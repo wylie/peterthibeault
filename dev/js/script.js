@@ -16,6 +16,7 @@ function init() {
 	relatedWorks();
 	getClickedAddtl();
 	// displayAddtnlWork();
+	getFirst();
 }
 
 // CAPITALIZE FIRST LETTER OF A STRING
@@ -27,9 +28,25 @@ function allLowerCase(string) {
   return string.toLowerCase();
 }
 
+// LOAD IN THE CV
 $(function() {
 	$('#cv .cv').load('resume-raw.php');
 });
+
+// DISPLAY FIRST FURNISHINGS
+function getFirst() {
+	for(var i = 0; i < dataArr.length; i++) {
+		var data = JSON.parse(localStorage.getItem( dataArr[i].toLowerCase() ) );
+		if( data.length > 0 ) {
+			var addtnl = document.getElementById(dataArr[i] + '-additional').children[1];
+			var firstChild = $(addtnl).children('.list-item:first-child');
+			$(firstChild).addClass('active');
+			var id = firstChild[0].attributes[1].nodeValue;
+
+			heroImg( dataArr[i], id, 0 );
+		}
+	}
+};
 
 // LOOP THROUGH DATAARR AND GET ALL DATA AVAILABLE... SAVE TO LOCALSTORAGE
 function workData() {
