@@ -699,3 +699,61 @@ a {
 /* -------------------------------------------- */
 /* -------------------------------- END CONTACT */
 /* -------------------------------------------- */
+
+#studio {
+	&-hero {
+		position: relative;
+		padding: 0;
+		font-size: 1.5em;
+		line-height: 1.8em;
+		overflow: hidden;
+		.display-date {
+	    position: absolute;
+	    bottom: 10px;
+	    right: 10px;
+	    border: none;
+	    margin-bottom: 0;
+	    padding-bottom: 0;
+	    text-shadow: 0 0 2px #000;
+		}
+	}
+	&-additional {
+		.list-item {
+			line-height: 5.5em;
+		  font-size: 0.75em;
+		}
+	}
+}
+
+#news {
+	&-additional {
+		.list-item {
+			font-weight: bold;
+			line-height: 5.5em;
+			font-size: 0.75em;
+		}
+	}
+	&-hero {
+		padding: 20px;
+	  font-size: 1.5em;
+	  line-height: 1.25em;
+	  position: relative;
+
+		.text {
+			line-height: 1.25em;
+	    margin-bottom: 40px;
+		}
+		.display-date {
+			font-size: .8em;
+	    text-align: right;
+	    border-top: 5px solid rgba(255, 255, 255, .05);
+	    margin-top: 5px;
+	    padding-top: 15px;
+	    line-height: .8em;
+	    position: absolute;
+	    left: 20px;
+	    right: 20px;
+	    bottom: 10px;
+		}
+	}
+}
