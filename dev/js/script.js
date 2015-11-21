@@ -132,7 +132,7 @@ function buildModule(nav, data) {
 
 	// create the container for the hero images
 	var heroDiv = document.createElement('div');
-	heroDiv.setAttribute('class', 'module-main');
+	heroDiv.setAttribute('class', 'module-main bg-3');
 	heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
 
 	// create the container for the hero images
@@ -174,7 +174,6 @@ function buildModule(nav, data) {
 
 	// add things to the leftDiv
 	leftDiv.appendChild(heroDiv);
-	console.log(nav);
 
 	if( (nav != 'studio') && (nav != 'news') ) {
 		leftDiv.appendChild(infoDiv);
@@ -227,7 +226,6 @@ function relatedWorks() {
 }
 
 function displayAddtnlWork(module, data) {
-	console.log( data );
 	var module = module.toLowerCase();
 	var id = '#' + module + '-additional';
 	var mod = $( id );
@@ -235,6 +233,7 @@ function displayAddtnlWork(module, data) {
 
 	for(var i = 0; i < data.length; i++ ) {
 		var listItem = document.createElement('li');
+		// do different stuff for different modules
 		if( module === 'studio' ) {
 			var imgPath = 'img/studio/';''
 			var imgSuff = '_m.jpg';
@@ -247,16 +246,53 @@ function displayAddtnlWork(module, data) {
 
 		listItem.setAttribute('class', 'list-item');
 		listItem.setAttribute('id', imgId);
+		// do different stuff for different modules
 		if( module === 'studio' ) {
+			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
+
+			var date = new Date(data[i].date);
+			var day = (date.getDate() + 1).toString();
+			var monthNum = date.getMonth();
+			var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+			for(var j = 0; j < monthNames.length; j++ ) {
+				var month = monthNames[monthNum];
+			}
+			var year = (date.getFullYear()).toString();
+			var year = year.slice(-2);
+			var studioDate = day + month + year;
+
+
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
+			listItem.setAttribute('data-id', i);
+			listItem.innerHTML = studioDate;
+
+			mod[0].children[1].appendChild( listItem );
 		} else if( module === 'news' ) {
+			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
+
+			var date = new Date(data[i].date);
+			var day = (date.getDate() + 1).toString();
+			var monthNum = date.getMonth();
+			var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+			for(var j = 0; j < monthNames.length; j++ ) {
+				var month = monthNames[monthNum];
+			}
+			var year = (date.getFullYear()).toString();
+			var year = year.slice(-2);
+			var newsDate = day + month + year;
+
+			listItem.innerHTML = newsDate;
 			listItem.setAttribute('style', 'background-image: none');
+			listItem.setAttribute('data-id', i);
+
+			mod[0].children[1].insertBefore( listItem, mod[0].children[1].firstChild );
+
 		} else {
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
-		}
-		listItem.setAttribute('data-id', i);
+			listItem.setAttribute('data-id', i);
 
-		mod[0].children[1].appendChild( listItem );
+			mod[0].children[1].appendChild( listItem );
+		}
 	}
 }
 
@@ -264,51 +300,124 @@ function displayAddtnlWork(module, data) {
 
 function getClickedAddtl() {
 	$('.module-list .list-item').click(function() {
+		$(this).addClass('active');
 		var section = $(this).parents('.module.group').attr('id');
 		var section = section.toLowerCase();
 		var id = $(this).attr('id');
-		heroImg( section, id );
+		var index = $(this).attr('data-id');
+		heroImg( section, id, index );
 		heroInfo( section, id );
 	});
 }
 
-function heroImg( section, id ) {
+function heroImg( section, id, index ) {
 	// get the hero element
 	var idName = '#' + section + '-hero';
 	var mod = $( idName );
 	// build out the main image
-	var imgPath = 'img/works/';''
-	var imgId = id;
-	var imgNum = 1;
-	var imgSuff = '_l-0.jpg';
-	// make sure we're doing this for sections with images
-	if(imgNum != undefined) {
+	// do different stuff for different modules
+	if( section === 'studio' ) {
+		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
+
+		var date = new Date(data[index].date);
+		var day = (date.getDate() + 1).toString();
+		var monthNum = date.getMonth();
+		var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+		for(var j = 0; j < monthNames.length; j++ ) {
+			var month = monthNames[monthNum];
+		}
+		var year = (date.getFullYear()).toString();
+		var year = year.slice(-2);
+		var studioDate = day + month + year;
+
+		var heroSpan = document.createElement('span');
+		heroSpan.setAttribute('class', 'display-date');
+		heroSpan.innerHTML = studioDate;
+
+		var imgPath = 'img/studio/';''
+		var imgSuff = '_l.jpg';
+		var imgId = id;
+		var imgNum = 1;
 		// create the hero image
 		var heroImg = document.createElement('img');
 		heroImg.setAttribute('class', 'main-image');
-		heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+		// do different stuff for different modules
+		if( section === 'studio' ) {
+			heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+		} else if ( section === 'news' ) {
+			// console.log('news');
+		} else {
+			heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+		}
 		// clear the hero image
 		mod[0].innerHTML = '';
 		// append the hero image
+		mod[0].appendChild( heroSpan );
 		mod[0].appendChild( heroImg );
+	} else if ( section === 'news' ) {
+		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
+
+		var date = new Date(data[index].date);
+		var day = (date.getDate() + 1).toString();
+		var monthNum = date.getMonth();
+		var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+		for(var j = 0; j < monthNames.length; j++ ) {
+			var month = monthNames[monthNum];
+		}
+		var year = (date.getFullYear()).toString();
+		var year = year.slice(-2);
+		var newsDate = day + month + year;
+
+		mod[0].innerHTML = '<div class="text">' + data[index].description  + '</div><div class="display-date">' + newsDate + '</div>';
+		return;
+	} else {
+		var imgPath = 'img/works/';''
+		var imgSuff = '_l-0.jpg';
+
+		var imgId = id;
+		var imgNum = 1;
+		// make sure we're doing this for sections with images
+		if(imgNum != undefined) {
+			// create the hero image
+			var heroImg = document.createElement('img');
+			heroImg.setAttribute('class', 'main-image');
+			// do different stuff for different modules
+			if( section === 'studio' ) {
+				heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+			} else if ( section === 'news' ) {
+				// console.log('news');
+			} else {
+				heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+			}
+			// clear the hero image
+			mod[0].innerHTML = '';
+			// append the hero image
+			mod[0].appendChild( heroImg );
+		}
+
 	}
 }
 
 function heroInfo( section, id ) {
 	var idName = '#' + section + '-tray';
 	var mod = $( idName );
-
 	var data = JSON.parse(localStorage.getItem( section ) );
+	// do different stuff for different modules
+	if( section === 'studio' ) {
+		console.log('studio');
+	} else if ( section === 'news' ) {
+		// console.log('news');
+	} else {
+		var ulOne = $( mod[0].children[0] );
+		var ulTwo = $( mod[0].children[1] );
+		var ulThree = $( mod[0].children[2] );
 
-	var ulOne = $( mod[0].children[0] );
-	var ulTwo = $( mod[0].children[1] );
-	var ulThree = $( mod[0].children[2] );
+		var liHead = document.createElement('li');
+		liHead.setAttribute('class', 'sidebar-list-heading');
+		liHead.innerHTML = 'TITLE';
 
-	var liHead = document.createElement('li');
-	liHead.setAttribute('class', 'sidebar-list-heading');
-	liHead.innerHTML = 'TITLE';
-
-	ulOne[0].appendChild( liHead );
+		ulOne[0].appendChild( liHead );
+	}
 }
 
 
