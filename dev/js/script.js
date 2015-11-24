@@ -322,6 +322,7 @@ function displayAddtnlWork(module, data) {
 
 function getClickedAddtl() {
 	$('.module-list .list-item').click(function() {
+		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
 		var section = $(this).parents('.module.group').attr('id');
 		var section = section.toLowerCase();
@@ -455,17 +456,16 @@ function heroRelated( section, id, index ) {
 		} else {
 			li.setAttribute('class', 'sidebar-list-item');
 		}
-		var href = document.createElement('a');
-		href.setAttribute('href', '#' + section);
-		href.setAttribute('style', 'background-image: url(../img/works/' + id + '_s-' + i + '.jpg);');
-		li.appendChild(href);
+		li.setAttribute('style', 'background-image: url(../img/works/' + id + '_s-' + i + '.jpg);');
 		relatedImages[0].appendChild(li);
 	}
 	getClickedRelated(section, id);
 }
 
 function getClickedRelated(section, id) {
-	$('.related a').click(function() {
+	$('.related .sidebar-list-item').click(function() {
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
 		var tst = $(this);
 		var tst = tst[0].style.backgroundImage;
 		var tst = tst.split('/');
