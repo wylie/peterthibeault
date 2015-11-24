@@ -15,7 +15,6 @@ function init() {
 	buildNav()
 	relatedWorks();
 	getClickedAddtl();
-	// displayAddtnlWork();
 	getFirst();
 }
 
@@ -44,6 +43,8 @@ function getFirst() {
 			var id = firstChild[0].attributes[1].nodeValue;
 
 			heroImg( dataArr[i], id, 0 );
+			heroInfo( dataArr[i], id, 0 );
+			heroRelated( dataArr[i], id, 0 );
 		}
 	}
 };
@@ -158,40 +159,36 @@ function buildModule(nav, data) {
 
 	// create the container for the hero images
 	var infoDiv = document.createElement('div');
-	infoDiv.setAttribute('class', 'module-info grid');
+	infoDiv.setAttribute('class', 'module-info grid bg-3 group');
 	infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
 
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
-	infoUl1.setAttribute('class', 'sidebar-items-list bg-3 group col4');
-	infoDiv.appendChild(infoUl1);
+	infoUl1.setAttribute('class', 'sidebar-items-list group col4');
 
-	var infoUl1Li = document.createElement('li');
-	infoUl1Li.setAttribute('class', 'sidebar-list-heading');
-	infoUl1Li.innerHTML = '<h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2>';
-	infoUl1.appendChild(infoUl1Li);
+	infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li data-info="name" class="sidebar-list-item"></li><li class="sidebar-list-heading">MEDIA</li><li data-info="media" class="sidebar-list-item"></li><li class="sidebar-list-heading">DESCRIPTION</li><li data-info="description" class="sidebar-list-item"></li><li class="sidebar-list-heading">DIMENSIONS</li><li data-info="dimension" class="sidebar-list-item"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
+
+	infoDiv.appendChild(infoUl1);
 
 	// create a list for the first column
 	var infoUl2 = document.createElement('ul');
-	infoUl2.setAttribute('class', 'sidebar-items-list bg-3 group col4');
+	infoUl2.setAttribute('class', 'sidebar-items-list group col4');
 	infoDiv.appendChild(infoUl2);
 
 	var infoUl2Li = document.createElement('li');
-	infoUl2Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl2Li.setAttribute('class', 'sidebar-header');
 	infoUl2Li.innerHTML = '<a href="#" target="_blank" class="sidebar-list-heading" title="Send me an email">AVAILABLE</a>';
 	infoUl2.appendChild(infoUl2Li);
 
 	// create a list for the first column
 	var infoUl3 = document.createElement('ul');
-	infoUl3.setAttribute('class', 'sidebar-items-list bg-3 group col4');
+	infoUl3.setAttribute('class', 'related sidebar-items-list group col4');
 	infoDiv.appendChild(infoUl3);
 
 	var infoUl3Li = document.createElement('li');
-	infoUl3Li.setAttribute('class', 'sidebar-list-heading');
+	infoUl3Li.setAttribute('class', 'sidebar-header');
 	infoUl3Li.innerHTML = '<h2 class="sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
 	infoUl3.appendChild(infoUl3Li);
-
-	// add the columns to the grid
 
 	// add things to the leftDiv
 	leftDiv.appendChild(heroDiv);
@@ -331,7 +328,7 @@ function getClickedAddtl() {
 		var id = $(this).attr('id');
 		var index = $(this).attr('data-id');
 		heroImg( section, id, index );
-		heroInfo( section, id );
+		heroInfo( section, id, index );
 	});
 }
 
@@ -423,26 +420,57 @@ function heroImg( section, id, index ) {
 	}
 }
 
-function heroInfo( section, id ) {
-	var idName = '#' + section + '-tray';
-	var mod = $( idName );
-	var data = JSON.parse(localStorage.getItem( section ) );
-	// do different stuff for different modules
-	if( section === 'studio' ) {
-		console.log('studio');
-	} else if ( section === 'news' ) {
-		// console.log('news');
-	} else {
-		var ulOne = $( mod[0].children[0] );
-		var ulTwo = $( mod[0].children[1] );
-		var ulThree = $( mod[0].children[2] );
+function heroInfo( section, id, index ) {
+	var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
 
-		var liHead = document.createElement('li');
-		liHead.setAttribute('class', 'sidebar-list-heading');
-		liHead.innerHTML = 'TITLE';
+	var title = $( '#' + section + '-tray [data-info="name"]' );
+	var media = $( '#' + section + '-tray [data-info="media"]' );
+	var desription = $( '#' + section + '-tray [data-info="description"]' );
+	var height =  $( '#' + section + '-tray [data-info="height"]' );
+	var width =  $( '#' + section + '-tray [data-info="width"]' );
+	var depth =  $( '#' + section + '-tray [data-info="depth"]' );
 
-		ulOne[0].appendChild( liHead );
+	title[0].innerHTML = data[index].title;
+	media[0].innerHTML = data[index].media;
+	desription[0].innerHTML = data[index].desription;
+	height[0].innerHTML = data[index].dimension_h;
+	width[0].innerHTML = data[index].dimension_w;
+	depth[0].innerHTML = data[index].dimension_d;
+}
+
+function heroRelated( section, id, index ) {
+	var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
+	var tray = $( '#' + section + '-tray');
+	var relatedImages = tray.children('.sidebar-items-list:last-child');
+
+	for(var i = 0; i < data[index].images; i++ ) {
+		var li = document.createElement('li');
+		if( i === 0 ) {
+			li.setAttribute('class', 'sidebar-list-item active');
+		} else {
+			li.setAttribute('class', 'sidebar-list-item');
+		}
+		var href = document.createElement('a');
+		href.setAttribute('href', '#' + section);
+		href.setAttribute('style', 'background-image: url(../img/works/' + id + '_s-' + i + '.jpg);');
+		li.appendChild(href);
+		relatedImages[0].appendChild(li);
 	}
+	getClickedRelated();
+}
+
+function getClickedRelated() {
+	$('.related a').click(function() {
+		console.log( $(this) );
+		console.log( 'bam' );
+		// $(this).addClass('active');
+		// var section = $(this).parents('.module.group').attr('id');
+		// var section = section.toLowerCase();
+		// var id = $(this).attr('id');
+		// var index = $(this).attr('data-id');
+		// heroImg( section, id, index );
+		// heroInfo( section, id, index );
+	});
 }
 
 

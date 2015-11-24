@@ -181,16 +181,33 @@ a {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+		color: #999;
+		li {
+			margin: 0 4% 4% 4%;
+		}
+	}
+	&-header {
+		width: 100%;
+		padding: 2.5% 1% 0;
+		margin: 0 3%;
+		border-bottom: none;
+		cursor: pointer;
 	}
 	&-list-heading {
 		color: #888;
-    font-weight: bold;
-    padding: 1%;
-    font-size: 1.15em;
-    cursor: pointer;
-    display: block;
-		&:hover {
-			text-decoration: none;
+		border-bottom: 1px solid #555;
+		padding-bottom: 3px;
+		text-transform: uppercase;
+		h2&,
+		a& {
+			border: none;
+			padding: 1%;
+			font-size: 1.35em;
+	    display: block;
+			font-weight: normal;
+			&:hover {
+				text-decoration: none;
+			}
 		}
 	}
 }
@@ -379,6 +396,31 @@ a {
 	}
 }
 
+.related {
+	.sidebar-list-item {
+		cursor: pointer;
+		width: 30px;
+		height: 30px;
+		background-color: #555;
+		float: left;
+		margin: 6px;
+		-webkit-transition: .125s linear all;
+		background-position: center center;
+		background-repeat: no-repeat;
+		opacity: .4;
+		&.active {
+    	opacity: 1;
+		}
+		a {
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+	}
+}
+
 
 /* ------------------------------------ end nav */
 
@@ -387,7 +429,8 @@ a {
 
 /* info universal -------------------------- */
 .module-info {
-	border-top: 10px solid transparent;
+	// border-top: 10px solid transparent;
+	margin-top: 10px;
 	margin-right: -10px;
 	.info {
 		&.info-list * {
