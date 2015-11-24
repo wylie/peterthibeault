@@ -329,6 +329,7 @@ function getClickedAddtl() {
 		var index = $(this).attr('data-id');
 		heroImg( section, id, index );
 		heroInfo( section, id, index );
+		replaceRelated( section, id, index );
 	});
 }
 
@@ -456,23 +457,36 @@ function heroRelated( section, id, index ) {
 		li.appendChild(href);
 		relatedImages[0].appendChild(li);
 	}
-	getClickedRelated();
+	getClickedRelated(section, id);
 }
 
-function getClickedRelated() {
+function getClickedRelated(section, id) {
 	$('.related a').click(function() {
-		console.log( $(this) );
-		console.log( 'bam' );
-		// $(this).addClass('active');
-		// var section = $(this).parents('.module.group').attr('id');
-		// var section = section.toLowerCase();
-		// var id = $(this).attr('id');
-		// var index = $(this).attr('data-id');
-		// heroImg( section, id, index );
-		// heroInfo( section, id, index );
+		var tst = $(this);
+		var tst = tst[0].style.backgroundImage;
+		var tst = tst.split('/');
+		var tst = tst[5].split('.');
+		var tst = tst[0].split('-');
+		heroImgRelated( section, id, tst[1] );
+		return;
 	});
 }
 
+function heroImgRelated(section, id, tst) {
+	var hero = document.getElementById( section + '-hero' );
+	hero.innerHTML = '';
+	var img = document.createElement('img');
+	img.setAttribute('class', 'main-image');
+	img.setAttribute('src', 'img/works/' + id + '_l-' + tst + '.jpg')
+	hero.appendChild(img);
+}
+
+function replaceRelated( section, id, index ) {
+	var tray = document.getElementById( section + '-tray' );
+	var relatedImages = $(tray).children('.related');
+	$(relatedImages[0]).children().not(':first').remove();
+	heroRelated( section, id, index );
+}
 
 
 
