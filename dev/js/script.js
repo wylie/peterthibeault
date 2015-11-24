@@ -17,6 +17,7 @@ function init() {
 	getClickedAddtl();
 	openTray();
 	getFirst();
+	email();
 }
 
 // CAPITALIZE FIRST LETTER OF A STRING
@@ -179,7 +180,7 @@ function buildModule(nav, data) {
 	var infoUl2Li = document.createElement('li');
 	infoUl2Li.setAttribute('class', 'sidebar-header');
 	if( data[0].available === true ) {
-		infoUl2Li.innerHTML = '<a href="#" target="_blank" class="sidebar-list-heading" title="Send me an email">AVAILABLE</a>';
+		infoUl2Li.innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[0].title + ' (' + nav + ')&amp;body=I am inquiring about a ' + nav + ' listed on your website. The name of it is: ' + data[0].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
 	} else {
 		infoUl2Li.innerHTML = '';
 	}
@@ -338,7 +339,7 @@ function getClickedAddtl() {
 			var sectionTray = document.getElementById( section + '-tray' );
 			var availList = $(sectionTray).children(' .sidebar-items-list');
 			var availHead = $(availList[1]).children('.sidebar-header');
-			availHead[0].innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[index].title + ' (drawing)&amp;body=I am inquiring about a ' + section + ' listed on your website. The name of it is: ' + data[index].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
+			availHead[0].innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[index].title + ' (' + section + ')&amp;body=I am inquiring about a ' + section + ' listed on your website. The name of it is: ' + data[index].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
 		}
 
 		heroImg( section, id, index );
@@ -445,16 +446,22 @@ function heroInfo( section, id, index ) {
 	var width =  $( '#' + section + '-tray [data-info="width"]' );
 	var depth =  $( '#' + section + '-tray [data-info="depth"]' );
 
-	title[0].innerHTML = data[index].title;
-	media[0].innerHTML = data[index].media;
-	if( data[index].desription === undefined) {
-		desription[0].innerHTML = '';
+	if( section === 'news' ) {
+		// do nothing
+	} else if( section === 'studio' ) {
+		// do nothing
 	} else {
-		desription[0].innerHTML = data[index].desription;
+		title[0].innerHTML = data[index].title;
+		media[0].innerHTML = data[index].media;
+		if( data[index].desription === undefined) {
+			desription[0].innerHTML = '';
+		} else {
+			desription[0].innerHTML = data[index].desription;
+		}
+		height[0].innerHTML = data[index].dimension_h;
+		width[0].innerHTML = data[index].dimension_w;
+		depth[0].innerHTML = data[index].dimension_d;
 	}
-	height[0].innerHTML = data[index].dimension_h;
-	width[0].innerHTML = data[index].dimension_w;
-	depth[0].innerHTML = data[index].dimension_d;
 }
 
 function heroRelated( section, id, index ) {
@@ -514,4 +521,14 @@ function openTray() {
 
 function displayNews() {
 	var news = document.getElementById('news');
+}
+
+function email() {
+	$('#contact .submit').click(function() {
+		var emailBox = $(this).parent('.module-main');
+		var nameInput = $(emailBox[0]).children('.name').val();
+		var emailInput = $(emailBox[0]).children('.email').val();
+		var messageInput = $(emailBox[0]).children('.message').val();
+		$.post( 'admin/functions/email.php', { name: nameInput, email: emailInput, message: messageInput } );
+	});
 }
