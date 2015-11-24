@@ -433,7 +433,11 @@ function heroInfo( section, id, index ) {
 
 	title[0].innerHTML = data[index].title;
 	media[0].innerHTML = data[index].media;
-	desription[0].innerHTML = data[index].desription;
+	if( data[index].desription === undefined) {
+		desription[0].innerHTML = '';
+	} else {
+		desription[0].innerHTML = data[index].desription;
+	}
 	height[0].innerHTML = data[index].dimension_h;
 	width[0].innerHTML = data[index].dimension_w;
 	depth[0].innerHTML = data[index].dimension_d;
