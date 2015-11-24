@@ -492,7 +492,6 @@ function getClickedRelated(section, id) {
 		var tst = tst[1].split('.');
 		var tst = tst[0].split('-');
 		heroImgRelated( section, id, tst[1] );
-		return;
 	});
 }
 
