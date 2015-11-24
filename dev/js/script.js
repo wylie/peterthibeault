@@ -476,7 +476,7 @@ function heroRelated( section, id, index ) {
 		} else {
 			li.setAttribute('class', 'sidebar-list-item');
 		}
-		li.setAttribute('style', 'background-image: url(../img/works/' + id + '_s-' + i + '.jpg);');
+		li.setAttribute('style', 'background-image: url(img/works/' + id + '_s-' + i + '.jpg);');
 		relatedImages[0].appendChild(li);
 	}
 	getClickedRelated(section, id);
@@ -488,8 +488,8 @@ function getClickedRelated(section, id) {
 		$(this).addClass('active');
 		var tst = $(this);
 		var tst = tst[0].style.backgroundImage;
-		var tst = tst.split('/');
-		var tst = tst[5].split('.');
+		var tst = tst.split('works');
+		var tst = tst[1].split('.');
 		var tst = tst[0].split('-');
 		heroImgRelated( section, id, tst[1] );
 		return;
@@ -514,8 +514,8 @@ function replaceRelated( section, id, index ) {
 
 
 function openTray() {
-	$('.module-info').click(function() {
-		$(this).toggleClass('closed');
+	$('.sidebar-list-heading').click(function() {
+		$(this).parents('.module-info').toggleClass('closed');
 	});
 }
 
