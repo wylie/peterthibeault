@@ -58,7 +58,7 @@ function init() {
 
 $(function() {
   $.get('../resume-raw.php', function(data) {
-    console.log('data = ' + data);
+    // console.log('data = ' + data);
     $('.resume .resume-content').html(data);
   });
 });
@@ -109,7 +109,7 @@ function deleteOld() {
     // give this a var
     var deleteBtn = $(this);
     // for now, just console log the id passed in
-    console.log( deleteBtn[0].parentElement.id );
+    // console.log( deleteBtn[0].parentElement.id );
   });
 }
 // some arrays we will need as we go along
@@ -191,12 +191,12 @@ function addWork() {
   // save the new work
   var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
 	var stringWork = JSON.stringify(newWork);
-  console.log(stringWork);
+  // console.log(stringWork);
   // TODO: error logging...
 }
 // CLEAR THE NEW TEXT AREA
 function clearWork() {
-  console.log('KER-POW');
+  // console.log('KER-POW');
 }
 function filterWorks() {
   // get all of the work filters
@@ -406,7 +406,7 @@ function deleteWorks() {
     // give this a var
     var deleteBtn = $(this).parents('.works');
     // for now, just console log the id passed in
-    console.log( deleteBtn[0].id );
+    // console.log( deleteBtn[0].id );
   });
 }
 
@@ -449,7 +449,7 @@ function addStudio() {
     // stringify the news
   	var stringStudio = JSON.stringify(newStudio);
     // do something with the news
-    console.log(stringStudio);
+    // console.log(stringStudio);
   }
 }
 // CLEAR THE NEW TEXT AREA
@@ -566,7 +566,7 @@ function addNews() {
     // stringify the news
   	var stringNews = JSON.stringify(newNews);
     // do something with the news
-    console.log(stringNews);
+    // console.log(stringNews);
   }
 }
 // CLEAR THE NEW TEXT AREA

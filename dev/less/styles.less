@@ -176,14 +176,23 @@ a {
 			font-size: 1.5em;
 		}
 	}
-	&-items-list{
+	&-items-list {
 		list-style-type: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 		color: #999;
 		li {
-			margin: 0 4% 4% 4%;
+			margin: 0 4% 5px 4%;
+		}
+		.sidebar-list-item {
+		  margin-bottom: 15px;
+		}
+		&:nth-child(3) {
+			.sidebar-header {
+				text-align: right;
+				padding-right: 20px;
+			}
 		}
 	}
 	&-header {
@@ -192,12 +201,14 @@ a {
 		margin: 0 3%;
 		border-bottom: none;
 		cursor: pointer;
+
 	}
 	&-list-heading {
 		color: #888;
 		border-bottom: 1px solid #555;
 		padding-bottom: 3px;
 		text-transform: uppercase;
+		white-space: nowrap;
 		h2&,
 		a& {
 			border: none;
@@ -408,6 +419,7 @@ a {
 		background-position: center center;
 		background-repeat: no-repeat;
 		opacity: .4;
+		float: right;
 		&.active {
     	opacity: 1;
 		}
@@ -432,6 +444,12 @@ a {
 	// border-top: 10px solid transparent;
 	margin-top: 10px;
 	margin-right: -10px;
+
+	&.closed {
+		height: 35px; // needed for the hiding of info until clicked
+		overflow: hidden; // needed for the hiding of info until clicked
+	}
+
 	.info {
 		&.info-list * {
 			   -moz-user-select: text;
@@ -702,9 +720,8 @@ a {
 		}
 	}
 	&:last-child {
-		form {
-			margin: 0 20px;
-			padding: 20px 0;
+		.module-main {
+			padding: 20px;
 		}
 		input,
 		textarea,

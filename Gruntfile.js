@@ -111,8 +111,22 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						flatten: true,
+						src: 'dev/admin/*.php',
+						dest: 'dist/admin/',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						flatten: true,
 						src: 'dev/admin/*.html',
 						dest: 'dist/admin/',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						flatten: true,
+						src: 'dev/admin/functions/*.php',
+						dest: 'dist/admin/functions/',
 						filter: 'isFile'
 					}
 				]
