@@ -176,14 +176,17 @@ a {
 			font-size: 1.5em;
 		}
 	}
-	&-items-list{
+	&-items-list {
 		list-style-type: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 		color: #999;
 		li {
-			margin: 0 4% 4% 4%;
+			margin: 0 4% 5px 4%;
+		}
+		.sidebar-list-item {
+		  margin-bottom: 15px;
 		}
 		&:nth-child(2) {
 			.sidebar-header {
@@ -445,6 +448,12 @@ a {
 	// border-top: 10px solid transparent;
 	margin-top: 10px;
 	margin-right: -10px;
+
+	&.closed {
+		height: 35px; // needed for the hiding of info until clicked
+		overflow: hidden; // needed for the hiding of info until clicked
+	}
+
 	.info {
 		&.info-list * {
 			   -moz-user-select: text;

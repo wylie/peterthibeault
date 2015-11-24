@@ -15,6 +15,7 @@ function init() {
 	buildNav()
 	relatedWorks();
 	getClickedAddtl();
+	openTray();
 	getFirst();
 }
 
@@ -159,14 +160,14 @@ function buildModule(nav, data) {
 
 	// create the container for the hero images
 	var infoDiv = document.createElement('div');
-	infoDiv.setAttribute('class', 'module-info grid bg-3 group');
+	infoDiv.setAttribute('class', 'module-info grid bg-3 group closed');
 	infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
 
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
 	infoUl1.setAttribute('class', 'sidebar-items-list group col4');
 
-	infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li data-info="name" class="sidebar-list-item"></li><li class="sidebar-list-heading">MEDIA</li><li data-info="media" class="sidebar-list-item"></li><li class="sidebar-list-heading">DESCRIPTION</li><li data-info="description" class="sidebar-list-item"></li><li class="sidebar-list-heading">DIMENSIONS</li><li data-info="dimension" class="sidebar-list-item"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
+	infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li class="sidebar-list-item" data-info="name"></li><li class="sidebar-list-heading">MEDIA</li><li class="sidebar-list-item" data-info="media"></li><li class="sidebar-list-heading">DESCRIPTION</li><li class="sidebar-list-item" data-info="description"></li><li class="sidebar-list-heading">DIMENSIONS</li><li class="sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
 
 	infoDiv.appendChild(infoUl1);
 
@@ -177,7 +178,11 @@ function buildModule(nav, data) {
 
 	var infoUl2Li = document.createElement('li');
 	infoUl2Li.setAttribute('class', 'sidebar-header');
-	infoUl2Li.innerHTML = '<a href="#" target="_blank" class="sidebar-list-heading" title="Send me an email">AVAILABLE</a>';
+	if( data[0].available === true ) {
+		infoUl2Li.innerHTML = '<a href="#" target="_blank" class="sidebar-list-heading" title="Send me an email">AVAILABLE</a>';
+	} else {
+		infoUl2Li.innerHTML = '';
+	}
 	infoUl2.appendChild(infoUl2Li);
 
 	// create a list for the first column
@@ -328,6 +333,14 @@ function getClickedAddtl() {
 		var section = section.toLowerCase();
 		var id = $(this).attr('id');
 		var index = $(this).attr('data-id');
+		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
+		if(data[index].available) {
+			var sectionTray = document.getElementById( section + '-tray' );
+			var availList = $(sectionTray).children(' .sidebar-items-list');
+			var availHead = $(availList[1]).children('.sidebar-header');
+			availHead[0].innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[index].title + ' (drawing)&amp;body=I am inquiring about a ' + section + ' listed on your website. The name of it is: ' + data[index].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
+		}
+
 		heroImg( section, id, index );
 		heroInfo( section, id, index );
 		replaceRelated( section, id, index );
@@ -493,7 +506,11 @@ function replaceRelated( section, id, index ) {
 }
 
 
-
+function openTray() {
+	$('.module-info').click(function() {
+		$(this).toggleClass('closed');
+	});
+}
 
 function displayNews() {
 	var news = document.getElementById('news');
