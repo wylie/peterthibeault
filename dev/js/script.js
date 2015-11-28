@@ -134,116 +134,119 @@ function buildModule(nav, data) {
 	if( ( data === undefined ) ) {
 		// do nothing
 	} else {
-		var worksDiv = document.getElementById('works');
-		var module = document.createElement('div');
-		module.setAttribute('class', 'module group');
+		for(var i = 0; i < data.length; i++) {
+			if( data[i].available === false ) {
+				var worksDiv = document.getElementById('works');
+				var module = document.createElement('div');
+				module.setAttribute('class', 'module group');
 
-		module.setAttribute('id', nav.toLowerCase() );
-		var anchor = document.createElement('a');
-		anchor.setAttribute('name', nav.toLowerCase() );
-		module.appendChild(anchor);
+				module.setAttribute('id', nav.toLowerCase() );
+				var anchor = document.createElement('a');
+				anchor.setAttribute('name', nav.toLowerCase() );
+				module.appendChild(anchor);
 
-		// heading
-		var h2 = document.createElement('h2');
-		h2.setAttribute('class',  'header');
-		h2.innerHTML = nav.toUpperCase();
-		module.appendChild(h2);
+				// heading
+				var h2 = document.createElement('h2');
+				h2.setAttribute('class',  'header');
+				h2.innerHTML = nav.toUpperCase();
+				module.appendChild(h2);
 
-		// wrap module div
-		var wrapDiv = document.createElement('div');
-		wrapDiv.setAttribute('class', 'module-wrap group');
+				// wrap module div
+				var wrapDiv = document.createElement('div');
+				wrapDiv.setAttribute('class', 'module-wrap group');
 
-		// create the left div
-		var leftDiv = document.createElement('div');
-		leftDiv.setAttribute('class', 'left');
-		leftDiv.setAttribute('id', 'left');
+				// create the left div
+				var leftDiv = document.createElement('div');
+				leftDiv.setAttribute('class', 'left');
+				leftDiv.setAttribute('id', 'left');
 
-		// create the container for the hero images
-		var heroDiv = document.createElement('div');
-		heroDiv.setAttribute('class', 'module-main bg-3');
-		heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
+				// create the container for the hero images
+				var heroDiv = document.createElement('div');
+				heroDiv.setAttribute('class', 'module-main bg-3');
+				heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
 
-		// create the container for the hero images
-		var infoDiv = document.createElement('div');
-		infoDiv.setAttribute('class', 'module-info grid bg-3 group closed');
-		infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
+				// create the container for the hero images
+				var infoDiv = document.createElement('div');
+				infoDiv.setAttribute('class', 'module-info grid bg-3 group closed');
+				infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
 
-		// create a list for the first column
-		var infoUl1 = document.createElement('ul');
-		infoUl1.setAttribute('class', 'sidebar-items-list group col4');
+				// create a list for the first column
+				var infoUl1 = document.createElement('ul');
+				infoUl1.setAttribute('class', 'sidebar-items-list group col4');
 
-		infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li class="sidebar-list-item" data-info="name"></li><li class="sidebar-list-heading">MEDIA</li><li class="sidebar-list-item" data-info="media"></li><li class="sidebar-list-heading">DESCRIPTION</li><li class="sidebar-list-item" data-info="description"></li><li class="sidebar-list-heading">DIMENSIONS</li><li class="sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
+				infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li class="sidebar-list-item" data-info="name"></li><li class="sidebar-list-heading">MEDIA</li><li class="sidebar-list-item" data-info="media"></li><li class="sidebar-list-heading">DESCRIPTION</li><li class="sidebar-list-item" data-info="description"></li><li class="sidebar-list-heading">DIMENSIONS</li><li class="sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
 
-		infoDiv.appendChild(infoUl1);
+				infoDiv.appendChild(infoUl1);
 
-		// create a list for the first column
-		var infoUl2 = document.createElement('ul');
-		infoUl2.setAttribute('class', 'sidebar-items-list group col4');
-		infoDiv.appendChild(infoUl2);
+				// create a list for the first column
+				var infoUl2 = document.createElement('ul');
+				infoUl2.setAttribute('class', 'sidebar-items-list group col4');
+				infoDiv.appendChild(infoUl2);
 
-		var infoUl2Li = document.createElement('li');
-		infoUl2Li.setAttribute('class', 'sidebar-header');
-		if( data[0].available === true ) {
-			// infoUl2Li.innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[0].title + ' (' + nav + ')&amp;body=I am inquiring about a ' + nav + ' listed on your website. The name of it is: ' + data[0].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
-		} else {
-			infoUl2Li.innerHTML = '';
+				var infoUl2Li = document.createElement('li');
+				infoUl2Li.setAttribute('class', 'sidebar-header');
+				if( data[0].available === true ) {
+					// infoUl2Li.innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[0].title + ' (' + nav + ')&amp;body=I am inquiring about a ' + nav + ' listed on your website. The name of it is: ' + data[0].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
+				} else {
+					infoUl2Li.innerHTML = '';
+				}
+				infoUl2.appendChild(infoUl2Li);
+
+				// create a list for the first column
+				var infoUl3 = document.createElement('ul');
+				infoUl3.setAttribute('class', 'related sidebar-items-list group col4');
+				infoDiv.appendChild(infoUl3);
+
+				var infoUl3Li = document.createElement('li');
+				infoUl3Li.setAttribute('class', 'sidebar-header');
+				infoUl3Li.innerHTML = '<h2 class="sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
+				infoUl3.appendChild(infoUl3Li);
+
+				// add things to the leftDiv
+				leftDiv.appendChild(heroDiv);
+
+				if( (nav != 'studio') && (nav != 'news') ) {
+					leftDiv.appendChild(infoDiv);
+				}
+
+				// add the left div to the wrapDiv
+				wrapDiv.appendChild(leftDiv);
+
+				// create the right div
+				var rightDiv = document.createElement('div');
+				rightDiv.setAttribute('class', 'right');
+				rightDiv.setAttribute('id', 'right');
+
+				// add the nav div
+				var navDiv = document.createElement('div');
+				navDiv.setAttribute('class', 'module-nav bg-3');
+				navDiv.setAttribute('id', nav.toLowerCase() + '-additional');
+
+				// add the nav div sub-header
+				var navSubHeaderDiv = document.createElement('h3');
+				navSubHeaderDiv.setAttribute('class', 'sub-header');
+				navSubHeaderDiv.innerHTML = 'Additional ' + nav;
+				navDiv.appendChild(navSubHeaderDiv);
+
+				// add the nav div list
+				var navList = document.createElement('ul');
+				navList.setAttribute('class', 'module-list');
+
+				// append navDiv to the navList
+				navDiv.appendChild(navList);
+
+				// add things to the rightDiv
+				rightDiv.appendChild(navDiv);
+
+				// add the right div to the wrapDiv
+				wrapDiv.appendChild(rightDiv);
+
+				// add it all to the module
+				module.appendChild(wrapDiv);
+				worksDiv.appendChild(module);
+			}
 		}
-		infoUl2.appendChild(infoUl2Li);
-
-		// create a list for the first column
-		var infoUl3 = document.createElement('ul');
-		infoUl3.setAttribute('class', 'related sidebar-items-list group col4');
-		infoDiv.appendChild(infoUl3);
-
-		var infoUl3Li = document.createElement('li');
-		infoUl3Li.setAttribute('class', 'sidebar-header');
-		infoUl3Li.innerHTML = '<h2 class="sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
-		infoUl3.appendChild(infoUl3Li);
-
-		// add things to the leftDiv
-		leftDiv.appendChild(heroDiv);
-
-		if( (nav != 'studio') && (nav != 'news') ) {
-			leftDiv.appendChild(infoDiv);
-		}
-
-		// add the left div to the wrapDiv
-		wrapDiv.appendChild(leftDiv);
-
-		// create the right div
-		var rightDiv = document.createElement('div');
-		rightDiv.setAttribute('class', 'right');
-		rightDiv.setAttribute('id', 'right');
-
-		// add the nav div
-		var navDiv = document.createElement('div');
-		navDiv.setAttribute('class', 'module-nav bg-3');
-		navDiv.setAttribute('id', nav.toLowerCase() + '-additional');
-
-		// add the nav div sub-header
-		var navSubHeaderDiv = document.createElement('h3');
-		navSubHeaderDiv.setAttribute('class', 'sub-header');
-		navSubHeaderDiv.innerHTML = 'Additional ' + nav;
-		navDiv.appendChild(navSubHeaderDiv);
-
-		// add the nav div list
-		var navList = document.createElement('ul');
-		navList.setAttribute('class', 'module-list');
-
-		// append navDiv to the navList
-		navDiv.appendChild(navList);
-
-		// add things to the rightDiv
-		rightDiv.appendChild(navDiv);
-
-		// add the right div to the wrapDiv
-		wrapDiv.appendChild(rightDiv);
-
-		// add it all to the module
-		module.appendChild(wrapDiv);
-		worksDiv.appendChild(module);
 	}
-	// }
 }
 
 function relatedWorks() {
@@ -259,16 +262,20 @@ function displayCV() {
 
 }
 
-function displayAddtnlWork(module, data) {
-	var module = module.toLowerCase();
-	var id = '#' + module + '-additional';
-	var mod = $( id );
-	var blammo = $(module + '.module-list');
+function displayAddtnlWork(section, data) {
+	var section = section.toLowerCase();
+	var elemId = '#' + section + '-additional';
+	console.log( elemId );
+	if( data.length > 0 ) {
+		var mod = $( '#' + section + '-additional' );
+		console.log( data.length );
+	}
+	var blammo = $(section + '.module-list');
 
 	for(var i = 0; i < data.length; i++ ) {
 		var listItem = document.createElement('li');
 		// do different stuff for different modules
-		if( module === 'studio' ) {
+		if( section === 'studio' ) {
 			var imgPath = 'img/studio/';''
 			var imgSuff = '_m.jpg';
 		} else {
@@ -281,8 +288,8 @@ function displayAddtnlWork(module, data) {
 		listItem.setAttribute('class', 'list-item');
 		listItem.setAttribute('id', imgId);
 		// do different stuff for different modules
-		if( module === 'studio' ) {
-			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
+		if( section === 'studio' ) {
+			var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
 
 			var date = new Date(data[i].date);
 			var day = (date.getDate() + 1).toString();
@@ -300,9 +307,11 @@ function displayAddtnlWork(module, data) {
 			listItem.setAttribute('data-id', i);
 			listItem.innerHTML = studioDate;
 
+			// console.log( mod.children );
+
 			mod[0].children[1].appendChild( listItem );
-		} else if( module === 'news' ) {
-			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
+		} else if( section === 'news' ) {
+			var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
 
 			var date = new Date(data[i].date);
 			var day = (date.getDate() + 1).toString();
