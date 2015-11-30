@@ -376,16 +376,18 @@ function heroImg( section, id, index ) {
 		var imgSuff = '_l.jpg';
 		var imgId = id;
 		var imgNum = 1;
+		var allImg = imgPath + imgId + imgSuff;
+		console.log( allImg );
 		// create the hero image
 		var heroImg = document.createElement('img');
 		heroImg.setAttribute('class', 'main-image');
 		// do different stuff for different modules
 		if( section === 'studio' ) {
-			heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+			heroImg.setAttribute('src', allImg);
 		} else if ( section === 'news' ) {
 			// console.log('news');
 		} else {
-			heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+			heroImg.setAttribute('src', allImg);
 		}
 		// clear the hero image
 		mod[0].innerHTML = '';
@@ -410,10 +412,11 @@ function heroImg( section, id, index ) {
 		return;
 	} else {
 		var imgPath = 'img/works/';''
-		var imgSuff = '_l-0.jpg';
-
 		var imgId = id;
+		var imgSuff = '_l-0.jpg';
 		var imgNum = 1;
+		var allImg = imgPath + imgId + imgSuff;
+		
 		// make sure we're doing this for sections with images
 		if(imgNum != undefined) {
 			// create the hero image
@@ -421,11 +424,11 @@ function heroImg( section, id, index ) {
 			heroImg.setAttribute('class', 'main-image');
 			// do different stuff for different modules
 			if( section === 'studio' ) {
-				heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+				heroImg.setAttribute('src', allImg);
 			} else if ( section === 'news' ) {
 				// console.log('news');
 			} else {
-				heroImg.setAttribute('src', imgPath + imgId + imgSuff);
+				heroImg.setAttribute('src', allImg);
 			}
 			// clear the hero image
 			mod[0].innerHTML = '';
