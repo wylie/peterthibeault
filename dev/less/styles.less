@@ -1,18 +1,8 @@
+/* -------------------------------------------- */
+/* IMPORTS ------------------------------------ */
+/* -------------------------------------------- */
 @import 'reset.less';
 @import 'grid.less';
-
-// @font-face {
-// 	font-family: Futura;
-// 	src: url('../fonts/futura/FuturaStd-Book.otf');
-// }
-// @font-face {
-// 	font-family: Futura-bold;
-// 	src: url('../fonts/futura/FuturaStd-Bold.otf');
-// }
-// @font-face {
-// 	font-family: Futura-light;
-// 	src: url('../fonts/futura/FuturaStd-Light.otf');
-// }
 
 /* -------------------------------------------- */
 /* UNIVERSAL ---------------------------------- */
@@ -27,6 +17,80 @@ body {
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 }
+
+/* -------------------------------------------- */
+/* BEM ---------------------------------------- */
+/* -------------------------------------------- */
+.nav {
+	height: 45%;
+	min-height: 345px;
+	&__item {
+		padding: 5px 5px 5px 0;
+		cursor: pointer;
+		&:last-child {
+			border-bottom: none;
+		}
+		&.active {
+			background-color: rgba(255,255,255,.125);
+		}
+		&:hover {
+			background-color: rgba(255,255,255,.25);
+		}
+	}
+	&__item-link {
+		color: rgb(255,255,255);
+	}
+}
+
+.logo {
+	height: 225px;
+	&__image {
+		height: 100%;
+		margin: 20px 0;
+		background-image: url(../img/logo-fff-30.png);
+		background-repeat: no-repeat;
+		background-size: 100%;
+		text-indent: -9999px;
+	}
+}
+
+.title {
+	min-height: 75px;
+	vertical-align: bottom;
+	position: relative;
+	margin-bottom: 50px;
+	&__heading {
+		position: absolute;
+		bottom: -8px;
+		right: 0;
+		font-size: 1.45em;
+		line-height: 1.25em;
+	}
+	&__heading-name {
+		display: block;
+	}
+}
+
+.col {
+	&-left {
+		width: 250px;
+		height: 100%;
+		position: fixed;
+		overflow: auto;
+		margin-top: -20px;
+	}
+	&-right {
+		width: 1180px;
+		padding: 0 30px 0 280px;
+	}
+}
+.sidebar {
+
+}
+
+
+
+
 a {
 	text-decoration: none;
 	&:active,
@@ -120,26 +184,7 @@ a {
 /* --------------------------- END MAIN COLUMNS */
 /* -------------------------------------------- */
 
-.nav {
-	height: 45%;
-	min-height: 345px;
-	&__item {
-		padding: 5px 5px 5px 0;
-		cursor: pointer;
-		&:last-child {
-			border-bottom: none;
-		}
-		&.active {
-			background-color: rgba(255,255,255,.125);
-		}
-		&:hover {
-			background-color: rgba(255,255,255,.25);
-		}
-	}
-	&__item-link {
-		color: rgb(255,255,255);
-	}
-}
+
 
 /* -------------------------------------------- */
 /* SIDEBAR ------------------------------------ */
@@ -158,19 +203,6 @@ a {
 	top: 0;
 	left: 0;
 	bottom: 0;
-	.sub-header {
-		min-height: 75px;
-		vertical-align: bottom;
-		position: relative;
-		margin-bottom: 50px;
-	}
-	.sub-heading {
-		position: absolute;
-		bottom: -8px;
-		right: 0;
-		font-size: 1.45em;
-		line-height: 1.25em;
-	}
 	&-items-list {
 		list-style-type: none;
     margin: 0;
@@ -242,17 +274,6 @@ a {
 /* -------------------------------------------- */
 /* HEADER ------------------------------------- */
 /* -------------------------------------------- */
-.logo {
-	height: 225px;
-	&__image {
-		height: 100%;
-		margin: 20px 0;
-		background-image: url(../img/logo-fff-30.png);
-		background-repeat: no-repeat;
-		background-size: 100%;
-		text-indent: -9999px;
-	}
-}
 /* -------------------------------------------- */
 /* --------------------------------- END HEADER */
 /* -------------------------------------------- */
