@@ -80,7 +80,7 @@ function buildNav() {
 			// add the text to the link
 			a.innerHTML = title;
 			// add a class to the link
-			a.setAttribute('class', 'link');
+			a.setAttribute('class', 'nav__item-link');
 			// add the link to the anchor on the page
 			a.setAttribute('href', '#' +  dataArr[i].toLowerCase() );
 			// give the link a title
@@ -88,7 +88,7 @@ function buildNav() {
 			// append the link to the li
 			li.appendChild(a);
 			// git the list-item a class
-			li.setAttribute('class', 'item');
+			li.setAttribute('class', 'nav__item');
 			// append the list-item to the nav list
 			nav.appendChild(li);
 		}
@@ -105,7 +105,7 @@ function buildNav() {
 		// add the text to the link
 		a.innerHTML = title;
 		// add a class to the link
-		a.setAttribute('class', 'link');
+		a.setAttribute('class', 'nav__item-link');
 		// add the link to the anchor on the page
 		a.setAttribute('href', '#' +  extraNav[i].toLowerCase() );
 		// give the link a title
@@ -113,7 +113,7 @@ function buildNav() {
 		// append the link to the li
 		li.appendChild(a);
 		// git the list-item a class
-		li.setAttribute('class', 'item');
+		li.setAttribute('class', 'nav__item');
 		// append the list-item to the nav list
 		nav.appendChild(li);
 	}
@@ -416,7 +416,7 @@ function heroImg( section, id, index ) {
 		var imgSuff = '_l-0.jpg';
 		var imgNum = 1;
 		var allImg = imgPath + imgId + imgSuff;
-		
+
 		// make sure we're doing this for sections with images
 		if(imgNum != undefined) {
 			// create the hero image
