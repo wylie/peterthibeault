@@ -5,12 +5,20 @@
 @import 'grid.less';
 
 /* -------------------------------------------- */
+/* VARIABLES ---------------------------------- */
+/* -------------------------------------------- */
+@bg-1: rgb(253, 138, 40); // #fd8a28
+@bg-2: rgb(57,38,77); // #39264d
+@bg-3: #666;
+
+/* -------------------------------------------- */
 /* UNIVERSAL ---------------------------------- */
 /* -------------------------------------------- */
 html,
 body {
 	font-family: Futura, arial, helvetica, sans-serif;
 	color: #fff;
+	background-color: @bg-1;
 }
 * {
 	   -moz-box-sizing: border-box;
@@ -85,7 +93,32 @@ body {
 	}
 }
 .sidebar {
+	border-width: 0 10px 0 0;
+	border-style: solid;
+	border-color: rgba(255,255,255,.1);
+	box-shadow: 5px 0 5px rgba(0,0,0,.25);
+	background-color: @bg-2;
+	width: 100%;
+	height: 100%;
+	padding: 0 10px 0;
+	text-align: right;
+	min-height: 635px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+}
 
+.copyright {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	font-size: .7em;
+	color: rgb(255,255,255);
+	color: rgba(255,255,255,.3);
+	&__text {
+		cursor: default;
+	}
 }
 
 
@@ -143,66 +176,10 @@ a {
 /* -------------------------------------------- */
 
 
-
-/* -------------------------------------------- */
-/* MAIN COLUMNS ------------------------------- */
-/* -------------------------------------------- */
-.bg {
-	&-1 {
-		background-color: rgb(253, 138, 40);
-	}
-	&-2 {
-		background-color: rgb(57,38,77);
-	}
-	&-3 {
-		background-color: #666;
-	}
-}
-/* -------------------------------------------- */
-/* ------------------------------ END UNIVERSAL */
-/* -------------------------------------------- */
-
-
-
-/* -------------------------------------------- */
-/* MAIN COLUMNS ------------------------------- */
-/* -------------------------------------------- */
-.l {
-	&-left {
-		width: 250px;
-		height: 100%;
-		position: fixed;
-		overflow: auto;
-		margin-top: -20px;
-	}
-	&-right {
-		width: 1180px;
-		padding: 0 30px 0 280px;
-	}
-}
-/* -------------------------------------------- */
-/* --------------------------- END MAIN COLUMNS */
-/* -------------------------------------------- */
-
-
-
 /* -------------------------------------------- */
 /* SIDEBAR ------------------------------------ */
 /* -------------------------------------------- */
 .sidebar {
-	border-width: 0 10px 0 0;
-	border-style: solid;
-	border-color: rgba(255,255,255,.1);
-	box-shadow: 5px 0 5px rgba(0,0,0,.25);
-	width: 100%;
-	height: 100%;
-	padding: 0 10px 0;
-	text-align: right;
-	min-height: 635px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
 	&-items-list {
 		list-style-type: none;
     margin: 0;
@@ -251,34 +228,6 @@ a {
 }
 /* ----------------------------------- end info */
 
-/* copyright ---------------------------------- */
-.copyright {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
-	font-size: .7em;
-	color: rgb(255,255,255);
-	color: rgba(255,255,255,.3);
-	.text {
-		cursor: default;
-	}
-}
-/* ------------------------------ end copyright */
-
-/* -------------------------------------------- */
-/* -------------------------------- END SIDEBAR */
-/* -------------------------------------------- */
-
-
-
-/* -------------------------------------------- */
-/* HEADER ------------------------------------- */
-/* -------------------------------------------- */
-/* -------------------------------------------- */
-/* --------------------------------- END HEADER */
-/* -------------------------------------------- */
-
-
 
 /* -------------------------------------------- */
 /* MODULE ------------------------------------- */
@@ -298,9 +247,6 @@ a {
 		background-color: rgba(255,255,255,.3);
 		padding: 10px;
 		min-width: 700px;
-		// &:last-child {
-		// 	margin-bottom: 100px;
-		// }
 		.logo + & {
 			margin-top: 40px;
 		}
@@ -338,7 +284,6 @@ a {
 		height: 100%;
 		position: relative;
 		.sub-header {
-			// width: 100%;
 			text-align: center;
 			border-bottom: 1px solid #444;
 			box-sizing: border-box;
@@ -447,12 +392,8 @@ a {
 
 /* ------------------------------------ end nav */
 
-/* info ------------------------------------ */
-/* -------------------------------- end info */
-
 /* info universal -------------------------- */
 .module-info {
-	// border-top: 10px solid transparent;
 	margin-top: 10px;
 	margin-right: -10px;
 
@@ -517,7 +458,6 @@ a {
 .available .form-input,
 .available .form-submit {
 	background-color: #555;
-	/* border: 1px solid #444; */
 	border: none;
 	font-size: .8em;
 	color: #888;
@@ -566,13 +506,6 @@ a {
 	}
 }
 /* -------------------------------- end related */
-
-/* -------------------------------------------- */
-/* --------------------------------- END MODULE */
-/* -------------------------------------------- */
-
-
-
 
 /* -------------------------------------------- */
 /* MODULE UNIVERSAL --------------------------- */
@@ -630,7 +563,6 @@ a {
 		padding: 0;
 		font-size: 1.5em;
 		line-height: 1.8em;
-		/* overflow: hidden; */
 	}
 	.display-date {
 		font-size: .8em;
