@@ -156,7 +156,7 @@ function buildModule(nav, data) {
 
 	// create the container for the hero images
 	var heroDiv = document.createElement('div');
-	heroDiv.setAttribute('class', 'module-main bg-3');
+	heroDiv.setAttribute('class', 'module-main bg-3 hero-img');
 	heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
 
 	// create the container for the hero images
@@ -377,10 +377,9 @@ function heroImg( section, id, index ) {
 		var imgId = id;
 		var imgNum = 1;
 		var allImg = imgPath + imgId + imgSuff;
-		console.log( allImg );
 		// create the hero image
 		var heroImg = document.createElement('img');
-		heroImg.setAttribute('class', 'main-image');
+		heroImg.setAttribute('class', 'main-image WHAMMY');
 		// do different stuff for different modules
 		if( section === 'studio' ) {
 			heroImg.setAttribute('src', allImg);
@@ -416,24 +415,19 @@ function heroImg( section, id, index ) {
 		var imgSuff = '_l-0.jpg';
 		var imgNum = 1;
 		var allImg = imgPath + imgId + imgSuff;
-		
+
 		// make sure we're doing this for sections with images
 		if(imgNum != undefined) {
-			// create the hero image
-			var heroImg = document.createElement('img');
-			heroImg.setAttribute('class', 'main-image');
 			// do different stuff for different modules
 			if( section === 'studio' ) {
-				heroImg.setAttribute('src', allImg);
+				mod[0].setAttribute('src', allImg);
 			} else if ( section === 'news' ) {
 				// console.log('news');
 			} else {
-				heroImg.setAttribute('src', allImg);
+				mod[0].setAttribute('style', 'background-image:url("' + allImg + '");');
 			}
 			// clear the hero image
 			mod[0].innerHTML = '';
-			// append the hero image
-			mod[0].appendChild( heroImg );
 		}
 
 	}
@@ -502,9 +496,10 @@ function heroImgRelated(section, id, tst) {
 	var hero = document.getElementById( section + '-hero' );
 	hero.innerHTML = '';
 	var img = document.createElement('img');
-	img.setAttribute('class', 'main-image');
-	img.setAttribute('src', 'img/works/' + id + '_l-' + tst + '.jpg')
-	hero.appendChild(img);
+	img.setAttribute('class', 'main-image KER-POW');
+	var allImg = 'img/works/' + id + '_l-' + tst + '.jpg';
+	img.setAttribute('src', 'img/works/' + id + '_l-' + tst + '.jpg');
+	hero.setAttribute('style', 'background-image:url("' + allImg + '");');
 }
 
 function replaceRelated( section, id, index ) {
