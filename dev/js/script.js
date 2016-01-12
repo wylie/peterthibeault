@@ -167,19 +167,19 @@ function buildModule(nav, data) {
 
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
-	infoUl1.setAttribute('class', 'tray-list sidebar-items-list col4');
+	infoUl1.setAttribute('class', 'tray__list sidebar-items-list col4');
 
-	infoUl1.innerHTML = '<li class="tray-list__heading sidebar-header"><h2 class="tray-list__heading-header tray-list__list-item_heading sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="tray-list__list-item_heading sidebar-list-heading">TITLE</li><li class="tray-list__list-item sidebar-list-item" data-info="name"></li><li class="tray-list__list-item_heading sidebar-list-heading">MEDIA</li><li class="tray-list__list-item sidebar-list-item" data-info="media"></li><li class="tray-list__list-item_heading sidebar-list-heading">DESCRIPTION</li><li class="tray-list__list-item sidebar-list-item" data-info="description"></li><li class="tray-list__list-item_heading sidebar-list-heading">DIMENSIONS</li><li class="tray-list__list-item sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
+	infoUl1.innerHTML = '<li class="tray__list-heading sidebar-header"><h2 class="tray__list-heading-header tray__list__list-item_heading sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="tray__list__list-item_heading sidebar-list-heading">TITLE</li><li class="tray__list__list-item sidebar-list-item" data-info="name"></li><li class="tray__list__list-item_heading sidebar-list-heading">MEDIA</li><li class="tray__list__list-item sidebar-list-item" data-info="media"></li><li class="tray__list__list-item_heading sidebar-list-heading">DESCRIPTION</li><li class="tray__list__list-item sidebar-list-item" data-info="description"></li><li class="tray__list__list-item_heading sidebar-list-heading">DIMENSIONS</li><li class="tray__list__list-item sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
 
 	infoDiv.appendChild(infoUl1);
 
 	// create a list for the first column
 	var infoUl2 = document.createElement('ul');
-	infoUl2.setAttribute('class', 'tray-list sidebar-items-list col4');
+	infoUl2.setAttribute('class', 'tray__list sidebar-items-list col4');
 	infoDiv.appendChild(infoUl2);
 
 	var infoUl2Li = document.createElement('li');
-	infoUl2Li.setAttribute('class', 'tray-list__heading sidebar-header');
+	infoUl2Li.setAttribute('class', 'tray__list-heading sidebar-header');
 	if( data[0].available === true ) {
 		infoUl2Li.innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[0].title + ' (' + nav + ')&amp;body=I am inquiring about a ' + nav + ' listed on your website. The name of it is: ' + data[0].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
 	} else {
@@ -189,12 +189,12 @@ function buildModule(nav, data) {
 
 	// create a list for the first column
 	var infoUl3 = document.createElement('ul');
-	infoUl3.setAttribute('class', 'tray-list sidebar-items-list col4');
+	infoUl3.setAttribute('class', 'tray__list related sidebar-items-list col4');
 	infoDiv.appendChild(infoUl3);
 
 	var infoUl3Li = document.createElement('li');
-	infoUl3Li.setAttribute('class', 'tray-list__heading sidebar-header');
-	infoUl3Li.innerHTML = '<h2 class="tray-list__heading-header sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
+	infoUl3Li.setAttribute('class', 'tray__list-heading sidebar-header');
+	infoUl3Li.innerHTML = '<h2 class="tray__list-heading-header sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
 	infoUl3.appendChild(infoUl3Li);
 
 	// add things to the leftDiv
@@ -219,7 +219,7 @@ function buildModule(nav, data) {
 
 	// add the nav div sub-header
 	var navSubHeaderDiv = document.createElement('h3');
-	navSubHeaderDiv.setAttribute('class', 'additional__header');
+	navSubHeaderDiv.setAttribute('class', 'additional__header sub-header');
 	navSubHeaderDiv.innerHTML = 'Additional ' + nav;
 	navDiv.appendChild(navSubHeaderDiv);
 
@@ -499,7 +499,7 @@ function heroImgRelated(section, id, tst) {
 	var hero = document.getElementById( section + '-hero' );
 	hero.innerHTML = '';
 	var img = document.createElement('img');
-	img.setAttribute('class', 'main-image');
+	img.setAttribute('class', 'main__img_img main-image');
 	img.setAttribute('src', 'img/works/' + id + '_l-' + tst + '.jpg')
 	hero.appendChild(img);
 }
