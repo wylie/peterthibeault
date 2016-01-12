@@ -80,7 +80,7 @@ function buildNav() {
 			// add the text to the link
 			a.innerHTML = title;
 			// add a class to the link
-			a.setAttribute('class', 'link');
+			a.setAttribute('class', 'nav__item-link');
 			// add the link to the anchor on the page
 			a.setAttribute('href', '#' +  dataArr[i].toLowerCase() );
 			// give the link a title
@@ -88,7 +88,7 @@ function buildNav() {
 			// append the link to the li
 			li.appendChild(a);
 			// git the list-item a class
-			li.setAttribute('class', 'item');
+			li.setAttribute('class', 'nav__item');
 			// append the list-item to the nav list
 			nav.appendChild(li);
 		}
@@ -105,7 +105,7 @@ function buildNav() {
 		// add the text to the link
 		a.innerHTML = title;
 		// add a class to the link
-		a.setAttribute('class', 'link');
+		a.setAttribute('class', 'nav__item-link');
 		// add the link to the anchor on the page
 		a.setAttribute('href', '#' +  extraNav[i].toLowerCase() );
 		// give the link a title
@@ -113,7 +113,7 @@ function buildNav() {
 		// append the link to the li
 		li.appendChild(a);
 		// git the list-item a class
-		li.setAttribute('class', 'item');
+		li.setAttribute('class', 'nav__item');
 		// append the list-item to the nav list
 		nav.appendChild(li);
 	}
@@ -132,7 +132,8 @@ function prepModules() {
 function buildModule(nav, data) {
 	var worksDiv = document.getElementById('works');
 	var module = document.createElement('div');
-	module.setAttribute('class', 'module group');
+	// module.setAttribute('class', 'section module group');
+	module.setAttribute('class', 'section module');
 
 	module.setAttribute('id', nav.toLowerCase() );
 	var anchor = document.createElement('a');
@@ -141,44 +142,44 @@ function buildModule(nav, data) {
 
 	// heading
 	var h2 = document.createElement('h2');
-	h2.setAttribute('class',  'header');
+	h2.setAttribute('class',  'section__header header');
 	h2.innerHTML = nav.toUpperCase();
 	module.appendChild(h2);
 
 	// wrap module div
 	var wrapDiv = document.createElement('div');
-	wrapDiv.setAttribute('class', 'module-wrap group');
+	wrapDiv.setAttribute('class', 'section__wrap module-wrap');
 
 	// create the left div
 	var leftDiv = document.createElement('div');
-	leftDiv.setAttribute('class', 'left');
+	leftDiv.setAttribute('class', 'main left');
 	leftDiv.setAttribute('id', 'left');
 
 	// create the container for the hero images
 	var heroDiv = document.createElement('div');
-	heroDiv.setAttribute('class', 'module-main bg-3');
+	heroDiv.setAttribute('class', 'main__img module-main');
 	heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
 
 	// create the container for the hero images
 	var infoDiv = document.createElement('div');
-	infoDiv.setAttribute('class', 'module-info grid bg-3 group closed');
+	infoDiv.setAttribute('class', 'main__info-tray tray module-info grid closed');
 	infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
 
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
-	infoUl1.setAttribute('class', 'sidebar-items-list group col4');
+	infoUl1.setAttribute('class', 'tray__list sidebar-items-list col4');
 
-	infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li class="sidebar-list-item" data-info="name"></li><li class="sidebar-list-heading">MEDIA</li><li class="sidebar-list-item" data-info="media"></li><li class="sidebar-list-heading">DESCRIPTION</li><li class="sidebar-list-item" data-info="description"></li><li class="sidebar-list-heading">DIMENSIONS</li><li class="sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
+	infoUl1.innerHTML = '<li class="tray__list-heading sidebar-header"><h2 class="tray__list-heading-header tray__list__list-item_heading sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="tray__list__list-item_heading sidebar-list-heading">TITLE</li><li class="tray__list__list-item sidebar-list-item" data-info="name"></li><li class="tray__list__list-item_heading sidebar-list-heading">MEDIA</li><li class="tray__list__list-item sidebar-list-item" data-info="media"></li><li class="tray__list__list-item_heading sidebar-list-heading">DESCRIPTION</li><li class="tray__list__list-item sidebar-list-item" data-info="description"></li><li class="tray__list__list-item_heading sidebar-list-heading">DIMENSIONS</li><li class="tray__list__list-item sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
 
 	infoDiv.appendChild(infoUl1);
 
 	// create a list for the first column
 	var infoUl2 = document.createElement('ul');
-	infoUl2.setAttribute('class', 'sidebar-items-list group col4');
+	infoUl2.setAttribute('class', 'tray__list sidebar-items-list col4');
 	infoDiv.appendChild(infoUl2);
 
 	var infoUl2Li = document.createElement('li');
-	infoUl2Li.setAttribute('class', 'sidebar-header');
+	infoUl2Li.setAttribute('class', 'tray__list-heading sidebar-header');
 	if( data[0].available === true ) {
 		infoUl2Li.innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[0].title + ' (' + nav + ')&amp;body=I am inquiring about a ' + nav + ' listed on your website. The name of it is: ' + data[0].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
 	} else {
@@ -188,12 +189,12 @@ function buildModule(nav, data) {
 
 	// create a list for the first column
 	var infoUl3 = document.createElement('ul');
-	infoUl3.setAttribute('class', 'related sidebar-items-list group col4');
+	infoUl3.setAttribute('class', 'tray__list related sidebar-items-list col4');
 	infoDiv.appendChild(infoUl3);
 
 	var infoUl3Li = document.createElement('li');
-	infoUl3Li.setAttribute('class', 'sidebar-header');
-	infoUl3Li.innerHTML = '<h2 class="sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
+	infoUl3Li.setAttribute('class', 'tray__list-heading sidebar-header');
+	infoUl3Li.innerHTML = '<h2 class="tray__list-heading-header sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
 	infoUl3.appendChild(infoUl3Li);
 
 	// add things to the leftDiv
@@ -208,23 +209,23 @@ function buildModule(nav, data) {
 
 	// create the right div
 	var rightDiv = document.createElement('div');
-	rightDiv.setAttribute('class', 'right');
+	rightDiv.setAttribute('class', 'additional right');
 	rightDiv.setAttribute('id', 'right');
 
 	// add the nav div
 	var navDiv = document.createElement('div');
-	navDiv.setAttribute('class', 'module-nav bg-3');
+	navDiv.setAttribute('class', 'additional__wrap module-nav');
 	navDiv.setAttribute('id', nav.toLowerCase() + '-additional');
 
 	// add the nav div sub-header
 	var navSubHeaderDiv = document.createElement('h3');
-	navSubHeaderDiv.setAttribute('class', 'sub-header');
+	navSubHeaderDiv.setAttribute('class', 'additional__header sub-header');
 	navSubHeaderDiv.innerHTML = 'Additional ' + nav;
 	navDiv.appendChild(navSubHeaderDiv);
 
 	// add the nav div list
 	var navList = document.createElement('ul');
-	navList.setAttribute('class', 'module-list');
+	navList.setAttribute('class', 'additional__list module-list');
 
 	// append navDiv to the navList
 	navDiv.appendChild(navList);
@@ -249,10 +250,6 @@ function relatedWorks() {
 	}
 }
 
-function displayCV() {
-
-}
-
 function displayAddtnlWork(module, data) {
 	var module = module.toLowerCase();
 	var id = '#' + module + '-additional';
@@ -272,7 +269,7 @@ function displayAddtnlWork(module, data) {
 		var imgId = data[i].id;
 		var imgNum = data[i].images;
 
-		listItem.setAttribute('class', 'list-item');
+		listItem.setAttribute('class', 'additional__list-item list-item');
 		listItem.setAttribute('id', imgId);
 		// do different stuff for different modules
 		if( module === 'studio' ) {
@@ -330,7 +327,7 @@ function getClickedAddtl() {
 	$('.module-list .list-item').click(function() {
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
-		var section = $(this).parents('.module.group').attr('id');
+		var section = $(this).parents('.section').attr('id');
 		var section = section.toLowerCase();
 		var id = $(this).attr('id');
 		var index = $(this).attr('data-id');
@@ -380,7 +377,7 @@ function heroImg( section, id, index ) {
 		console.log( allImg );
 		// create the hero image
 		var heroImg = document.createElement('img');
-		heroImg.setAttribute('class', 'main-image');
+		heroImg.setAttribute('class', 'main__img_img main-image');
 		// do different stuff for different modules
 		if( section === 'studio' ) {
 			heroImg.setAttribute('src', allImg);
@@ -416,12 +413,12 @@ function heroImg( section, id, index ) {
 		var imgSuff = '_l-0.jpg';
 		var imgNum = 1;
 		var allImg = imgPath + imgId + imgSuff;
-		
+
 		// make sure we're doing this for sections with images
 		if(imgNum != undefined) {
 			// create the hero image
 			var heroImg = document.createElement('img');
-			heroImg.setAttribute('class', 'main-image');
+			heroImg.setAttribute('class', 'main__img_img main-image');
 			// do different stuff for different modules
 			if( section === 'studio' ) {
 				heroImg.setAttribute('src', allImg);
@@ -502,7 +499,7 @@ function heroImgRelated(section, id, tst) {
 	var hero = document.getElementById( section + '-hero' );
 	hero.innerHTML = '';
 	var img = document.createElement('img');
-	img.setAttribute('class', 'main-image');
+	img.setAttribute('class', 'main__img_img main-image');
 	img.setAttribute('src', 'img/works/' + id + '_l-' + tst + '.jpg')
 	hero.appendChild(img);
 }
