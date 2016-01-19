@@ -108,8 +108,10 @@ function deleteOld() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
+    var page = $('body').attr('id');
+    console.log(page);
     // for now, just console log the id passed in
-    // console.log( deleteBtn[0].parentElement.id );
+    console.log( deleteBtn[0].parentElement.id );
   });
 }
 // some arrays we will need as we go along
@@ -406,7 +408,7 @@ function deleteWorks() {
     // give this a var
     var deleteBtn = $(this).parents('.works');
     // for now, just console log the id passed in
-    // console.log( deleteBtn[0].id );
+    console.log( deleteBtn[0].id );
   });
 }
 
@@ -449,7 +451,7 @@ function addStudio() {
     // stringify the news
   	var stringStudio = JSON.stringify(newStudio);
     // do something with the news
-    // console.log(stringStudio);
+    console.log(stringStudio);
   }
 }
 // CLEAR THE NEW TEXT AREA
@@ -567,8 +569,38 @@ function addNews() {
   	var stringNews = JSON.stringify(newNews);
     // do something with the news
     // console.log(stringNews);
+    saveNews(stringNews);
   }
 }
+function saveNews(data) {
+	// throw error if the kind is not one of the data files
+	var URL = 'functions/save-news.php?data=' + encodeURIComponent(data);
+  // console.log( URL );
+
+	var request = new XMLHttpRequest();
+	request.open('GET', URL);
+	request.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
+  var msg = document.getElementById('messaging');
+  msg.innerHTML = 'Your news story is being added...'
+	request.onreadystatechange = function() {
+		if (this.readyState == this.DONE && this.status == 200) {
+			localStorage.setItem('data', data);
+      msg.classList.remove('error');
+      msg.classList.add('success');
+      msg.innerHTML = 'Your news story has been added!'
+		} else {
+      msg.classList.remove('success');
+      msg.classList.add('error');
+      msg.innerHTML = 'Something went wrong... your news story couldn\'t be added at this time.'
+			// console.log('Add Status: ' + this.status)
+		}
+	};
+	request.send();
+}
+
+
+
+
 // CLEAR THE NEW TEXT AREA
 function clearNews() {
   var newsErr = $('.msg.error');
