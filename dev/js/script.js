@@ -396,7 +396,7 @@ function heroImg( section, id, index ) {
 	} else if ( section === 'news' ) {
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
 
-		var date = new Date(data[index].date);
+		var date = new Date(data[data.length - 1].date);
 		var day = (date.getDate() + 1).toString();
 		var monthNum = date.getMonth();
 		var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -407,7 +407,7 @@ function heroImg( section, id, index ) {
 		var year = year.slice(-2);
 		var newsDate = day + month + year;
 
-		mod[0].innerHTML = '<div class="text">' + data[index].description  + '</div><div class="display-date">' + newsDate + '</div>';
+		mod[0].innerHTML = '<div class="text">' + data[data.length - 1].description  + '</div><div class="display-date">' + newsDate + '</div>';
 		return;
 	} else {
 		var imgPath = 'img/works/';''
