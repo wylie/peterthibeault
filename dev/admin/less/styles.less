@@ -22,6 +22,9 @@ a {
 	box-sizing: border-box;
 	font-family: Futura, helvetica, arial, sans-serif;
 }
+.success {
+	color: green;
+}
 .error {
 	color: red;
 }
@@ -267,6 +270,15 @@ input#price {
 .button {
 	+ .button {
 		float: right;
+	}
+	&[disabled] {
+	    background-color: #ccc;
+	    color: #aaa;
+	    cursor: default;
+			&:hover {
+				background-color: #ccc !important;
+		    color: #aaa !important;
+			}
 	}
 }
 .save,

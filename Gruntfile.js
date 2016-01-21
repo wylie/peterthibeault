@@ -217,6 +217,14 @@ module.exports = function(grunt) {
 					livereload: false
 				}
 			},
+			adminphp: {
+				files: ['dev/admin/functions/*.php'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
 			adminhtml: {
 				files: ['dev/admin/*.html'],
 				tasks: ['copy'],

@@ -108,8 +108,10 @@ function deleteOld() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
+    var page = $('body').attr('id');
+    console.log(page);
     // for now, just console log the id passed in
-    // console.log( deleteBtn[0].parentElement.id );
+    console.log( deleteBtn[0].parentElement.id );
   });
 }
 // some arrays we will need as we go along
@@ -341,6 +343,7 @@ function displayWorks() {
         // create the save button
         var button1 = document.createElement('button');
         button1.setAttribute('class', 'save button');
+        button1.setAttribute('disabled', 'disabled');
         button1.setAttribute('type', 'submit');
         button1.setAttribute('name', 'edit');
         button1.setAttribute('value', 'save');
@@ -348,6 +351,7 @@ function displayWorks() {
         // create the delete button
         var button2 = document.createElement('button');
         button2.setAttribute('class', 'delete button');
+        button2.setAttribute('disabled', 'disabled');
         button2.setAttribute('type', 'submit');
         button2.setAttribute('name', 'edit');
         button2.setAttribute('value', 'delete');
@@ -406,7 +410,7 @@ function deleteWorks() {
     // give this a var
     var deleteBtn = $(this).parents('.works');
     // for now, just console log the id passed in
-    // console.log( deleteBtn[0].id );
+    console.log( deleteBtn[0].id );
   });
 }
 
@@ -449,7 +453,7 @@ function addStudio() {
     // stringify the news
   	var stringStudio = JSON.stringify(newStudio);
     // do something with the news
-    // console.log(stringStudio);
+    console.log(stringStudio);
   }
 }
 // CLEAR THE NEW TEXT AREA
@@ -482,6 +486,7 @@ function displayStudio() {
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
+      button.setAttribute('disabled', 'disabled');
       button.setAttribute('type', 'submit');
       button.setAttribute('name', 'edit');
       button.setAttribute('value', 'delete');
@@ -525,6 +530,7 @@ function displayNews() {
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
+      button.setAttribute('disabled', 'disabled');
       button.setAttribute('type', 'submit');
       button.setAttribute('name', 'edit');
       button.setAttribute('value', 'delete');
@@ -566,9 +572,44 @@ function addNews() {
     // stringify the news
   	var stringNews = JSON.stringify(newNews);
     // do something with the news
-    // console.log(stringNews);
+    saveNews(stringNews);
   }
 }
+function saveNews(data) {
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/save-news.php?data=' + encodeURIComponent(data),
+      dataType: 'JSON',
+      // beforeSend: function() {
+      //   msg.innerHTML = 'Your news story is being added...'
+      // },
+      success: function(ret){
+        console.log(ret);
+
+        // var data_array = $.parseJSON(json_data);
+        // console.log(data_array);
+
+        //access your data like this:
+        // var plum_or_whatever = data_array['output'];
+        // console.log(plum_or_whatever);
+        //continue from here...
+
+        // console.log(plum_or_whatever);
+        msg.classList.add('success');
+        msg.innerHTML = 'Your news story has been added!';
+        msg.innerHTML = ret;
+      // },
+      // error: function() {
+      //   msg.classList.add('error');
+      //   msg.innerHTML = 'Something went wrong... your news story couldn\'t be added at this time.'
+      }
+  });
+}
+
+
+
+
 // CLEAR THE NEW TEXT AREA
 function clearNews() {
   var newsErr = $('.msg.error');
