@@ -334,7 +334,6 @@ function getClickedAddtl() {
 		var section = section.toLowerCase();
 		var id = $(this).attr('id');
 		var index = $(this).attr('data-id');
-		console.log(index);
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
 		if(data[index].available) {
 			var sectionTray = document.getElementById( section + '-tray' );
