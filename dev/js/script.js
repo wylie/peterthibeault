@@ -516,9 +516,9 @@ function openTray() {
 	});
 }
 
-function displayNews() {
-	var news = document.getElementById('news');
-}
+// function displayNews() {
+// 	var news = document.getElementById('news');
+// }
 
 function email() {
 	$('#contact .submit').click(function() {
