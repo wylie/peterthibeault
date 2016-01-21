@@ -294,7 +294,7 @@ function displayAddtnlWork(module, data) {
 			listItem.setAttribute('data-id', i);
 			listItem.innerHTML = studioDate;
 
-			mod[0].children[1].appendChild( listItem );
+			mod[0].children[1].insertBefore( listItem, mod[0].children[1].firstChild );
 		} else if( module === 'news' ) {
 			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
 
