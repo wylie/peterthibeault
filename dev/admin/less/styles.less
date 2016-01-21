@@ -271,6 +271,15 @@ input#price {
 	+ .button {
 		float: right;
 	}
+	&[disabled] {
+	    background-color: #ccc;
+	    color: #aaa;
+	    cursor: default;
+			&:hover {
+				background-color: #ccc !important;
+		    color: #aaa !important;
+			}
+	}
 }
 .save,
 .delete,
