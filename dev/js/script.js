@@ -294,7 +294,7 @@ function displayAddtnlWork(module, data) {
 			listItem.setAttribute('data-id', i);
 			listItem.innerHTML = studioDate;
 
-			mod[0].children[1].appendChild( listItem );
+			mod[0].children[1].insertBefore( listItem, mod[0].children[1].firstChild );
 		} else if( module === 'news' ) {
 			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
 
@@ -379,7 +379,7 @@ function heroImg( section, id, index ) {
 		var allImg = imgPath + imgId + imgSuff;
 		// create the hero image
 		var heroImg = document.createElement('img');
-		heroImg.setAttribute('class', 'main-image WHAMMY');
+		heroImg.setAttribute('class', 'main-image');
 		// do different stuff for different modules
 		if( section === 'studio' ) {
 			heroImg.setAttribute('src', allImg);
@@ -514,10 +514,6 @@ function openTray() {
 	$('.sidebar-list-heading').click(function() {
 		$(this).parents('.module-info').toggleClass('closed');
 	});
-}
-
-function displayNews() {
-	var news = document.getElementById('news');
 }
 
 function email() {
