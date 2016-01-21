@@ -516,10 +516,6 @@ function openTray() {
 	});
 }
 
-// function displayNews() {
-// 	var news = document.getElementById('news');
-// }
-
 function email() {
 	$('#contact .submit').click(function() {
 		var emailBox = $(this).parent('.module-main');
