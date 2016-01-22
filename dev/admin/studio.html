@@ -31,7 +31,10 @@
 		<h2 class="header">Add New Studio Shot</h2>
 		<div class="module-section">
 			<h3 class="subheader">Choose An Image:</h2>
-			<input class="studio-add" id="studioImage" size="25" name="studio_image" type="file" />
+
+			<input class="studio-add" id="studioImage" size="25" name="studioImage" type="file" accept="image/*"/>
+			<div id="upload"><span id="uploadProcess"></span></div>
+
 			<div class="msg error"></div>
 			<div class="module-save">
 				<button class="save button" id="saveStudio" type="submit" name="edit" value="save">Save</button>
