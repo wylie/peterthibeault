@@ -233,6 +233,8 @@ function displayWorks() {
         var div = document.createElement('div');
         div.setAttribute('class', 'module-section work works ' + key);
         div.setAttribute('id', allWorks[key][j].id);
+        div.setAttribute('data-section', key);
+        div.setAttribute('data-id', j);
         // create the image
         var img = document.createElement('img');
         img.setAttribute('class', 'studio-img');
@@ -475,6 +477,7 @@ function displayStudio() {
       var div = document.createElement('div');
       div.setAttribute('class', 'module-section work studio');
       div.setAttribute('id', studio[i].id);
+      div.setAttribute('data-id', i);
       // img stuff
       var img = document.createElement('img');
       img.setAttribute('class', 'studio-img');
@@ -522,6 +525,7 @@ function displayNews() {
       var div = document.createElement('div');
       div.setAttribute('class', 'news-item');
       div.setAttribute('id', news[i].id);
+      div.setAttribute('data-id', i);
       div.innerHTML = news[i].description;
       // span stuff
       var span = document.createElement('span');
