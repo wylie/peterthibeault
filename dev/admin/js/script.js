@@ -29,8 +29,43 @@ function init() {
       // delete old studio after clicking on the button
       deleteOld();
       // grab the new studio
-      var saveStudio = document.getElementById('saveStudio');
-      saveStudio.onclick = addStudio;
+
+      var today = new Date();
+      var timeId = today.getTime();
+
+      var test = document.getElementById('studioImage');
+      test.addEventListener('change', function() {
+        var file = this.files[0];
+
+        var fd = new FormData();
+        fd.append('studioImage', file);
+        fd.append('id', timeId);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'functions/upload.php', true);
+
+        xhr.upload.onprogress = function(e) {
+          if (e.lengthComputable) {
+            var percentComplete = (e.loaded / e.total) * 100;
+            var uploadProcess = document.getElementById('uploadProcess');
+            uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
+          }
+        };
+
+        xhr.onload = function() {
+          if (this.status == 200) {
+            var resp = JSON.parse(this.response);
+
+            name = resp.name;
+            ext = resp.extension;
+            image = resp.newFileName;
+
+            addStudio(today, timeId);
+          };
+        };
+
+        xhr.send(fd);
+      }, false);
       break;
     case 'news':
       // display the old news
@@ -426,11 +461,11 @@ function deleteWorks() {
 
 
 // GET THE NEW TEXT AREA
-function addStudio() {
+function addStudio(today, id) {
   // get today's date
-  var today = new Date();
+  // var today = new Date();
   // create an id
-  var id = today.getTime();
+  // var id = today.getTime();
   // grab the news content
   var studioImage = document.getElementById('studioImage').value;
   // get the day
@@ -443,6 +478,7 @@ function addStudio() {
   var date = yyyy + '-' + mm + '-' + dd;
   // get the error div
   var newsErr = $('.msg.error');
+
   // check to see if the
   if(studioImage === '') {
     // display the error
@@ -451,12 +487,27 @@ function addStudio() {
     // clear the error when new is entrered
     $(newsErr).text('');
     // build out the news
-    var newStudio = new News(id, studioImage, date);
+    var newStudio = new Studio(id, '../img/studio/' + id + '_l.jpg', date);
     // stringify the news
   	var stringStudio = JSON.stringify(newStudio);
     // do something with the news
-    console.log(stringStudio);
+    saveStudio(stringStudio);
   }
+}
+function saveStudio(data) {
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/save-studio.php?data=' + encodeURIComponent(data),
+      dataType: 'JSON',
+      success: function(ret){
+        console.log(ret);
+
+        msg.classList.add('success');
+        msg.innerHTML = 'Your studio shot has been added!';
+        msg.innerHTML = ret;
+      }
+  });
 }
 // CLEAR THE NEW TEXT AREA
 function clearStudio() {
@@ -467,6 +518,7 @@ function clearStudio() {
 // DISPLAY THE STUDIO
 function displayStudio() {
   var studio = JSON.parse( localStorage.getItem('studio') );
+  // console.log( studio );
   for (var key in studio) {
     var studio = studio[key].reverse();
     // get the length of each section
