@@ -22,39 +22,35 @@ function customError($errno, $errstr) {
 }
 set_error_handler("customError");
 
+// set the kind
 $kind = "news";
-$myData = $_GET["data"];
-
+// get the index that's passed into the file
+$index = $_GET["index"];
+// make sure that the index is a number…
+$index = intval($index);
+// get the file we want to edit
 $myFile = "../../data/news.json";
+// get the contents of that file
 $fileData = file_get_contents($myFile);
-echo '$fileData: ' . $fileData;
-
+// encode the contents of the file
 $json_encode = json_encode($fileData);
-echo '$json_encode: ' . $json_encode;
-unset( json_decode($json_encode) );
-// echo '$json_decode: ' . $json_decode;
-
-// $json_encode = '{"OS":"Android","Title":"Galaxy"}';
-// $json_decode = json_decode($json_encode);
-// unset($json_decode['Title']);
-
-// $jsonArray = json_decode($fileData,true);
-// echo '$jsonArray: ' . $jsonArray;
-//
-// $newJson = $_GET["data"];
-// echo '$newJson: ' . $newJson;
-//
-// $newJson = json_decode($newJson,true);
-// echo '$newJson: ' . $newJson;
-//
-// $jsonArray[$kind][] = $newJson;
-// $ultimateJson = json_encode($jsonArray);
-// echo '$ultimateJson: ' . $ultimateJson;
-// unset( json_encode($jsonArray) );
-
+// decode the contents of the file
+$json = json_decode($fileData, true);
+// loop through the file
+foreach ($json[$kind] as $key => $val) {
+  // find the matching index in the JSON data
+  if ($key == $index) {
+    // remove that index from the JSON data
+    unset($json[$kind][$key]);
+  }
+}
+// encode the date again
+$json = json_encode($json);
+// open the file
 $fileHandle = fopen($myFile, "w");
-
-fwrite($fileHandle, $ultimateJson);
+// write the file
+fwrite($fileHandle, $json);
+// close the file
 fclose($fileHandle);
 
 ?>
