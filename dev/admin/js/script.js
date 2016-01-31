@@ -27,7 +27,7 @@ function init() {
       var cancelStudio = document.getElementById('cancelStudio');
       cancelStudio.onclick = clearStudio;
       // delete old studio after clicking on the button
-      deleteOld();
+      deleteOldStudio();
       // grab the new studio
 
       var today = new Date();
@@ -54,11 +54,11 @@ function init() {
 
         xhr.onload = function() {
           if (this.status == 200) {
-            var resp = JSON.parse(this.response);
-
-            name = resp.name;
-            ext = resp.extension;
-            image = resp.newFileName;
+            // causing errors…
+            // var resp = JSON.parse(this.response);
+            // name = resp.name;
+            // ext = resp.extension;
+            // image = resp.newFileName;
 
             addStudio(today, timeId);
           };
@@ -74,7 +74,7 @@ function init() {
       var cancelNews = document.getElementById('cancelNews');
       cancelNews.onclick = clearNews;
       // delete old news after clicking on the button
-      deleteOld();
+      deleteOldNews();
       // grab the new news
       var saveNews = document.getElementById('saveNews');
       saveNews.onclick = addNews;
@@ -532,7 +532,7 @@ function displayStudio() {
       var div = document.createElement('div');
       div.setAttribute('class', 'module-section work studio');
       div.setAttribute('id', studio[i].id);
-      div.setAttribute('data-id', i);
+      div.setAttribute('data-id', (studio.length - 1) - i);
       // img stuff
       var img = document.createElement('img');
       img.setAttribute('class', 'studio-img');
@@ -544,7 +544,6 @@ function displayStudio() {
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
-      button.setAttribute('disabled', 'disabled');
       button.setAttribute('type', 'submit');
       button.setAttribute('name', 'edit');
       button.setAttribute('value', 'delete');
@@ -556,6 +555,30 @@ function displayStudio() {
       oldStudio.appendChild(div);
     }
   }
+}
+function deleteOldStudio() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this);
+    var dataIndex = $(this.parentElement).data('id');
+    var kind = $('body').attr('id');
+    deleteStudio(dataIndex);
+  });
+}
+function deleteStudio(index) {
+  console.log(index);
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/delete-studio.php?index=' + encodeURIComponent(index),
+      dataType: 'JSON',
+      success: function(ret){
+        console.log(ret);
+        msg.classList.add('success');
+        msg.innerHTML = 'Your studio image has been deleted!';
+        msg.innerHTML = ret;
+      }
+  });
 }
 
 
@@ -589,7 +612,6 @@ function displayNews() {
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
-      // button.setAttribute('disabled', 'disabled');
       button.setAttribute('type', 'submit');
       button.setAttribute('name', 'edit');
       button.setAttribute('value', 'delete');
@@ -665,7 +687,7 @@ function saveNews(data) {
       }
   });
 }
-function deleteOld() {
+function deleteOldNews() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
@@ -684,7 +706,7 @@ function deleteNews(index) {
       success: function(ret){
         console.log(ret);
         msg.classList.add('success');
-        msg.innerHTML = 'Your news story has been added!';
+        msg.innerHTML = 'Your news story has been deleted!';
         msg.innerHTML = ret;
       }
   });
