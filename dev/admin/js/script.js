@@ -580,7 +580,7 @@ function displayNews() {
       var div = document.createElement('div');
       div.setAttribute('class', 'news-item');
       div.setAttribute('id', news[i].id);
-      div.setAttribute('data-id', i);
+      div.setAttribute('data-id', (news.length - 1) - i);
       div.innerHTML = news[i].description;
       // span stuff
       var span = document.createElement('span');
@@ -669,44 +669,23 @@ function deleteOld() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
-    var dataId = $(this.parentElement).data('id');
-    // console.log(dataId);
+    var dataIndex = $(this.parentElement).data('id');
     var kind = $('body').attr('id');
-    // console.log(page);
-    // for now, just console log the id passed in
-    // console.log( deleteBtn[0].parentElement.id );
-    deleteNews(dataId);
+    deleteNews(dataIndex);
   });
 }
-function deleteNews(data) {
-  console.log(data);
+function deleteNews(index) {
+  console.log(index);
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
-      url: 'functions/delete-news.php?data=' + encodeURIComponent(data),
+      url: 'functions/delete-news.php?index=' + encodeURIComponent(index),
       dataType: 'JSON',
-      // beforeSend: function() {
-      //   msg.innerHTML = 'Your news story is being added...'
-      // },
       success: function(ret){
         console.log(ret);
-
-        // var data_array = $.parseJSON(json_data);
-        // console.log(data_array);
-
-        //access your data like this:
-        // var plum_or_whatever = data_array['output'];
-        // console.log(plum_or_whatever);
-        //continue from here...
-
-        // console.log(plum_or_whatever);
         msg.classList.add('success');
         msg.innerHTML = 'Your news story has been added!';
         msg.innerHTML = ret;
-      // },
-      // error: function() {
-      //   msg.classList.add('error');
-      //   msg.innerHTML = 'Something went wrong... your news story couldn\'t be added at this time.'
       }
   });
 }
