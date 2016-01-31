@@ -360,8 +360,13 @@ function heroImg( section, id, index ) {
 	// build out the main image
 	// do different stuff for different modules
 	if( section === 'studio' ) {
-		console.log( index );
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
+		// so… this sucks. when we run this the first time, in order to populate the heroImg section with
+		// an image, we send in the 0 index. unfortunately the Studio & News sections are reversed so the older
+		// news and studio data is at the bottom and the newest is at the top. the quickest fix I see is to
+		// create another function that mirrors this, but is only run for the initial loading of the page.
+		// that sounds awful though
+		// var index = data.length - 1;
 
 		var date = new Date(data[index].date);
 		var day = (date.getDate() + 1).toString();
