@@ -36,6 +36,10 @@ function init() {
       var test = document.getElementById('studioImage');
       test.addEventListener('change', function() {
         var file = this.files[0];
+        var fileName = file.name;
+        var fileArr = fileName.split('.');
+        var imgIndex = fileArr.length - 1;
+        var imgSuff = fileArr[imgIndex];
 
         var fd = new FormData();
         fd.append('studioImage', file);
@@ -43,6 +47,7 @@ function init() {
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'functions/upload.php', true);
+        // console.log( xhr );
 
         xhr.upload.onprogress = function(e) {
           if (e.lengthComputable) {
@@ -60,7 +65,7 @@ function init() {
             // ext = resp.extension;
             // image = resp.newFileName;
 
-            addStudio(today, timeId);
+            addStudio(today, timeId, imgSuff);
           };
         };
 
@@ -464,13 +469,14 @@ function deleteWorks() {
 
 
 // GET THE NEW TEXT AREA
-function addStudio(today, id) {
+function addStudio(today, id, imgSuff) {
   // get today's date
   // var today = new Date();
   // create an id
   // var id = today.getTime();
   // grab the news content
   var studioImage = document.getElementById('studioImage').value;
+  console.log( studioImage );
   // get the day
   var dd = today.getDate();
   // get the month
@@ -490,7 +496,8 @@ function addStudio(today, id) {
     // clear the error when new is entrered
     $(newsErr).text('');
     // build out the news
-    var newStudio = new Studio(id, '../img/studio/' + id + '_l.jpg', date);
+    var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, date);
+    console.log( newStudio );
     // stringify the news
   	var stringStudio = JSON.stringify(newStudio);
     // do something with the news
@@ -498,6 +505,7 @@ function addStudio(today, id) {
   }
 }
 function saveStudio(data) {
+  console.log( data );
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
