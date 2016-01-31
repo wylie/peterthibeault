@@ -143,10 +143,13 @@ function deleteOld() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
-    var page = $('body').attr('id');
-    console.log(page);
+    var dataId = $(this.parentElement).data('id');
+    console.log(dataId);
+    var kind = $('body').attr('id');
+    // console.log(page);
     // for now, just console log the id passed in
-    console.log( deleteBtn[0].parentElement.id );
+    // console.log( deleteBtn[0].parentElement.id );
+    deleteData(kind, dataId);
   });
 }
 // some arrays we will need as we go along
@@ -586,7 +589,7 @@ function displayNews() {
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
-      button.setAttribute('disabled', 'disabled');
+      // button.setAttribute('disabled', 'disabled');
       button.setAttribute('type', 'submit');
       button.setAttribute('name', 'edit');
       button.setAttribute('value', 'delete');
@@ -662,6 +665,52 @@ function saveNews(data) {
       }
   });
 }
+function deleteOld() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this);
+    var dataId = $(this.parentElement).data('id');
+    // console.log(dataId);
+    var kind = $('body').attr('id');
+    // console.log(page);
+    // for now, just console log the id passed in
+    // console.log( deleteBtn[0].parentElement.id );
+    deleteNews(dataId);
+  });
+}
+function deleteNews(data) {
+  console.log(data);
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/delete-news.php?data=' + encodeURIComponent(data),
+      dataType: 'JSON',
+      // beforeSend: function() {
+      //   msg.innerHTML = 'Your news story is being added...'
+      // },
+      success: function(ret){
+        console.log(ret);
+
+        // var data_array = $.parseJSON(json_data);
+        // console.log(data_array);
+
+        //access your data like this:
+        // var plum_or_whatever = data_array['output'];
+        // console.log(plum_or_whatever);
+        //continue from here...
+
+        // console.log(plum_or_whatever);
+        msg.classList.add('success');
+        msg.innerHTML = 'Your news story has been added!';
+        msg.innerHTML = ret;
+      // },
+      // error: function() {
+      //   msg.classList.add('error');
+      //   msg.innerHTML = 'Something went wrong... your news story couldn\'t be added at this time.'
+      }
+  });
+}
+
 
 
 
