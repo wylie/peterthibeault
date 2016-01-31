@@ -27,11 +27,30 @@ $myData = $_GET["data"];
 
 $myFile = "../../data/news.json";
 $fileData = file_get_contents($myFile);
-$jsonArray = json_decode($fileData,true);
-$newJson = $_GET["data"];
-$newJson = json_decode($newJson,true);
-$jsonArray[$kind][] = $newJson;
-$ultimateJson = json_encode($jsonArray);
+echo '$fileData: ' . $fileData;
+
+$json_encode = json_encode($fileData);
+echo '$json_encode: ' . $json_encode;
+unset( json_decode($json_encode) );
+// echo '$json_decode: ' . $json_decode;
+
+// $json_encode = '{"OS":"Android","Title":"Galaxy"}';
+// $json_decode = json_decode($json_encode);
+// unset($json_decode['Title']);
+
+// $jsonArray = json_decode($fileData,true);
+// echo '$jsonArray: ' . $jsonArray;
+//
+// $newJson = $_GET["data"];
+// echo '$newJson: ' . $newJson;
+//
+// $newJson = json_decode($newJson,true);
+// echo '$newJson: ' . $newJson;
+//
+// $jsonArray[$kind][] = $newJson;
+// $ultimateJson = json_encode($jsonArray);
+// echo '$ultimateJson: ' . $ultimateJson;
+// unset( json_encode($jsonArray) );
 
 $fileHandle = fopen($myFile, "w");
 
