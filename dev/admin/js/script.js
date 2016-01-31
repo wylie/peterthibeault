@@ -143,10 +143,13 @@ function deleteOld() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
-    var page = $('body').attr('id');
-    console.log(page);
+    var dataId = $(this.parentElement).data('id');
+    console.log(dataId);
+    var kind = $('body').attr('id');
+    // console.log(page);
     // for now, just console log the id passed in
-    console.log( deleteBtn[0].parentElement.id );
+    // console.log( deleteBtn[0].parentElement.id );
+    deleteData(kind, dataId);
   });
 }
 // some arrays we will need as we go along
@@ -577,7 +580,7 @@ function displayNews() {
       var div = document.createElement('div');
       div.setAttribute('class', 'news-item');
       div.setAttribute('id', news[i].id);
-      div.setAttribute('data-id', i);
+      div.setAttribute('data-id', (news.length - 1) - i);
       div.innerHTML = news[i].description;
       // span stuff
       var span = document.createElement('span');
@@ -586,7 +589,7 @@ function displayNews() {
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
-      button.setAttribute('disabled', 'disabled');
+      // button.setAttribute('disabled', 'disabled');
       button.setAttribute('type', 'submit');
       button.setAttribute('name', 'edit');
       button.setAttribute('value', 'delete');
@@ -662,6 +665,31 @@ function saveNews(data) {
       }
   });
 }
+function deleteOld() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this);
+    var dataIndex = $(this.parentElement).data('id');
+    var kind = $('body').attr('id');
+    deleteNews(dataIndex);
+  });
+}
+function deleteNews(index) {
+  console.log(index);
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/delete-news.php?index=' + encodeURIComponent(index),
+      dataType: 'JSON',
+      success: function(ret){
+        console.log(ret);
+        msg.classList.add('success');
+        msg.innerHTML = 'Your news story has been added!';
+        msg.innerHTML = ret;
+      }
+  });
+}
+
 
 
 
