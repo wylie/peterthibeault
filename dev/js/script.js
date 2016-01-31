@@ -260,11 +260,17 @@ function displayAddtnlWork(module, data) {
 	var blammo = $(module + '.module-list');
 
 	for(var i = 0; i < data.length; i++ ) {
+		// console.log( module );
+		// console.log( data );
 		var listItem = document.createElement('li');
 		// do different stuff for different modules
 		if( module === 'studio' ) {
+			var imgPath = data[i].image;
+			var fileArr = imgPath.split('.');
+			var imgIndex = fileArr.length - 1;
+			var imgSuff = fileArr[imgIndex];
 			var imgPath = 'img/studio/';''
-			var imgSuff = '_m.jpg';
+			var imgSuff = '_l.' + imgSuff;
 		} else {
 			var imgPath = 'img/works/';''
 			var imgSuff = '_m-0.jpg';
@@ -288,7 +294,6 @@ function displayAddtnlWork(module, data) {
 			var year = (date.getFullYear()).toString();
 			var year = year.slice(-2);
 			var studioDate = day + month + year;
-
 
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 			listItem.setAttribute('data-id', i);
@@ -355,13 +360,14 @@ function heroImg( section, id, index ) {
 	// build out the main image
 	// do different stuff for different modules
 	if( section === 'studio' ) {
+		console.log( index );
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
 
 		var date = new Date(data[index].date);
 		var day = (date.getDate() + 1).toString();
 		var monthNum = date.getMonth();
 		var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-		for(var j = 0; j < monthNames.length; j++ ) {
+		for(var i = 0; i < monthNames.length; i++ ) {
 			var month = monthNames[monthNum];
 		}
 		var year = (date.getFullYear()).toString();
@@ -372,8 +378,13 @@ function heroImg( section, id, index ) {
 		heroSpan.setAttribute('class', 'display-date');
 		heroSpan.innerHTML = studioDate;
 
+		var imgPath = data[index].image;
+		var fileArr = imgPath.split('.');
+		var imgIndex = fileArr.length - 1;
+		var imgSuffix = fileArr[imgIndex];
+
 		var imgPath = 'img/studio/';''
-		var imgSuff = '_l.jpg';
+		var imgSuff = '_l.' + imgSuffix;
 		var imgId = id;
 		var imgNum = 1;
 		var allImg = imgPath + imgId + imgSuff;
