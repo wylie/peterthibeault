@@ -44,7 +44,12 @@ function getFirst() {
 			$(firstChild).addClass('active');
 			var id = firstChild[0].attributes[1].nodeValue;
 
-			heroImg( dataArr[i], id, 0 );
+			if( dataArr[i] === 'news' || dataArr[i] === 'studio') {
+				var index = data.length - 1;
+				heroImg( dataArr[i], id, index );
+			} else {
+				heroImg( dataArr[i], id, 0 );
+			}
 			heroInfo( dataArr[i], id, 0 );
 			heroRelated( dataArr[i], id, 0 );
 		}
