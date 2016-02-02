@@ -44,7 +44,12 @@ function getFirst() {
 			$(firstChild).addClass('active');
 			var id = firstChild[0].attributes[1].nodeValue;
 
-			heroImg( dataArr[i], id, 0 );
+			if( dataArr[i] === 'news' || dataArr[i] === 'studio') {
+				var index = data.length - 1;
+				heroImg( dataArr[i], id, index );
+			} else {
+				heroImg( dataArr[i], id, 0 );
+			}
 			heroInfo( dataArr[i], id, 0 );
 			heroRelated( dataArr[i], id, 0 );
 		}
@@ -360,9 +365,7 @@ function heroImg( section, id, index ) {
 	// build out the main image
 	// do different stuff for different modules
 	if( section === 'studio' ) {
-		console.log( index );
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-
 		var date = new Date(data[index].date);
 		var day = (date.getDate() + 1).toString();
 		var monthNum = date.getMonth();
