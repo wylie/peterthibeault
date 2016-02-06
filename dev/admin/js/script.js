@@ -47,7 +47,6 @@ function init() {
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'functions/upload.php', true);
-        // console.log( xhr );
 
         xhr.upload.onprogress = function(e) {
           if (e.lengthComputable) {
