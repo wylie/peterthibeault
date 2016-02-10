@@ -506,11 +506,12 @@ function getClickedRelated(section, id) {
 	});
 }
 
+// this is the function with the issues!
 function heroImgRelated(section, id, tst) {
 	var hero = document.getElementById( section + '-hero' );
 	hero.innerHTML = '';
 	var img = document.createElement('img');
-	img.setAttribute('class', 'main-image KER-POW');
+	img.setAttribute('class', 'main-image');
 	var allImg = 'img/works/' + id + '_l-' + tst + '.jpg';
 	img.setAttribute('src', 'img/works/' + id + '_l-' + tst + '.jpg');
 	hero.setAttribute('style', 'background-image:url("' + allImg + '");');

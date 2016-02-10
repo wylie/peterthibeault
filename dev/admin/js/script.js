@@ -30,47 +30,14 @@ function init() {
       deleteOldStudio();
       // grab the new studio
 
-      var today = new Date();
-      var timeId = today.getTime();
-
-      var test = document.getElementById('studioImage');
-      test.addEventListener('change', function() {
-        var file = this.files[0];
-        var fileName = file.name;
-        var fileArr = fileName.split('.');
-        var imgIndex = fileArr.length - 1;
-        var imgSuff = fileArr[imgIndex];
-
-        var fd = new FormData();
-        fd.append('studioImage', file);
-        fd.append('id', timeId);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'functions/upload.php', true);
-        // console.log( xhr );
-
-        xhr.upload.onprogress = function(e) {
-          if (e.lengthComputable) {
-            var percentComplete = (e.loaded / e.total) * 100;
-            var uploadProcess = document.getElementById('uploadProcess');
-            uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
-          }
-        };
-
-        xhr.onload = function() {
-          if (this.status == 200) {
-            // causing errors…
-            // var resp = JSON.parse(this.response);
-            // name = resp.name;
-            // ext = resp.extension;
-            // image = resp.newFileName;
-
-            addStudio(today, timeId, imgSuff);
-          };
-        };
-
-        xhr.send(fd);
+      var saveStudio = document.getElementById('saveStudio');
+      var studioImage = document.getElementById('studioImage');
+      studioImage.addEventListener('change', function() {
+        saveStudio.removeAttribute('disabled');
       }, false);
+      var saveStudio = document.getElementById('saveStudio');
+      saveStudio.addEventListener('click', startSavingStudio, false);
+
       break;
     case 'news':
       // display the old news
@@ -90,8 +57,6 @@ function init() {
       break;
   }
 }
-
-
 
 
 
@@ -469,14 +434,60 @@ function deleteWorks() {
 
 
 // GET THE NEW TEXT AREA
-function addStudio(today, id, imgSuff) {
-  // get today's date
-  // var today = new Date();
-  // create an id
-  // var id = today.getTime();
+function startSavingStudio() {
+  var studioImg = document.getElementById('studioImage');
+  if( studioImg.files[0] ) {
+      var today = new Date();
+      var timeId = today.getTime();
+      var file = studioImg.files[0];
+      var fd = new FormData();
+      fd.append('studioImage', file);
+      fd.append('id', timeId);
+
+      uploadStudioImg(today, timeId, fd, file);
+  } else {
+    console.log( 'please add an image!' );
+  }
+}
+
+function uploadStudioImg(today, timeId, fd, file) {
+  var stringStudio = addStudio(today, timeId, fd, file);
+  // console.log( stringStudio );
+  var fileName = file.name;
+  var fileArr = fileName.split('.');
+  var imgIndex = fileArr.length - 1;
+  var imgSuff = fileArr[imgIndex];
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'functions/upload.php', true);
+
+  xhr.upload.onprogress = function(e) {
+    if (e.lengthComputable) {
+      var percentComplete = (e.loaded / e.total) * 100;
+      var uploadProcess = document.getElementById('uploadProcess');
+      uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
+      if(percentComplete === 100) {
+      }
+    }
+  };
+
+  xhr.onload = function() {
+    if (this.status == 200) {
+      saveStudio(stringStudio);
+    };
+  };
+
+  xhr.send(fd);
+}
+function addStudio(today, id, fd, file) {
+  var fileName = file.name;
+  var fileArr = fileName.split('.');
+  var imgIndex = fileArr.length - 1;
+  var imgSuff = fileArr[imgIndex];
+
   // grab the news content
   var studioImage = document.getElementById('studioImage').value;
-  console.log( studioImage );
+  // console.log( studioImage );
   // get the day
   var dd = today.getDate();
   // get the month
@@ -497,15 +508,13 @@ function addStudio(today, id, imgSuff) {
     $(newsErr).text('');
     // build out the news
     var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, date);
-    console.log( newStudio );
     // stringify the news
   	var stringStudio = JSON.stringify(newStudio);
     // do something with the news
-    saveStudio(stringStudio);
+    return stringStudio;
   }
 }
 function saveStudio(data) {
-  console.log( data );
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
@@ -519,17 +528,35 @@ function saveStudio(data) {
         msg.innerHTML = ret;
       }
   });
+  reloadStudio();
+}
+function reloadStudio() {
+  localStorage.removeItem('studio');
+  getData('studio');
+
+  clearStudio();
+
+  setTimeout(function(){
+    var studioItems = document.getElementById('oldStudio');
+    studioItems.innerHTML = '';
+    displayStudio();
+  },300);
 }
 // CLEAR THE NEW TEXT AREA
 function clearStudio() {
-  var newsErr = $('.msg.error');
-  $(newsErr).text('');
-  document.getElementById('newsContent').value = '';
+  var saveStudio = document.getElementById('saveStudio');
+  saveStudio.setAttribute('disabled', 'disabled');
+
+  var uploadProcess = document.getElementById('uploadProcess');
+  uploadProcess.setAttribute('style', 'width: 0%;');
+
+  var studioErr = $('.msg.error');
+  $(studioErr).text('');
+  document.getElementById('studioImage').value = '';
 }
 // DISPLAY THE STUDIO
 function displayStudio() {
   var studio = JSON.parse( localStorage.getItem('studio') );
-  // console.log( studio );
   for (var key in studio) {
     var studio = studio[key].reverse();
     // get the length of each section
@@ -568,13 +595,14 @@ function deleteOldStudio() {
   $('.delete').click(function() {
     // give this a var
     var deleteBtn = $(this);
+    var dataId = $(this.parentElement).attr('id');
     var dataIndex = $(this.parentElement).data('id');
     var kind = $('body').attr('id');
+    document.getElementById(dataId).remove();
     deleteStudio(dataIndex);
   });
 }
 function deleteStudio(index) {
-  console.log(index);
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
@@ -587,6 +615,9 @@ function deleteStudio(index) {
         msg.innerHTML = ret;
       }
   });
+  setTimeout(function(){
+    reloadStudio();
+  },300);
 }
 
 
@@ -744,14 +775,5 @@ function clearNews() {
 function dbNum(num) {
   // get the element where the numbers will live
   var dbNum = document.getElementById('dbNum');
-  // push the num to the workSum array
-  workSum.push( num );
-  // create a var at 0 so we can add to it
-  var totalWorks = 0;
-  // loop through and add the numbers in the array
-  $.each(workSum,function() {
-      totalWorks += this;
-  });
-  // display the number of news items saved
-  dbNum.innerHTML = totalWorks;
+  dbNum.innerHTML = num;
 }
