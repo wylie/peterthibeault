@@ -18,6 +18,7 @@ function init() {
 	openTray();
 	getFirst();
 	email();
+	getClickedRelated();
 }
 
 // CAPITALIZE FIRST LETTER OF A STRING
@@ -51,8 +52,9 @@ function getFirst() {
 				heroImg( dataArr[i], id, 0 );
 			}
 			heroInfo( dataArr[i], id, 0 );
-			heroRelated( dataArr[i], id, 0 );
+			// console.log( 'get first' );
 		}
+		heroRelated( dataArr[i], id, 0 );
 	}
 };
 
@@ -265,8 +267,6 @@ function displayAddtnlWork(module, data) {
 	var blammo = $(module + '.module-list');
 
 	for(var i = 0; i < data.length; i++ ) {
-		// console.log( module );
-		// console.log( data );
 		var listItem = document.createElement('li');
 		// do different stuff for different modules
 		if( module === 'studio' ) {
@@ -338,6 +338,7 @@ function displayAddtnlWork(module, data) {
 
 function getClickedAddtl() {
 	$('.module-list .list-item').click(function() {
+		console.log( $(this) );
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
 		var section = $(this).parents('.module.group').attr('id');
@@ -476,25 +477,33 @@ function heroInfo( section, id, index ) {
 }
 
 function heroRelated( section, id, index ) {
-	var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-	var tray = $( '#' + section + '-tray');
-	var relatedImages = tray.children('.sidebar-items-list:last-child');
-
-	for(var i = 0; i < data[index].images; i++ ) {
-		var li = document.createElement('li');
-		if( i === 0 ) {
-			li.setAttribute('class', 'sidebar-list-item active');
-		} else {
-			li.setAttribute('class', 'sidebar-list-item');
-		}
-		li.setAttribute('style', 'background-image: url(img/works/' + id + '_s-' + i + '.jpg);');
-		relatedImages[0].appendChild(li);
+	switch(section) {
+		case 'furnishings':
+		case 'sculpture':
+		case 'drawing':
+		case 'painting':
+		case 'design':
+			var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
+			var tray = $( '#' + section + '-tray');
+			var relatedImages = tray.children('.sidebar-items-list:last-child');
+			for(var i = 0; i < data[index].images; i++ ) {
+				var li = document.createElement('li');
+				if( i === 0 ) {
+					li.setAttribute('class', 'sidebar-list-item active');
+				} else {
+					li.setAttribute('class', 'sidebar-list-item');
+				}
+				li.setAttribute('style', 'background-image: url(img/works/' + id + '_s-' + i + '.jpg);');
+				relatedImages[0].appendChild(li);
+			}
+			// getClickedRelated(section, id);
+			break;
 	}
-	getClickedRelated(section, id);
 }
 
-function getClickedRelated(section, id) {
-	$('.related .sidebar-list-item').click(function() {
+function getClickedRelated() {
+	$('.sidebar-list-item').click(function() {
+		console.log( $(this) );
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
 		var tst = $(this);
@@ -505,6 +514,19 @@ function getClickedRelated(section, id) {
 		heroImgRelated( section, id, tst[1] );
 	});
 }
+// function getClickedRelated(section, id) {
+// 	$('.related .sidebar-list-item').click(function() {
+// 		console.log( $(this) );
+// 		$(this).siblings().removeClass('active');
+// 		$(this).addClass('active');
+// 		var tst = $(this);
+// 		var tst = tst[0].style.backgroundImage;
+// 		var tst = tst.split('works');
+// 		var tst = tst[1].split('.');
+// 		var tst = tst[0].split('-');
+// 		heroImgRelated( section, id, tst[1] );
+// 	});
+// }
 
 // this is the function with the issues!
 function heroImgRelated(section, id, tst) {
