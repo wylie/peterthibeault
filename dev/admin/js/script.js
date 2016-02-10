@@ -29,7 +29,6 @@ function init() {
       // delete old studio after clicking on the button
       deleteOldStudio();
       // grab the new studio
-
       var saveStudio = document.getElementById('saveStudio');
       var studioImage = document.getElementById('studioImage');
       studioImage.addEventListener('change', function() {
@@ -47,9 +46,15 @@ function init() {
       cancelNews.onclick = clearNews;
       // delete old news after clicking on the button
       deleteOldNews();
-      // grab the new news
+
       var saveNews = document.getElementById('saveNews');
-      saveNews.onclick = addNews;
+      var newsContent = document.getElementById('newsContent');
+      newsContent.addEventListener('input', function() {
+        saveNews.removeAttribute('disabled');
+        saveNews.onclick = addNews;
+      }, false);
+
+      // grab the new news
       break;
     case 'cv':
       break;
@@ -97,6 +102,32 @@ function News(id, description, date) {
 	this.id = id,
 	this.description = description,
 	this.date = date
+}
+
+
+
+function reloadData(kind) {
+  localStorage.removeItem(kind);
+  getData(kind);
+
+  switch(kind) {
+    case 'studio':
+      clearStudio();
+      setTimeout(function(){
+        var studioItems = document.getElementById('oldStudio');
+        studioItems.innerHTML = '';
+        displayStudio();
+      },300);
+      break;
+    case 'news':
+      clearNews();
+      setTimeout(function(){
+        var newsItems = document.getElementById('oldNews');
+        newsItems.innerHTML = '';
+        displayNews();
+      },300);
+      break;
+  }
 }
 
 
@@ -528,19 +559,7 @@ function saveStudio(data) {
         msg.innerHTML = ret;
       }
   });
-  reloadStudio();
-}
-function reloadStudio() {
-  localStorage.removeItem('studio');
-  getData('studio');
-
-  clearStudio();
-
-  setTimeout(function(){
-    var studioItems = document.getElementById('oldStudio');
-    studioItems.innerHTML = '';
-    displayStudio();
-  },300);
+  reloadData('studio');
 }
 // CLEAR THE NEW TEXT AREA
 function clearStudio() {
@@ -616,7 +635,7 @@ function deleteStudio(index) {
       }
   });
   setTimeout(function(){
-    reloadStudio();
+    reloadData('studio');
   },300);
 }
 
@@ -701,30 +720,14 @@ function saveNews(data) {
       type: 'GET',
       url: 'functions/save-news.php?data=' + encodeURIComponent(data),
       dataType: 'JSON',
-      // beforeSend: function() {
-      //   msg.innerHTML = 'Your news story is being added...'
-      // },
       success: function(ret){
         console.log(ret);
-
-        // var data_array = $.parseJSON(json_data);
-        // console.log(data_array);
-
-        //access your data like this:
-        // var plum_or_whatever = data_array['output'];
-        // console.log(plum_or_whatever);
-        //continue from here...
-
-        // console.log(plum_or_whatever);
         msg.classList.add('success');
         msg.innerHTML = 'Your news story has been added!';
         msg.innerHTML = ret;
-      // },
-      // error: function() {
-      //   msg.classList.add('error');
-      //   msg.innerHTML = 'Something went wrong... your news story couldn\'t be added at this time.'
       }
   });
+  reloadData('news');
 }
 function deleteOldNews() {
   $('.delete').click(function() {
@@ -736,7 +739,6 @@ function deleteOldNews() {
   });
 }
 function deleteNews(index) {
-  console.log(index);
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
@@ -749,12 +751,10 @@ function deleteNews(index) {
         msg.innerHTML = ret;
       }
   });
+  setTimeout(function(){
+    reloadData('news');
+  },300);
 }
-
-
-
-
-
 // CLEAR THE NEW TEXT AREA
 function clearNews() {
   var newsErr = $('.msg.error');
