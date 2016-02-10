@@ -18,6 +18,7 @@ function init() {
 	openTray();
 	getFirst();
 	email();
+	getClickedRelated();
 }
 
 // CAPITALIZE FIRST LETTER OF A STRING
@@ -43,7 +44,6 @@ function getFirst() {
 			var firstChild = $(addtnl).children('.list-item:first-child');
 			$(firstChild).addClass('active');
 			var id = firstChild[0].attributes[1].nodeValue;
-
 			if( dataArr[i] === 'news' || dataArr[i] === 'studio') {
 				var index = data.length - 1;
 				heroImg( dataArr[i], id, index );
@@ -51,8 +51,8 @@ function getFirst() {
 				heroImg( dataArr[i], id, 0 );
 			}
 			heroInfo( dataArr[i], id, 0 );
-			heroRelated( dataArr[i], id, 0 );
 		}
+		heroRelated( dataArr[i], id, 0 );
 	}
 };
 
@@ -143,40 +143,31 @@ function buildModule(nav, data) {
 	var anchor = document.createElement('a');
 	anchor.setAttribute('name', nav.toLowerCase() );
 	module.appendChild(anchor);
-
 	// heading
 	var h2 = document.createElement('h2');
 	h2.setAttribute('class',  'header');
 	h2.innerHTML = nav.toUpperCase();
 	module.appendChild(h2);
-
 	// wrap module div
 	var wrapDiv = document.createElement('div');
 	wrapDiv.setAttribute('class', 'module-wrap group');
-
 	// create the left div
 	var leftDiv = document.createElement('div');
 	leftDiv.setAttribute('class', 'left');
 	leftDiv.setAttribute('id', 'left');
-
 	// create the container for the hero images
 	var heroDiv = document.createElement('div');
 	heroDiv.setAttribute('class', 'module-main bg-3 hero-img');
 	heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
-
 	// create the container for the hero images
 	var infoDiv = document.createElement('div');
 	infoDiv.setAttribute('class', 'module-info grid bg-3 group closed');
 	infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
-
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
 	infoUl1.setAttribute('class', 'sidebar-items-list group col4');
-
 	infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li class="sidebar-list-item" data-info="name"></li><li class="sidebar-list-heading">MEDIA</li><li class="sidebar-list-item" data-info="media"></li><li class="sidebar-list-heading">DESCRIPTION</li><li class="sidebar-list-item" data-info="description"></li><li class="sidebar-list-heading">DIMENSIONS</li><li class="sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
-
 	infoDiv.appendChild(infoUl1);
-
 	// create a list for the first column
 	var infoUl2 = document.createElement('ul');
 	infoUl2.setAttribute('class', 'sidebar-items-list group col4');
@@ -190,7 +181,6 @@ function buildModule(nav, data) {
 		infoUl2Li.innerHTML = '';
 	}
 	infoUl2.appendChild(infoUl2Li);
-
 	// create a list for the first column
 	var infoUl3 = document.createElement('ul');
 	infoUl3.setAttribute('class', 'related sidebar-items-list group col4');
@@ -200,46 +190,36 @@ function buildModule(nav, data) {
 	infoUl3Li.setAttribute('class', 'sidebar-header');
 	infoUl3Li.innerHTML = '<h2 class="sidebar-list-heading" title="View some more images of this piece">RELATED IMAGES</h2>';
 	infoUl3.appendChild(infoUl3Li);
-
 	// add things to the leftDiv
 	leftDiv.appendChild(heroDiv);
 
 	if( (nav != 'studio') && (nav != 'news') ) {
 		leftDiv.appendChild(infoDiv);
 	}
-
 	// add the left div to the wrapDiv
 	wrapDiv.appendChild(leftDiv);
-
 	// create the right div
 	var rightDiv = document.createElement('div');
 	rightDiv.setAttribute('class', 'right');
 	rightDiv.setAttribute('id', 'right');
-
 	// add the nav div
 	var navDiv = document.createElement('div');
 	navDiv.setAttribute('class', 'module-nav bg-3');
 	navDiv.setAttribute('id', nav.toLowerCase() + '-additional');
-
 	// add the nav div sub-header
 	var navSubHeaderDiv = document.createElement('h3');
 	navSubHeaderDiv.setAttribute('class', 'sub-header');
 	navSubHeaderDiv.innerHTML = 'Additional ' + nav;
 	navDiv.appendChild(navSubHeaderDiv);
-
 	// add the nav div list
 	var navList = document.createElement('ul');
 	navList.setAttribute('class', 'module-list');
-
 	// append navDiv to the navList
 	navDiv.appendChild(navList);
-
 	// add things to the rightDiv
 	rightDiv.appendChild(navDiv);
-
 	// add the right div to the wrapDiv
 	wrapDiv.appendChild(rightDiv);
-
 	// add it all to the module
 	module.appendChild(wrapDiv);
 	worksDiv.appendChild(module);
@@ -255,7 +235,7 @@ function relatedWorks() {
 }
 
 function displayCV() {
-
+	// do nothing
 }
 
 function displayAddtnlWork(module, data) {
@@ -263,10 +243,7 @@ function displayAddtnlWork(module, data) {
 	var id = '#' + module + '-additional';
 	var mod = $( id );
 	var blammo = $(module + '.module-list');
-
 	for(var i = 0; i < data.length; i++ ) {
-		// console.log( module );
-		// console.log( data );
 		var listItem = document.createElement('li');
 		// do different stuff for different modules
 		if( module === 'studio' ) {
@@ -282,13 +259,11 @@ function displayAddtnlWork(module, data) {
 		}
 		var imgId = data[i].id;
 		var imgNum = data[i].images;
-
 		listItem.setAttribute('class', 'list-item');
 		listItem.setAttribute('id', imgId);
 		// do different stuff for different modules
 		if( module === 'studio' ) {
 			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
-
 			var date = new Date(data[i].date);
 			var day = (date.getDate() + 1).toString();
 			var monthNum = date.getMonth();
@@ -299,15 +274,12 @@ function displayAddtnlWork(module, data) {
 			var year = (date.getFullYear()).toString();
 			var year = year.slice(-2);
 			var studioDate = day + month + year;
-
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 			listItem.setAttribute('data-id', i);
 			listItem.innerHTML = studioDate;
-
 			mod[0].children[1].insertBefore( listItem, mod[0].children[1].firstChild );
 		} else if( module === 'news' ) {
 			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
-
 			var date = new Date(data[i].date);
 			var day = (date.getDate() + 1).toString();
 			var monthNum = date.getMonth();
@@ -318,26 +290,21 @@ function displayAddtnlWork(module, data) {
 			var year = (date.getFullYear()).toString();
 			var year = year.slice(-2);
 			var newsDate = day + month + year;
-
 			listItem.innerHTML = newsDate;
 			listItem.setAttribute('style', 'background-image: none');
 			listItem.setAttribute('data-id', i);
-
 			mod[0].children[1].insertBefore( listItem, mod[0].children[1].firstChild );
-
 		} else {
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 			listItem.setAttribute('data-id', i);
-
 			mod[0].children[1].appendChild( listItem );
 		}
 	}
 }
 
-
-
 function getClickedAddtl() {
 	$('.module-list .list-item').click(function() {
+		console.log( $(this) );
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
 		var section = $(this).parents('.module.group').attr('id');
@@ -351,7 +318,6 @@ function getClickedAddtl() {
 			var availHead = $(availList[1]).children('.sidebar-header');
 			availHead[0].innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[index].title + ' (' + section + ')&amp;body=I am inquiring about a ' + section + ' listed on your website. The name of it is: ' + data[index].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
 		}
-
 		heroImg( section, id, index );
 		heroInfo( section, id, index );
 		replaceRelated( section, id, index );
@@ -376,16 +342,13 @@ function heroImg( section, id, index ) {
 		var year = (date.getFullYear()).toString();
 		var year = year.slice(-2);
 		var studioDate = day + month + year;
-
 		var heroSpan = document.createElement('span');
 		heroSpan.setAttribute('class', 'display-date');
 		heroSpan.innerHTML = studioDate;
-
 		var imgPath = data[index].image;
 		var fileArr = imgPath.split('.');
 		var imgIndex = fileArr.length - 1;
 		var imgSuffix = fileArr[imgIndex];
-
 		var imgPath = 'img/studio/';''
 		var imgSuff = '_l.' + imgSuffix;
 		var imgId = id;
@@ -398,7 +361,7 @@ function heroImg( section, id, index ) {
 		if( section === 'studio' ) {
 			heroImg.setAttribute('src', allImg);
 		} else if ( section === 'news' ) {
-			// console.log('news');
+			// do nothing
 		} else {
 			heroImg.setAttribute('src', allImg);
 		}
@@ -409,7 +372,6 @@ function heroImg( section, id, index ) {
 		mod[0].appendChild( heroImg );
 	} else if ( section === 'news' ) {
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-
 		var date = new Date(data[index].date);
 		var day = (date.getDate() + 1).toString();
 		var monthNum = date.getMonth();
@@ -420,7 +382,6 @@ function heroImg( section, id, index ) {
 		var year = (date.getFullYear()).toString();
 		var year = year.slice(-2);
 		var newsDate = day + month + year;
-
 		mod[0].innerHTML = '<div class="text">' + data[index].description  + '</div><div class="display-date">' + newsDate + '</div>';
 		return;
 	} else {
@@ -429,34 +390,29 @@ function heroImg( section, id, index ) {
 		var imgSuff = '_l-0.jpg';
 		var imgNum = 1;
 		var allImg = imgPath + imgId + imgSuff;
-
 		// make sure we're doing this for sections with images
 		if(imgNum != undefined) {
 			// do different stuff for different modules
 			if( section === 'studio' ) {
 				mod[0].setAttribute('src', allImg);
 			} else if ( section === 'news' ) {
-				// console.log('news');
 			} else {
 				mod[0].setAttribute('style', 'background-image:url("' + allImg + '");');
 			}
 			// clear the hero image
 			mod[0].innerHTML = '';
 		}
-
 	}
 }
 
 function heroInfo( section, id, index ) {
 	var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-
 	var title = $( '#' + section + '-tray [data-info="name"]' );
 	var media = $( '#' + section + '-tray [data-info="media"]' );
 	var desription = $( '#' + section + '-tray [data-info="description"]' );
 	var height =  $( '#' + section + '-tray [data-info="height"]' );
 	var width =  $( '#' + section + '-tray [data-info="width"]' );
 	var depth =  $( '#' + section + '-tray [data-info="depth"]' );
-
 	if( section === 'news' ) {
 		// do nothing
 	} else if( section === 'studio' ) {
@@ -476,25 +432,37 @@ function heroInfo( section, id, index ) {
 }
 
 function heroRelated( section, id, index ) {
-	var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-	var tray = $( '#' + section + '-tray');
-	var relatedImages = tray.children('.sidebar-items-list:last-child');
-
-	for(var i = 0; i < data[index].images; i++ ) {
-		var li = document.createElement('li');
-		if( i === 0 ) {
-			li.setAttribute('class', 'sidebar-list-item active');
-		} else {
-			li.setAttribute('class', 'sidebar-list-item');
-		}
-		li.setAttribute('style', 'background-image: url(img/works/' + id + '_s-' + i + '.jpg);');
-		relatedImages[0].appendChild(li);
+	switch(section) {
+		case 'furnishings':
+		case 'sculpture':
+		case 'drawing':
+		case 'painting':
+		case 'design':
+			var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
+			var tray = $( '#' + section + '-tray');
+			var relatedImages = tray.children('.sidebar-items-list:last-child');
+			for(var i = 0; i < data[index].images; i++ ) {
+				var li = document.createElement('li');
+				if( i === 0 ) {
+					li.setAttribute('class', 'sidebar-list-item active');
+				} else {
+					li.setAttribute('class', 'sidebar-list-item');
+				}
+				li.setAttribute('style', 'background-image: url(img/works/' + id + '_s-' + i + '.jpg);');
+				li.setAttribute('data-id', id);
+				relatedImages[0].appendChild(li);
+			}
+			break;
 	}
-	getClickedRelated(section, id);
 }
 
-function getClickedRelated(section, id) {
-	$('.related .sidebar-list-item').click(function() {
+function getClickedRelated() {
+	$('.sidebar-list-item').click(function() {
+		var test = $(this);
+		var sec = test[0].parentNode.parentNode.id;
+		var secSplit = sec.split('-');
+		var section = secSplit[0];
+		var id = $(this).data(id);
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
 		var tst = $(this);
@@ -502,7 +470,7 @@ function getClickedRelated(section, id) {
 		var tst = tst.split('works');
 		var tst = tst[1].split('.');
 		var tst = tst[0].split('-');
-		heroImgRelated( section, id, tst[1] );
+		heroImgRelated( section, id.id, tst[1] );
 	});
 }
 
@@ -523,7 +491,6 @@ function replaceRelated( section, id, index ) {
 	$(relatedImages[0]).children().not(':first').remove();
 	heroRelated( section, id, index );
 }
-
 
 function openTray() {
 	$('.sidebar-list-heading').click(function() {
