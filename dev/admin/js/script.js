@@ -26,8 +26,7 @@ function init() {
       // cancel the studio in the textarea
       var cancelStudio = document.getElementById('cancelStudio');
       cancelStudio.onclick = clearStudio;
-
-      deleteOldStudio();
+      deleteBadStuff('studio');
 
       // grab the new studio
       var saveStudio = document.getElementById('saveStudio');
@@ -46,7 +45,7 @@ function init() {
       var cancelNews = document.getElementById('cancelNews');
       cancelNews.onclick = clearNews;
       // delete old news after clicking on the button
-      deleteOldNews();
+      deleteBadStuff('news');
 
       var saveNews = document.getElementById('saveNews');
       var newsContent = document.getElementById('newsContent');
@@ -475,7 +474,6 @@ function saveStuff(section, data) {
   reloadData(section);
 }
 function deleteStuff(section, index) {
-  console.log( 'deleteStuff function' );
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
@@ -492,7 +490,20 @@ function deleteStuff(section, index) {
     reloadData(section);
   },300);
 }
-
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function deleteBadStuff(section) {
+  var sectionCap = capitalizeFirstLetter(section);
+  $('#old' + sectionCap).on('click', '.delete', function() {
+    var deleteBtn = $(this);
+    var dataId = $(this.parentElement).attr('id');
+    var dataIndex = $(this.parentElement).data('id');
+    var kind = $('body').attr('id');
+    document.getElementById(dataId).remove();
+    deleteStuff(section, dataIndex);
+  });
+}
 
 
 
@@ -615,16 +626,6 @@ function displayStudio() {
     }
   }
 }
-function deleteOldStudio() {
-  $('#oldStudio').on('click', '.delete', function() {
-    var deleteBtn = $(this);
-    var dataId = $(this.parentElement).attr('id');
-    var dataIndex = $(this.parentElement).data('id');
-    var kind = $('body').attr('id');
-    document.getElementById(dataId).remove();
-    deleteStuff('studio', dataIndex);
-  });
-}
 // CLEAR THE NEW TEXT AREA
 function clearStudio() {
   var saveStudio = document.getElementById('saveStudio');
@@ -712,15 +713,6 @@ function addNews() {
     // do something with the news
     saveStuff('news', stringNews);
   }
-}
-function deleteOldNews() {
-  $('#oldNews').on('click', '.delete', function() {
-    // give this a var
-    var deleteBtn = $(this);
-    var dataIndex = $(this.parentElement).data('id');
-    var kind = $('body').attr('id');
-    deleteStuff('news', dataIndex);
-  });
 }
 // CLEAR THE NEW TEXT AREA
 function clearNews() {
