@@ -26,6 +26,9 @@ function init() {
       // cancel the studio in the textarea
       var cancelStudio = document.getElementById('cancelStudio');
       cancelStudio.onclick = clearStudio;
+
+      deleteOldStudio();
+
       // grab the new studio
       var saveStudio = document.getElementById('saveStudio');
       var studioImage = document.getElementById('studioImage');
@@ -457,10 +460,6 @@ function deleteWorks() {
 
 
 
-
-
-
-
 function saveStuff(section, data) {
   var msg = document.getElementById('messaging');
   $.ajax({
@@ -475,10 +474,24 @@ function saveStuff(section, data) {
   });
   reloadData(section);
 }
-
-
-
-
+function deleteStuff(section, index) {
+  console.log( 'deleteStuff function' );
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/delete-'+ section + '.php?index=' + encodeURIComponent(index),
+      dataType: 'JSON',
+      success: function(ret){
+        console.log(ret);
+        msg.classList.add('success');
+        msg.innerHTML = 'Your ' + section + ' has been deleted!';
+        msg.innerHTML = ret;
+      }
+  });
+  setTimeout(function(){
+    reloadData(section);
+  },300);
+}
 
 
 
@@ -565,18 +578,6 @@ function addStudio(today, id, fd, file) {
     return stringStudio;
   }
 }
-// CLEAR THE NEW TEXT AREA
-function clearStudio() {
-  var saveStudio = document.getElementById('saveStudio');
-  saveStudio.setAttribute('disabled', 'disabled');
-
-  var uploadProcess = document.getElementById('uploadProcess');
-  uploadProcess.setAttribute('style', 'width: 0%;');
-
-  var studioErr = $('.msg.error');
-  $(studioErr).text('');
-  document.getElementById('studioImage').value = '';
-}
 // DISPLAY THE STUDIO
 function displayStudio() {
   var studio = JSON.parse( localStorage.getItem('studio') );
@@ -614,30 +615,27 @@ function displayStudio() {
     }
   }
 }
-$('#oldStudio').on('click', '.delete', function() {
-  var deleteBtn = $(this);
-  var dataId = $(this.parentElement).attr('id');
-  var dataIndex = $(this.parentElement).data('id');
-  var kind = $('body').attr('id');
-  document.getElementById(dataId).remove();
-  deleteStudio(dataIndex);
-});
-function deleteStudio(index) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/delete-studio.php?index=' + encodeURIComponent(index),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-        msg.classList.add('success');
-        msg.innerHTML = 'Your studio image has been deleted!';
-        msg.innerHTML = ret;
-      }
+function deleteOldStudio() {
+  $('#oldStudio').on('click', '.delete', function() {
+    var deleteBtn = $(this);
+    var dataId = $(this.parentElement).attr('id');
+    var dataIndex = $(this.parentElement).data('id');
+    var kind = $('body').attr('id');
+    document.getElementById(dataId).remove();
+    deleteStuff('studio', dataIndex);
   });
-  setTimeout(function(){
-    reloadData('studio');
-  },300);
+}
+// CLEAR THE NEW TEXT AREA
+function clearStudio() {
+  var saveStudio = document.getElementById('saveStudio');
+  saveStudio.setAttribute('disabled', 'disabled');
+
+  var uploadProcess = document.getElementById('uploadProcess');
+  uploadProcess.setAttribute('style', 'width: 0%;');
+
+  var studioErr = $('.msg.error');
+  $(studioErr).text('');
+  document.getElementById('studioImage').value = '';
 }
 
 
@@ -721,25 +719,8 @@ function deleteOldNews() {
     var deleteBtn = $(this);
     var dataIndex = $(this.parentElement).data('id');
     var kind = $('body').attr('id');
-    deleteNews(dataIndex);
+    deleteStuff('news', dataIndex);
   });
-}
-function deleteNews(index) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/delete-news.php?index=' + encodeURIComponent(index),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-        msg.classList.add('success');
-        msg.innerHTML = 'Your news story has been deleted!';
-        msg.innerHTML = ret;
-      }
-  });
-  setTimeout(function(){
-    reloadData('news');
-  },300);
 }
 // CLEAR THE NEW TEXT AREA
 function clearNews() {
