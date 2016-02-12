@@ -610,9 +610,7 @@ function displayStudio() {
     }
   }
 }
-function deleteOldStudio() {
-  $('.delete').click(function() {
-    // give this a var
+  $('#oldStudio').on('click', '.delete', function() {
     var deleteBtn = $(this);
     var dataId = $(this.parentElement).attr('id');
     var dataIndex = $(this.parentElement).data('id');
@@ -730,7 +728,7 @@ function saveNews(data) {
   reloadData('news');
 }
 function deleteOldNews() {
-  $('.delete').click(function() {
+  $('#oldNews').on('click', '.delete', function() {
     // give this a var
     var deleteBtn = $(this);
     var dataIndex = $(this.parentElement).data('id');
