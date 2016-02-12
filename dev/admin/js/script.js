@@ -26,8 +26,7 @@ function init() {
       // cancel the studio in the textarea
       var cancelStudio = document.getElementById('cancelStudio');
       cancelStudio.onclick = clearStudio;
-      // delete old studio after clicking on the button
-      deleteOldStudio();
+      deleteBadStuff('studio');
       // grab the new studio
       var saveStudio = document.getElementById('saveStudio');
       var studioImage = document.getElementById('studioImage');
@@ -36,7 +35,6 @@ function init() {
       }, false);
       var saveStudio = document.getElementById('saveStudio');
       saveStudio.addEventListener('click', startSavingStudio, false);
-
       break;
     case 'news':
       // display the old news
@@ -45,16 +43,14 @@ function init() {
       var cancelNews = document.getElementById('cancelNews');
       cancelNews.onclick = clearNews;
       // delete old news after clicking on the button
-      deleteOldNews();
-
+      deleteBadStuff('news');
+      // grab the new news
       var saveNews = document.getElementById('saveNews');
       var newsContent = document.getElementById('newsContent');
       newsContent.addEventListener('input', function() {
         saveNews.removeAttribute('disabled');
         saveNews.onclick = addNews;
       }, false);
-
-      // grab the new news
       break;
     case 'cv':
       break;
@@ -66,9 +62,19 @@ function init() {
 
 
 
+
+// we need this for one thing…
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+
+
+
+// load the resume
 $(function() {
   $.get('../resume-raw.php', function(data) {
-    // console.log('data = ' + data);
     $('.resume .resume-content').html(data);
   });
 });
@@ -106,11 +112,50 @@ function News(id, description, date) {
 
 
 
-function reloadData(kind) {
-  localStorage.removeItem(kind);
-  getData(kind);
 
-  switch(kind) {
+
+// delete the old studio & news
+function deleteOld() {
+  $('.delete').click(function() {
+    // give this a var
+    var deleteBtn = $(this);
+    var dataId = $(this.parentElement).data('id');
+    console.log(dataId);
+    var section = $('body').attr('id');
+    deleteData(section, dataId);
+  });
+}
+// some arrays we will need as we go along
+var sectionArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students', 'studio', 'news'];
+// loop through the sections and get all the data available
+function dataTypes() {
+	for(var i = 0; i < sectionArr.length; i++) {
+		// lets get the data and store it locally
+		getData(sectionArr[i]);
+	}
+}
+// GET ALL THE DATA
+function getData(section) {
+	var request = new XMLHttpRequest();
+	request.open('GET', '../data/' + section + '.json');
+
+	request.onreadystatechange = function() {
+		var div = document.getElementById('results');
+		if(this.readyState == this.DONE && this.status == 200) {
+			var type = request.getResponseHeader('Content-Type');
+			if(this.responseText != null) {
+				var json = JSON.parse(this.responseText);
+				var keys = Object.keys(json);
+				localStorage.setItem(section, JSON.stringify(json));
+			}
+		}
+	}
+	request.send();
+}
+function reloadData(section) {
+  localStorage.removeItem(section);
+  getData(section);
+  switch(section) {
     case 'studio':
       clearStudio();
       setTimeout(function(){
@@ -129,62 +174,6 @@ function reloadData(kind) {
       break;
   }
 }
-
-
-
-
-
-
-
-
-
-
-// delete the old studio & news
-function deleteOld() {
-  $('.delete').click(function() {
-    // give this a var
-    var deleteBtn = $(this);
-    var dataId = $(this.parentElement).data('id');
-    console.log(dataId);
-    var kind = $('body').attr('id');
-    // console.log(page);
-    // for now, just console log the id passed in
-    // console.log( deleteBtn[0].parentElement.id );
-    deleteData(kind, dataId);
-  });
-}
-// some arrays we will need as we go along
-var kindsArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students', 'studio', 'news'];
-// loop through the kinds and get all the data available
-function dataTypes() {
-	for(var i = 0; i < kindsArr.length; i++) {
-		// lets get the data and store it locally
-		getData(kindsArr[i]);
-	}
-}
-// GET ALL THE DATA
-function getData(kind) {
-	var request = new XMLHttpRequest();
-	request.open('GET', '../data/' + kind + '.json');
-
-	request.onreadystatechange = function() {
-		var div = document.getElementById('results');
-		if(this.readyState == this.DONE && this.status == 200) {
-			var type = request.getResponseHeader('Content-Type');
-			if(this.responseText != null) {
-				var json = JSON.parse(this.responseText);
-				var keys = Object.keys(json);
-				localStorage.setItem(kind, JSON.stringify(json));
-			}
-		}
-	}
-	request.send();
-}
-
-
-
-
-
 
 
 
@@ -232,7 +221,6 @@ function addWork() {
   // save the new work
   var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
 	var stringWork = JSON.stringify(newWork);
-  // console.log(stringWork);
   // TODO: error logging...
 }
 // CLEAR THE NEW TEXT AREA
@@ -243,11 +231,11 @@ function filterWorks() {
   // get all of the work filters
   $('#filterWorks .list-item label').click(function() {
     // get the attribute of each label
-    var kind = $(this).attr('for');
+    var section = $(this).attr('for');
     // remove any hiding going on
     $('#oldWorks').children('.works').show();
     // add hiding to the siblings of the type clicked on
-    $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
+    $('#oldWorks').children('.' + section).siblings('.works:not(' + '.' + section + ')').hide();
   });
 }
 var workNums = [];
@@ -255,10 +243,10 @@ var workSum = [];
 var workAll = [];
 // DISPLAY THE WORKS
 function displayWorks() {
-  // loop through the kindsArr
-  for(var i = 0; i < kindsArr.length - 2; i++) {
+  // loop through the sectionArr
+  for(var i = 0; i < sectionArr.length - 2; i++) {
     // add to the workAll arr
-    workAll.push(kindsArr[i]);
+    workAll.push(sectionArr[i]);
   }
   for(var i = 0; i < workAll.length; i++) {
     var allWorks = workAll[i];
@@ -459,7 +447,46 @@ function deleteWorks() {
 
 
 
-
+function saveStuff(section, data) {
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/save-' + section + '.php?data=' + encodeURIComponent(data),
+      dataType: 'JSON',
+      success: function(ret){
+        msg.classList.add('success');
+        msg.innerHTML = 'Your ' + section + ' has been added!';
+        msg.innerHTML = ret;
+      }
+  });
+  reloadData(section);
+}
+function deleteStuff(section, index) {
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/delete-'+ section + '.php?index=' + encodeURIComponent(index),
+      dataType: 'JSON',
+      success: function(ret){
+        msg.classList.add('success');
+        msg.innerHTML = 'Your ' + section + ' has been deleted!';
+        msg.innerHTML = ret;
+      }
+  });
+  setTimeout(function(){
+    reloadData(section);
+  },300);
+}
+function deleteBadStuff(section) {
+  var sectionCap = capitalizeFirstLetter(section);
+  $('#old' + sectionCap).on('click', '.delete', function() {
+    var deleteBtn = $(this);
+    var dataId = $(this.parentElement).attr('id');
+    var dataIndex = $(this.parentElement).data('id');
+    document.getElementById(dataId).remove();
+    deleteStuff(section, dataIndex);
+  });
+}
 
 
 
@@ -474,21 +501,16 @@ function startSavingStudio() {
       var fd = new FormData();
       fd.append('studioImage', file);
       fd.append('id', timeId);
-
       uploadStudioImg(today, timeId, fd, file);
-  } else {
-    console.log( 'please add an image!' );
   }
 }
 
 function uploadStudioImg(today, timeId, fd, file) {
   var stringStudio = addStudio(today, timeId, fd, file);
-  // console.log( stringStudio );
   var fileName = file.name;
   var fileArr = fileName.split('.');
   var imgIndex = fileArr.length - 1;
   var imgSuff = fileArr[imgIndex];
-
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'functions/upload.php', true);
 
@@ -498,16 +520,16 @@ function uploadStudioImg(today, timeId, fd, file) {
       var uploadProcess = document.getElementById('uploadProcess');
       uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
       if(percentComplete === 100) {
+        // do something… or do nothing!
       }
     }
   };
 
   xhr.onload = function() {
     if (this.status == 200) {
-      saveStudio(stringStudio);
+      saveStuff('studio', stringStudio);
     };
   };
-
   xhr.send(fd);
 }
 function addStudio(today, id, fd, file) {
@@ -515,10 +537,8 @@ function addStudio(today, id, fd, file) {
   var fileArr = fileName.split('.');
   var imgIndex = fileArr.length - 1;
   var imgSuff = fileArr[imgIndex];
-
   // grab the news content
   var studioImage = document.getElementById('studioImage').value;
-  // console.log( studioImage );
   // get the day
   var dd = today.getDate();
   // get the month
@@ -528,15 +548,14 @@ function addStudio(today, id, fd, file) {
   // build out the date
   var date = yyyy + '-' + mm + '-' + dd;
   // get the error div
-  var newsErr = $('.msg.error');
-
+  var studioErr = $('.msg.error');
   // check to see if the
   if(studioImage === '') {
     // display the error
-    $(newsErr).text('please add a studio shot...');
+    $(studioErr).text('please add a studio shot...');
   } else {
     // clear the error when new is entrered
-    $(newsErr).text('');
+    $(studioErr).text('');
     // build out the news
     var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, date);
     // stringify the news
@@ -544,34 +563,6 @@ function addStudio(today, id, fd, file) {
     // do something with the news
     return stringStudio;
   }
-}
-function saveStudio(data) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/save-studio.php?data=' + encodeURIComponent(data),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-
-        msg.classList.add('success');
-        msg.innerHTML = 'Your studio shot has been added!';
-        msg.innerHTML = ret;
-      }
-  });
-  reloadData('studio');
-}
-// CLEAR THE NEW TEXT AREA
-function clearStudio() {
-  var saveStudio = document.getElementById('saveStudio');
-  saveStudio.setAttribute('disabled', 'disabled');
-
-  var uploadProcess = document.getElementById('uploadProcess');
-  uploadProcess.setAttribute('style', 'width: 0%;');
-
-  var studioErr = $('.msg.error');
-  $(studioErr).text('');
-  document.getElementById('studioImage').value = '';
 }
 // DISPLAY THE STUDIO
 function displayStudio() {
@@ -610,37 +601,18 @@ function displayStudio() {
     }
   }
 }
-  $('#oldStudio').on('click', '.delete', function() {
-    var deleteBtn = $(this);
-    var dataId = $(this.parentElement).attr('id');
-    var dataIndex = $(this.parentElement).data('id');
-    var kind = $('body').attr('id');
-    document.getElementById(dataId).remove();
-    deleteStudio(dataIndex);
-  });
+// CLEAR THE NEW STUDIO
+function clearStudio() {
+  var saveStudio = document.getElementById('saveStudio');
+  saveStudio.setAttribute('disabled', 'disabled');
+
+  var uploadProcess = document.getElementById('uploadProcess');
+  uploadProcess.setAttribute('style', 'width: 0%;');
+
+  var studioErr = $('.msg.error');
+  $(studioErr).text('');
+  document.getElementById('studioImage').value = '';
 }
-function deleteStudio(index) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/delete-studio.php?index=' + encodeURIComponent(index),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-        msg.classList.add('success');
-        msg.innerHTML = 'Your studio image has been deleted!';
-        msg.innerHTML = ret;
-      }
-  });
-  setTimeout(function(){
-    reloadData('studio');
-  },300);
-}
-
-
-
-
-
 
 
 
@@ -648,9 +620,9 @@ function deleteStudio(index) {
 
 // DISPLAY THE OLD NEWS
 function displayNews() {
-  var news = JSON.parse( localStorage.getItem('news') );
-  for (var key in news) {
-    var news = news[key].reverse();
+  var newsData = JSON.parse( localStorage.getItem('news') );
+  for (var key in newsData) {
+    var news = newsData[key].reverse();
     // get the length of each section
     dbNum( news.length );
     for(var i = 0; i < news.length; i++) {
@@ -709,52 +681,14 @@ function addNews() {
     // stringify the news
   	var stringNews = JSON.stringify(newNews);
     // do something with the news
-    saveNews(stringNews);
+    saveStuff('news', stringNews);
   }
 }
-function saveNews(data) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/save-news.php?data=' + encodeURIComponent(data),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-        msg.classList.add('success');
-        msg.innerHTML = 'Your news story has been added!';
-        msg.innerHTML = ret;
-      }
-  });
-  reloadData('news');
-}
-function deleteOldNews() {
-  $('#oldNews').on('click', '.delete', function() {
-    // give this a var
-    var deleteBtn = $(this);
-    var dataIndex = $(this.parentElement).data('id');
-    var kind = $('body').attr('id');
-    deleteNews(dataIndex);
-  });
-}
-function deleteNews(index) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/delete-news.php?index=' + encodeURIComponent(index),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-        msg.classList.add('success');
-        msg.innerHTML = 'Your news story has been deleted!';
-        msg.innerHTML = ret;
-      }
-  });
-  setTimeout(function(){
-    reloadData('news');
-  },300);
-}
-// CLEAR THE NEW TEXT AREA
+// CLEAR THE NEW NEWS
 function clearNews() {
+  var saveNews = document.getElementById('saveNews');
+  saveNews.setAttribute('disabled', 'disabled');
+
   var newsErr = $('.msg.error');
   $(newsErr).text('');
   document.getElementById('newsContent').value = '';
@@ -764,14 +698,8 @@ function clearNews() {
 
 
 
-
-
-
-
-
 // GET NUMBER OF ITEMS IN DB
 function dbNum(num) {
-  // get the element where the numbers will live
   var dbNum = document.getElementById('dbNum');
   dbNum.innerHTML = num;
 }
