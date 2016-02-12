@@ -121,23 +121,23 @@ function deleteOld() {
     var deleteBtn = $(this);
     var dataId = $(this.parentElement).data('id');
     console.log(dataId);
-    var kind = $('body').attr('id');
-    deleteData(kind, dataId);
+    var section = $('body').attr('id');
+    deleteData(section, dataId);
   });
 }
 // some arrays we will need as we go along
-var kindsArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students', 'studio', 'news'];
-// loop through the kinds and get all the data available
+var sectionArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students', 'studio', 'news'];
+// loop through the sections and get all the data available
 function dataTypes() {
-	for(var i = 0; i < kindsArr.length; i++) {
+	for(var i = 0; i < sectionArr.length; i++) {
 		// lets get the data and store it locally
-		getData(kindsArr[i]);
+		getData(sectionArr[i]);
 	}
 }
 // GET ALL THE DATA
-function getData(kind) {
+function getData(section) {
 	var request = new XMLHttpRequest();
-	request.open('GET', '../data/' + kind + '.json');
+	request.open('GET', '../data/' + section + '.json');
 
 	request.onreadystatechange = function() {
 		var div = document.getElementById('results');
@@ -146,16 +146,16 @@ function getData(kind) {
 			if(this.responseText != null) {
 				var json = JSON.parse(this.responseText);
 				var keys = Object.keys(json);
-				localStorage.setItem(kind, JSON.stringify(json));
+				localStorage.setItem(section, JSON.stringify(json));
 			}
 		}
 	}
 	request.send();
 }
-function reloadData(kind) {
-  localStorage.removeItem(kind);
-  getData(kind);
-  switch(kind) {
+function reloadData(section) {
+  localStorage.removeItem(section);
+  getData(section);
+  switch(section) {
     case 'studio':
       clearStudio();
       setTimeout(function(){
@@ -221,7 +221,6 @@ function addWork() {
   // save the new work
   var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
 	var stringWork = JSON.stringify(newWork);
-  // console.log(stringWork);
   // TODO: error logging...
 }
 // CLEAR THE NEW TEXT AREA
@@ -232,11 +231,11 @@ function filterWorks() {
   // get all of the work filters
   $('#filterWorks .list-item label').click(function() {
     // get the attribute of each label
-    var kind = $(this).attr('for');
+    var section = $(this).attr('for');
     // remove any hiding going on
     $('#oldWorks').children('.works').show();
     // add hiding to the siblings of the type clicked on
-    $('#oldWorks').children('.' + kind).siblings('.works:not(' + '.' + kind + ')').hide();
+    $('#oldWorks').children('.' + section).siblings('.works:not(' + '.' + section + ')').hide();
   });
 }
 var workNums = [];
@@ -244,10 +243,10 @@ var workSum = [];
 var workAll = [];
 // DISPLAY THE WORKS
 function displayWorks() {
-  // loop through the kindsArr
-  for(var i = 0; i < kindsArr.length - 2; i++) {
+  // loop through the sectionArr
+  for(var i = 0; i < sectionArr.length - 2; i++) {
     // add to the workAll arr
-    workAll.push(kindsArr[i]);
+    workAll.push(sectionArr[i]);
   }
   for(var i = 0; i < workAll.length; i++) {
     var allWorks = workAll[i];
@@ -456,7 +455,7 @@ function saveStuff(section, data) {
       dataType: 'JSON',
       success: function(ret){
         msg.classList.add('success');
-        msg.innerHTML = 'Your ' + section + ' shot has been added!';
+        msg.innerHTML = 'Your ' + section + ' has been added!';
         msg.innerHTML = ret;
       }
   });
@@ -469,7 +468,6 @@ function deleteStuff(section, index) {
       url: 'functions/delete-'+ section + '.php?index=' + encodeURIComponent(index),
       dataType: 'JSON',
       success: function(ret){
-        console.log(ret);
         msg.classList.add('success');
         msg.innerHTML = 'Your ' + section + ' has been deleted!';
         msg.innerHTML = ret;
@@ -485,7 +483,6 @@ function deleteBadStuff(section) {
     var deleteBtn = $(this);
     var dataId = $(this.parentElement).attr('id');
     var dataIndex = $(this.parentElement).data('id');
-    var kind = $('body').attr('id');
     document.getElementById(dataId).remove();
     deleteStuff(section, dataIndex);
   });
@@ -505,8 +502,6 @@ function startSavingStudio() {
       fd.append('studioImage', file);
       fd.append('id', timeId);
       uploadStudioImg(today, timeId, fd, file);
-  } else {
-    console.log( 'please add an image!' );
   }
 }
 
@@ -525,7 +520,7 @@ function uploadStudioImg(today, timeId, fd, file) {
       var uploadProcess = document.getElementById('uploadProcess');
       uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
       if(percentComplete === 100) {
-        // do something
+        // do something… or do nothing!
       }
     }
   };
@@ -606,7 +601,7 @@ function displayStudio() {
     }
   }
 }
-// CLEAR THE NEW TEXT AREA
+// CLEAR THE NEW STUDIO
 function clearStudio() {
   var saveStudio = document.getElementById('saveStudio');
   saveStudio.setAttribute('disabled', 'disabled');
@@ -625,9 +620,9 @@ function clearStudio() {
 
 // DISPLAY THE OLD NEWS
 function displayNews() {
-  var news = JSON.parse( localStorage.getItem('news') );
-  for (var key in news) {
-    var news = news[key].reverse();
+  var newsData = JSON.parse( localStorage.getItem('news') );
+  for (var key in newsData) {
+    var news = newsData[key].reverse();
     // get the length of each section
     dbNum( news.length );
     for(var i = 0; i < news.length; i++) {
@@ -689,7 +684,7 @@ function addNews() {
     saveStuff('news', stringNews);
   }
 }
-// CLEAR THE NEW TEXT AREA
+// CLEAR THE NEW NEWS
 function clearNews() {
   var saveNews = document.getElementById('saveNews');
   saveNews.setAttribute('disabled', 'disabled');
@@ -705,7 +700,6 @@ function clearNews() {
 
 // GET NUMBER OF ITEMS IN DB
 function dbNum(num) {
-  // get the element where the numbers will live
   var dbNum = document.getElementById('dbNum');
   dbNum.innerHTML = num;
 }
