@@ -26,8 +26,6 @@ function init() {
       // cancel the studio in the textarea
       var cancelStudio = document.getElementById('cancelStudio');
       cancelStudio.onclick = clearStudio;
-      // delete old studio after clicking on the button
-      deleteOldStudio();
       // grab the new studio
       var saveStudio = document.getElementById('saveStudio');
       var studioImage = document.getElementById('studioImage');
@@ -463,6 +461,28 @@ function deleteWorks() {
 
 
 
+function saveStuff(section, data) {
+  var msg = document.getElementById('messaging');
+  $.ajax({
+      type: 'GET',
+      url: 'functions/save-' + section + '.php?data=' + encodeURIComponent(data),
+      dataType: 'JSON',
+      success: function(ret){
+        msg.classList.add('success');
+        msg.innerHTML = 'Your ' + section + ' shot has been added!';
+        msg.innerHTML = ret;
+      }
+  });
+  reloadData(section);
+}
+
+
+
+
+
+
+
+
 
 // GET THE NEW TEXT AREA
 function startSavingStudio() {
@@ -504,7 +524,7 @@ function uploadStudioImg(today, timeId, fd, file) {
 
   xhr.onload = function() {
     if (this.status == 200) {
-      saveStudio(stringStudio);
+      saveStuff('studio', stringStudio);
     };
   };
 
@@ -528,15 +548,15 @@ function addStudio(today, id, fd, file) {
   // build out the date
   var date = yyyy + '-' + mm + '-' + dd;
   // get the error div
-  var newsErr = $('.msg.error');
+  var studioErr = $('.msg.error');
 
   // check to see if the
   if(studioImage === '') {
     // display the error
-    $(newsErr).text('please add a studio shot...');
+    $(studioErr).text('please add a studio shot...');
   } else {
     // clear the error when new is entrered
-    $(newsErr).text('');
+    $(studioErr).text('');
     // build out the news
     var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, date);
     // stringify the news
@@ -544,22 +564,6 @@ function addStudio(today, id, fd, file) {
     // do something with the news
     return stringStudio;
   }
-}
-function saveStudio(data) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/save-studio.php?data=' + encodeURIComponent(data),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-
-        msg.classList.add('success');
-        msg.innerHTML = 'Your studio shot has been added!';
-        msg.innerHTML = ret;
-      }
-  });
-  reloadData('studio');
 }
 // CLEAR THE NEW TEXT AREA
 function clearStudio() {
@@ -610,15 +614,14 @@ function displayStudio() {
     }
   }
 }
-  $('#oldStudio').on('click', '.delete', function() {
-    var deleteBtn = $(this);
-    var dataId = $(this.parentElement).attr('id');
-    var dataIndex = $(this.parentElement).data('id');
-    var kind = $('body').attr('id');
-    document.getElementById(dataId).remove();
-    deleteStudio(dataIndex);
-  });
-}
+$('#oldStudio').on('click', '.delete', function() {
+  var deleteBtn = $(this);
+  var dataId = $(this.parentElement).attr('id');
+  var dataIndex = $(this.parentElement).data('id');
+  var kind = $('body').attr('id');
+  document.getElementById(dataId).remove();
+  deleteStudio(dataIndex);
+});
 function deleteStudio(index) {
   var msg = document.getElementById('messaging');
   $.ajax({
@@ -709,23 +712,8 @@ function addNews() {
     // stringify the news
   	var stringNews = JSON.stringify(newNews);
     // do something with the news
-    saveNews(stringNews);
+    saveStuff('news', stringNews);
   }
-}
-function saveNews(data) {
-  var msg = document.getElementById('messaging');
-  $.ajax({
-      type: 'GET',
-      url: 'functions/save-news.php?data=' + encodeURIComponent(data),
-      dataType: 'JSON',
-      success: function(ret){
-        console.log(ret);
-        msg.classList.add('success');
-        msg.innerHTML = 'Your news story has been added!';
-        msg.innerHTML = ret;
-      }
-  });
-  reloadData('news');
 }
 function deleteOldNews() {
   $('#oldNews').on('click', '.delete', function() {
@@ -755,6 +743,9 @@ function deleteNews(index) {
 }
 // CLEAR THE NEW TEXT AREA
 function clearNews() {
+  var saveNews = document.getElementById('saveNews');
+  saveNews.setAttribute('disabled', 'disabled');
+
   var newsErr = $('.msg.error');
   $(newsErr).text('');
   document.getElementById('newsContent').value = '';
