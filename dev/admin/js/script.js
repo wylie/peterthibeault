@@ -27,7 +27,6 @@ function init() {
       var cancelStudio = document.getElementById('cancelStudio');
       cancelStudio.onclick = clearStudio;
       deleteBadStuff('studio');
-
       // grab the new studio
       var saveStudio = document.getElementById('saveStudio');
       var studioImage = document.getElementById('studioImage');
@@ -36,7 +35,6 @@ function init() {
       }, false);
       var saveStudio = document.getElementById('saveStudio');
       saveStudio.addEventListener('click', startSavingStudio, false);
-
       break;
     case 'news':
       // display the old news
@@ -46,15 +44,13 @@ function init() {
       cancelNews.onclick = clearNews;
       // delete old news after clicking on the button
       deleteBadStuff('news');
-
+      // grab the new news
       var saveNews = document.getElementById('saveNews');
       var newsContent = document.getElementById('newsContent');
       newsContent.addEventListener('input', function() {
         saveNews.removeAttribute('disabled');
         saveNews.onclick = addNews;
       }, false);
-
-      // grab the new news
       break;
     case 'cv':
       break;
@@ -66,9 +62,19 @@ function init() {
 
 
 
+
+// we need this for one thing…
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+
+
+
+// load the resume
 $(function() {
   $.get('../resume-raw.php', function(data) {
-    // console.log('data = ' + data);
     $('.resume .resume-content').html(data);
   });
 });
@@ -106,37 +112,6 @@ function News(id, description, date) {
 
 
 
-function reloadData(kind) {
-  localStorage.removeItem(kind);
-  getData(kind);
-
-  switch(kind) {
-    case 'studio':
-      clearStudio();
-      setTimeout(function(){
-        var studioItems = document.getElementById('oldStudio');
-        studioItems.innerHTML = '';
-        displayStudio();
-      },300);
-      break;
-    case 'news':
-      clearNews();
-      setTimeout(function(){
-        var newsItems = document.getElementById('oldNews');
-        newsItems.innerHTML = '';
-        displayNews();
-      },300);
-      break;
-  }
-}
-
-
-
-
-
-
-
-
 
 
 // delete the old studio & news
@@ -147,9 +122,6 @@ function deleteOld() {
     var dataId = $(this.parentElement).data('id');
     console.log(dataId);
     var kind = $('body').attr('id');
-    // console.log(page);
-    // for now, just console log the id passed in
-    // console.log( deleteBtn[0].parentElement.id );
     deleteData(kind, dataId);
   });
 }
@@ -180,11 +152,28 @@ function getData(kind) {
 	}
 	request.send();
 }
-
-
-
-
-
+function reloadData(kind) {
+  localStorage.removeItem(kind);
+  getData(kind);
+  switch(kind) {
+    case 'studio':
+      clearStudio();
+      setTimeout(function(){
+        var studioItems = document.getElementById('oldStudio');
+        studioItems.innerHTML = '';
+        displayStudio();
+      },300);
+      break;
+    case 'news':
+      clearNews();
+      setTimeout(function(){
+        var newsItems = document.getElementById('oldNews');
+        newsItems.innerHTML = '';
+        displayNews();
+      },300);
+      break;
+  }
+}
 
 
 
@@ -490,9 +479,6 @@ function deleteStuff(section, index) {
     reloadData(section);
   },300);
 }
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 function deleteBadStuff(section) {
   var sectionCap = capitalizeFirstLetter(section);
   $('#old' + sectionCap).on('click', '.delete', function() {
@@ -518,7 +504,6 @@ function startSavingStudio() {
       var fd = new FormData();
       fd.append('studioImage', file);
       fd.append('id', timeId);
-
       uploadStudioImg(today, timeId, fd, file);
   } else {
     console.log( 'please add an image!' );
@@ -527,12 +512,10 @@ function startSavingStudio() {
 
 function uploadStudioImg(today, timeId, fd, file) {
   var stringStudio = addStudio(today, timeId, fd, file);
-  // console.log( stringStudio );
   var fileName = file.name;
   var fileArr = fileName.split('.');
   var imgIndex = fileArr.length - 1;
   var imgSuff = fileArr[imgIndex];
-
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'functions/upload.php', true);
 
@@ -542,6 +525,7 @@ function uploadStudioImg(today, timeId, fd, file) {
       var uploadProcess = document.getElementById('uploadProcess');
       uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
       if(percentComplete === 100) {
+        // do something
       }
     }
   };
@@ -551,7 +535,6 @@ function uploadStudioImg(today, timeId, fd, file) {
       saveStuff('studio', stringStudio);
     };
   };
-
   xhr.send(fd);
 }
 function addStudio(today, id, fd, file) {
@@ -559,10 +542,8 @@ function addStudio(today, id, fd, file) {
   var fileArr = fileName.split('.');
   var imgIndex = fileArr.length - 1;
   var imgSuff = fileArr[imgIndex];
-
   // grab the news content
   var studioImage = document.getElementById('studioImage').value;
-  // console.log( studioImage );
   // get the day
   var dd = today.getDate();
   // get the month
@@ -573,7 +554,6 @@ function addStudio(today, id, fd, file) {
   var date = yyyy + '-' + mm + '-' + dd;
   // get the error div
   var studioErr = $('.msg.error');
-
   // check to see if the
   if(studioImage === '') {
     // display the error
@@ -638,11 +618,6 @@ function clearStudio() {
   $(studioErr).text('');
   document.getElementById('studioImage').value = '';
 }
-
-
-
-
-
 
 
 
@@ -723,11 +698,6 @@ function clearNews() {
   $(newsErr).text('');
   document.getElementById('newsContent').value = '';
 }
-
-
-
-
-
 
 
 
