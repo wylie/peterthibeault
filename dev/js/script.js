@@ -35,6 +35,18 @@ $(function() {
 	$('#cv .cv').load('resume-raw.php');
 });
 
+function showDate(data) {
+  var date = new Date(data.date);
+  var day = date.getDate().toString();
+  var monthNum = date.getMonth();
+  var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  var month = monthNames[monthNum];
+  var year = (date.getFullYear()).toString();
+  var year = year.slice(-2);
+  var studioDate = day + month + year;
+  return studioDate;
+}
+
 // DISPLAY FIRST FURNISHINGS
 function getFirst() {
 	for(var i = 0; i < dataArr.length; i++) {
@@ -264,32 +276,14 @@ function displayAddtnlWork(module, data) {
 		// do different stuff for different modules
 		if( module === 'studio' ) {
 			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
-			var date = new Date(data[i].date);
-			var day = (date.getDate() + 1).toString();
-			var monthNum = date.getMonth();
-			var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-			for(var j = 0; j < monthNames.length; j++ ) {
-				var month = monthNames[monthNum];
-			}
-			var year = (date.getFullYear()).toString();
-			var year = year.slice(-2);
-			var studioDate = day + month + year;
+			var studioDate = showDate(data[i]);
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 			listItem.setAttribute('data-id', i);
 			listItem.innerHTML = studioDate;
 			mod[0].children[1].insertBefore( listItem, mod[0].children[1].firstChild );
 		} else if( module === 'news' ) {
 			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
-			var date = new Date(data[i].date);
-			var day = (date.getDate() + 1).toString();
-			var monthNum = date.getMonth();
-			var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-			for(var j = 0; j < monthNames.length; j++ ) {
-				var month = monthNames[monthNum];
-			}
-			var year = (date.getFullYear()).toString();
-			var year = year.slice(-2);
-			var newsDate = day + month + year;
+			var newsDate = showDate(data[i]);
 			listItem.innerHTML = newsDate;
 			listItem.setAttribute('style', 'background-image: none');
 			listItem.setAttribute('data-id', i);
@@ -304,7 +298,6 @@ function displayAddtnlWork(module, data) {
 
 function getClickedAddtl() {
 	$('.module-list .list-item').click(function() {
-		console.log( $(this) );
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
 		var section = $(this).parents('.module.group').attr('id');
@@ -332,16 +325,7 @@ function heroImg( section, id, index ) {
 	// do different stuff for different modules
 	if( section === 'studio' ) {
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-		var date = new Date(data[index].date);
-		var day = (date.getDate() + 1).toString();
-		var monthNum = date.getMonth();
-		var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-		for(var i = 0; i < monthNames.length; i++ ) {
-			var month = monthNames[monthNum];
-		}
-		var year = (date.getFullYear()).toString();
-		var year = year.slice(-2);
-		var studioDate = day + month + year;
+		var studioDate = showDate(data[index]);
 		var heroSpan = document.createElement('span');
 		heroSpan.setAttribute('class', 'display-date');
 		heroSpan.innerHTML = studioDate;
@@ -372,16 +356,7 @@ function heroImg( section, id, index ) {
 		mod[0].appendChild( heroImg );
 	} else if ( section === 'news' ) {
 		var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-		var date = new Date(data[index].date);
-		var day = (date.getDate() + 1).toString();
-		var monthNum = date.getMonth();
-		var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-		for(var j = 0; j < monthNames.length; j++ ) {
-			var month = monthNames[monthNum];
-		}
-		var year = (date.getFullYear()).toString();
-		var year = year.slice(-2);
-		var newsDate = day + month + year;
+		var newsDate = showDate(data[index]);
 		mod[0].innerHTML = '<div class="text">' + data[index].description  + '</div><div class="display-date">' + newsDate + '</div>';
 		return;
 	} else {
@@ -463,7 +438,8 @@ function getClickedRelated() {
 		var secSplit = sec.split('-');
 		var section = secSplit[0];
 		var id = $(this).data(id);
-		$(this).siblings().removeClass('active');
+		// TODO: can't these next two lines be combined?
+		$(this).siblings().removeClass('active').addClass('active');
 		$(this).addClass('active');
 		var tst = $(this);
 		var tst = tst[0].style.backgroundImage;
