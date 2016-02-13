@@ -447,6 +447,17 @@ function deleteWorks() {
 
 
 
+function showDate(data) {
+  var date = new Date(data.date);
+  var day = (date.getDate() + 1).toString();
+  var monthNum = date.getMonth();
+  var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  var month = monthNames[monthNum];
+  var year = (date.getFullYear()).toString();
+  var year = year.slice(-2);
+  var studioDate = day + month + year;
+  return studioDate;
+}
 function saveStuff(section, data) {
   var msg = document.getElementById('messaging');
   $.ajax({
@@ -582,10 +593,11 @@ function displayStudio() {
       var img = document.createElement('img');
       img.setAttribute('class', 'studio-img');
       img.setAttribute('src', studio[i].image);
-      // span stuff
+      // date stuff
+      var studioDate = showDate(studio[i]);
       var span = document.createElement('span');
-      span.setAttribute('class', 'date');
-      span.innerHTML = studio[i].date;
+  		span.setAttribute('class', 'date');
+  		span.innerHTML = studioDate;
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
@@ -633,10 +645,11 @@ function displayNews() {
       div.setAttribute('id', news[i].id);
       div.setAttribute('data-id', (news.length - 1) - i);
       div.innerHTML = news[i].description;
-      // span stuff
+      // date stuff
+      var newsDate = showDate(news[i]);
       var span = document.createElement('span');
       span.setAttribute('class', 'news-item-date');
-      span.innerHTML = news[i].date;
+      span.innerHTML = newsDate;
       // button stuff
       var button = document.createElement('button');
       button.setAttribute('class', 'delete button');
