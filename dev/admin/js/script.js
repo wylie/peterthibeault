@@ -449,7 +449,7 @@ function deleteWorks() {
 
 function showDate(data) {
   var date = new Date(data.date);
-  var day = (date.getDate() + 1).toString();
+  var day = date.getDate().toString();
   var monthNum = date.getMonth();
   var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
   var month = monthNames[monthNum];
@@ -550,14 +550,6 @@ function addStudio(today, id, fd, file) {
   var imgSuff = fileArr[imgIndex];
   // grab the news content
   var studioImage = document.getElementById('studioImage').value;
-  // get the day
-  var dd = today.getDate();
-  // get the month
-  var mm = today.getMonth() + 1; //January is 0!
-  // get the year
-  var yyyy = today.getFullYear();
-  // build out the date
-  var date = yyyy + '-' + mm + '-' + dd;
   // get the error div
   var studioErr = $('.msg.error');
   // check to see if the
@@ -568,7 +560,7 @@ function addStudio(today, id, fd, file) {
     // clear the error when new is entrered
     $(studioErr).text('');
     // build out the news
-    var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, date);
+    var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, today);
     // stringify the news
   	var stringStudio = JSON.stringify(newStudio);
     // do something with the news
@@ -672,14 +664,6 @@ function addNews() {
   var id = today.getTime();
   // grab the news content
   var newsContent = document.getElementById('newsContent').value;
-  // get the day
-  var dd = today.getDate();
-  // get the month
-  var mm = today.getMonth() + 1; //January is 0!
-  // get the year
-  var yyyy = today.getFullYear();
-  // build out the date
-  var date = yyyy + '-' + mm + '-' + dd;
   // get the error div
   var newsErr = $('.msg.error');
   // check to see if the
@@ -690,7 +674,7 @@ function addNews() {
     // clear the error when new is entrered
     $(newsErr).text('');
     // build out the news
-    var newNews = new News(id, newsContent, date);
+    var newNews = new News(id, newsContent, today);
     // stringify the news
   	var stringNews = JSON.stringify(newNews);
     // do something with the news
