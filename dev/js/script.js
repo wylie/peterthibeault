@@ -255,7 +255,7 @@ function buildModule(nav, data) {
 	var infoUl2Li = document.createElement('li');
 	infoUl2Li.setAttribute('class', 'sidebar-header');
 	if( data[0].available === true ) {
-		infoUl2Li.innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[0].title + ' (' + nav + ')&amp;body=I am inquiring about a ' + nav + ' listed on your website. The name of it is: ' + data[0].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">AVAILABLE</a>';
+		infoUl2Li.innerHTML = '<a href="mailto:tbowdsign@verizon.net?subject=Work inquiry: ' + data[0].title + ' (' + nav + ')&amp;body=I am inquiring about a ' + nav + ' listed on your website. The name of it is: ' + data[0].title + '" class="sidebar-list-heading" data-sidebar="available" title="Send me an email">CONTACT ME</a>';
 	} else {
 		infoUl2Li.innerHTML = '';
 	}
