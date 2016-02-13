@@ -12,13 +12,14 @@ window.onload = init;
 
 // INITITAL FUNCTION
 function init() {
-	buildNav()
+	buildNav();
 	relatedWorks();
 	getClickedAddtl();
 	openTray();
 	getFirst();
 	email();
 	getClickedRelated();
+	getAvailable();
 }
 
 // CAPITALIZE FIRST LETTER OF A STRING
@@ -66,6 +67,19 @@ function getFirst() {
 		}
 		heroRelated( dataArr[i], id, 0 );
 	}
+};
+// DISPLAY FIRST AVAILABLE FURNISHINGS
+function getFirstAvail(module, data) {
+	var data = JSON.parse(localStorage.getItem( module ) );
+	// TODO bring the next line about no data back into the available works function
+	// if( data.length > 0 ) {
+	var addtnl = document.getElementById(module + '-additional').children[1];
+	var firstChild = $(addtnl).children('.list-item:first-child');
+	$(firstChild).addClass('active');
+	var id = firstChild[0].attributes[1].nodeValue;
+	heroImg( module, id, 0 );
+	heroInfo( module, id, 0 );
+	heroRelated( module, id, 0 );
 };
 
 // LOOP THROUGH DATAARR AND GET ALL DATA AVAILABLE... SAVE TO LOCALSTORAGE
@@ -140,10 +154,55 @@ function buildNav() {
 function prepModules() {
 	for(var i = 0; i < dataArr.length; i++) {
 		var data = JSON.parse(localStorage.getItem( dataArr[i].toLowerCase() ) );
-		if( data.length > 0 ) {
+		if( (data != null) && (data.length > 0) ) {
 			buildModule(dataArr[i], data);
 		}
 	}
+}
+
+function getAvailable() {
+	var availableWorks = [];
+	var nav = document.getElementById('nav');
+	var li = document.createElement('li');
+	var a = document.createElement('a');
+	a.innerHTML = 'Available Work';
+	a.setAttribute('class', 'link');
+	a.setAttribute('href', '#availableworks');
+	a.setAttribute('title', 'View My Available Works!');
+	li.appendChild(a);
+	li.setAttribute('class', 'item');
+	nav.insertBefore( li, nav.firstChild );
+	for(var i = 0; i < dataArr.length; i++) {
+		switch(dataArr[i]) {
+			case 'furnishings':
+			case 'sculpture':
+			case 'drawing':
+			case 'painting':
+			case 'design':
+				var test = dataArr[i];
+				var availableData = JSON.parse(localStorage.getItem( dataArr[i] ));
+				for(var j = 0; j < availableData.length; j++) {
+					if( availableData[j].available === true ) {
+						availableWorks.push(availableData[j]);
+					}
+				}
+				break;
+		}
+	}
+	buildModule('available works', availableWorks);
+	localStorage.setItem( 'availableworks', JSON.stringify(availableWorks) );
+
+	// console.log( JSON.stringify(availableWorks) );
+
+	displayAddtnlWork( 'availableworks', availableWorks );
+	getFirstAvail( 'availableworks', availableWorks );
+	// console.log( JSON.stringify(availableWorks) );
+
+	// var id = 0;
+	//
+	// heroImg( 'available', id, 0 );
+	// heroInfo( dataArr[i], id, 0 );
+	// heroRelated( dataArr[i], id, 0 );
 }
 
 function buildModule(nav, data) {
@@ -151,9 +210,25 @@ function buildModule(nav, data) {
 	var module = document.createElement('div');
 	module.setAttribute('class', 'module group');
 
-	module.setAttribute('id', nav.toLowerCase() );
+	var test = nav.toLowerCase();
+	switch(test) {
+		case 'furnishings':
+		case 'sculpture':
+		case 'drawing':
+		case 'painting':
+		case 'design':
+		case 'studio':
+		case 'news':
+			var test = nav.toLowerCase();
+			break;
+		case 'available works':
+			var test = 'availableworks';
+			break;
+	}
+
+	module.setAttribute('id', test );
 	var anchor = document.createElement('a');
-	anchor.setAttribute('name', nav.toLowerCase() );
+	anchor.setAttribute('name', test );
 	module.appendChild(anchor);
 	// heading
 	var h2 = document.createElement('h2');
@@ -170,11 +245,11 @@ function buildModule(nav, data) {
 	// create the container for the hero images
 	var heroDiv = document.createElement('div');
 	heroDiv.setAttribute('class', 'module-main bg-3 hero-img');
-	heroDiv.setAttribute('id', nav.toLowerCase() + '-hero');
+	heroDiv.setAttribute('id', test + '-hero');
 	// create the container for the hero images
 	var infoDiv = document.createElement('div');
 	infoDiv.setAttribute('class', 'module-info grid bg-3 group closed');
-	infoDiv.setAttribute('id', nav.toLowerCase() + '-tray');
+	infoDiv.setAttribute('id', test + '-tray');
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
 	infoUl1.setAttribute('class', 'sidebar-items-list group col4');
@@ -217,7 +292,7 @@ function buildModule(nav, data) {
 	// add the nav div
 	var navDiv = document.createElement('div');
 	navDiv.setAttribute('class', 'module-nav bg-3');
-	navDiv.setAttribute('id', nav.toLowerCase() + '-additional');
+	navDiv.setAttribute('id', test + '-additional');
 	// add the nav div sub-header
 	var navSubHeaderDiv = document.createElement('h3');
 	navSubHeaderDiv.setAttribute('class', 'sub-header');
@@ -297,7 +372,8 @@ function displayAddtnlWork(module, data) {
 }
 
 function getClickedAddtl() {
-	$('.module-list .list-item').click(function() {
+	$('#works').on('click', '.module-list .list-item', function() {
+	// $('.module-list .list-item').click(function() {
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
 		var section = $(this).parents('.module.group').attr('id');
@@ -469,7 +545,8 @@ function replaceRelated( section, id, index ) {
 }
 
 function openTray() {
-	$('.sidebar-list-heading').click(function() {
+	$('#works').on('click', '.sidebar-list-heading', function () {
+	// $('.sidebar-list-heading').click(function() {
 		$(this).parents('.module-info').toggleClass('closed');
 	});
 }
@@ -482,29 +559,4 @@ function email() {
 		var messageInput = $(emailBox[0]).children('.message').val();
 		$.post( 'admin/functions/email.php', { name: nameInput, email: emailInput, message: messageInput } );
 	});
-}
-
-function getAvailable() {
-	var availableWorks = [];
-	var nav = document.getElementById('nav');
-	for(var i = 0; i < dataArr.length; i++) {
-		var data = JSON.parse(localStorage.getItem( dataArr[i].toLowerCase() ) );
-		for(var j = 0; j < data.length; j++) {
-			if( data[j].available ) {
-				availableWorks.push(dataArr[i], j);
-			}
-		}
-	}
-	// console.log( availableWorks );
-	var li = document.createElement('li');
-	var a = document.createElement('a');
-	a.innerHTML = 'Available Work';
-	a.setAttribute('class', 'link');
-	a.setAttribute('href', '#available');
-	a.setAttribute('title', 'View My Available Works!');
-	li.appendChild(a);
-	li.setAttribute('class', 'item');
-	nav.insertBefore( li, nav.firstChild );
-
-	buildModule();
 }
