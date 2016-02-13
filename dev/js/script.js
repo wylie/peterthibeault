@@ -288,7 +288,11 @@ function buildModule(nav, data) {
 	// add the nav div sub-header
 	var navSubHeaderDiv = document.createElement('h3');
 	navSubHeaderDiv.setAttribute('class', 'sub-header');
-	navSubHeaderDiv.innerHTML = 'Additional ' + nav;
+	if( nav === 'available works') {
+		navSubHeaderDiv.innerHTML = nav;
+	} else {
+		navSubHeaderDiv.innerHTML = 'Additional ' + nav;
+	}
 	navDiv.appendChild(navSubHeaderDiv);
 	// add the nav div list
 	var navList = document.createElement('ul');
