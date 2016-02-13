@@ -191,18 +191,10 @@ function getAvailable() {
 	}
 	buildModule('available works', availableWorks);
 	localStorage.setItem( 'availableworks', JSON.stringify(availableWorks) );
-
-	// console.log( JSON.stringify(availableWorks) );
-
 	displayAddtnlWork( 'availableworks', availableWorks );
 	getFirstAvail( 'availableworks', availableWorks );
-	// console.log( JSON.stringify(availableWorks) );
-
-	// var id = 0;
-	//
-	// heroImg( 'available', id, 0 );
-	// heroInfo( dataArr[i], id, 0 );
-	// heroRelated( dataArr[i], id, 0 );
+	var id = '';
+	heroRelated( dataArr[i], id, 0 );
 }
 
 function buildModule(nav, data) {
@@ -309,7 +301,14 @@ function buildModule(nav, data) {
 	wrapDiv.appendChild(rightDiv);
 	// add it all to the module
 	module.appendChild(wrapDiv);
-	worksDiv.appendChild(module);
+
+	console.log( module.id );
+	if( module.id === 'availableworks') {
+		worksDiv.insertBefore( module, worksDiv.firstChild );
+		// worksDiv.appendChild(module);
+	} else {
+		worksDiv.appendChild(module);
+	}
 }
 
 function relatedWorks() {
@@ -489,6 +488,7 @@ function heroRelated( section, id, index ) {
 		case 'drawing':
 		case 'painting':
 		case 'design':
+		case 'availableworks':
 			var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
 			var tray = $( '#' + section + '-tray');
 			var relatedImages = tray.children('.sidebar-items-list:last-child');
@@ -508,7 +508,7 @@ function heroRelated( section, id, index ) {
 }
 
 function getClickedRelated() {
-	$('.sidebar-list-item').click(function() {
+	$('#works').on('click', '.sidebar-list-item', function() {
 		var test = $(this);
 		var sec = test[0].parentNode.parentNode.id;
 		var secSplit = sec.split('-');
@@ -546,7 +546,6 @@ function replaceRelated( section, id, index ) {
 
 function openTray() {
 	$('#works').on('click', '.sidebar-list-heading', function () {
-	// $('.sidebar-list-heading').click(function() {
 		$(this).parents('.module-info').toggleClass('closed');
 	});
 }
