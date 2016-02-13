@@ -37,7 +37,7 @@ $(function() {
 
 function showDate(data) {
   var date = new Date(data.date);
-  var day = (date.getDate() + 1).toString();
+  var day = date.getDate().toString();
   var monthNum = date.getMonth();
   var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
   var month = monthNames[monthNum];
@@ -276,16 +276,7 @@ function displayAddtnlWork(module, data) {
 		// do different stuff for different modules
 		if( module === 'studio' ) {
 			var data = JSON.parse(localStorage.getItem( module.toLowerCase() ) );
-			var date = new Date(data[i].date);
-			var day = (date.getDate() + 1).toString();
-			var monthNum = date.getMonth();
-			var monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-			for(var j = 0; j < monthNames.length; j++ ) {
-				var month = monthNames[monthNum];
-			}
-			var year = (date.getFullYear()).toString();
-			var year = year.slice(-2);
-			var studioDate = day + month + year;
+			var studioDate = showDate(data[i]);
 			listItem.setAttribute('style', 'background-image: url("' + imgPath + imgId + imgSuff + '")');
 			listItem.setAttribute('data-id', i);
 			listItem.innerHTML = studioDate;
@@ -447,7 +438,8 @@ function getClickedRelated() {
 		var secSplit = sec.split('-');
 		var section = secSplit[0];
 		var id = $(this).data(id);
-		$(this).siblings().removeClass('active');
+		// TODO: can't these next two lines be combined?
+		$(this).siblings().removeClass('active').addClass('active');
 		$(this).addClass('active');
 		var tst = $(this);
 		var tst = tst[0].style.backgroundImage;
