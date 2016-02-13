@@ -301,8 +301,6 @@ function buildModule(nav, data) {
 	wrapDiv.appendChild(rightDiv);
 	// add it all to the module
 	module.appendChild(wrapDiv);
-
-	console.log( module.id );
 	if( module.id === 'availableworks') {
 		worksDiv.insertBefore( module, worksDiv.firstChild );
 		// worksDiv.appendChild(module);
