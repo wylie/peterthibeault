@@ -44,6 +44,8 @@ foreach ($json[$kind] as $key => $val) {
     unset($json[$kind][$key]);
   }
 }
+// fix the indexing
+$json[$kind] = array_values(array_filter($json[$kind]));
 // encode the date again
 $json = json_encode($json);
 // open the file
