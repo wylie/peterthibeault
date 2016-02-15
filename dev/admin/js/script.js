@@ -380,7 +380,6 @@ function displayWorks() {
         // create the delete button
         var button2 = document.createElement('button');
         button2.setAttribute('class', 'delete button');
-        button2.setAttribute('disabled', 'disabled');
         button2.setAttribute('type', 'submit');
         button2.setAttribute('name', 'edit');
         button2.setAttribute('value', 'delete');
