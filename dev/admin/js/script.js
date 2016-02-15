@@ -15,7 +15,8 @@ function init() {
       // filter the old works
       filterWorks();
       // delete old works after clicking on the button
-      deleteWorks();
+      deleteBadStuff('works');
+      // deleteWorks();
       // grab the new studio
       var saveWork = document.getElementById('saveWork');
       saveWork.onclick = addWork;
@@ -491,10 +492,15 @@ function deleteBadStuff(section) {
   var sectionCap = capitalizeFirstLetter(section);
   $('#old' + sectionCap).on('click', '.delete', function() {
     var deleteBtn = $(this);
-    var dataId = $(this.parentElement).attr('id');
-    var dataIndex = $(this.parentElement).data('id');
+    var dataId = $(this).parents('.module-section').attr('id');
+    var dataIndex = $(this).parents('.module-section').data('id');
     document.getElementById(dataId).remove();
-    deleteStuff(section, dataIndex);
+    var dataSection = $(this).parents('.module-section').data('section');
+    if( section === 'works' ) {
+      deleteStuff(dataSection, dataIndex);
+    } else {
+      deleteStuff(section, dataIndex);
+    }
   });
 }
 
