@@ -17,8 +17,14 @@ function init() {
       // delete old works after clicking on the button
       deleteWorks();
       // grab the new studio
+
       var saveWork = document.getElementById('saveWork');
-      saveWork.onclick = addWork;
+      // var newWorkImage = document.getElementById('newWorkImage').value;
+      newWorkImage.addEventListener('change', function() {
+        saveWork.removeAttribute('disabled');
+        saveWork.onclick = addWork;
+      }, false);
+
       break;
     case 'studio':
       // display all the old studio photos
@@ -196,7 +202,7 @@ function getWorkSection() {
 // GET THE NEW TEXT AREA
 function addWork() {
   var id = (new Date()).getTime();
-  getWorkSection();
+  var newSection = getWorkSection();
   // grab all the values from the new work inputs
   var newTitle = document.getElementById('newTitle').value;
   var newYear = document.getElementById('newYear').value;
@@ -221,11 +227,26 @@ function addWork() {
   // save the new work
   var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
 	var stringWork = JSON.stringify(newWork);
+  console.log( stringWork );
   // TODO: error logging...
 }
 // CLEAR THE NEW TEXT AREA
 function clearWork() {
-  // console.log('KER-POW');
+  // disable the save button
+  var saveWork = document.getElementById('saveWork');
+  saveWork.setAttribute('disabled', 'disabled');
+  // reset all the form fields
+  document.getElementById('newTitle').value = '';
+  document.getElementById('newYear').value = '';
+  document.getElementById('newMedia').value = '';
+  document.getElementById('newWorkImage').value = '';
+  document.getElementById('newDescription').value = '';
+  document.getElementById('newDimension_d').value = '';
+  document.getElementById('newDimension_w').value = '';
+  document.getElementById('newDimension_h').value = '';
+
+  document.getElementById('yes').checked = false;
+  document.getElementById('no').checked = true;
 }
 function filterWorks() {
   // get all of the work filters
@@ -253,7 +274,12 @@ function displayWorks() {
     var allWorks = JSON.parse( localStorage.getItem( allWorks ) );
     for( var key in allWorks ) {
       // get the length of each section
-      dbNum( allWorks[key].length );
+      workNums.push( allWorks[key].length );
+      var sum = 0;
+      for(var i=0; i < workNums.length; i++){
+          sum += parseInt(workNums[i]);
+      }
+      dbNum( sum );
       for( var j = 0; j < allWorks[key].length; j++ ) {
         var oldWorks = document.getElementById('oldWorks');
         // create the main div
