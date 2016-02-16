@@ -492,8 +492,13 @@ function deleteBadStuff(section) {
   var sectionCap = capitalizeFirstLetter(section);
   $('#old' + sectionCap).on('click', '.delete', function() {
     var deleteBtn = $(this);
-    var dataId = $(this).parents('.module-section').attr('id');
-    var dataIndex = $(this).parents('.module-section').data('id');
+    if( section === 'works' ) {
+      var deleteParent = deleteBtn.parents('.module-section');
+    } else {
+      var deleteParent = deleteBtn[0].parentNode;
+    }
+    var dataId = $(deleteParent).attr('id');
+    var dataIndex = $(deleteParent).attr('data-id');
     document.getElementById(dataId).remove();
     var dataSection = $(this).parents('.module-section').data('section');
     if( section === 'works' ) {
@@ -638,7 +643,7 @@ function displayNews() {
       // old news stuff
       var oldNews = document.getElementById('oldNews');
       var div = document.createElement('div');
-      div.setAttribute('class', 'news-item');
+      div.setAttribute('class', 'modules-section news-item');
       div.setAttribute('id', news[i].id);
       div.setAttribute('data-id', (news.length - 1) - i);
       div.innerHTML = news[i].description;
