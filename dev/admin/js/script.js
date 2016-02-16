@@ -15,7 +15,8 @@ function init() {
       // filter the old works
       filterWorks();
       // delete old works after clicking on the button
-      deleteWorks();
+      deleteBadStuff('works');
+      // deleteWorks();
       // grab the new studio
       var saveWork = document.getElementById('saveWork');
       saveWork.onclick = addWork;
@@ -380,7 +381,6 @@ function displayWorks() {
         // create the delete button
         var button2 = document.createElement('button');
         button2.setAttribute('class', 'delete button');
-        button2.setAttribute('disabled', 'disabled');
         button2.setAttribute('type', 'submit');
         button2.setAttribute('name', 'edit');
         button2.setAttribute('value', 'delete');
@@ -492,10 +492,20 @@ function deleteBadStuff(section) {
   var sectionCap = capitalizeFirstLetter(section);
   $('#old' + sectionCap).on('click', '.delete', function() {
     var deleteBtn = $(this);
-    var dataId = $(this.parentElement).attr('id');
-    var dataIndex = $(this.parentElement).data('id');
+    if( section === 'works' ) {
+      var deleteParent = deleteBtn.parents('.module-section');
+    } else {
+      var deleteParent = deleteBtn[0].parentNode;
+    }
+    var dataId = $(deleteParent).attr('id');
+    var dataIndex = $(deleteParent).attr('data-id');
     document.getElementById(dataId).remove();
-    deleteStuff(section, dataIndex);
+    var dataSection = $(this).parents('.module-section').data('section');
+    if( section === 'works' ) {
+      deleteStuff(dataSection, dataIndex);
+    } else {
+      deleteStuff(section, dataIndex);
+    }
   });
 }
 
@@ -633,7 +643,7 @@ function displayNews() {
       // old news stuff
       var oldNews = document.getElementById('oldNews');
       var div = document.createElement('div');
-      div.setAttribute('class', 'news-item');
+      div.setAttribute('class', 'modules-section news-item');
       div.setAttribute('id', news[i].id);
       div.setAttribute('data-id', (news.length - 1) - i);
       div.innerHTML = news[i].description;
