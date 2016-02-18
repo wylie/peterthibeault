@@ -1,3 +1,17 @@
+# peterthibeault [![Build Status](https://travis-ci.org/wylie/peterthibeault.svg?branch=develop)](https://travis-ci.org/wylie/peterthibeault)
+
+The professional site of artist, Peter Thibeault.
+
+---
+
+`npm install`
+
+`bower install`
+
+`grunt build`
+
+`grunt server`
+
 | [welcome](#welcome) | [homepage](#homepage) | [works](#works) | [studio](#studio) | [news](#news) | [cv](#cv)
 | --------|-------|-------|-------|-------|-------|
 |  | [navigation](#navigation) | [old works](#oldworks) | [old studio](#oldstudio) | [old news](#oldnews) |  |  |  |
@@ -5,7 +19,7 @@
 <a name="welcome"></a>
 # Welcome
 
-This documentation for [peterthibeault.com](http://peterthibeault.com) will teach you how to use your new website.
+This is documentation for the site [peterthibeault.com](http://peterthibeault.com) and will go over how to maintain it.
 
 ---
 
