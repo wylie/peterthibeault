@@ -68,34 +68,34 @@ Your only option from here is to click on one of the links at the top.
 ---
 
 <a name="works"></a>
-## Works Section
+### Works Section
 
 The **Works** section is still being worked on, so nothing can be uploaded or edited at this time. _Documentation to come soon_.
 
 <a name="oldworks"></a>
-### Old Works
+#### Old Works
 
 _Documentation to come soon_.
 
 <a name="newworks"></a>
-### New Works
+#### New Works
 
 _Documentation to come soon_.
 
 ---
 
 <a name="studio"></a>
-## Studio Section
+### Studio Section
 
 The **Studio** section is up and running. _More documentation to come soon_.
 
 <a name="oldstudio"></a>
-### Old Studio
+#### Old Studio
 
 ![Old Studio](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/studio-old.png)
 
 <a name="newstudio"></a>
-### New Studio
+#### New Studio
 
 The new Studio sub-section is pretty simple. Here is what it should look like:
 
@@ -112,12 +112,12 @@ Below that you have a simple form for uploading a new Studio shot. You will see 
 ---
 
 <a name="news"></a>
-## News Section
+### News Section
 
 The **News** section is split into two sub-sections: New News & Old News.
 
 <a name="oldnews"></a>
-### Old News
+#### Old News
 ![Old News](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/news-old.png)
 
 This is the Old News sub-section. You have all your Old News stories listed starting with the newest (also with a green border) at the top, and the oldest story is at the bottom.
@@ -125,11 +125,11 @@ This is the Old News sub-section. You have all your Old News stories listed star
 Each Old News story has a delete button so you can, you've guessed it, delete that news story.
 
 <a name="newnews"></a>
-### New News
+#### New News
 
 ---
 
 <a name="cv"></a>
-## CV Section
+### CV Section
 
 The **CV** section is still being worked on, so nothing can be uploaded or edited at this time.
