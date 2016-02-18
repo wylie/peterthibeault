@@ -5,6 +5,9 @@ function init() {
   var elements = document.getElementsByTagName('body');
   var page = elements[0].id;
 
+  // console.log( elements );
+  // console.log( page );
+
   switch(page) {
     case 'works':
       // display the old works
@@ -54,6 +57,13 @@ function init() {
       }, false);
       break;
     case 'cv':
+        $.get('../resume-raw.php', function(data) {
+            console.log( data );
+            var cvData = document.getElementById('cvContent')
+            // var cvData = $('.resume-content');
+            console.log( cvData );
+            // cvData.innerHTML = data;
+        });
       break;
     case 'contact':
       break;
@@ -76,6 +86,11 @@ function capitalizeFirstLetter(string) {
 // load the resume
 $(function() {
   $.get('../resume-raw.php', function(data) {
+    //   console.log( data );
+    //   var cvData = document.getElementById('cvContent')
+    //   // var cvData = $('.resume-content');
+    //   console.log( cvData );
+    //   // cvData.innerHTML = data;
     $('.resume .resume-content').html(data);
   });
 });
