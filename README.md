@@ -4,8 +4,8 @@ The professional site of artist, Peter Thibeault.
 
 | [development](#development) | [welcome](#welcome) | [homepage](#homepage) | [works](#works) | [studio](#studio) | [news](#news) | [cv](#cv)
 | --------|-------|-------|-------|-------|-------|
-|  |  | [navigation](#navigation) | [old works](#oldworks) | [old studio](#oldstudio) | [old news](#oldnews) |  |  |  |
-|  | [sections](#sections) | [new works](#newworks) | [new studio](#newstudio) | [new news](#newnews) |  |  |  |
+|  |  | [navigation](#navigation) | [old works](#oldworks) | [old studio](#oldstudio) | [old news](#oldnews) |  |
+|  | [sections](#sections) | [new works](#newworks) | [new studio](#newstudio) | [new news](#newnews) |  |
 
 ---
 
@@ -55,6 +55,9 @@ To the right of the Navigation are the Sections, which should look something lik
 If you have a link to a Section in the Navigation then you will see a Section of the same name. Simple.
 
 ---
+
+<a name="admin"></a>
+## Admin
 
 When you first get to the Admin interface you will see a welcome screen. You can't do anything from this page other than be greeted. It should look like this:
 
