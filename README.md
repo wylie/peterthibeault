@@ -164,6 +164,4 @@ After you save the new **News** story it will appear in the **Old News** Section
 <a name="cv"></a>
 ### CV Section
 
-The **CV** section is functioning. *More documentation soon.*
-
-The **CV** section is still being worked on, so nothing can be uploaded or edited at this time.
+The **CV** section is up and running. *More documentation to come soon.*
