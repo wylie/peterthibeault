@@ -1,4 +1,4 @@
-# peterthibeault [![Build Status](https://travis-ci.org/wylie/peterthibeault.svg?branch=develop)](https://travis-ci.org/wylie/peterthibeault)
+# peterthibeault.com [![Build Status](https://travis-ci.org/wylie/peterthibeault.svg?branch=develop)](https://travis-ci.org/wylie/peterthibeault)
 
 The site of artist, Peter Thibeault.
 
