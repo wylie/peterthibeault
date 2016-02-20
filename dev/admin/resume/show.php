@@ -1,26 +1,34 @@
 <?php
-/* post.php : this page shows what insert.php has sent */
 
-	$content = stripslashes($_POST['content']);
+	$http = $_SERVER[HTTP_HOST];
+	$test = $_POST['content'];
+	$content = stripslashes($test);
+	$myFile = '../../resume-raw.php';
 
-	echo 'Your new resume is being saved, please wait...';
+	// if( $http == 'dukeofcheese.com' ) {
+	// 	$myFile = 'http://dukeofcheese.com/dev/pt/resume-raw.php';
+	// } else {
+	// 	$myFile = 'http://peterthibeault.com/resume-raw.php';
+	// }
 
-	//echo $content;
+	$fileHandle = fopen($myFile, 'w');
 
-	$myFile = "../../resume-raw.php";
-	$fh = fopen($myFile, 'w') or die("can't open file");
-	$stringData = $content;
-	fwrite($fh, $stringData);
-	fclose($fh);
+	fwrite($fileHandle, $ultimateJson);
+    fclose($fileHandle);
 
-	echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://dukeofcheese.com/dev/pt/admin/cv.php">';
+	// $fh = fopen($myFile, 'w');
+	// $fh = fopen($myFile, 'w') or die("can't open file");
+	// fwrite($fh, $content);
+	// fclose($fh);
+
+	// if( $http == 'dukeofcheese.com' ) {
+	// 	echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://dukeofcheese.com/dev/pt/admin/cv.php">';
+	// } else {
+	// 	echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://peterthibeault.com/admin/cv.php">';
+	// }
+
+	echo 'Your CV has been updated!';
+
 	exit;
-
-	/*
-	ob_start();
-	header("location: http://peterthibeault.com/admin/resume.php");
-	echo "send data";
-	ob_end_flush(); //now the headers are sent
-	*/
 
 ?>
