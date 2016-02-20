@@ -87,7 +87,7 @@ The **Works** section is still being worked on, so nothing can be uploaded or ed
 <a name="studio"></a>
 ### Studio Section
 
-The **Studio** section is up and running and is split into two sub-sections: **New Studio** & **Old Studio**.
+The **Studio** section is up and running! It is split into two sub-sections: **New Studio** & **Old Studio**.
 
 The **New Studio** sub-section is where you can add new images of your studio. These images will be uploaded, renamed and tagged with the date you uploaded them. As soon as you upload one of these the **Homepage** gets updated with the new image and date overlay.
 
@@ -112,20 +112,24 @@ The **New Studio** sub-section is pretty simple. Here is what it should look lik
 
 ![Studio: New](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/studio-new.png)
 
-You have a Stats section showing you how many **Studio** images total you have added.
+You have a **Stats** section showing you how many **Studio** images you have added.
 
-Below that you have a simple form for uploading a new **Studio** image. You will see that the Save button is greyed out and you are unable to click it. This is to prevent you from accidentally uploading clicking it and uploading no image. After you add an image the Save button will activate and turn green. Once you click the Save button you will see a green progress bar. This shows you that the progress of you uploading image. Once the new Studio image has been uploaded and the data has been saved you will see the new Studio image appear at the top left of the old **Studio** images below.  
+Below the **Stats** section is a Choose File button. Clicking on this will allow you to choose an image from your computer to upload.
 
-**Actions**
-- Click on the `Choose File` button to select the new Studio image
-- Click the, now green, Save button
+Below the Choose File button are two more buttons, a Save button and a Cancel button. By default the Save button is disabled. After you click the Choose File button and select an image the Save button will be enabled and turn green. The Cancel button is always active and when clicked will clear any image selected by the Choose File button.
+
+When you have selected the image you want to add just click the green Save button and your image will be uploaded. On clicking the Save button you will see a green progress bar. This shows you that the progress of you uploading image.
+
+After you save the new **Studio** image it will appear in the **Old Studio** section as the top-left image.
+
+![Studio: Old - First](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/studio-old.png)
 
 ---
 
 <a name="news"></a>
 ### News Section
 
-The **News** section is up and running and is split into two sub-sections: **New News** & **Old News**.
+The **News** section is up and running! It is split into two sub-sections: **New News** & **Old News**.
 
 The **New News** sub-section is where you can add new news. These news stories will be saved and tagged with the date you saved them. As soon as you save one of these the **Homepage** gets updated with the new story and date.
 
@@ -149,11 +153,17 @@ In the **New News** sub-section you can save new **News** stories.
 
 ![News: New](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/news-new.png)
 
-By default the Save button is disabled. When you start to type a **News** story into the text area the Save button will be enabled. When you are finished with the new story just click the green Save button and your story will be added
+You have a **Stats** section showing you how many **News** stories you have added.
+
+Below the **Stats** section is a text area. This is where you will type in your new **News** story.
+
+Below the text area are two buttons, a Save button and a Cancel button. By default the Save button is disabled. When you start to type a **News** story into the text area the Save button will be enabled and turn green. The Cancel button is always active and when clicked will clear the text area of any text you've written in it.
+
+When you are finished typing in your new **News** story just click the green Save button and your story will be saved.
 
 ![News: New - Added](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/news-new-added.png)
 
-After you save the new **News** story it will appear in the **Old News** Section as the first item and have a green border. It will also be on the **Homepage** displayed as the first **News** story in the **News** section.
+After you save the new **News** story it will appear in the **Old News** Section as the first item and have a green border.
 
 ![News: Old - First](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/news-old-first.png)
 
