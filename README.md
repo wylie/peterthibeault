@@ -2,10 +2,10 @@
 
 The site of artist, Peter Thibeault.
 
-| [development](#development) | [welcome](#welcome) | [homepage](#homepage) | [works](#works) | [studio](#studio) | [news](#news) | [cv](#cv)
-| --------|-------|-------|-------|-------|-------|-------|
-|  | [navigation](#navigation) | [old works](#oldworks) | [old studio](#oldstudio) | [old news](#oldnews) |  |
-|  | [sections](#sections) | [new works](#newworks) | [new studio](#newstudio) | [new news](#newnews) |  |
+| [development](#development) | [welcome](#welcome) | [admin](#admin) | [homepage](#homepage) | [works](#works) | [studio](#studio) | [news](#news) | [cv](#cv)
+| --------|-------|-------|-------|-------|-------|-------|-------|
+|  |  | [navigation](#navigation) | [old works](#oldworks) | [old studio](#oldstudio) | [old news](#oldnews) |  |
+|  |  | [sections](#sections) | [new works](#newworks) | [new studio](#newstudio) | [new news](#newnews) |  |
 
 ---
 
