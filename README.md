@@ -20,15 +20,8 @@ Here's what you need to do in order to get up and running on a development machi
 
 `grunt server`
 
-<<<<<<< HEAD
 ---
 
-=======
-| [welcome](#welcome) | [homepage](#homepage) | [works](#works) | [studio](#studio) | [news](#news) | [cv](#cv)
-| --------|-------|-------|-------|-------|-------|
-|  | [navigation](#navigation) | [old works](#oldworks) | [old studio](#oldstudio) | [old news](#oldnews) |  |  |  |
-|  | [sections](#sections) | [new works](#newworks) | [new studio](#newstudio) | [new news](#newnews) |  |  |  |
->>>>>>> origin/gh-pages
 <a name="welcome"></a>
 # Welcome
 
@@ -63,12 +56,9 @@ If you have a link to a Section in the Navigation then you will see a Section of
 
 ---
 
-<<<<<<< HEAD
 <a name="admin"></a>
 ## Admin
 
-=======
->>>>>>> origin/gh-pages
 When you first get to the Admin interface you will see a welcome screen. You can't do anything from this page other than be greeted. It should look like this:
 
 ![landing page](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/welcome-section.png)
@@ -78,58 +68,34 @@ Your only option from here is to click on one of the links at the top.
 ---
 
 <a name="works"></a>
-<<<<<<< HEAD
 ### Works Section
-=======
-## Works Section
->>>>>>> origin/gh-pages
 
 The **Works** section is still being worked on, so nothing can be uploaded or edited at this time. _Documentation to come soon_.
 
 <a name="oldworks"></a>
-<<<<<<< HEAD
 #### Old Works
-=======
-### Old Works
->>>>>>> origin/gh-pages
 
 _Documentation to come soon_.
 
 <a name="newworks"></a>
-<<<<<<< HEAD
 #### New Works
-=======
-### New Works
->>>>>>> origin/gh-pages
 
 _Documentation to come soon_.
 
 ---
 
 <a name="studio"></a>
-<<<<<<< HEAD
 ### Studio Section
-=======
-## Studio Section
->>>>>>> origin/gh-pages
 
 The **Studio** section is up and running. _More documentation to come soon_.
 
 <a name="oldstudio"></a>
-<<<<<<< HEAD
 #### Old Studio
-=======
-### Old Studio
->>>>>>> origin/gh-pages
 
 ![Old Studio](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/studio-old.png)
 
 <a name="newstudio"></a>
-<<<<<<< HEAD
 #### New Studio
-=======
-### New Studio
->>>>>>> origin/gh-pages
 
 The new Studio sub-section is pretty simple. Here is what it should look like:
 
@@ -146,20 +112,12 @@ Below that you have a simple form for uploading a new Studio shot. You will see 
 ---
 
 <a name="news"></a>
-<<<<<<< HEAD
 ### News Section
-=======
-## News Section
->>>>>>> origin/gh-pages
 
 The **News** section is split into two sub-sections: New News & Old News.
 
 <a name="oldnews"></a>
-<<<<<<< HEAD
 #### Old News
-=======
-### Old News
->>>>>>> origin/gh-pages
 ![Old News](https://raw.githubusercontent.com/wylie/peterthibeault/gh-pages/images/news-old.png)
 
 This is the Old News sub-section. You have all your Old News stories listed starting with the newest (also with a green border) at the top, and the oldest story is at the bottom.
@@ -167,19 +125,11 @@ This is the Old News sub-section. You have all your Old News stories listed star
 Each Old News story has a delete button so you can, you've guessed it, delete that news story.
 
 <a name="newnews"></a>
-<<<<<<< HEAD
 #### New News
-=======
-### New News
->>>>>>> origin/gh-pages
 
 ---
 
 <a name="cv"></a>
-<<<<<<< HEAD
 ### CV Section
-=======
-## CV Section
->>>>>>> origin/gh-pages
 
 The **CV** section is still being worked on, so nothing can be uploaded or edited at this time.
