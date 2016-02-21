@@ -59,7 +59,7 @@ function init() {
             var cvData = document.getElementById('cvContent')
             // var cvData = $('.resume-content');
             // console.log( cvData );
-            cvData.innerHTML = data;
+            // cvData.innerHTML = data;
         });
       break;
     case 'contact':
