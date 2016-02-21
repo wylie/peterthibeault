@@ -32,7 +32,7 @@ This is documentation for the site [peterthibeault.com](http://peterthibeault.co
 <a name="homepage"></a>
 ## Homepage
 
-The **omepage** is the main page that users see and everything in the Admin section will show up here.
+The **Homepage** is the main page that users see and everything in the Admin section will show up here.
 
 <a name="navigation"></a>
 ### Navigation
