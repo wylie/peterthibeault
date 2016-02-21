@@ -5,9 +5,6 @@ function init() {
   var elements = document.getElementsByTagName('body');
   var page = elements[0].id;
 
-  // console.log( elements );
-  // console.log( page );
-
   switch(page) {
     case 'works':
       // display the old works
@@ -58,10 +55,10 @@ function init() {
       break;
     case 'cv':
         $.get('../resume-raw.php', function(data) {
-            console.log( data );
+            // console.log( data );
             var cvData = document.getElementById('cvContent')
             // var cvData = $('.resume-content');
-            console.log( cvData );
+            // console.log( cvData );
             // cvData.innerHTML = data;
         });
       break;
