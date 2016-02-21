@@ -1,6 +1,5 @@
 <?php
 
-	$content = stripslashes($_POST['content']);
 	$http = $_SERVER[HTTP_HOST];
 
 	if( $http == 'dukeofcheese.com' ) {
@@ -10,7 +9,7 @@
 	}
 
 	$fh = fopen($myFile, 'w');
-	$stringData = $content;
+	$stringData = stripslashes($_POST['content']);
 	fwrite($fh, $stringData);
 	fclose($fh);
 
