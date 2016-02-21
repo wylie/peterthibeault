@@ -21,9 +21,10 @@
 		    ],
 			menubar: false,
 			toolbar: [
-				'save | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent blockquote',
+				'save',
+				'bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent blockquote',
 				'styleselect formatselect fontselect fontsizeselect',
-				'cut copy paste | bullist numlist | undo redo removeformat | subscript superscript'
+				'cut copy paste | bullist numlist | undo redo removeformat | subscript superscript | table'
 			]
 		});
 	</script>
@@ -41,9 +42,9 @@
 
 	<section class="module">
 		<h1 class="header">CV</h1>
-		<div class="module-main content" style="color: #000 !important;">
+		<div class="module-main content">
 			<form method="post" action="resume/show.php">
-				<div class="resume-content" id="cvContent">Garbage!</div>
+				<div class="resume-content" id="cvContent" name="content">Garbage!</div>
 			</form>
 		</div>
 	</section>
