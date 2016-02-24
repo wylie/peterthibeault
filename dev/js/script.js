@@ -33,7 +33,7 @@ function allLowerCase(string) {
 
 // LOAD IN THE CV
 $(function() {
-	$('#cv .cv').load('resume-raw.php');
+	$('#cv .cv').load('resume-raw.html');
 });
 
 function showDate(data) {
