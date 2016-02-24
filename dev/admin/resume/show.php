@@ -4,9 +4,9 @@
 	$newCV = $_POST['cvContent'];
 
 	if( $http == 'dukeofcheese.com' ) {
-		$myFile = '../../resume-raw.php';
+		$myFile = '../../resume-raw.html';
 	} elseif( $http == 'peterthibeault.com' ) {
-		$myFile = '../../resume-raw.php';
+		$myFile = '../../resume-raw.html';
 	}
 
 	$fh = fopen($myFile, 'w');

@@ -54,7 +54,7 @@ function init() {
       }, false);
       break;
     case 'cv':
-        $.get('../resume-raw.php', function(data) {
+        $.get('../resume-raw.html', function(data) {
             // console.log( data );
             var cvData = document.getElementById('cvContent')
             // var cvData = $('.resume-content');
@@ -82,12 +82,8 @@ function capitalizeFirstLetter(string) {
 
 // load the resume
 $(function() {
-  $.get('../resume-raw.php', function(data) {
-    //   console.log( data );
-    //   var cvData = document.getElementById('cvContent')
-    //   // var cvData = $('.resume-content');
-    //   console.log( cvData );
-    //   // cvData.innerHTML = data;
+  $.get('../resume-raw.html', function(data) {
+    console.log( );
     $('.resume .resume-content').html(data);
   });
 });
