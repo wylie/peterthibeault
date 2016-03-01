@@ -92,8 +92,7 @@ $(function() {
 
 
 // create new work
-function Work(section, id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, image) {//, images) {
-  this.section = section,
+function Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, image) {//, images) {
   this.id = id,
   this.title = title,
   this.year = year,
@@ -205,12 +204,12 @@ function getWorkSection() {
 // GET THE NEW TEXT AREA
 function addWork() {
   var id = (new Date()).getTime();
-  getWorkSection();
+  var section = getWorkSection();
   // grab all the values from the new work inputs
+  var newWorkImage = document.getElementById('newWorkImage').value;
   var newTitle = document.getElementById('newTitle').value;
   var newYear = document.getElementById('newYear').value;
   var newMedia = document.getElementById('newMedia').value;
-  var newWorkImage = document.getElementById('newWorkImage').value;
   var newDescription = document.getElementById('newDescription').value;
   var newDimension_d = document.getElementById('newDimension_d').value;
   var newDimension_w = document.getElementById('newDimension_w').value;
@@ -228,8 +227,9 @@ function addWork() {
     }
   }
   // save the new work
-  var newWork = new Work(newSection, id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
+  var newWork = new Work(id, newTitle, newYear, newMedia, newDescription, newDimension_d, newDimension_w, newDimension_h, newAvailable);
 	var stringWork = JSON.stringify(newWork);
+  saveStuff(section, stringWork);
   // TODO: error logging...
 }
 // CLEAR THE NEW TEXT AREA
@@ -467,10 +467,12 @@ function showDate(data) {
   return studioDate;
 }
 function saveStuff(section, data) {
+  console.log( section );
+  console.log( data );
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
-      url: 'functions/save-' + section + '.php?data=' + encodeURIComponent(data),
+      url: 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data),
       dataType: 'JSON',
       success: function(ret){
         msg.classList.add('success');
