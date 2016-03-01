@@ -23,13 +23,13 @@ function customError($errno, $errstr) {
 set_error_handler("customError");
 
 // set the kind
-$kind = "studio";
+$section = $_GET["section"];
 // get the index that's passed into the file
 $index = $_GET["index"];
 // make sure that the index is a number…
 $index = intval($index);
 // get the file we want to edit
-$myFile = "../../data/studio.json";
+$myFile = "../../data/" . $section . ".json";
 // get the contents of that file
 $fileData = file_get_contents($myFile);
 // encode the contents of the file
@@ -37,15 +37,15 @@ $json_encode = json_encode($fileData);
 // decode the contents of the file
 $json = json_decode($fileData, true);
 // loop through the file
-foreach ($json[$kind] as $key => $val) {
+foreach ($json[$section] as $key => $val) {
   // find the matching index in the JSON data
   if ($key == $index) {
     // remove that index from the JSON data
-    unset($json[$kind][$key]);
+    unset($json[$section][$key]);
   }
 }
 // fix the indexing
-$json[$kind] = array_values(array_filter($json[$kind]));
+$json[$section] = array_values(array_filter($json[$section]));
 // encode the date again
 $json = json_encode($json);
 // open the file
