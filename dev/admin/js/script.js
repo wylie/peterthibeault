@@ -484,7 +484,7 @@ function deleteStuff(section, index) {
   var msg = document.getElementById('messaging');
   $.ajax({
       type: 'GET',
-      url: 'functions/delete-'+ section + '.php?section=' + section + '&index=' + encodeURIComponent(index),
+      url: 'functions/delete.php?section=' + section + '&index=' + encodeURIComponent(index),
       dataType: 'JSON',
       success: function(ret){
         msg.classList.add('success');
