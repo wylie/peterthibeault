@@ -302,6 +302,7 @@ function getWorkSection() {
 }
 function filterWorks() {
   // get all of the work filters
+  // NEED TO ADD IN SOME BUSINESS ABOUT ADDING/REMOVIONG CHECKS
   $('#filterWorks .list-item label').click(function() {
     // get the attribute of each label
     var section = $(this).attr('for');
