@@ -160,16 +160,16 @@ function reloadData(section) {
     case 'studio':
       clear(section);
       setTimeout(function(){
-        var studioItems = document.getElementById('oldStudio');
-        studioItems.innerHTML = '';
+        var oldStudio = document.getElementById('oldStudio');
+        oldStudio.innerHTML = '';
         displayStudio();
       },300);
       break;
     case 'news':
       clear(section);
       setTimeout(function(){
-        var newsItems = document.getElementById('oldNews');
-        newsItems.innerHTML = '';
+        var oldNews = document.getElementById('oldNews');
+        oldNews.innerHTML = '';
         displayNews();
       },300);
       break;
@@ -181,8 +181,8 @@ function reloadData(section) {
     case 'students':
       clear(section);
       setTimeout(function(){
-        var workItems = document.getElementById('oldWorks');
-        workItems.innerHTML = '';
+        var oldWorks = document.getElementById('oldWorks');
+        oldWorks.innerHTML = '';
         displayWorks();
       },300);
       break;
@@ -314,7 +314,8 @@ function filterWorks() {
 // lets swap the main image with related ones
 function swapWorks() {
   $('.studio-img-thmb').click(function() {
-    // AND THIS ISN'T WORKING BECAUSE...? $(this).addCLass('active');
+    $(this).parent('.list-item').siblings().children('.studio-img-thmb').removeClass('active');
+    $(this).addClass('active');
     // get this and it's parent
     var imgId = $(this).attr('data-imgid');
     var parent = $(this).closest('.module-section');
@@ -575,6 +576,9 @@ function displayWorks() {
           // img element stuff
           var allImgs = document.createElement('img');
           allImgs.setAttribute('class', 'studio-img-thmb');
+          if( m === 0 ) {
+            allImgs.setAttribute('class', 'studio-img-thmb active');
+          }
           // build the image bits
           var imgPath = '../img/works/';
           var imgNum = allWorks[key][j].id;
