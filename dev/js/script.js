@@ -20,6 +20,19 @@ function init() {
 	email();
 	getClickedRelated();
 	getAvailable();
+
+	$('.module').addClass('hidden');
+	$('.module:first-child').removeClass('hidden');
+
+	$('.nav').on('click', '.item .link', function() {
+		// console.log( 'BOOM' );
+		var it = $(this).attr('href');
+		var it = it.split('#');
+		var section = it[1];
+		console.log( section );
+		$('#' + section).removeClass('hidden').siblings('.module').addClass('hidden');
+	});
+
 }
 
 // CAPITALIZE FIRST LETTER OF A STRING
