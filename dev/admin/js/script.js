@@ -776,7 +776,9 @@ function gatherData() {
 
 
 // GET NUMBER OF ITEMS IN DB
+newNum = 0;
 function dbNum(num) {
-  var dbNum = document.getElementById('dbNum');
-  dbNum.innerHTML = num;
+    var dbNum = document.getElementById('dbNum');
+    newNum += num;
+    dbNum.innerHTML = newNum;
 }
