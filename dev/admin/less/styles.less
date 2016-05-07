@@ -322,27 +322,26 @@ input#price {
 	}
 }
 .filter {
-	input {
+	.input {
 		display: none;
 		&:checked {
-			+ label {
+			+ .label {
 				background-color: #666;
-			    color: #fff;
+				color: #fff;
 			}
 		}
 	}
-	label {
+	.label {
 		cursor: pointer;
 		font-size: .8em;
-    width: auto;
-    padding: 10px;
-    display: block;
+		width: auto;
+		padding: 10px;
+		display: block;
 		&:hover {
 			text-decoration: underline;
 		}
 	}
 }
-
 .content {
 	.group;
 	&.hidden {
