@@ -92,3 +92,10 @@ function getThis(section, btn) {
     deleteStuff(section, dataIndex);
     deleteParent.remove();
 }
+
+function deleteSingleWork( x ) {
+    // $(x).parent('.module-section').siblings().children('.studio-img-thmb').removeClass('active');
+    $(x).parent('.module-section').addClass('active');
+    // var xPar = $(x).parents('.module-section');
+    // console.log( xPar );
+}

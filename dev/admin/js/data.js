@@ -33,23 +33,29 @@ function News(id, description, date) {
 
 // GET ALL THE DATA
 function getData(section) {
-    console.log( 'getData: ' + section );
-    for(var i = 0; i < section.length; i++) {
-    	var request = new XMLHttpRequest();
-    	request.open('GET', '../data/' + section[i] + '.json');
+    try {
+        if( !Array.isArray(section) ) {
+            throw new Error( 'getData() requires an array' );
+        }
+    }
+    finally {
+        for(var i = 0; i < section.length; i++) {
+            var request = new XMLHttpRequest();
+            request.open('GET', '../data/' + section[i] + '.json');
 
-    	request.onreadystatechange = function() {
-    		var div = document.getElementById('results');
-    		if(this.readyState == this.DONE && this.status == 200) {
-    			var type = request.getResponseHeader('Content-Type');
-    			if(this.responseText != null) {
-    				var json = JSON.parse(this.responseText);
-    				var keys = Object.keys(json);
-    				localStorage.setItem(keys, JSON.stringify(json));
-    			}
-    		}
-    	}
-    	request.send();
+            request.onreadystatechange = function() {
+                var div = document.getElementById('results');
+                if(this.readyState == this.DONE && this.status == 200) {
+                    var type = request.getResponseHeader('Content-Type');
+                    if(this.responseText != null) {
+                        var json = JSON.parse(this.responseText);
+                        var keys = Object.keys(json);
+                        localStorage.setItem(keys, JSON.stringify(json));
+                    }
+                }
+            }
+            request.send();
+        }
     }
 }
 
@@ -57,7 +63,7 @@ function getData(section) {
 function reloadData(section) {
     console.log( 'reloadData: ' + section);
     localStorage.removeItem(section);
-    getData(section);
+    getData([section]);
     switch(section) {
         case 'studio':
             clear(section);

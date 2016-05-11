@@ -4,7 +4,7 @@ var workNums = [];
 var workSum = [];
 var workAll = [];
 function displayWorks() {
-    console.log( 'displayWorks' );
+    // console.log( 'displayWorks' );
     // loop through the sectionArr
     for(var i = 0; i < workArr.length; i++) {
         // add to the workAll arr
@@ -20,10 +20,8 @@ function displayWorks() {
                 var oldWorks = document.getElementById('oldWorks');
                 // create the main div
                 var div = document.createElement('div');
-                div.setAttribute('class', 'module-section work works ' + key);
+                div.setAttribute('class', 'module-section work works js-' + key);
                 div.setAttribute('id', allWorks[key][j].id);
-                div.setAttribute('data-section', key);
-                div.setAttribute('data-id', j);
                 // create the image
                 var img = document.createElement('img');
                 img.setAttribute('class', 'studio-img');
@@ -317,26 +315,20 @@ function getWorkSection() {
 
 
 function filterWorks( x ) {
-    // var cls = $(x).attr('for');
-    // console.log( cls );
-    // get all of the work filters
-    // NEED TO ADD IN SOME BUSINESS ABOUT ADDING/REMOVIONG CHECKS
-    // $('#filterWorks').on('click', '.list-item label', function() {
-        // get the attribute of each label
-        var section = $(x).attr('for');
-        console.log( section );
-        // remove any hiding going on
-        $('#oldWorks').children('.works').show();
-        // add hiding to the siblings of the type clicked on
-        $('#oldWorks').children('.' + section).siblings('.works:not(' + '.' + section + ')').hide();
-    // });
+    // get the attribute of each label
+    var section = $(x).attr('for');
+    console.log( section );
+    // remove any hiding going on
+    $('#oldWorks').children('.works').show();
+    // add hiding to the siblings of the type clicked on
+    $('#oldWorks').children('.js-' + section).siblings('.works:not(' + '.js-' + section + ')').hide();
 }
 
 
 // GET NUMBER OF ITEMS IN DB
 newNum = 0;
 function dbNum(num) {
-    console.log( 'dbNum: ' + num );
+    // console.log( 'dbNum: ' + num );
     var dbNum = document.getElementById('dbNum');
     newNum += num;
     dbNum.innerHTML = newNum;

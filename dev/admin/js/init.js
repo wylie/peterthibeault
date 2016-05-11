@@ -19,6 +19,12 @@ define(['data','delete','display','save'], function (require) {
             $('#filterWorks').on('click', '.label', function() {
                 filterWorks( this );
             });
+
+            // delete a work
+            $('#oldWorks').on('click', '.delete.button', function() {
+                deleteSingleWork( this );
+            });
+
             // grab the new studio
             var saveWork = document.getElementById('saveWork');
             saveWork.onclick = addWork;
@@ -32,7 +38,7 @@ define(['data','delete','display','save'], function (require) {
 
             break;
         case 'studio':
-            getData([page]);
+            getData(['studio']);
             displayStudio();
             $('#oldStudio').on('click', '.delete', function() {
                 getThis('studio', this);
@@ -49,7 +55,7 @@ define(['data','delete','display','save'], function (require) {
             }, false);
             break;
         case 'news':
-            getData([page]);
+            getData(['news']);
             displayNews();
             $('#oldNews').on('click', '.delete', function() {
                 getThis('news', this);
