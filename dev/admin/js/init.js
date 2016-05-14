@@ -27,6 +27,11 @@ define(['data','delete','display','save'], function (require) {
 
             displayFilterCount();
 
+            // change state of save button after adding content to any field in a single work
+            $('[id^=form-]').on('change', ':input', function() {
+                var container = $(this).parent().siblings('.module-save').children('.save').prop('disabled', false);
+            });
+
             // grab the new studio
             var saveWork = document.getElementById('saveWork');
             saveWork.onclick = addWork;

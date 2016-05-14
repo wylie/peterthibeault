@@ -9,6 +9,7 @@ function displayWorks() {
         dbNum( data[key].length );
         for( var j = 0; j < data[key].length; j++ ) {
             var oldWorks = document.getElementById('oldWorks');
+
             // create the main div
             var div = document.createElement('div');
             div.setAttribute('class', 'module-section work works js-' + key);
@@ -26,6 +27,10 @@ function displayWorks() {
             var span = document.createElement('span');
             span.setAttribute('class', 'date');
             span.innerHTML = data[key][j].date;
+
+            var form = document.createElement('form');
+            form.setAttribute('id', 'form-' + data[key][j].id)
+
             // create the title heading
             var heading1 = document.createElement('h3');
             heading1.setAttribute('class', 'heading');
@@ -87,29 +92,24 @@ function displayWorks() {
             heading5.innerHTML = 'Available';
             // create the available heading
             var ulAvailable = document.createElement('ul');
-            ulAvailable.setAttribute('class', 'list inline available');
             // NO
-            var liAvailable1 = document.createElement('li');
-            liAvailable1.setAttribute('class', 'list-item');
             var inputAvailable1 = document.createElement('input');
-            inputAvailable1.setAttribute('class', 'input');
+            inputAvailable1.setAttribute('class', 'available input');
             inputAvailable1.setAttribute('type', 'radio');
             inputAvailable1.setAttribute('name', 'available-' + data[key][j].id);
             inputAvailable1.setAttribute('id', 'no-' + data[key][j].id);
             var labelAvailable1 = document.createElement('label');
-            labelAvailable1.setAttribute('class', 'label');
+            labelAvailable1.setAttribute('class', 'available label');
             labelAvailable1.setAttribute('for', 'no-' + data[key][j].id);
             labelAvailable1.innerHTML = 'No';
             // YES
-            var liAvailable2 = document.createElement('li');
-            liAvailable2.setAttribute('class', 'list-item');
             var inputAvailable2 = document.createElement('input');
-            inputAvailable2.setAttribute('class', 'input');
+            inputAvailable2.setAttribute('class', 'available input');
             inputAvailable2.setAttribute('type', 'radio');
             inputAvailable2.setAttribute('name', 'available-' + data[key][j].id);
             inputAvailable2.setAttribute('id', 'yes-' + data[key][j].id);
             var labelAvailable2 = document.createElement('label');
-            labelAvailable2.setAttribute('class', 'label');
+            labelAvailable2.setAttribute('class', 'available label');
             labelAvailable2.setAttribute('for', 'yes-' + data[key][j].id);
             labelAvailable2.innerHTML = 'Yes';
 
@@ -119,14 +119,6 @@ function displayWorks() {
             if( data[key][j].available === true ) {
                 inputAvailable2.setAttribute('checked', 'checked');
             }
-
-            liAvailable1.appendChild(inputAvailable1);
-            liAvailable1.appendChild(labelAvailable1);
-            liAvailable2.appendChild(inputAvailable2);
-            liAvailable2.appendChild(labelAvailable2);
-
-            ulAvailable.appendChild(liAvailable1);
-            ulAvailable.appendChild(liAvailable2);
 
             // create the related images heading
             var heading6 = document.createElement('h3');
@@ -177,25 +169,31 @@ function displayWorks() {
             button2.setAttribute('value', 'delete');
             button2.innerHTML = 'Delete';
             // append everything
-            div.appendChild(img);
-            div.appendChild(heading1);
-            div.appendChild(input1);
-            div.appendChild(heading2);
-            div.appendChild(input2);
-            div.appendChild(heading3);
-            div.appendChild(input3);
-            div.appendChild(heading4);
-            div.appendChild(input4);
-            div.appendChild(heading4);
-            div.appendChild(input4);
-            div.appendChild(input5);
-            div.appendChild(input6);
-            div.appendChild(heading5);
-            div.appendChild(ulAvailable);
-            // div.appendChild(input7);
 
-            div.appendChild(heading6);
-            div.appendChild(ulRelated);
+            form.appendChild(img);
+            form.appendChild(heading1);
+            form.appendChild(input1);
+            form.appendChild(heading2);
+            form.appendChild(input2);
+            form.appendChild(heading3);
+            form.appendChild(input3);
+            form.appendChild(heading4);
+            form.appendChild(input4);
+            form.appendChild(heading4);
+            form.appendChild(input4);
+            form.appendChild(input5);
+            form.appendChild(input6);
+            form.appendChild(heading5);
+            form.appendChild(ulAvailable);
+            form.appendChild(inputAvailable1);
+            form.appendChild(labelAvailable1);
+            form.appendChild(inputAvailable2);
+            form.appendChild(labelAvailable2);
+            form.appendChild(heading6);
+            form.appendChild(ulRelated);
+
+            div.appendChild(form);
+
             // insert bigtime
             div.insertBefore(span, div.firstChild);
             saveDiv.appendChild(button1);

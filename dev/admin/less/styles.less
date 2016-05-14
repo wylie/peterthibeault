@@ -321,7 +321,6 @@ input#price {
 		}
 	}
 }
-.available,
 .filter {
 	.input {
 		display: none;
@@ -350,16 +349,28 @@ input#price {
 	}
 }
 .available {
-    width: 100%;
+    margin: 5px 0 10px;
     background-color: #efefef;
-    margin-top: 5px;
-	.list-item {
+	&.input {
+		display: none;
+		&:checked + .label {
+			background-color: #666;
+			color: #fff;
+		}
+	}
+	&.label {
+		cursor: pointer;
 		width: 50%;
+		font-size: .8em;
+		display: block;
+		float: left;
+		padding: 10px;
 		text-align: center;
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 }
-
-
 
 
 .content {
