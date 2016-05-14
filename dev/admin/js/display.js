@@ -156,7 +156,7 @@ function displayWorks() {
             // create the save button
             var cancelBtn = document.createElement('button');
             cancelBtn.setAttribute('class', 'cancel button');
-            cancelBtn.classList.add('hide');
+            cancelBtn.setAttribute('disabled', 'disabled');
             cancelBtn.setAttribute('type', 'submit');
             cancelBtn.setAttribute('name', 'edit');
             cancelBtn.setAttribute('value', 'save');
