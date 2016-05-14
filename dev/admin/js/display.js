@@ -154,20 +154,28 @@ function displayWorks() {
             var saveDiv = document.createElement('div');
             saveDiv.setAttribute('class', 'module-save');
             // create the save button
-            var button1 = document.createElement('button');
-            button1.setAttribute('class', 'save button');
-            button1.setAttribute('disabled', 'disabled');
-            button1.setAttribute('type', 'submit');
-            button1.setAttribute('name', 'edit');
-            button1.setAttribute('value', 'save');
-            button1.innerHTML = 'Save';
+            var cancelBtn = document.createElement('button');
+            cancelBtn.setAttribute('class', 'cancel button');
+            cancelBtn.classList.add('hide');
+            cancelBtn.setAttribute('type', 'submit');
+            cancelBtn.setAttribute('name', 'edit');
+            cancelBtn.setAttribute('value', 'save');
+            cancelBtn.innerHTML = 'Cancel';
+            // create the save button
+            var saveBtn = document.createElement('button');
+            saveBtn.setAttribute('class', 'save button');
+            saveBtn.setAttribute('disabled', 'disabled');
+            saveBtn.setAttribute('type', 'submit');
+            saveBtn.setAttribute('name', 'edit');
+            saveBtn.setAttribute('value', 'save');
+            saveBtn.innerHTML = 'Save';
             // create the delete button
-            var button2 = document.createElement('button');
-            button2.setAttribute('class', 'delete button');
-            button2.setAttribute('type', 'submit');
-            button2.setAttribute('name', 'edit');
-            button2.setAttribute('value', 'delete');
-            button2.innerHTML = 'Delete';
+            var deleteBtn = document.createElement('button');
+            deleteBtn.setAttribute('class', 'delete button');
+            deleteBtn.setAttribute('type', 'submit');
+            deleteBtn.setAttribute('name', 'edit');
+            deleteBtn.setAttribute('value', 'delete');
+            deleteBtn.innerHTML = 'Delete';
             // append everything
 
             form.appendChild(img);
@@ -196,8 +204,9 @@ function displayWorks() {
 
             // insert bigtime
             div.insertBefore(span, div.firstChild);
-            saveDiv.appendChild(button1);
-            saveDiv.appendChild(button2);
+            saveDiv.appendChild(cancelBtn);
+            saveDiv.appendChild(saveBtn);
+            saveDiv.appendChild(deleteBtn);
             div.appendChild(saveDiv);
             oldWorks.appendChild(div);
         }
