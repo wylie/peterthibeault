@@ -9,9 +9,9 @@ define(['data','delete','display','save'], function (require) {
         case 'works':
             getData(['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students']);
             displayWorks();
-            $('#oldWorks').on('click', '.delete', function() {
-                getThis('works', this);
-            });
+            // $('#oldWorks').on('click', '.delete', function() {
+                //getThis('works', this);
+            // });
             // cancel the studio in the textarea
             var cancelWork = document.getElementById('cancelWork');
             cancelWork.onclick = clear;
@@ -24,6 +24,8 @@ define(['data','delete','display','save'], function (require) {
             $('#oldWorks').on('click', '.delete.button', function() {
                 deleteSingleWork( this );
             });
+
+            displayFilterCount();
 
             // grab the new studio
             var saveWork = document.getElementById('saveWork');

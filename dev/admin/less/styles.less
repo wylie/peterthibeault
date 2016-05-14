@@ -328,6 +328,9 @@ input#price {
 			+ .label {
 				background-color: #666;
 				color: #fff;
+				.num {
+					color: #ccc;
+				}
 			}
 		}
 	}
@@ -337,8 +340,12 @@ input#price {
 		width: auto;
 		padding: 10px;
 		display: block;
+		text-transform: capitalize;
 		&:hover {
 			text-decoration: underline;
+		}
+		.num {
+			color: #999;
 		}
 	}
 }

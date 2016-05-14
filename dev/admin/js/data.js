@@ -64,35 +64,36 @@ function reloadData(section) {
     console.log( 'reloadData: ' + section);
     localStorage.removeItem(section);
     getData([section]);
-    switch(section) {
-        case 'studio':
-            clear(section);
-            setTimeout(function(){
-            var oldStudio = document.getElementById('oldStudio');
-                oldStudio.innerHTML = '';
-                displayStudio();
-            },300);
+    setTimeout(function(){
+        switch(section) {
+            case 'studio':
+                clear(section);
+                setTimeout(function(){
+                var oldStudio = document.getElementById('oldStudio');
+                    oldStudio.innerHTML = '';
+                    displayStudio();
+                },300);
+                break;
+            case 'news':
+                clear(section);
+                setTimeout(function(){
+                var oldNews = document.getElementById('oldNews');
+                    oldNews.innerHTML = '';
+                    displayNews();
+                },300);
+                break;
+            case 'furnishings':
+            case 'sculpture':
+            case 'drawing':
+            case 'painting':
+            case 'design':
+            case 'students':
+                clear(section);
+                    var oldWorks = document.getElementById('oldWorks');
+                    oldWorks.innerHTML = '';
+                    displayWorks();
+                    displayFilterCount();
             break;
-        case 'news':
-            clear(section);
-            setTimeout(function(){
-            var oldNews = document.getElementById('oldNews');
-                oldNews.innerHTML = '';
-                displayNews();
-            },300);
-            break;
-        case 'furnishings':
-        case 'sculpture':
-        case 'drawing':
-        case 'painting':
-        case 'design':
-        case 'students':
-            clear(section);
-            setTimeout(function(){
-                var oldWorks = document.getElementById('oldWorks');
-                oldWorks.innerHTML = '';
-                displayWorks();
-            },300);
-        break;
-    }
+        }
+    },300);
 }

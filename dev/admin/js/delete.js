@@ -18,7 +18,7 @@ function deleteOld() {
 }
 
 
-// CLEAR THE DATA ON THE PAGE
+// CLEAR THE DATA FOR THE PAGE
 function clear() {
     console.log( 'clear' );
     var section = $('body').attr('id');
@@ -94,8 +94,52 @@ function getThis(section, btn) {
 }
 
 function deleteSingleWork( x ) {
-    // $(x).parent('.module-section').siblings().children('.studio-img-thmb').removeClass('active');
-    $(x).parent('.module-section').addClass('active');
-    // var xPar = $(x).parents('.module-section');
-    // console.log( xPar );
+    // get the parent module
+    var par = $(x).parents('.module-section');
+    // get the classes
+    var parClasses = $(par).attr('class');
+    // get the id
+    var parId = parseInt($(par).attr('id'));
+    // create an array with the classes
+    var parClasses = parClasses.split(' ');
+    // loop through the class array
+    for(var i = 0; i < parClasses.length; i++) {
+        // now split each class to find the one that contains js-
+        var parClass = parClasses[i].split('-');
+        // if the first part of the class equals js…
+        if( parClass[0] === 'js' ) {
+            // that's the section
+            var section = parClass[1];
+            // get the section from localStorage
+            var sectionData = JSON.parse( localStorage.getItem( section) );
+            // loop through the data
+            for(var j = 0; j < sectionData[section].length; j++) {
+                // make the id a number…
+                sectionId = parseInt(sectionData[section][j].id);
+                // find out if the id matches the one in the data
+                if( parId === sectionId ) {
+                    var oldWorks = document.getElementById('oldWorks');
+                    oldWorks.innerHTML = '';
+                    deleteSingleIndex(section, j);
+                }
+            }
+        }
+    }
+}
+// DELETE SINGLE INDEX
+function deleteSingleIndex(section, index) {
+    $.ajax({
+        type: 'GET',
+        url: 'functions/deleteIndex.php?section=' + section + '&index=' + index,
+        dataType: 'JSON',
+        success: function(ret){
+            msg.classList.add('success');
+            msg.innerHTML = 'Your ' + section + ' has been deleted!';
+            msg.innerHTML = ret;
+        }
+    });
+    setTimeout(function(){
+        reloadData(section);
+        resetFilter();
+    },300);
 }
