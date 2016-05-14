@@ -321,6 +321,7 @@ input#price {
 		}
 	}
 }
+.available,
 .filter {
 	.input {
 		display: none;
@@ -337,7 +338,6 @@ input#price {
 	.label {
 		cursor: pointer;
 		font-size: .8em;
-		width: auto;
 		padding: 10px;
 		display: block;
 		text-transform: capitalize;
@@ -349,6 +349,19 @@ input#price {
 		}
 	}
 }
+.available {
+    width: 100%;
+    background-color: #efefef;
+    margin-top: 5px;
+	.list-item {
+		width: 50%;
+		text-align: center;
+	}
+}
+
+
+
+
 .content {
 	.group;
 	&.hidden {

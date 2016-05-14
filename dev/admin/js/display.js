@@ -86,10 +86,48 @@ function displayWorks() {
             heading5.setAttribute('class', 'heading');
             heading5.innerHTML = 'Available';
             // create the available heading
-            var input7 = document.createElement('input');
-            input7.setAttribute('class', 'form-input');
-            input7.setAttribute('type', 'text');
-            input7.setAttribute('value', data[key][j].available);
+            var ulAvailable = document.createElement('ul');
+            ulAvailable.setAttribute('class', 'list inline available');
+            // NO
+            var liAvailable1 = document.createElement('li');
+            liAvailable1.setAttribute('class', 'list-item');
+            var inputAvailable1 = document.createElement('input');
+            inputAvailable1.setAttribute('class', 'input');
+            inputAvailable1.setAttribute('type', 'radio');
+            inputAvailable1.setAttribute('name', 'available-' + data[key][j].id);
+            inputAvailable1.setAttribute('id', 'no-' + data[key][j].id);
+            var labelAvailable1 = document.createElement('label');
+            labelAvailable1.setAttribute('class', 'label');
+            labelAvailable1.setAttribute('for', 'no-' + data[key][j].id);
+            labelAvailable1.innerHTML = 'No';
+            // YES
+            var liAvailable2 = document.createElement('li');
+            liAvailable2.setAttribute('class', 'list-item');
+            var inputAvailable2 = document.createElement('input');
+            inputAvailable2.setAttribute('class', 'input');
+            inputAvailable2.setAttribute('type', 'radio');
+            inputAvailable2.setAttribute('name', 'available-' + data[key][j].id);
+            inputAvailable2.setAttribute('id', 'yes-' + data[key][j].id);
+            var labelAvailable2 = document.createElement('label');
+            labelAvailable2.setAttribute('class', 'label');
+            labelAvailable2.setAttribute('for', 'yes-' + data[key][j].id);
+            labelAvailable2.innerHTML = 'Yes';
+
+            if( data[key][j].available === false ) {
+                inputAvailable1.setAttribute('checked', 'checked');
+            }
+            if( data[key][j].available === true ) {
+                inputAvailable2.setAttribute('checked', 'checked');
+            }
+
+            liAvailable1.appendChild(inputAvailable1);
+            liAvailable1.appendChild(labelAvailable1);
+            liAvailable2.appendChild(inputAvailable2);
+            liAvailable2.appendChild(labelAvailable2);
+
+            ulAvailable.appendChild(liAvailable1);
+            ulAvailable.appendChild(liAvailable2);
+
             // create the related images heading
             var heading6 = document.createElement('h3');
             heading6.setAttribute('class', 'heading');
@@ -153,7 +191,9 @@ function displayWorks() {
             div.appendChild(input5);
             div.appendChild(input6);
             div.appendChild(heading5);
-            div.appendChild(input7);
+            div.appendChild(ulAvailable);
+            // div.appendChild(input7);
+
             div.appendChild(heading6);
             div.appendChild(ulRelated);
             // insert bigtime
