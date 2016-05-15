@@ -210,7 +210,6 @@ function addStudio(today, id, fd, file) {
 
 // get the new information entered in old work
 function gatherNewOldWork( id ) {
-    // newData = id;
     var title = document.getElementById('title-' + id).value;
     var year = document.getElementById('year-' + id).value;
     var media = document.getElementById('media-' + id).value;
@@ -223,9 +222,9 @@ function gatherNewOldWork( id ) {
     } else if( document.querySelector('#no-' + id + ':checked') )  {
         var available = false;
     }
-    // TODO: get this hooked up…
     // image stuff
-    var images = null;
+    var par = document.forms['form-' + id];
+    var images = $(par).children('.related').children('.list-item').length;
     // date
     var today = new Date();
     var m = today.getMonth() + 1;
