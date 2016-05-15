@@ -97,3 +97,30 @@ function reloadData(section) {
         }
     },300);
 }
+
+
+function applyOldData(data) {
+    var id = data.id;
+    var title = document.getElementById('title-' + id);
+    var year = document.getElementById('year-' + id);
+    var media = document.getElementById('media-' + id);
+    var description = document.getElementById('description-' + id);
+    var dimension_d = document.getElementById('dimension_d-' + id);
+    var dimension_w = document.getElementById('dimension_w-' + id);
+    var dimension_h = document.getElementById('dimension_h-' + id);
+    var yes = document.getElementById('yes-' + id);
+    var no = document.getElementById('no-' + id);
+
+    title.value = data.title;
+    year.value = data.year;
+    media.value = data.media;
+    description.value = data.description;
+    dimension_d.value = data.dimension_d;
+    dimension_w.value = data.dimension_w;
+    dimension_h.value = data.dimension_h;
+    if( data.available === true ) {
+        $(yes).prop('checked', true);
+    } else {
+        $(no).prop('checked', true);
+    }
+}

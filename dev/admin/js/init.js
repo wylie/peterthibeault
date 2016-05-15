@@ -33,6 +33,26 @@ define(['data','delete','display','save'], function (require) {
                 $(this).parent().siblings('.module-save').children('.cancel').prop('disabled', false);
             });
 
+            $('#oldWorks').on('click', '.cancel.button', function() {
+                var mod = $(this).parents('.module-section');
+                var id = parseInt($(mod).attr('id'));
+                var classes = mod[0].classList;
+                for(var i = 0; i < classes.length; i++) {
+                    var section = classes[i].split('-');
+                    if( section[0] === 'js' ) {
+                        var section = section[1];
+                        var data = JSON.parse( localStorage.getItem( section ) );
+                        for(var j = 0; j < data[section].length; j++) {
+                            if( data[section][j].id === id ) {
+                                // console.log( data[section][j] );
+                                applyOldData(data[section][j]);
+                            }
+                        }
+                    }
+                }
+            });
+
+
             // grab the new studio
             var saveWork = document.getElementById('saveWork');
             saveWork.onclick = addWork;

@@ -38,6 +38,7 @@ function displayWorks() {
             // create the title heading
             var input1 = document.createElement('input');
             input1.setAttribute('class', 'form-input');
+            input1.setAttribute('id', 'title-' + data[key][j].id);
             input1.setAttribute('type', 'text');
             input1.setAttribute('value', data[key][j].title);
             // create the year heading
@@ -47,6 +48,7 @@ function displayWorks() {
             // create the year heading
             var input2 = document.createElement('input');
             input2.setAttribute('class', 'form-input');
+            input2.setAttribute('id', 'year-' + data[key][j].id);
             input2.setAttribute('type', 'text');
             input2.setAttribute('value', data[key][j].year);
             // create the media heading
@@ -56,6 +58,7 @@ function displayWorks() {
             // create the media heading
             var input3 = document.createElement('input');
             input3.setAttribute('class', 'form-input');
+            input3.setAttribute('id', 'media-' + data[key][j].id);
             input3.setAttribute('type', 'text');
             input3.setAttribute('value', data[key][j].media);
             // create the description heading
@@ -65,33 +68,35 @@ function displayWorks() {
             // create the description heading
             var input4 = document.createElement('textarea');
             input4.setAttribute('class', 'form-input');
+            input4.setAttribute('id', 'description-' + data[key][j].id);
             input4.setAttribute('type', 'text');
             input4.innerHTML = data[key][j].description;
             // create the dimensions heading
-            var heading4 = document.createElement('h3');
-            heading4.setAttribute('class', 'heading');
-            heading4.innerHTML = 'Dimensions';
-            // create the dimensions heading
-            var input4 = document.createElement('input');
-            input4.setAttribute('class', 'form-input dimension');
-            input4.setAttribute('type', 'text');
-            input4.setAttribute('value', data[key][j].dimension_d);
+            var heading5 = document.createElement('h3');
+            heading5.setAttribute('class', 'heading');
+            heading5.innerHTML = 'Dimensions';
             // create the dimensions heading
             var input5 = document.createElement('input');
             input5.setAttribute('class', 'form-input dimension');
+            input5.setAttribute('id', 'dimension_d-' + data[key][j].id);
             input5.setAttribute('type', 'text');
-            input5.setAttribute('value', data[key][j].dimension_w);
+            input5.setAttribute('value', data[key][j].dimension_d);
             // create the dimensions heading
             var input6 = document.createElement('input');
             input6.setAttribute('class', 'form-input dimension');
+            input6.setAttribute('id', 'dimension_w-' + data[key][j].id);
             input6.setAttribute('type', 'text');
-            input6.setAttribute('value', data[key][j].dimension_h);
+            input6.setAttribute('value', data[key][j].dimension_w);
+            // create the dimensions heading
+            var input7 = document.createElement('input');
+            input7.setAttribute('class', 'form-input dimension');
+            input7.setAttribute('id', 'dimension_h-' + data[key][j].id);
+            input7.setAttribute('type', 'text');
+            input7.setAttribute('value', data[key][j].dimension_h);
             // create the available heading
-            var heading5 = document.createElement('h3');
-            heading5.setAttribute('class', 'heading');
-            heading5.innerHTML = 'Available';
-            // create the available heading
-            var ulAvailable = document.createElement('ul');
+            var heading6 = document.createElement('h3');
+            heading6.setAttribute('class', 'heading');
+            heading6.innerHTML = 'Available';
             // NO
             var inputAvailable1 = document.createElement('input');
             inputAvailable1.setAttribute('class', 'available input');
@@ -121,9 +126,9 @@ function displayWorks() {
             }
 
             // create the related images heading
-            var heading6 = document.createElement('h3');
-            heading6.setAttribute('class', 'heading');
-            heading6.innerHTML = 'All Images';
+            var heading7 = document.createElement('h3');
+            heading7.setAttribute('class', 'heading');
+            heading7.innerHTML = 'All Images';
             // create the related images heading
             var ulRelated = document.createElement('ul');
             ulRelated.setAttribute('class', 'list inline related');
@@ -189,15 +194,16 @@ function displayWorks() {
             form.appendChild(input4);
             form.appendChild(heading4);
             form.appendChild(input4);
+            form.appendChild(heading5);
             form.appendChild(input5);
             form.appendChild(input6);
-            form.appendChild(heading5);
-            form.appendChild(ulAvailable);
+            form.appendChild(input7);
+            form.appendChild(heading6);
             form.appendChild(inputAvailable1);
             form.appendChild(labelAvailable1);
             form.appendChild(inputAvailable2);
             form.appendChild(labelAvailable2);
-            form.appendChild(heading6);
+            form.appendChild(heading7);
             form.appendChild(ulRelated);
 
             div.appendChild(form);
