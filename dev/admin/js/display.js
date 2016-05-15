@@ -26,7 +26,7 @@ function displayWorks() {
             // create the date span
             var span = document.createElement('span');
             span.setAttribute('class', 'date');
-            span.innerHTML = data[key][j].date;
+            span.innerHTML = 'Last Modified: ' + data[key][j].date;
 
             var form = document.createElement('form');
             form.setAttribute('id', 'form-' + data[key][j].id)
@@ -169,6 +169,7 @@ function displayWorks() {
             // create the save button
             var saveBtn = document.createElement('button');
             saveBtn.setAttribute('class', 'save button');
+            saveBtn.setAttribute('id', 'saveOld-' + data[key][j].id);
             saveBtn.setAttribute('disabled', 'disabled');
             saveBtn.setAttribute('type', 'submit');
             saveBtn.setAttribute('name', 'edit');
@@ -177,6 +178,7 @@ function displayWorks() {
             // create the delete button
             var deleteBtn = document.createElement('button');
             deleteBtn.setAttribute('class', 'delete button');
+            deleteBtn.setAttribute('id', 'deleteOld-' + data[key][j].id);
             deleteBtn.setAttribute('type', 'submit');
             deleteBtn.setAttribute('name', 'edit');
             deleteBtn.setAttribute('value', 'delete');

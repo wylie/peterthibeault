@@ -207,3 +207,60 @@ function addStudio(today, id, fd, file) {
         return stringStudio;
     }
 }
+
+// get the new information entered in old work
+function gatherNewOldWork( id ) {
+    // newData = id;
+    var title = document.getElementById('title-' + id).value;
+    var year = document.getElementById('year-' + id).value;
+    var media = document.getElementById('media-' + id).value;
+    var description = document.getElementById('description-' + id).value;
+    var dimension_d = document.getElementById('dimension_d-' + id).value;
+    var dimension_w = document.getElementById('dimension_w-' + id).value;
+    var dimension_h = document.getElementById('dimension_h-' + id).value;
+    if( document.querySelector('#yes-' + id + ':checked') ) {
+        var available = true;
+    } else if( document.querySelector('#no-' + id + ':checked') )  {
+        var available = false;
+    }
+    // TODO: get this hooked up…
+    // image stuff
+    var images = null;
+    // date
+    var today = new Date();
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+    var y = today.getFullYear();
+    var date = m + '-' + d + '-' + y;
+    // build out the object
+    var newData = new Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date);
+    // return the new old data
+    return newData;
+}
+
+function updateOldWork(x) {
+    var saveOld = $(x).attr('id');
+    var saveOldId = '#' + $(x).attr('id');
+    var idArr = saveOldId.split('-');
+    var id = parseInt(idArr[1]);
+
+    var saveOldArr = saveOld.split('-');
+    var tst = document.getElementById(saveOldArr[1]);
+
+    var newOldWork = gatherNewOldWork(id);
+    console.log( newOldWork );
+
+    for(var i =0; i < tst.classList.length; i++) {
+        var aClass = tst.classList[i];
+        var section = aClass.split('-');
+        if( section[0] === 'js' ) {
+            var section = section[1];
+            var data = JSON.parse( localStorage.getItem( section ) );
+            for(var j = 0; j < data[section].length; j++) {
+                if( data[section][j].id === id ) {
+                    // do future stuff like send off to be saved…
+                }
+            }
+        }
+    }
+}

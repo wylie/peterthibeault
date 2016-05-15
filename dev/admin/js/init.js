@@ -54,10 +54,14 @@ define(['data','delete','display','save'], function (require) {
                 $(this).prop('disabled', true);
             });
 
-
-            // grab the new studio
+            // grab the new work
             var saveWork = document.getElementById('saveWork');
             saveWork.onclick = addWork;
+
+            // grab the old work
+            $('#oldWorks').on('click', '.save.button', function() {
+                updateOldWork(this);
+            });
 
             var saveWork = document.getElementById('saveWork');
             var workImage = document.getElementById('workImage');
