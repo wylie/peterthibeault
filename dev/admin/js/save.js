@@ -134,10 +134,11 @@ function addWork(today, id, file) {
 
 // START SAVING STUFF
 function saveStuff(section, data) {
-    console.log( 'saveStuff: ' + section + ', ' + data );
+    console.log( data );
+    // console.log( 'saveStuff: ' + section + ', ' + data );
     var msg = document.getElementById('messaging');
-    // var urls = 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data);
-    // console.log( urls );
+    var urls = 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data);
+    console.log( urls );
     $.ajax({
         type: 'GET',
         url: 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data),
@@ -247,7 +248,7 @@ function updateOldWork(x) {
     var tst = document.getElementById(saveOldArr[1]);
 
     var newOldWork = gatherNewOldWork(id);
-    console.log( newOldWork );
+    // console.log( newOldWork );
 
     for(var i =0; i < tst.classList.length; i++) {
         var aClass = tst.classList[i];
@@ -258,8 +259,30 @@ function updateOldWork(x) {
             for(var j = 0; j < data[section].length; j++) {
                 if( data[section][j].id === id ) {
                     // do future stuff like send off to be saved…
+                    saveSingleIndex(section, j , newOldWork);
                 }
             }
         }
     }
+}
+
+function saveSingleIndex(section, index, data) {
+    var data = JSON.stringify(data);
+    var urls = 'functions/saveIndex.php?section=' + section + '&index=' + index + '&data=' + encodeURIComponent(data);
+    console.log( urls );
+    $.ajax({
+        type: 'GET',
+        url: 'functions/saveIndex.php?section=' + section + '&index=' + index + '&data=' + encodeURIComponent(data),
+        dataType: 'JSON',
+        success: function(ret){
+            msg.classList.add('success');
+            msg.innerHTML = 'Your ' + section + ' has been deleted!';
+            msg.innerHTML = ret;
+        }
+    });
+    setTimeout(function(){
+        console.log( 'it is done' );
+        // reloadData(section);
+        // resetFilter();
+    },300);
 }

@@ -24,9 +24,6 @@ set_error_handler("customError");
 
 $section = $_GET["section"];
 $myData = $_GET["data"];
- 
-// echo $section;
-// echo $myData;
 
 $myFile = "../../data/" . $section . ".json";
 $fileData = file_get_contents($myFile);
