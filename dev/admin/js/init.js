@@ -44,12 +44,14 @@ define(['data','delete','display','save'], function (require) {
                         var data = JSON.parse( localStorage.getItem( section ) );
                         for(var j = 0; j < data[section].length; j++) {
                             if( data[section][j].id === id ) {
-                                // console.log( data[section][j] );
                                 applyOldData(data[section][j]);
                             }
                         }
                     }
                 }
+                // re-disable the buttons
+                $(this).siblings('.save').prop('disabled', true);
+                $(this).prop('disabled', true);
             });
 
 
