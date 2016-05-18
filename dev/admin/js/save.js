@@ -1,7 +1,5 @@
 // get the data entered in the form
 function gatherData() {
-    console.log( 'gatherData' );
-    // console.log( 'gatherData' );
     var section = $('body').attr('id');
     switch(section) {
         case 'works':
@@ -29,8 +27,6 @@ function gatherData() {
             }
             break;
         case 'news':
-            // console.log( section );
-
             // get today's date
             var today = new Date();
             // create an id
@@ -51,7 +47,6 @@ function gatherData() {
                 // stringify the news
                 var stringNews = JSON.stringify(newNews);
                 // do something with the news
-                // console.log( stringNews );
                 saveStuff('news', stringNews);
             }
             break;
@@ -60,8 +55,9 @@ function gatherData() {
 
 
 function uploadWorkImg(today, timeId, fd, file) {
-    console.log( 'uploadWorkImg: ' + today + ', ' + timeId + ', ' + fd + ', ' + file );
     var stringWork = addWork(today, timeId, file);
+    var section = getCheckedSection();
+    console.log( section );
     var fileName = file.name;
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
@@ -76,30 +72,36 @@ function uploadWorkImg(today, timeId, fd, file) {
             uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
             if(percentComplete === 100) {
                 // do something… or do nothing!
+                console.log( 'SUCCESS!!' );
             }
         }
     };
 
     xhr.onload = function() {
         if (this.status == 200) {
-            saveStuff('studio', stringWork);
+            saveStuff(section, stringWork);
         };
     };
     xhr.send(fd);
 }
 
+function getCheckedSection() {
+    for(var i =0; i < workArr.length; i++) {
+        var section = document.getElementById(workArr[i] + 'Add');
+        if( $(section).prop('checked') ) {
+            var section = workArr[i];
+            return section;
+        }
+    }
+}
 
 function addWork(today, id, file) {
-    console.log( 'addWork: ' + today + ', ' + id + ', ' + file );
-    // console.log(today);
-    // console.log(id);
-    // console.log(fd);
-    // console.log(file);
     var fileName = file.name;
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
     var imgSuff = fileArr[imgIndex];
 
+    var images = 1;
     var title = document.getElementById('newTitle').value;
     var year = document.getElementById('newYear').value;
     var media = document.getElementById('newMedia').value;
@@ -107,9 +109,20 @@ function addWork(today, id, file) {
     var dimension_d = document.getElementById('newDimension_d').value;
     var dimension_w = document.getElementById('newDimension_w').value;
     var dimension_h = document.getElementById('newDimension_h').value;
-    var images = 1;
-    // var available = document.getElementById('available').value;
-    var date = id;
+    var yes = document.getElementById('yes');
+    var no = document.getElementById('no');
+
+    if( $(yes).prop('checked', true) ) {
+        var available = true;
+    } else if( $(no).prop('checked', true) ) {
+        var available = false;
+    }
+
+    var today = new Date();
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+    var y = today.getFullYear();
+    var date = m + '-' + d + '-' + y;
 
     // grab the news content
     var workImage = document.getElementById('workImage').value;
@@ -123,9 +136,9 @@ function addWork(today, id, file) {
         // clear the error when new is entrered
         $(workErr).text('');
         // build out the news
-        var newWork = new Work(id, title, year, media, description, dimension_w, dimension_h, available, images, date);
+        var newWork = new Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date);
         // stringify the news
-        	var stringWork = JSON.stringify(newWork);
+    	var stringWork = JSON.stringify(newWork);
         // do something with the news
         return stringWork;
     }
@@ -134,11 +147,7 @@ function addWork(today, id, file) {
 
 // START SAVING STUFF
 function saveStuff(section, data) {
-    console.log( data );
-    // console.log( 'saveStuff: ' + section + ', ' + data );
     var msg = document.getElementById('messaging');
-    var urls = 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data);
-    console.log( urls );
     $.ajax({
         type: 'GET',
         url: 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data),
@@ -154,7 +163,6 @@ function saveStuff(section, data) {
 
 
 function uploadStudioImg(today, timeId, fd, file) {
-    console.log( 'uploadStudioImg: ' + today + ', ' + timeId + ', ' + fd + ', ' + file );
     var stringStudio = addStudio(today, timeId, fd, file);
     var fileName = file.name;
     var fileArr = fileName.split('.');
@@ -170,6 +178,7 @@ function uploadStudioImg(today, timeId, fd, file) {
             uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
             if(percentComplete === 100) {
                 // do something… or do nothing!
+                console.log( 'SUCCESS!!' );
             }
         }
     };
@@ -182,9 +191,7 @@ function uploadStudioImg(today, timeId, fd, file) {
     xhr.send(fd);
 }
 
-
 function addStudio(today, id, fd, file) {
-    console.log( 'addStudio: ' + today + ', ' + id + ', ' + fd + ', ' + file );
     var fileName = file.name;
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
@@ -248,7 +255,6 @@ function updateOldWork(x) {
     var tst = document.getElementById(saveOldArr[1]);
 
     var newOldWork = gatherNewOldWork(id);
-    // console.log( newOldWork );
 
     for(var i =0; i < tst.classList.length; i++) {
         var aClass = tst.classList[i];
@@ -268,8 +274,6 @@ function updateOldWork(x) {
 
 function saveSingleIndex(section, index, data) {
     var data = JSON.stringify(data);
-    var urls = 'functions/saveIndex.php?section=' + section + '&index=' + index + '&data=' + encodeURIComponent(data);
-    console.log( urls );
     $.ajax({
         type: 'GET',
         url: 'functions/saveIndex.php?section=' + section + '&index=' + index + '&data=' + encodeURIComponent(data),
