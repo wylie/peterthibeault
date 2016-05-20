@@ -9,9 +9,12 @@ define(['data','delete','display','save'], function (require) {
         case 'works':
             getData(['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students']);
             displayWorks();
-            // $('#oldWorks').on('click', '.delete', function() {
-                //getThis('works', this);
-            // });
+
+            var lastWork = sessionStorage.getItem('lastWork');
+            if( lastWork ) {
+                displayLastSaved( lastWork );
+            }
+
             // cancel the studio in the textarea
             var cancelWork = document.getElementById('cancelWork');
             cancelWork.onclick = clear;

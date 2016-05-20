@@ -139,6 +139,9 @@ function addWork(today, id, file) {
         var newWork = new Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date);
         // stringify the news
     	var stringWork = JSON.stringify(newWork);
+        // set the last added work to sessionStorage
+        sessionStorage.setItem('lastWork', stringWork);
+        displayLastSaved();
         // do something with the news
         return stringWork;
     }
