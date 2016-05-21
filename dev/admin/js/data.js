@@ -1,5 +1,5 @@
 // create new work
-function Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date) {//, images) {
+function Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date) {
     this.id = id,
     this.title = title,
     this.year = year,
@@ -9,7 +9,6 @@ function Work(id, title, year, media, description, dimension_d, dimension_w, dim
     this.dimension_w = dimension_w,
     this.dimension_h = dimension_h,
     this.available = available,
-    // this.image = image//,
     this.images = images,
     this.date = date
 }

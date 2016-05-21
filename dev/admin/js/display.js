@@ -228,182 +228,185 @@ function displayWorks() {
 
 
 function displayLastSaved( data ) {
-    var addNewWork = document.getElementById('addNewWork');
-    var lastWork = document.getElementById('lastWork');
-    var section = 'design';
-    var data = JSON.parse( data );
-    if( !lastWork ) {
-        var div = document.createElement('div');
-        div.setAttribute('id','lastWork');
-        var h2 = document.createElement('h2');
-        h2.setAttribute('class','header');
-        h2.innerHTML = 'Last Saved Work';
-        var moduleSection = document.createElement('div');
-        moduleSection.setAttribute('class', 'module-section single');
-        var img = document.createElement('img');
-        img.setAttribute('class', section + '-img');
-        img.setAttribute('src', '../img/works/' + data.id + '_l-0.jpg');
+    var section = sessionStorage.getItem('lastSection');
+    if( data !== undefined ) {
+        var addNewWork = document.getElementById('addNewWork');
+        var lastWork = document.getElementById('lastWork');
+        var section = 'design';
+        var data = JSON.parse( data );
+        if( !lastWork ) {
+            var div = document.createElement('div');
+            div.setAttribute('id','lastWork');
+            var h2 = document.createElement('h2');
+            h2.setAttribute('class','header');
+            h2.innerHTML = 'Last Saved Work';
+            var moduleSection = document.createElement('div');
+            moduleSection.setAttribute('class', 'module-section single');
+            var img = document.createElement('img');
+            img.setAttribute('class', section + '-img');
+            img.setAttribute('src', '../img/works/' + data.id + '_l-0.jpg');
 
-        var form = document.createElement('form');
-        form.setAttribute('id', 'form-' + data.id)
+            var form = document.createElement('form');
+            form.setAttribute('id', 'form-' + data.id)
 
-        // create the title heading
-        var heading1 = document.createElement('h3');
-        heading1.setAttribute('class', 'heading');
-        heading1.innerHTML = 'Title';
-        // create the title heading
-        var input1 = document.createElement('input');
-        input1.setAttribute('class', 'form-input');
-        input1.setAttribute('id', 'title-' + data.id);
-        input1.setAttribute('type', 'text');
-        input1.setAttribute('value', data.title);
-        // create the year heading
-        var heading2 = document.createElement('h3');
-        heading2.setAttribute('class', 'heading');
-        heading2.innerHTML = 'Year';
-        // create the year heading
-        var input2 = document.createElement('input');
-        input2.setAttribute('class', 'form-input');
-        input2.setAttribute('id', 'year-' + data.id);
-        input2.setAttribute('type', 'text');
-        input2.setAttribute('value', data.year);
-        // create the media heading
-        var heading3 = document.createElement('h3');
-        heading3.setAttribute('class', 'heading');
-        heading3.innerHTML = 'Media';
-        // create the media heading
-        var input3 = document.createElement('input');
-        input3.setAttribute('class', 'form-input');
-        input3.setAttribute('id', 'media-' + data.id);
-        input3.setAttribute('type', 'text');
-        input3.setAttribute('value', data.media);
-        // create the description heading
-        var heading4 = document.createElement('h3');
-        heading4.setAttribute('class', 'heading');
-        heading4.innerHTML = 'Description';
-        // create the description heading
-        var input4 = document.createElement('textarea');
-        input4.setAttribute('class', 'form-input');
-        input4.setAttribute('id', 'description-' + data.id);
-        input4.setAttribute('type', 'text');
-        input4.innerHTML = data.description;
-        // create the dimensions heading
-        var heading5 = document.createElement('h3');
-        heading5.setAttribute('class', 'heading');
-        heading5.innerHTML = 'Dimensions';
-        // create the dimensions heading
-        var input5 = document.createElement('input');
-        input5.setAttribute('class', 'form-input dimension');
-        input5.setAttribute('id', 'dimension_d-' + data.id);
-        input5.setAttribute('type', 'text');
-        input5.setAttribute('value', data.dimension_d);
-        // create the dimensions heading
-        var input6 = document.createElement('input');
-        input6.setAttribute('class', 'form-input dimension');
-        input6.setAttribute('id', 'dimension_w-' + data.id);
-        input6.setAttribute('type', 'text');
-        input6.setAttribute('value', data.dimension_w);
-        // create the dimensions heading
-        var input7 = document.createElement('input');
-        input7.setAttribute('class', 'form-input dimension');
-        input7.setAttribute('id', 'dimension_h-' + data.id);
-        input7.setAttribute('type', 'text');
-        input7.setAttribute('value', data.dimension_h);
-        // create the available heading
-        var heading6 = document.createElement('h3');
-        heading6.setAttribute('class', 'heading');
-        heading6.innerHTML = 'Available';
-        // NO
-        var inputAvailable1 = document.createElement('input');
-        inputAvailable1.setAttribute('class', 'available input');
-        inputAvailable1.setAttribute('type', 'radio');
-        inputAvailable1.setAttribute('name', 'available-' + data.id);
-        inputAvailable1.setAttribute('id', 'no-' + data.id);
-        var labelAvailable1 = document.createElement('label');
-        labelAvailable1.setAttribute('class', 'available label');
-        labelAvailable1.setAttribute('for', 'no-' + data.id);
-        labelAvailable1.innerHTML = 'No';
-        // YES
-        var inputAvailable2 = document.createElement('input');
-        inputAvailable2.setAttribute('class', 'available input');
-        inputAvailable2.setAttribute('type', 'radio');
-        inputAvailable2.setAttribute('name', 'available-' + data.id);
-        inputAvailable2.setAttribute('id', 'yes-' + data.id);
-        var labelAvailable2 = document.createElement('label');
-        labelAvailable2.setAttribute('class', 'available label');
-        labelAvailable2.setAttribute('for', 'yes-' + data.id);
-        labelAvailable2.innerHTML = 'Yes';
+            // create the title heading
+            var heading1 = document.createElement('h3');
+            heading1.setAttribute('class', 'heading');
+            heading1.innerHTML = 'Title';
+            // create the title heading
+            var input1 = document.createElement('input');
+            input1.setAttribute('class', 'form-input');
+            input1.setAttribute('id', 'title-' + data.id);
+            input1.setAttribute('type', 'text');
+            input1.setAttribute('value', data.title);
+            // create the year heading
+            var heading2 = document.createElement('h3');
+            heading2.setAttribute('class', 'heading');
+            heading2.innerHTML = 'Year';
+            // create the year heading
+            var input2 = document.createElement('input');
+            input2.setAttribute('class', 'form-input');
+            input2.setAttribute('id', 'year-' + data.id);
+            input2.setAttribute('type', 'text');
+            input2.setAttribute('value', data.year);
+            // create the media heading
+            var heading3 = document.createElement('h3');
+            heading3.setAttribute('class', 'heading');
+            heading3.innerHTML = 'Media';
+            // create the media heading
+            var input3 = document.createElement('input');
+            input3.setAttribute('class', 'form-input');
+            input3.setAttribute('id', 'media-' + data.id);
+            input3.setAttribute('type', 'text');
+            input3.setAttribute('value', data.media);
+            // create the description heading
+            var heading4 = document.createElement('h3');
+            heading4.setAttribute('class', 'heading');
+            heading4.innerHTML = 'Description';
+            // create the description heading
+            var input4 = document.createElement('textarea');
+            input4.setAttribute('class', 'form-input');
+            input4.setAttribute('id', 'description-' + data.id);
+            input4.setAttribute('type', 'text');
+            input4.innerHTML = data.description;
+            // create the dimensions heading
+            var heading5 = document.createElement('h3');
+            heading5.setAttribute('class', 'heading');
+            heading5.innerHTML = 'Dimensions';
+            // create the dimensions heading
+            var input5 = document.createElement('input');
+            input5.setAttribute('class', 'form-input dimension');
+            input5.setAttribute('id', 'dimension_d-' + data.id);
+            input5.setAttribute('type', 'text');
+            input5.setAttribute('value', data.dimension_d);
+            // create the dimensions heading
+            var input6 = document.createElement('input');
+            input6.setAttribute('class', 'form-input dimension');
+            input6.setAttribute('id', 'dimension_w-' + data.id);
+            input6.setAttribute('type', 'text');
+            input6.setAttribute('value', data.dimension_w);
+            // create the dimensions heading
+            var input7 = document.createElement('input');
+            input7.setAttribute('class', 'form-input dimension');
+            input7.setAttribute('id', 'dimension_h-' + data.id);
+            input7.setAttribute('type', 'text');
+            input7.setAttribute('value', data.dimension_h);
+            // create the available heading
+            var heading6 = document.createElement('h3');
+            heading6.setAttribute('class', 'heading');
+            heading6.innerHTML = 'Available';
+            // NO
+            var inputAvailable1 = document.createElement('input');
+            inputAvailable1.setAttribute('class', 'available input');
+            inputAvailable1.setAttribute('type', 'radio');
+            inputAvailable1.setAttribute('name', 'available-' + data.id);
+            inputAvailable1.setAttribute('id', 'no-' + data.id);
+            var labelAvailable1 = document.createElement('label');
+            labelAvailable1.setAttribute('class', 'available label');
+            labelAvailable1.setAttribute('for', 'no-' + data.id);
+            labelAvailable1.innerHTML = 'No';
+            // YES
+            var inputAvailable2 = document.createElement('input');
+            inputAvailable2.setAttribute('class', 'available input');
+            inputAvailable2.setAttribute('type', 'radio');
+            inputAvailable2.setAttribute('name', 'available-' + data.id);
+            inputAvailable2.setAttribute('id', 'yes-' + data.id);
+            var labelAvailable2 = document.createElement('label');
+            labelAvailable2.setAttribute('class', 'available label');
+            labelAvailable2.setAttribute('for', 'yes-' + data.id);
+            labelAvailable2.innerHTML = 'Yes';
 
-        if( data.available === false ) {
-            inputAvailable1.setAttribute('checked', 'checked');
-        }
-        if( data.available === true ) {
-            inputAvailable2.setAttribute('checked', 'checked');
-        }
-
-        // create the related images heading
-        var heading7 = document.createElement('h3');
-        heading7.setAttribute('class', 'heading');
-        heading7.innerHTML = 'All Images';
-        // create the related images heading
-        var ulRelated = document.createElement('ul');
-        ulRelated.setAttribute('class', 'list inline related');
-        // loop through it all
-        for( var m = 0; m <= data.images - 1; m++ ) {
-            var liRelated = document.createElement('li');
-            liRelated.setAttribute('class', 'list-item');
-            // img element stuff
-            var allImgs = document.createElement('img');
-            allImgs.setAttribute('class', 'studio-img-thmb');
-            if( m === 0 ) {
-                allImgs.setAttribute('class', 'studio-img-thmb active');
+            if( data.available === false ) {
+                inputAvailable1.setAttribute('checked', 'checked');
             }
-            // build the image bits
-            var imgPath = '../img/works/';
-            var imgNum = data.id;
-            var imgSize = '_m-';
-            var imgSuff = '.jpg';
-            var imgIndex = m;
-            // build the image
-            allImgs.setAttribute('src', imgPath + imgNum + imgSize + imgIndex + imgSuff);
-            allImgs.setAttribute('data-imgid', imgIndex);
-            // append it all
-            liRelated.appendChild(allImgs);
-            ulRelated.appendChild(liRelated);
+            if( data.available === true ) {
+                inputAvailable2.setAttribute('checked', 'checked');
+            }
+
+            // create the related images heading
+            var heading7 = document.createElement('h3');
+            heading7.setAttribute('class', 'heading');
+            heading7.innerHTML = 'All Images';
+            // create the related images heading
+            var ulRelated = document.createElement('ul');
+            ulRelated.setAttribute('class', 'list inline related');
+            // loop through it all
+            for( var m = 0; m <= data.images - 1; m++ ) {
+                var liRelated = document.createElement('li');
+                liRelated.setAttribute('class', 'list-item');
+                // img element stuff
+                var allImgs = document.createElement('img');
+                allImgs.setAttribute('class', 'studio-img-thmb');
+                if( m === 0 ) {
+                    allImgs.setAttribute('class', 'studio-img-thmb active');
+                }
+                // build the image bits
+                var imgPath = '../img/works/';
+                var imgNum = data.id;
+                var imgSize = '_m-';
+                var imgSuff = '.jpg';
+                var imgIndex = m;
+                // build the image
+                allImgs.setAttribute('src', imgPath + imgNum + imgSize + imgIndex + imgSuff);
+                allImgs.setAttribute('data-imgid', imgIndex);
+                // append it all
+                liRelated.appendChild(allImgs);
+                ulRelated.appendChild(liRelated);
+            }
+
+            form.appendChild(img);
+            form.appendChild(heading1);
+            form.appendChild(input1);
+            form.appendChild(heading2);
+            form.appendChild(input2);
+            form.appendChild(heading3);
+            form.appendChild(input3);
+            form.appendChild(heading4);
+            form.appendChild(input4);
+            form.appendChild(heading4);
+            form.appendChild(input4);
+            form.appendChild(heading5);
+            form.appendChild(input5);
+            form.appendChild(input6);
+            form.appendChild(input7);
+            form.appendChild(heading6);
+            form.appendChild(inputAvailable1);
+            form.appendChild(labelAvailable1);
+            form.appendChild(inputAvailable2);
+            form.appendChild(labelAvailable2);
+            form.appendChild(heading7);
+            form.appendChild(ulRelated);
+
+            // div.appendChild(form);
+
+            moduleSection.appendChild(form);
+
+            // append all the items
+            div.appendChild(h2);
+            div.appendChild(moduleSection);
+            // put the whole thing on the page
+            $('#addNewWork').after(div);
         }
-
-        form.appendChild(img);
-        form.appendChild(heading1);
-        form.appendChild(input1);
-        form.appendChild(heading2);
-        form.appendChild(input2);
-        form.appendChild(heading3);
-        form.appendChild(input3);
-        form.appendChild(heading4);
-        form.appendChild(input4);
-        form.appendChild(heading4);
-        form.appendChild(input4);
-        form.appendChild(heading5);
-        form.appendChild(input5);
-        form.appendChild(input6);
-        form.appendChild(input7);
-        form.appendChild(heading6);
-        form.appendChild(inputAvailable1);
-        form.appendChild(labelAvailable1);
-        form.appendChild(inputAvailable2);
-        form.appendChild(labelAvailable2);
-        form.appendChild(heading7);
-        form.appendChild(ulRelated);
-
-        // div.appendChild(form);
-
-        moduleSection.appendChild(form);
-
-        // append all the items
-        div.appendChild(h2);
-        div.appendChild(moduleSection);
-        // put the whole thing on the page
-        $('#addNewWork').after(div);
     }
 }
 
@@ -543,7 +546,6 @@ function getWorkSection() {
 function filterWorks( x ) {
     // get the attribute of each label
     var section = $(x).attr('for');
-    console.log( section );
     // remove any hiding going on
     $('#oldWorks').children('.works').show();
     // add hiding to the siblings of the type clicked on

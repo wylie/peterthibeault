@@ -55,9 +55,8 @@ function gatherData() {
 
 
 function uploadWorkImg(today, timeId, fd, file) {
-    var stringWork = addWork(today, timeId, file);
     var section = getCheckedSection();
-    console.log( section );
+    var stringWork = addWork(section, today, timeId, file);
     var fileName = file.name;
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
@@ -95,7 +94,7 @@ function getCheckedSection() {
     }
 }
 
-function addWork(today, id, file) {
+function addWork(section, today, id, file) {
     var fileName = file.name;
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
@@ -140,6 +139,7 @@ function addWork(today, id, file) {
         // stringify the news
     	var stringWork = JSON.stringify(newWork);
         // set the last added work to sessionStorage
+        sessionStorage.setItem('lastSection', section);
         sessionStorage.setItem('lastWork', stringWork);
         displayLastSaved();
         // do something with the news
@@ -150,20 +150,37 @@ function addWork(today, id, file) {
 
 // START SAVING STUFF
 function saveStuff(section, data) {
-    var msg = document.getElementById('messaging');
+    var msgDiv = document.createElement('div');
+    msgDiv.setAttribute('class', 'msg');
+    msgDiv.setAttribute('id', 'msg');
+    $('.module-save').append(msgDiv);
+    var msg = document.getElementById('msg');
     $.ajax({
         type: 'GET',
         url: 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data),
         dataType: 'JSON',
         success: function(ret){
+            console.log(ret);
             msg.classList.add('success');
             msg.innerHTML = 'Your ' + section + ' has been added!';
-            msg.innerHTML = ret;
+        },
+        error: function(ret){
+            msg.classList.add('error');
+            msg.innerHTML = 'Your ' + section + ' has not been added!';
+        },
+        complete: function() {
+            setTimeout(function(){
+                reloadData(section);
+                msg.remove();
+            },2000);
         }
     });
-    reloadData(section);
 }
 
+
+function ajaxSuccess () {
+  console.log(this.responseText);
+}
 
 function uploadStudioImg(today, timeId, fd, file) {
     var stringStudio = addStudio(today, timeId, fd, file);
@@ -173,6 +190,7 @@ function uploadStudioImg(today, timeId, fd, file) {
     var imgSuff = fileArr[imgIndex];
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'functions/upload.php', true);
+    xhr.onload = ajaxSuccess;
 
     xhr.upload.onprogress = function(e) {
         if (e.lengthComputable) {
@@ -268,28 +286,40 @@ function updateOldWork(x) {
             for(var j = 0; j < data[section].length; j++) {
                 if( data[section][j].id === id ) {
                     // do future stuff like send off to be saved…
-                    saveSingleIndex(section, j , newOldWork);
+                    saveSingleIndex(id, section, j , newOldWork);
                 }
             }
         }
     }
 }
 
-function saveSingleIndex(section, index, data) {
+function saveSingleIndex(id, section, index, data) {
     var data = JSON.stringify(data);
+    var msgDiv = document.createElement('div');
+    msgDiv.setAttribute('class', 'msg');
+    msgDiv.setAttribute('id', 'msg-' + id);
+    $('#' + id + ' .module-save').append(msgDiv);
+    var msg = document.getElementById('msg-' + id);
     $.ajax({
         type: 'GET',
         url: 'functions/saveIndex.php?section=' + section + '&index=' + index + '&data=' + encodeURIComponent(data),
         dataType: 'JSON',
         success: function(ret){
+            // console.log( ret );
             msg.classList.add('success');
-            msg.innerHTML = 'Your ' + section + ' has been deleted!';
-            msg.innerHTML = ret;
+            msg.innerHTML = 'Your edit to this ' + ret.section + ' has been saved!';
+        },
+        error: function(ret) {
+            // console.log( msg );
+            msg.classList.add('error');
+            msg.innerHTML = 'Your edit to this ' + ret.section + ' has not been saved!';
+        },
+        complete: function() {
+            setTimeout(function(){
+                reloadData(section);
+                resetFilter();
+                msg.remove();
+            },2000);
         }
     });
-    setTimeout(function(){
-        console.log( 'it is done' );
-        // reloadData(section);
-        // resetFilter();
-    },300);
 }

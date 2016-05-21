@@ -75,12 +75,15 @@ function deleteStuff(section, index) {
         success: function(ret){
             msg.classList.add('success');
             msg.innerHTML = 'Your ' + section + ' has been deleted!';
-            msg.innerHTML = ret;
+            // msg.innerHTML = ret;
+        },
+        complete: function() {
+            setTimeout(function(){
+                reloadData(section);
+                msg.remove();
+            },2000);
         }
     });
-    setTimeout(function(){
-        reloadData(section);
-    },300);
 }
 
 
@@ -120,26 +123,42 @@ function deleteSingleWork( x ) {
                 if( parId === sectionId ) {
                     var oldWorks = document.getElementById('oldWorks');
                     oldWorks.innerHTML = '';
-                    deleteSingleIndex(section, j);
+                    deleteSingleIndex(sectionId, section, j);
                 }
             }
         }
     }
 }
 // DELETE SINGLE INDEX
-function deleteSingleIndex(section, index) {
+function deleteSingleIndex(id, section, index) {
+    var msgDiv = document.createElement('div');
+    msgDiv.setAttribute('class', 'msg');
+    msgDiv.setAttribute('id', 'msg-' + id);
+    $('#' + id + ' .module-save').append(msgDiv);
+    var msg = document.getElementById('msg-' + id);
+
+
+
     $.ajax({
         type: 'GET',
         url: 'functions/deleteIndex.php?section=' + section + '&index=' + index,
         dataType: 'JSON',
         success: function(ret){
+            console.log( ret );
             msg.classList.add('success');
             msg.innerHTML = 'Your ' + section + ' has been deleted!';
-            msg.innerHTML = ret;
+        },
+        error: function(ret){
+            console.log( ret );
+            msg.classList.add('error');
+            msg.innerHTML = 'Your ' + section + ' has not been deleted!';
+        },
+        complete: function(ret) {
+            setTimeout(function(){
+                reloadData(section);
+                resetFilter();
+                msg.remove();
+            },2000);
         }
     });
-    setTimeout(function(){
-        reloadData(section);
-        resetFilter();
-    },300);
 }

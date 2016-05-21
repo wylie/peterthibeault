@@ -60,4 +60,11 @@ fwrite($fileHandle, $json);
 // close the file
 fclose($fileHandle);
 
+$json = json_encode(array(
+  'section' => $section,
+  'index' => $index
+));
+
+echo $json;
+
 ?>
