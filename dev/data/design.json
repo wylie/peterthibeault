@@ -12,6 +12,19 @@
       "available": false,
       "images": 1,
       "date": "03-18-2015"
+    },
+    {
+      "id": 1443894931831,
+      "title": "Another Trade Show Exhibit",
+      "year": "",
+      "media": "",
+      "description": null,
+      "dimension_d": "10'",
+      "dimension_w": "10'",
+      "dimension_h": "8'",
+      "available": false,
+      "images": 0,
+      "date": "03-18-2015"
     }
   ]
 }

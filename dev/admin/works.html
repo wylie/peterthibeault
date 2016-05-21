@@ -3,11 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>Peter Thibeault - Admin</title>
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
 
 	<link href="css/styles.css" rel="stylesheet" />
 
-	<script src="../js/jquery.js"></script>
-	<script src="js/script.js"></script>
+	<script data-main="js/script" src="js/require.js"></script>
 
 </head>
 <body id="works">
@@ -35,35 +37,37 @@
 				<h3 class="subheader">Choose A Section:</h2>
 				<ul class="list filter inline" id="addWorkCategory">
 					<li class="list-item">
-						<input type="radio" name="section" id="furnishings">
-						<label class="label" for="furnishings">Furnishings</label>
+						<input class="input" type="radio" name="section" id="furnishingsAdd">
+						<label class="label" for="furnishingsAdd">Furnishings</label>
 					</li>
 					<li class="list-item">
-						<input type="radio" name="section" id="sculpture">
-						<label class="label" for="sculpture">Sculpture</label>
+						<input class="input" type="radio" name="section" id="sculptureAdd">
+						<label class="label" for="sculptureAdd">Sculpture</label>
 					</li>
 					<li class="list-item">
-						<input type="radio" name="section" id="drawing">
-						<label class="label" for="drawing">Drawing</label>
+						<input class="input" type="radio" name="section" id="drawingAdd">
+						<label class="label" for="drawingAdd">Drawing</label>
 					</li>
 					<li class="list-item">
-						<input type="radio" name="section" id="painting">
-						<label class="label" for="painting">Painting</label>
+						<input class="input" type="radio" name="section" id="paintingAdd">
+						<label class="label" for="paintingAdd">Painting</label>
 					</li>
 					<li class="list-item">
-						<input type="radio" name="section" id="design">
-						<label class="label" for="design">Design</label>
+						<input class="input" type="radio" name="section" id="designAdd">
+						<label class="label" for="designAdd">Design</label>
 					</li>
 					<li class="list-item">
-						<input type="radio" name="section" id="students">
-						<label class="label" for="students">Students</label>
+						<input class="input" type="radio" name="section" id="studentsAdd">
+						<label class="label" for="studentsAdd">Students</label>
 					</li>
 				</ul>
 			</div>
 
 			<div class="inner-section">
 				<h3 class="subheader">Choose An Image:</h2>
-				<input size="25" id="newWorkImage" name="main_image" type="file" />
+				<!-- <input size="25" id="newWorkImage" name="main_image" type="file" /> -->
+				<input class="studio-add" id="workImage" size="25" name="workImage" type="file" accept="image/*"/>
+				<div class="status" id="upload"><span class="status-bar" id="uploadProcess"></span></div>
 			</div>
 
 			<div class="inner-section">
@@ -81,21 +85,21 @@
 					<li class="module-list-item"><input class="form-input dimension" id="newDimension_d" name="dimension_d" type="text" style="width: 25px;" />D x <input class="form-input dimension" id="newDimension_w" name="dimension_w" type="text" style="width: 25px;"/>W x <input class="form-input dimension" id="newDimension_h" name="dimension_h" type="text" style="width: 25px;" class="form-input" />H</li>
 					<li class="module-list"><h4>AVAILABLE</h4></li>
 					<li class="module-list-item">
-						<ul class="list filter inline" id="availableToBuy">
+						<ul class="list filter inline available" id="availableToBuy">
 							<li class="list-item">
-								<input type="radio" name="available" id="yes">
-								<label class="label" for="yes">Yes</label>
+								<input class="available input" type="radio" name="available" id="yes">
+								<label class="available label" for="yes">Yes</label>
 							</li>
 							<li class="list-item">
-								<input type="radio" name="available" id="no" checked>
-								<label class="label" for="no">No</label>
+								<input class="available input" type="radio" name="available" id="no" checked>
+								<label class="available label" for="no">No</label>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<div class="module-save">
 					<div class="msg error"></div>
-					<button class="save button" id="saveWork" type="submit" name="edit" value="save">Save</button>
+					<button class="save button" id="saveWork" type="submit" name="edit" value="save" disabled>Save</button>
 					<button class="cancel button" id="cancelWork" type="submit" name="edit" value="cancel">Cancel</button>
 					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
 					<input type="hidden" name="submitted" value="true" />
@@ -108,31 +112,31 @@
 			<h2 class="subheader">Filter By Section</h2>
 			<ul class="list filter inline" id="filterWorks">
 				<li class="list-item">
-					<input type="radio" name="section" id="furnishings">
+					<input class="input" type="radio" name="filterSection" id="furnishings">
 					<label class="label" for="furnishings">Furnishings</label>
 				</li>
 				<li class="list-item">
-					<input type="radio" name="section" id="sculpture">
+					<input class="input" type="radio" name="filterSection" id="sculpture">
 					<label class="label" for="sculpture">Sculpture</label>
 				</li>
 				<li class="list-item">
-					<input type="radio" name="section" id="drawing">
+					<input class="input" type="radio" name="filterSection" id="drawing">
 					<label class="label" for="drawing">Drawing</label>
 				</li>
 				<li class="list-item">
-					<input type="radio" name="section" id="painting">
+					<input class="input" type="radio" name="filterSection" id="painting">
 					<label class="label" for="painting">Painting</label>
 				</li>
 				<li class="list-item">
-					<input type="radio" name="section" id="design">
+					<input class="input" type="radio" name="filterSection" id="design">
 					<label class="label" for="design">Design</label>
 				</li>
 				<li class="list-item">
-					<input type="radio" name="section" id="students">
+					<input class="input" type="radio" name="filterSection" id="students">
 					<label class="label" for="students">Students</label>
 				</li>
 				<li class="list-item">
-					<input type="radio" name="section" id="all" checked="checked" />
+					<input class="input" type="radio" name="filterSection" id="all" checked="checked" />
 					<label class="label" for="all">Display all</label>
 				</li>
 			</ul>

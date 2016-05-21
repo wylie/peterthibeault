@@ -38,4 +38,10 @@ $fileHandle = fopen($myFile, "w");
 fwrite($fileHandle, $ultimateJson);
 fclose($fileHandle);
 
+$json = json_encode(array(
+  'section' => $section
+));
+
+echo $json;
+
 ?>
