@@ -1,12 +1,15 @@
 <?php
 
     # this is a bad fix…
-    $key = '_l-0.';
+    $key = '_l-';
+    $num = $_REQUEST['num'];
     $value = 750;
 
-    echo 'file: ' . $_FILES['workImage'];
+    echo $key;
+    // echo 'file: ' . $_FILES['workImage'];
 
     $image = $_FILES['workImage']['name'];
+    $number = $_FILES['workImage']['number'];
     $image_tmp = $_FILES['workImage']['tmp_name'];
     $image_type = $_FILES['workImage']['type'];
 
@@ -26,7 +29,7 @@
     $image_ext = getExtension($image_name);
     $ext = strtolower($image_ext);
     $output_folder = "../../img/works/";
-    $new_file_name = strtolower($_REQUEST['id'] . $key . $ext);
+    $new_file_name = strtolower($_REQUEST['id'] . $key . $num . '.' . $ext);
     $new_file_location = $output_folder . $new_file_name;
 
     move_uploaded_file($image_tmp, $new_file_location);

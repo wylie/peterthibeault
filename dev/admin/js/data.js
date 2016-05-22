@@ -92,6 +92,9 @@ function reloadData(section) {
                     oldWorks.innerHTML = '';
                     displayWorks();
                     displayFilterCount();
+                    $('#lastWork').remove();
+                    var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
+                    displayLastSaved( data );
             break;
         }
     },300);
@@ -110,7 +113,7 @@ function applyOldData(data) {
     var yes = document.getElementById('yes-' + id);
     var no = document.getElementById('no-' + id);
 
-    title.value = data.title;
+    title.value = data.title;// FIXME: figure out the error being thrown here when deleting last saved
     year.value = data.year;
     media.value = data.media;
     description.value = data.description;

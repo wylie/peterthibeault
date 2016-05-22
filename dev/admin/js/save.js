@@ -11,6 +11,7 @@ function gatherData() {
                 var fd = new FormData();
                 fd.append('workImage', file);
                 fd.append('id', timeId);
+                fd.append('num', 0);
                 uploadWorkImg(today, timeId, fd, file);
             }
             break;
@@ -72,6 +73,8 @@ function uploadWorkImg(today, timeId, fd, file) {
             if(percentComplete === 100) {
                 // do something… or do nothing!
                 console.log( 'SUCCESS!!' );
+                var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
+                applyOldData( data );
             }
         }
     };
@@ -140,8 +143,7 @@ function addWork(section, today, id, file) {
     	var stringWork = JSON.stringify(newWork);
         // set the last added work to sessionStorage
         sessionStorage.setItem('lastSection', section);
-        sessionStorage.setItem('lastWork', stringWork);
-        displayLastSaved();
+        sessionStorage.setItem('lastData', stringWork);
         // do something with the news
         return stringWork;
     }
@@ -160,7 +162,6 @@ function saveStuff(section, data) {
         url: 'functions/saveit.php?section=' + section + '&data=' + encodeURIComponent(data),
         dataType: 'JSON',
         success: function(ret){
-            console.log(ret);
             msg.classList.add('success');
             msg.innerHTML = 'Your ' + section + ' has been added!';
         },
@@ -267,25 +268,21 @@ function gatherNewOldWork( id ) {
 }
 
 function updateOldWork(x) {
-    var saveOld = $(x).attr('id');
-    var saveOldId = '#' + $(x).attr('id');
-    var idArr = saveOldId.split('-');
-    var id = parseInt(idArr[1]);
-
-    var saveOldArr = saveOld.split('-');
-    var tst = document.getElementById(saveOldArr[1]);
-
-    var newOldWork = gatherNewOldWork(id);
-
-    for(var i =0; i < tst.classList.length; i++) {
-        var aClass = tst.classList[i];
-        var section = aClass.split('-');
-        if( section[0] === 'js' ) {
-            var section = section[1];
+    var saveOld = $(x).parents('.module-section');
+    var id = parseInt( saveOld[0].id );
+    var classes = saveOld[0].classList;
+    for(var i =0; i < classes.length; i++) {
+        var myClass = classes[i].split('-');
+        if( myClass[0] === 'js' ) {
+            var section = myClass[1];
+            var newOldWork = gatherNewOldWork( id );
             var data = JSON.parse( localStorage.getItem( section ) );
             for(var j = 0; j < data[section].length; j++) {
                 if( data[section][j].id === id ) {
                     // do future stuff like send off to be saved…
+                    localStorage.setItem(section, JSON.stringify(newOldWork) );
+                    // sessionStorage.setItem( 'lastSection', section );
+                    // sessionStorage.setItem( 'lastData', JSON.stringify(newOldWork) );
                     saveSingleIndex(id, section, j , newOldWork);
                 }
             }

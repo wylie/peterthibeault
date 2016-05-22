@@ -8,12 +8,13 @@ define(['data','delete','display','save'], function (require) {
     switch(page) {
         case 'works':
             getData(['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students']);
-            displayWorks();
 
-            var lastWork = sessionStorage.getItem('lastWork');
-            if( lastWork ) {
-                displayLastSaved( lastWork );
+            var lastData = sessionStorage.getItem('lastData');
+            if( lastData ) {
+                displayLastSaved( lastData );
             }
+
+            displayWorks();
 
             // cancel the studio in the textarea
             var cancelWork = document.getElementById('cancelWork');
@@ -21,6 +22,11 @@ define(['data','delete','display','save'], function (require) {
             // filter the old works
             $('#filterWorks').on('click', '.label', function() {
                 filterWorks( this );
+            });
+
+            // delete a work
+            $('#works #lastWork').on('click', '.js-delete', function() {
+                deleteSingleWork( this );
             });
 
             // delete a work
@@ -34,6 +40,23 @@ define(['data','delete','display','save'], function (require) {
             $('#oldWorks').on('change', '[id^=form-] :input', function() {
                 $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+
+            $('#works #lastWork').on('change', '[id^=form-] :input', function() {
+                $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+
+            $('#works #lastWork').on('click', '.js-save', function() {
+                updateOldWork(this);
+            });
+
+            $('#works #lastWork').on('click', '.js-cancel', function() {
+                var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
+                applyOldData( data );
+                // re-disable the buttons
+                $(this).siblings('.js-save').prop('disabled', true);
+                $(this).prop('disabled', true);
             });
 
             $('#oldWorks').on('click', '.js-cancel', function() {

@@ -79,7 +79,8 @@ h4 {
 	.group;
 	&.inline {
 		.list-item {
-			float: left;
+			display: inline-block;
+			vertical-align: middle;
 		}
 	}
 	&.center {
@@ -90,8 +91,7 @@ h4 {
 		}
 	}
 	&.related {
-		margin-left: -5px;
-		margin-right: -5px;
+		margin: 15px -5px;
 		.group;
 		.list-item {
 			height: auto;
@@ -266,7 +266,7 @@ input#price {
 	}
 }
 .module-save {
-	margin: 20px 0 0;
+	// margin: 20px 0 0;
 	.cancel.button {
 		width: 100%;
 	    margin-bottom: 2%;
@@ -380,6 +380,7 @@ input#price {
 		float: left;
 		padding: 10px;
 		text-align: center;
+		.group;
 		&:hover {
 			text-decoration: underline;
 		}
@@ -433,13 +434,17 @@ input#price {
 	.form-input {
 		width: 100%;
 		font-size: 18px;
-		margin-top: 5px;
+		margin-top: 15px;
 		border: 2px solid #ccc;
 		padding: 5px;
 		&.dimension {
-			width: 25% !important;
-			display: inline-block;
-			margin-right: 10px;
+			width: 32%;
+		    display: inline-block;
+		    margin-right: 2%;
+			&.last {
+				.group;
+				margin-right: 0;
+			}
 		}
 	}
 	.inner-section {
@@ -521,7 +526,7 @@ input#price {
 		width: 50%;
 	}
 	& {
-		margin-bottom: 20px;
+		margin: 15px 0;
 	}
 	.label {
 		margin: 0;
