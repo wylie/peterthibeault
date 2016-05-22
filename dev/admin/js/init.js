@@ -36,7 +36,7 @@ define(['data','delete','display','save'], function (require) {
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
             });
 
-            $('#oldWorks').on('click', '.cancel.button', function() {
+            $('#oldWorks').on('click', '.js-cancel', function() {
                 var mod = $(this).parents('.module-section');
                 var id = parseInt($(mod).attr('id'));
                 var classes = mod[0].classList;
