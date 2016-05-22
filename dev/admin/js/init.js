@@ -31,7 +31,7 @@ define(['data','delete','display','save'], function (require) {
             displayFilterCount();
 
             // change state of save button after adding content to any field in a single work
-            $('[id^=form-]').on('change', ':input', function() {
+            $('#oldWorks').on('change', '[id^=form-] :input', function() {
                 $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
             });
