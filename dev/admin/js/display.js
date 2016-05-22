@@ -1,11 +1,10 @@
 function saveMod(data) {
-    console.log( data );
     // save module
     var saveDiv = document.createElement('div');
     saveDiv.setAttribute('class', 'module-save');
     // create the save button
     var cancelBtn = document.createElement('button');
-    cancelBtn.setAttribute('class', 'btn btn_wide btn__cancel');
+    cancelBtn.setAttribute('class', 'btn btn_wide btn__cancel js-cancel');
     cancelBtn.setAttribute('disabled', 'disabled');
     cancelBtn.setAttribute('type', 'submit');
     cancelBtn.setAttribute('name', 'edit');
@@ -13,7 +12,7 @@ function saveMod(data) {
     cancelBtn.innerHTML = 'Cancel';
     // create the save button
     var saveBtn = document.createElement('button');
-    saveBtn.setAttribute('class', 'btn btn__save');
+    saveBtn.setAttribute('class', 'btn btn__save js-save');
     saveBtn.setAttribute('id', 'saveOld-' + data.id);
     saveBtn.setAttribute('disabled', 'disabled');
     saveBtn.setAttribute('type', 'submit');
@@ -22,7 +21,7 @@ function saveMod(data) {
     saveBtn.innerHTML = 'Save';
     // create the delete button
     var deleteBtn = document.createElement('button');
-    deleteBtn.setAttribute('class', 'btn btn__delete');
+    deleteBtn.setAttribute('class', 'btn btn__delete js-delete');
     deleteBtn.setAttribute('id', 'deleteOld-' + data.id);
     deleteBtn.setAttribute('type', 'submit');
     deleteBtn.setAttribute('name', 'edit');

@@ -24,7 +24,7 @@ define(['data','delete','display','save'], function (require) {
             });
 
             // delete a work
-            $('#oldWorks').on('click', '.delete.button', function() {
+            $('#oldWorks').on('click', '.js-delete', function() {
                 deleteSingleWork( this );
             });
 
@@ -32,8 +32,8 @@ define(['data','delete','display','save'], function (require) {
 
             // change state of save button after adding content to any field in a single work
             $('[id^=form-]').on('change', ':input', function() {
-                $(this).parent().siblings('.module-save').children('.save').prop('disabled', false);
-                $(this).parent().siblings('.module-save').children('.cancel').prop('disabled', false);
+                $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
             });
 
             $('#oldWorks').on('click', '.cancel.button', function() {
@@ -53,7 +53,7 @@ define(['data','delete','display','save'], function (require) {
                     }
                 }
                 // re-disable the buttons
-                $(this).siblings('.save').prop('disabled', true);
+                $(this).siblings('.js-save').prop('disabled', true);
                 $(this).prop('disabled', true);
             });
 
@@ -62,7 +62,7 @@ define(['data','delete','display','save'], function (require) {
             saveWork.onclick = addWork;
 
             // grab the old work
-            $('#oldWorks').on('click', '.save.button', function() {
+            $('#oldWorks').on('click', '.js-save', function() {
                 updateOldWork(this);
             });
 
@@ -77,7 +77,7 @@ define(['data','delete','display','save'], function (require) {
         case 'studio':
             getData(['studio']);
             displayStudio();
-            $('#oldStudio').on('click', '.delete', function() {
+            $('#oldStudio').on('click', '.js-delete', function() {
                 getThis('studio', this);
             });
             // cancel the studio in the textarea
@@ -94,7 +94,7 @@ define(['data','delete','display','save'], function (require) {
         case 'news':
             getData(['news']);
             displayNews();
-            $('#oldNews').on('click', '.delete', function() {
+            $('#oldNews').on('click', '.js-delete', function() {
                 getThis('news', this);
             });
             // cancel the news in the textarea
