@@ -1,3 +1,41 @@
+function saveMod(data) {
+    console.log( data );
+    // save module
+    var saveDiv = document.createElement('div');
+    saveDiv.setAttribute('class', 'module-save');
+    // create the save button
+    var cancelBtn = document.createElement('button');
+    cancelBtn.setAttribute('class', 'btn btn_wide btn__cancel');
+    cancelBtn.setAttribute('disabled', 'disabled');
+    cancelBtn.setAttribute('type', 'submit');
+    cancelBtn.setAttribute('name', 'edit');
+    cancelBtn.setAttribute('value', 'save');
+    cancelBtn.innerHTML = 'Cancel';
+    // create the save button
+    var saveBtn = document.createElement('button');
+    saveBtn.setAttribute('class', 'btn btn__save');
+    saveBtn.setAttribute('id', 'saveOld-' + data.id);
+    saveBtn.setAttribute('disabled', 'disabled');
+    saveBtn.setAttribute('type', 'submit');
+    saveBtn.setAttribute('name', 'edit');
+    saveBtn.setAttribute('value', 'save');
+    saveBtn.innerHTML = 'Save';
+    // create the delete button
+    var deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('class', 'btn btn__delete');
+    deleteBtn.setAttribute('id', 'deleteOld-' + data.id);
+    deleteBtn.setAttribute('type', 'submit');
+    deleteBtn.setAttribute('name', 'edit');
+    deleteBtn.setAttribute('value', 'delete');
+    deleteBtn.innerHTML = 'Delete';
+
+    saveDiv.appendChild(cancelBtn);
+    saveDiv.appendChild(saveBtn);
+    saveDiv.appendChild(deleteBtn);
+
+    return saveDiv;
+}
+
 // DISPLAY THE WORKS
 var workArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students'];
 function displayWorks() {
@@ -155,34 +193,7 @@ function displayWorks() {
                 liRelated.appendChild(allImgs);
                 ulRelated.appendChild(liRelated);
             }
-            // save module
-            var saveDiv = document.createElement('div');
-            saveDiv.setAttribute('class', 'module-save');
-            // create the save button
-            var cancelBtn = document.createElement('button');
-            cancelBtn.setAttribute('class', 'cancel button');
-            cancelBtn.setAttribute('disabled', 'disabled');
-            cancelBtn.setAttribute('type', 'submit');
-            cancelBtn.setAttribute('name', 'edit');
-            cancelBtn.setAttribute('value', 'save');
-            cancelBtn.innerHTML = 'Cancel';
-            // create the save button
-            var saveBtn = document.createElement('button');
-            saveBtn.setAttribute('class', 'save button');
-            saveBtn.setAttribute('id', 'saveOld-' + data[key][j].id);
-            saveBtn.setAttribute('disabled', 'disabled');
-            saveBtn.setAttribute('type', 'submit');
-            saveBtn.setAttribute('name', 'edit');
-            saveBtn.setAttribute('value', 'save');
-            saveBtn.innerHTML = 'Save';
-            // create the delete button
-            var deleteBtn = document.createElement('button');
-            deleteBtn.setAttribute('class', 'delete button');
-            deleteBtn.setAttribute('id', 'deleteOld-' + data[key][j].id);
-            deleteBtn.setAttribute('type', 'submit');
-            deleteBtn.setAttribute('name', 'edit');
-            deleteBtn.setAttribute('value', 'delete');
-            deleteBtn.innerHTML = 'Delete';
+            var saveModule = saveMod(data[key][j]);
             // append everything
 
             form.appendChild(img);
@@ -212,10 +223,7 @@ function displayWorks() {
 
             // insert bigtime
             div.insertBefore(span, div.firstChild);
-            saveDiv.appendChild(cancelBtn);
-            saveDiv.appendChild(saveBtn);
-            saveDiv.appendChild(deleteBtn);
-            div.appendChild(saveDiv);
+            div.appendChild(saveModule);
             oldWorks.appendChild(div);
         }
     }
@@ -243,7 +251,7 @@ function displayLastSaved( data ) {
             var moduleSection = document.createElement('div');
             moduleSection.setAttribute('class', 'module-section single');
             var img = document.createElement('img');
-            img.setAttribute('class', section + '-img');
+            img.setAttribute('class', 'studio-img');
             img.setAttribute('src', '../img/works/' + data.id + '_l-0.jpg');
 
             var form = document.createElement('form');
@@ -373,6 +381,7 @@ function displayLastSaved( data ) {
                 liRelated.appendChild(allImgs);
                 ulRelated.appendChild(liRelated);
             }
+            var saveModule = saveMod(data);
 
             form.appendChild(img);
             form.appendChild(heading1);
@@ -400,6 +409,7 @@ function displayLastSaved( data ) {
             // div.appendChild(form);
 
             moduleSection.appendChild(form);
+            moduleSection.appendChild(saveModule);
 
             // append all the items
             div.appendChild(h2);
@@ -409,6 +419,7 @@ function displayLastSaved( data ) {
         }
     }
 }
+
 
 function swapWorks() {
     console.log( 'swapWorks' );
@@ -459,7 +470,7 @@ function displayStudio() {
             span.innerHTML = studioDate;
             // button stuff
             var button = document.createElement('button');
-            button.setAttribute('class', 'delete button');
+            button.setAttribute('class', 'btn btn_wide btn__delete');
             button.setAttribute('type', 'submit');
             button.setAttribute('name', 'edit');
             button.setAttribute('value', 'delete');
@@ -498,7 +509,7 @@ function displayNews() {
             span.innerHTML = newsDate;
             // button stuff
             var button = document.createElement('button');
-            button.setAttribute('class', 'delete button');
+            button.setAttribute('class', 'btn btn_right btn__delete');
             button.setAttribute('type', 'submit');
             button.setAttribute('name', 'edit');
             button.setAttribute('value', 'delete');

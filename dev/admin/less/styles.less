@@ -95,7 +95,8 @@ h4 {
 		.group;
 		.list-item {
 			height: auto;
-	    padding: 5px 5px 0 5px;
+			max-width: 75px;
+			padding: 5px 5px 0 5px;
 		}
 	}
 	.studio-img-thmb {
@@ -264,7 +265,7 @@ input#price {
 		width: 33%;
 	}
 }
-#oldWorks .module-save {
+.module-save {
 	margin: 20px 0 0;
 	.cancel.button {
 		width: 100%;
@@ -420,9 +421,11 @@ input#price {
 	position: relative;
 	background-color: #fff;
 	.group;
+	&,
 	&.work {
 		.group;
 		display: inline-block;
+		width: 100%;
 		.heading {
 	    margin: 10px 0 0;
 		}
@@ -522,5 +525,49 @@ input#price {
 	}
 	.label {
 		margin: 0;
+	}
+}
+
+///
+// BEM STUFF
+///
+.btn {
+	border: none;
+	width: 49%;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	cursor: pointer;
+	margin-top: 2%;
+	float: left;
+	&[disabled] {
+	    background-color: #ccc;
+	    color: #aaa;
+	    cursor: default;
+	}
+	// block modifiers
+	&_wide {
+		width: 100%;
+	}
+	&_right {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin-top: 0;
+		width: 75px;
+	}
+	// elements
+	&__save {
+	    background-color: #1DB91C;
+		float: left;
+	}
+	&__cancel {
+		background-color: #ccc;
+		float: right;
+	}
+	&__delete {
+    	background-color: red;
+		float: right;
 	}
 }
