@@ -20,38 +20,38 @@ define(['data','delete','display','save'], function (require) {
             var cancelWork = document.getElementById('cancelWork');
             cancelWork.onclick = clear;
             // filter the old works
-            $('#filterWorks').on('click', '.label', function() {
+            $('#works').on('click', '#filterWorks .label', function() {
                 filterWorks( this );
             });
 
             // delete a work
-            $('#works #lastWork').on('click', '.js-delete', function() {
+            $('#works').on('click', '#lastWork .js-delete', function() {
                 deleteSingleWork( this );
             });
 
             // delete a work
-            $('#oldWorks').on('click', '.js-delete', function() {
+            $('#works').on('click', '#oldWorks .js-delete', function() {
                 deleteSingleWork( this );
             });
 
             displayFilterCount();
 
             // change state of save button after adding content to any field in a single work
-            $('#oldWorks').on('change', '[id^=form-] :input', function() {
+            $('#works').on('change', '#oldWorks [id^=form-] :input', function() {
                 $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
             });
 
-            $('#works #lastWork').on('change', '[id^=form-] :input', function() {
+            $('#works').on('change', '#lastWork [id^=form-] :input', function() {
                 $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
             });
 
-            $('#works #lastWork').on('click', '.js-save', function() {
+            $('#works').on('click', '#lastWork .js-save', function() {
                 updateOldWork(this);
             });
 
-            $('#works #lastWork').on('click', '.js-cancel', function() {
+            $('#works').on('click', '#lastWork .js-cancel', function() {
                 var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
                 applyOldData( data );
                 // re-disable the buttons
@@ -59,7 +59,7 @@ define(['data','delete','display','save'], function (require) {
                 $(this).prop('disabled', true);
             });
 
-            $('#oldWorks').on('click', '.js-cancel', function() {
+            $('#works').on('click', '#oldWorks .js-cancel', function() {
                 var mod = $(this).parents('.module-section');
                 var id = parseInt($(mod).attr('id'));
                 var classes = mod[0].classList;

@@ -267,9 +267,19 @@ function gatherNewOldWork( id ) {
     return newData;
 }
 
+function get(num) {
+
+    return num;
+}
+
 function updateOldWork(x) {
     var saveOld = $(x).parents('.module-section');
-    var id = parseInt( saveOld[0].id );
+    var id = saveOld[0].id;
+    if( isNaN(id) ) {
+        var id = id.split('-');
+        var id = id[1];
+    }
+
     var classes = saveOld[0].classList;
     for(var i =0; i < classes.length; i++) {
         var myClass = classes[i].split('-');
@@ -281,8 +291,6 @@ function updateOldWork(x) {
                 if( data[section][j].id === id ) {
                     // do future stuff like send off to be saved…
                     localStorage.setItem(section, JSON.stringify(newOldWork) );
-                    // sessionStorage.setItem( 'lastSection', section );
-                    // sessionStorage.setItem( 'lastData', JSON.stringify(newOldWork) );
                     saveSingleIndex(id, section, j , newOldWork);
                 }
             }

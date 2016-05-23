@@ -283,7 +283,7 @@ function displayLastSaved( data ) {
         input6.setAttribute('value', data.dimension_w);
         // create the dimensions heading
         var input7 = document.createElement('input');
-        input7.setAttribute('class', 'form-input dimension');
+        input7.setAttribute('class', 'form-input dimension last');
         input7.setAttribute('placeholder', 'H');
         input7.setAttribute('id', 'dimension_h-' + data.id);
         input7.setAttribute('type', 'text');
@@ -346,26 +346,18 @@ function displayLastSaved( data ) {
         var saveModule = saveMod(data);
 
         form.appendChild(img);
-        form.appendChild(heading1);
         form.appendChild(input1);
-        form.appendChild(heading2);
         form.appendChild(input2);
-        form.appendChild(heading3);
         form.appendChild(input3);
-        form.appendChild(heading4);
         form.appendChild(input4);
-        form.appendChild(heading4);
         form.appendChild(input4);
-        form.appendChild(heading5);
         form.appendChild(input5);
         form.appendChild(input6);
         form.appendChild(input7);
-        form.appendChild(heading6);
         form.appendChild(inputAvailable1);
         form.appendChild(labelAvailable1);
         form.appendChild(inputAvailable2);
         form.appendChild(labelAvailable2);
-        form.appendChild(heading7);
         form.appendChild(ulRelated);
 
         // div.appendChild(form);
