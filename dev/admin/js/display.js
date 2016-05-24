@@ -35,6 +35,33 @@ function saveMod(data) {
     return saveDiv;
 }
 
+function addRelated() {
+
+    var today = new Date();
+    var id = today.getTime();
+
+    // create the add related li
+    var liAddRelated = document.createElement('li');
+    liAddRelated.setAttribute('class','list-item add');
+
+    var liAddRelatedLabel = document.createElement('label');
+    liAddRelatedLabel.setAttribute('class','label');
+    liAddRelatedLabel.setAttribute('for', 'addRelated-' + id);
+    liAddRelatedLabel.innerHTML = '+';
+    liAddRelated.appendChild(liAddRelatedLabel);
+
+    var liAddRelatedInput = document.createElement('input');
+    liAddRelatedInput.setAttribute('class','input related-add');
+    liAddRelatedInput.setAttribute('id', 'addRelated-' + id);
+    liAddRelatedInput.setAttribute('size', 25);
+    liAddRelatedInput.setAttribute('name', id);
+    liAddRelatedInput.setAttribute('type', 'file');
+    liAddRelatedInput.setAttribute('accept', 'image/*');
+    liAddRelated.appendChild(liAddRelatedInput);
+
+    return liAddRelated;
+}
+
 // DISPLAY THE WORKS
 var workArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students'];
 function displayWorks() {
@@ -165,6 +192,7 @@ function displayWorks() {
                 var imgSize = '_l-';
                 var imgSuff = '.jpg';
                 var imgIndex = m;
+
                 // build the image
                 allImgs.setAttribute('src', imgPath + imgNum + imgSize + imgIndex + imgSuff);
                 allImgs.setAttribute('data-imgid', imgIndex);
@@ -188,7 +216,12 @@ function displayWorks() {
             form.appendChild(labelAvailable1);
             form.appendChild(inputAvailable2);
             form.appendChild(labelAvailable2);
+
+            var addRelatedLi = addRelated();
+            ulRelated.appendChild(addRelatedLi);
+
             form.appendChild(ulRelated);
+
 
             div.appendChild(form);
 

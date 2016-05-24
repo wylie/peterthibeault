@@ -76,7 +76,6 @@ h4 {
 
 .list {
 	list-style-type: none;
-	.group;
 	&.inline {
 		.list-item {
 			display: inline-block;
@@ -92,11 +91,34 @@ h4 {
 	}
 	&.related {
 		margin: 15px -5px;
-		.group;
 		.list-item {
 			height: auto;
 			max-width: 75px;
 			padding: 5px 5px 0 5px;
+			&.add {
+				width: 75px;
+				height: 75px;
+				padding: 0;
+				// overflow: hidden;
+				background-color: #ccc;
+				.label {
+					cursor: pointer;
+					width: 75px;
+					display: block;
+					text-align: center;
+					transform: translateY(-50%);
+					top: 50%;
+					font-size: 100px;
+					position: relative;
+					opacity: .5;
+					&:hover {
+						opacity: 1;
+					}
+				}
+				.related-add {
+					display: none;
+				}
+			}
 		}
 	}
 	.studio-img-thmb {

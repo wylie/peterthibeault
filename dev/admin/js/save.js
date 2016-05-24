@@ -1,7 +1,8 @@
 // get the data entered in the form
 function gatherData() {
-    var section = $('body').attr('id');
-    switch(section) {
+    var page = $('body').attr('id');
+    var section = sessionStorage.getItem( 'section' );
+    switch(page) {
         case 'works':
             var workImg = document.getElementById('workImage');
             if( workImg.files[0] ) {
@@ -12,7 +13,7 @@ function gatherData() {
                 fd.append('workImage', file);
                 fd.append('id', timeId);
                 fd.append('num', 0);
-                uploadWorkImg(today, timeId, fd, file);
+                uploadWorkImg(section, today, timeId, fd, file);
             }
             break;
         case 'studio':
@@ -55,8 +56,10 @@ function gatherData() {
 }
 
 
-function uploadWorkImg(today, timeId, fd, file) {
-    var section = getCheckedSection();
+function uploadWorkImg(section, today, timeId, fd, file) {
+    if( section === undefined ) {
+        var section = getCheckedSection();
+    }
     var stringWork = addWork(section, today, timeId, file);
     var fileName = file.name;
     var fileArr = fileName.split('.');
@@ -239,7 +242,7 @@ function addStudio(today, id, fd, file) {
 }
 
 // get the new information entered in old work
-function gatherNewOldWork( id ) {
+function gatherNewOldWork( id, imgNum ) {
     var title = document.getElementById('title-' + id).value;
     var year = document.getElementById('year-' + id).value;
     var media = document.getElementById('media-' + id).value;
@@ -254,7 +257,10 @@ function gatherNewOldWork( id ) {
     }
     // image stuff
     var par = document.forms['form-' + id];
+
     var images = $(par).children('.related').children('.list-item').length;
+    var images = 1 + (images - 1);
+
     // date
     var today = new Date();
     var m = today.getMonth() + 1;
@@ -273,11 +279,42 @@ function get(num) {
 }
 
 function updateOldWork(x) {
+    var id = $(x).parents('.module-section').attr('id');
+    var imgNum = $(x).parent().siblings('form').children('.related').children().length;
+    var addInp = $(x).parent().siblings('form').children('.related').children('.add').children('.input');
+    var addVal = $(x).parent().siblings('form').children('.related').children('.add').children('.input').val();
+    var addId = $(x).parent().siblings('form').children('.related').children('.add').children('.input').attr('id');
+
+    var shazam = $(x).parents('.module-section').attr('class');
+    var tst = shazam.split(' ');
+    for(var i = 0; i < tst.length; i++) {
+        var tsts = tst[i].split('-');
+        if( tsts[0] === 'js' ) {
+            var section = tsts[1];
+        }
+    }
+    console.log( section );
+
+    var imgNum = imgNum - 1;
+
+    if( addVal ) {
+        if( addInp[0].files[0] ) {
+            var today = new Date();
+            var file = addInp[0].files[0];
+            var fd = new FormData();
+            fd.append('workImage', file);
+            fd.append('id', id);
+            fd.append('num', imgNum );
+            uploadWorkImg(section, today, id, fd, file);
+        }
+    }
+
     var saveOld = $(x).parents('.module-section');
     var id = saveOld[0].id;
     if( isNaN(id) ) {
         var id = id.split('-');
         var id = id[1];
+        var id = parseInt(id);
     }
 
     var classes = saveOld[0].classList;
@@ -285,11 +322,15 @@ function updateOldWork(x) {
         var myClass = classes[i].split('-');
         if( myClass[0] === 'js' ) {
             var section = myClass[1];
-            var newOldWork = gatherNewOldWork( id );
+            var newOldWork = gatherNewOldWork( id, imgNum);
             var data = JSON.parse( localStorage.getItem( section ) );
+            if( typeof id === 'string' ) {
+                var id = parseInt( id );
+            }
             for(var j = 0; j < data[section].length; j++) {
                 if( data[section][j].id === id ) {
                     // do future stuff like send off to be saved…
+                    sessionStorage.setItem( 'section', section );
                     localStorage.setItem(section, JSON.stringify(newOldWork) );
                     saveSingleIndex(id, section, j , newOldWork);
                 }

@@ -24,6 +24,10 @@ define(['data','delete','display','save'], function (require) {
                 filterWorks( this );
             });
 
+            $('#works').on('click', '.add span', function() {
+                console.log( this );
+            });
+
             // delete a work
             $('#works').on('click', '#lastWork .js-delete', function() {
                 deleteSingleWork( this );
@@ -42,6 +46,15 @@ define(['data','delete','display','save'], function (require) {
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
             });
 
+            $('#works').on('change', '#oldWorks [id^=addRelated-]', function() {
+                $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+
+            $('#works').on('change', '#lastWork [id^=addRelated-]', function() {
+                $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
             $('#works').on('change', '#lastWork [id^=form-] :input', function() {
                 $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
@@ -87,9 +100,9 @@ define(['data','delete','display','save'], function (require) {
             // grab the old work
             $('#oldWorks').on('click', '.js-save', function() {
                 updateOldWork(this);
+                gatherData;
             });
 
-            var saveWork = document.getElementById('saveWork');
             var workImage = document.getElementById('workImage');
             workImage.addEventListener('change', function() {
                 saveWork.removeAttribute('disabled');
@@ -141,3 +154,7 @@ define(['data','delete','display','save'], function (require) {
         }
 
 });
+
+function doIt(  ) {
+    console.log( 'x' );
+}
