@@ -63,6 +63,23 @@ function addRelated() {
     return liAddRelated;
 }
 
+function uploadProcess( id ) {
+    // PARAMS: 1
+    // - ID: number, the id of the item editing
+    // - RETURN: the status element
+    // --------------------
+    var status = document.createElement('div');
+    status.setAttribute('class', 'status');
+    status.setAttribute('id', 'upload-' + id);
+    var statusBar = document.createElement('span');
+    statusBar.setAttribute('class', 'status-bar');
+    statusBar.setAttribute('id', 'process-' + id);
+
+    status.appendChild(statusBar);
+
+    return status;
+}
+
 // DISPLAY THE WORKS
 var workArr = ['design', 'drawing', 'furnishings', 'painting', 'sculpture', 'students'];
 function displayWorks() {
@@ -221,8 +238,10 @@ function displayWorks() {
             var addRelatedLi = addRelated();
             ulRelated.appendChild(addRelatedLi);
 
-            form.appendChild(ulRelated);
+            var statusBar = uploadProcess( data[key][j].id );
 
+            form.appendChild(ulRelated);
+            form.appendChild(statusBar);
 
             div.appendChild(form);
 

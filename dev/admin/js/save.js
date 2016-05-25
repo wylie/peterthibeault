@@ -527,7 +527,7 @@ function uploadImage( id, img, file ) {
     xhr.upload.onprogress = function(e) {
         if (e.lengthComputable) {
             var percentComplete = (e.loaded / e.total) * 100;
-            var uploadProcess = document.getElementById('uploadProcess');
+            var uploadProcess = document.getElementById('process-' + id);
             uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
             if(percentComplete === 100) {
                 console.log( 'progress…' );
