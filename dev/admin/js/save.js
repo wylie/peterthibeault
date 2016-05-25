@@ -56,11 +56,15 @@ function gatherData() {
 }
 
 
-function uploadWorkImg(section, today, timeId, fd, file) {
+function uploadWorkImg(age, section, today, timeId, fd, file) {
     if( section === undefined ) {
         var section = getCheckedSection();
     }
-    var stringWork = addWork(section, today, timeId, file);
+    if( age === 'old' ) {
+        var stringWork = addOldWork(section, today, timeId, file);
+    } else {
+        var stringWork = addWork(section, today, timeId, file);
+    }
     var fileName = file.name;
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
@@ -77,6 +81,7 @@ function uploadWorkImg(section, today, timeId, fd, file) {
                 // do something… or do nothing!
                 console.log( 'SUCCESS!!' );
                 var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
+                console.log( JSON.stringify(data ) );
                 applyOldData( data );
             }
         }
@@ -101,6 +106,59 @@ function getCheckedSection() {
 }
 
 function addWork(section, today, id, file) {
+    var fileName = file.name;
+    var fileArr = fileName.split('.');
+    var imgIndex = fileArr.length - 1;
+    var imgSuff = fileArr[imgIndex];
+
+    var images = 1;
+    var title = document.getElementById('newTitle').value;
+    var year = document.getElementById('newYear').value;
+    var media = document.getElementById('newMedia').value;
+    var description = document.getElementById('newDescription').value;
+    var dimension_d = document.getElementById('newDimension_d').value;
+    var dimension_w = document.getElementById('newDimension_w').value;
+    var dimension_h = document.getElementById('newDimension_h').value;
+    var yes = document.getElementById('yes');
+    var no = document.getElementById('no');
+
+    if( $(yes).prop('checked', true) ) {
+        var available = true;
+    } else if( $(no).prop('checked', true) ) {
+        var available = false;
+    }
+
+    var today = new Date();
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+    var y = today.getFullYear();
+    var date = m + '-' + d + '-' + y;
+
+    // grab the news content
+    var workImage = document.getElementById('workImage').value;
+    // get the error div
+    var workErr = $('.msg.error');
+    // check to see if the
+    if(workImage === '') {
+        // display the error
+        $(workErr).text('please add a work image...');
+    } else {
+        // clear the error when new is entrered
+        $(workErr).text('');
+        // build out the news
+        var newWork = new Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date);
+        // stringify the news
+    	var stringWork = JSON.stringify(newWork);
+        // set the last added work to sessionStorage
+        sessionStorage.setItem('lastSection', section);
+        sessionStorage.setItem('lastData', stringWork);
+        // do something with the news
+        return stringWork;
+    }
+}
+
+function addOldWork(section, today, id, file) {
+    console.log( 'OLD!!' );
     var fileName = file.name;
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
@@ -305,7 +363,7 @@ function updateOldWork(x) {
             fd.append('workImage', file);
             fd.append('id', id);
             fd.append('num', imgNum );
-            uploadWorkImg(section, today, id, fd, file);
+            uploadWorkImg('old', section, today, id, fd, file);
         }
     }
 
@@ -366,6 +424,185 @@ function saveSingleIndex(id, section, index, data) {
                 resetFilter();
                 msg.remove();
             },2000);
+        }
+    });
+}
+
+// --------------------
+// NEW FUNCTIONS BELOW
+// --------------------
+// lets get the current date and format it
+function getDate() {
+    // PARAMS: 0
+    // - RETURN: string, current date
+    // --------------------
+    var today = new Date();
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+    var y = today.getFullYear();
+    var date = m + '-' + d + '-' + y;
+    // return the date
+    return date;
+}
+// get the elements id
+function getId( elem ) {
+    // PARAMS: 1
+    // - ELEM: this, the element clicked on
+    // - RETURN: number,  id of item clicked
+    // --------------------
+    var id = $( elem ).parents('.module-section').attr('id');
+    // return the id
+    return id;
+}
+// get the data from the form
+function getFormData( elem ) {
+    // PARAMS: 1
+    // - ELEM: this, the element clicked on
+    // - RETURN: array, [ new Work object, file data ]
+    // --------------------
+    var id = parseInt( $( elem ).parents('.module-section').attr('id') );
+    var form = $( elem ).parent().siblings('form');
+    // get the stuff from the form
+    var title = $(form[0]).children('[id^=title-]').val();
+    var year = $(form[0]).children('[id^=year-]').val();
+    var media = $(form[0]).children('[id^=media-]').val();
+    var description = $(form[0]).children('[id^=description-]').val();
+    var depth = $(form[0]).children('[id^=dimension_d-]').val();
+    var width = $(form[0]).children('[id^=dimension_w-]').val();
+    var height = $(form[0]).children('[id^=dimension_h-]').val();
+    // check if available or not
+    if( $(form[0]).children('[id^=yes-]:checked').val() ) {
+        var available = true;
+    } else if( $(form[0]).children('[id^=no-]:checked').val() )  {
+        var available = false;
+    }
+    // do image stuff
+    var newImgInput = $(form[0]).children('.related').children('.add').children('.input'); // get the new image input
+    var images = $(form[0]).children('.related').children().length - 1; // minus 1 for the add button
+    if( newImgInput[0].files[0] ) {
+        var newImg = 1; // if we are uploading a new image
+        // uploadImage( newImgInput[0].files[0] );
+    } else {
+        var newImg = 0; // if we aren't uploading a new image
+    }
+    var images = images + newImg; // add the old and new together
+    // get the date
+    var date = getDate();
+    // add it all to the array
+    var newData = new Work(id, title, year, media, description, depth, width, height, available, images, date);
+    // return all of it
+    return [newData, newImgInput[0].files[0]];
+}
+// get the section of the element
+function getSection( elem ) {
+    // PARAMS: 1
+    // - ELEM: this, the element clicked on
+    // - RETURN: string, section of element clicked
+    // --------------------
+    var clses = $( elem ).parents('.module-section').attr('class');
+    var clsesArr = clses.split(' ');
+    for(var i = 0; i < clsesArr.length; i++) {
+        var cls = clsesArr[i].split('-');
+        if( cls[0] === 'js' ) {
+            // return the section
+            return section = cls[1];
+        }
+    }
+}
+// upload the image
+function uploadImage( id, img, file ) {
+    // PARAMS: 3
+    // - ID: number, the id of the item editing
+    // - IMG: number, the number of images alrwady saved for item
+    // - FILE: file data from getFormData()
+    // - RETURN: boolean, true
+    // --------------------
+    var fd = new FormData();
+    fd.append('workImage', file);
+    fd.append('id', id);
+    fd.append('num', img );
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'functions/uploadwork.php', true);
+    xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            var percentComplete = (e.loaded / e.total) * 100;
+            var uploadProcess = document.getElementById('uploadProcess');
+            uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
+            if(percentComplete === 100) {
+                console.log( 'progress…' );
+            }
+        }
+    };
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            console.log( 'SUCCESS!!' );
+        };
+    };
+    xhr.send(fd);
+    return true;
+}
+
+function getIndex( data, id ) {
+    // PARAMS: 2
+    // - DATA: localStorage data of section
+    // - ID: number, the id of the item editing
+    // - RETURN: number,  index of item clicked
+    // --------------------
+    for( key in data ) {
+        for(var i = 0; i < data[key].length; i++) {
+            if( data[key][i].id === id ) {
+                var index = i;
+                return index;
+            }
+        }
+    }
+}
+
+function createMsg( id ) {
+    // PARAMS: 1
+    // - ID: id of piece being saved
+    // - RETURN: the msg element
+    // --------------------
+    var msgDiv = document.createElement('div');
+    msgDiv.setAttribute('class', 'msg');
+    msgDiv.setAttribute('id', 'msg-' + id);
+    $('#' + id + ' .module-save').append(msgDiv);
+    var msg = document.getElementById('msg-' + id);
+    return msg;
+}
+
+function saveData( id, data, section, index ) {
+    // PARAMS: 4
+    // - ID: id of piece being saved
+    // - DATA: data to save
+    // - SECTION: section to save stuff to
+    // - INDEX: where to save it to
+    // - RETURN: ???
+    // --------------------
+    var msg = createMsg( id ); // generate the messaging element
+    var data = encodeURIComponent( JSON.stringify( data ) ); // encode the data
+    $.ajax({
+        type: 'GET',
+        url: 'functions/saveIndex.php?data=' + data + '&section=' + section + '&index=' + index,
+        dataType: 'JSON',
+        success: function(ret){
+            msg.classList.add('success');
+            msg.innerHTML = 'Your ' + section + ' has been added!';
+            console.log( 'SUCCESS!' );
+        },
+        error: function(ret){
+            msg.classList.add('error');
+            msg.innerHTML = 'Your ' + section + ' has not been added!';
+            console.log( 'ERROR!' );
+        },
+        complete: function() {
+            setTimeout(function(){
+                reloadData(section);
+                msg.remove();
+            },2000);
+            console.log( 'COMPLETE!' );
         }
     });
 }

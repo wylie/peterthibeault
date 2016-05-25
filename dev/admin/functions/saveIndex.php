@@ -22,22 +22,23 @@ function customError($errno, $errstr) {
 }
 set_error_handler("customError");
 
+// get the data
+$data = $_GET["data"];
 // get the section
 $section = $_GET["section"];
 // get the index passed in
 $index = $_GET["index"];
 // make sure that the index is a number…
 $index = intval($index);
-// get the data
-$myData = $_GET["data"];
+
 // get the file we want to edit
-$myFile = "../../data/" . $section . ".json";
+$file = "../../data/" . $section . ".json";
 // get the contents of that file
-$fileData = file_get_contents($myFile);
+$fileData = file_get_contents($file);
 // encode the contents of the file
 $json_encode = json_encode($fileData);
 // decode the data
-$myData = json_decode($myData, true);
+$data = json_decode($data, true);
 $json = json_decode($fileData, true);
 
 // loop through the file
@@ -45,7 +46,7 @@ foreach ($json[$section] as $key => $val) {
     // find the matching index in the JSON data
     if ($key == $index) {
         // add that index to the JSON data
-        $json[$section][$key] = $myData;
+        $json[$section][$key] = $data;
     }
 }
 
@@ -54,13 +55,14 @@ $json[$section] = array_values(array_filter($json[$section]));
 // encode the date again
 $json = json_encode($json);
 // open the file
-$fileHandle = fopen($myFile, "w");
+$fileHandle = fopen($file, "w");
 // write the file
 fwrite($fileHandle, $json);
 // close the file
 fclose($fileHandle);
 
 $json = json_encode(array(
+  'data' => $data,
   'section' => $section,
   'index' => $index
 ));

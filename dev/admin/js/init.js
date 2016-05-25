@@ -97,10 +97,25 @@ define(['data','delete','display','save'], function (require) {
             var saveWork = document.getElementById('saveWork');
             saveWork.onclick = addWork;
 
-            // grab the old work
+            // grab the old work and save it
             $('#oldWorks').on('click', '.js-save', function() {
-                updateOldWork(this);
-                gatherData;
+                var id = parseInt(getId( this )); // will return ID, make sure its a number
+                var section = getSection( this ); // get section
+                var formData = getFormData( this ); // get form data
+                    var work = formData[0]; // new Work object
+                    var file = formData[1]; // file data
+                if( file ) { // check to see if we have a new file
+                    var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
+                }
+                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                var index = getIndex( localData, id );
+                saveData(id, work, section, index); // send data off to be saved
+
+                // compare new data with old localStorage data
+                // send off new combined data
+
+                // updateOldWork(this);
+                // gatherData;
             });
 
             var workImage = document.getElementById('workImage');

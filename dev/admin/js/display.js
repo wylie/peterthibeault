@@ -9,7 +9,7 @@ function saveMod(data) {
     cancelBtn.setAttribute('type', 'submit');
     cancelBtn.setAttribute('name', 'edit');
     cancelBtn.setAttribute('value', 'save');
-    cancelBtn.innerHTML = 'Cancel';
+    cancelBtn.innerHTML = 'cancel';
     // create the save button
     var saveBtn = document.createElement('button');
     saveBtn.setAttribute('class', 'btn btn__save js-save');
@@ -18,7 +18,7 @@ function saveMod(data) {
     saveBtn.setAttribute('type', 'submit');
     saveBtn.setAttribute('name', 'edit');
     saveBtn.setAttribute('value', 'save');
-    saveBtn.innerHTML = 'Save';
+    saveBtn.innerHTML = 'save';
     // create the delete button
     var deleteBtn = document.createElement('button');
     deleteBtn.setAttribute('class', 'btn btn__delete js-delete');
@@ -26,7 +26,7 @@ function saveMod(data) {
     deleteBtn.setAttribute('type', 'submit');
     deleteBtn.setAttribute('name', 'edit');
     deleteBtn.setAttribute('value', 'delete');
-    deleteBtn.innerHTML = 'Delete';
+    deleteBtn.innerHTML = 'delete';
 
     saveDiv.appendChild(cancelBtn);
     saveDiv.appendChild(saveBtn);
@@ -43,6 +43,7 @@ function addRelated() {
     // create the add related li
     var liAddRelated = document.createElement('li');
     liAddRelated.setAttribute('class','list-item add');
+    liAddRelated.setAttribute('title','add more images');
 
     var liAddRelatedLabel = document.createElement('label');
     liAddRelatedLabel.setAttribute('class','label');
@@ -90,7 +91,7 @@ function displayWorks() {
             // create the date span
             var span = document.createElement('span');
             span.setAttribute('class', 'date');
-            span.innerHTML = 'Last Modified: ' + data[key][j].date;
+            span.innerHTML = 'last modified: ' + data[key][j].date;
 
             var form = document.createElement('form');
             form.setAttribute('id', 'form-' + data[key][j].id)
@@ -153,7 +154,7 @@ function displayWorks() {
             var labelAvailable1 = document.createElement('label');
             labelAvailable1.setAttribute('class', 'available label');
             labelAvailable1.setAttribute('for', 'no-' + data[key][j].id);
-            labelAvailable1.innerHTML = 'NOT AVAILABLE';
+            labelAvailable1.innerHTML = 'not available';
             // YES
             var inputAvailable2 = document.createElement('input');
             inputAvailable2.setAttribute('class', 'available input');
@@ -163,7 +164,7 @@ function displayWorks() {
             var labelAvailable2 = document.createElement('label');
             labelAvailable2.setAttribute('class', 'available label');
             labelAvailable2.setAttribute('for', 'yes-' + data[key][j].id);
-            labelAvailable2.innerHTML = 'AVAILABLE';
+            labelAvailable2.innerHTML = 'available';
 
             if( data[key][j].available === false ) {
                 inputAvailable1.setAttribute('checked', 'checked');
@@ -275,49 +276,49 @@ function displayLastSaved( data ) {
         // create the title heading
         var input1 = document.createElement('input');
         input1.setAttribute('class', 'form-input');
-        input1.setAttribute('placeholder', 'TITLE');
+        input1.setAttribute('placeholder', 'title');
         input1.setAttribute('id', 'title-' + data.id);
         input1.setAttribute('type', 'text');
         input1.setAttribute('value', data.title);
         // create the year heading
         var input2 = document.createElement('input');
         input2.setAttribute('class', 'form-input');
-        input2.setAttribute('placeholder', 'YEAR');
+        input2.setAttribute('placeholder', 'year');
         input2.setAttribute('id', 'year-' + data.id);
         input2.setAttribute('type', 'text');
         input2.setAttribute('value', data.year);
         // create the media heading
         var input3 = document.createElement('input');
         input3.setAttribute('class', 'form-input');
-        input3.setAttribute('placeholder', 'MEDIA');
+        input3.setAttribute('placeholder', 'media');
         input3.setAttribute('id', 'media-' + data.id);
         input3.setAttribute('type', 'text');
         input3.setAttribute('value', data.media);
         // create the description heading
         var input4 = document.createElement('textarea');
         input4.setAttribute('class', 'form-input');
-        input4.setAttribute('placeholder', 'DESCRIPTION]');
+        input4.setAttribute('placeholder', 'description]');
         input4.setAttribute('id', 'description-' + data.id);
         input4.setAttribute('type', 'text');
         input4.innerHTML = data.description;
         // create the dimensions heading
         var input5 = document.createElement('input');
         input5.setAttribute('class', 'form-input dimension');
-        input5.setAttribute('placeholder', 'D');
+        input5.setAttribute('placeholder', 'd');
         input5.setAttribute('id', 'dimension_d-' + data.id);
         input5.setAttribute('type', 'text');
         input5.setAttribute('value', data.dimension_d);
         // create the dimensions heading
         var input6 = document.createElement('input');
         input6.setAttribute('class', 'form-input dimension');
-        input6.setAttribute('placeholder', 'W');
+        input6.setAttribute('placeholder', 'w');
         input6.setAttribute('id', 'dimension_w-' + data.id);
         input6.setAttribute('type', 'text');
         input6.setAttribute('value', data.dimension_w);
         // create the dimensions heading
         var input7 = document.createElement('input');
         input7.setAttribute('class', 'form-input dimension last');
-        input7.setAttribute('placeholder', 'H');
+        input7.setAttribute('placeholder', 'h');
         input7.setAttribute('id', 'dimension_h-' + data.id);
         input7.setAttribute('type', 'text');
         input7.setAttribute('value', data.dimension_h);
@@ -330,7 +331,7 @@ function displayLastSaved( data ) {
         var labelAvailable1 = document.createElement('label');
         labelAvailable1.setAttribute('class', 'available label');
         labelAvailable1.setAttribute('for', 'no-' + data.id);
-        labelAvailable1.innerHTML = 'NOT AVAILABLE';
+        labelAvailable1.innerHTML = 'not available';
         // YES
         var inputAvailable2 = document.createElement('input');
         inputAvailable2.setAttribute('class', 'available input');
@@ -340,7 +341,7 @@ function displayLastSaved( data ) {
         var labelAvailable2 = document.createElement('label');
         labelAvailable2.setAttribute('class', 'available label');
         labelAvailable2.setAttribute('for', 'yes-' + data.id);
-        labelAvailable2.innerHTML = 'AVAILABLE';
+        labelAvailable2.innerHTML = 'available';
 
         if( data.available === false ) {
             inputAvailable1.setAttribute('checked', 'checked');
@@ -460,7 +461,7 @@ function displayStudio() {
             button.setAttribute('type', 'submit');
             button.setAttribute('name', 'edit');
             button.setAttribute('value', 'delete');
-            button.innerHTML = 'Delete';
+            button.innerHTML = 'delete';
             // append it all
             div.appendChild(img);
             div.insertBefore(span, div.firstChild);
@@ -499,7 +500,7 @@ function displayNews() {
             button.setAttribute('type', 'submit');
             button.setAttribute('name', 'edit');
             button.setAttribute('value', 'delete');
-            button.innerHTML = 'Delete';
+            button.innerHTML = 'delete';
             // append it all
             div.appendChild(button);
             div.insertBefore(span, div.firstChild);
