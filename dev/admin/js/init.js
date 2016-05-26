@@ -7,50 +7,52 @@ define(['data','delete','display','save'], function (require) {
 
     switch(page) {
         case 'works':
+            // get data
             getData(['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students']);
-
-            var lastData = sessionStorage.getItem('lastData');
-            if( lastData ) {
-                displayLastSaved( lastData );
-            }
-
+            // display stuff
             displayWorks();
+            displayFilterCount();
+            // displayLastSaved();
 
-            // cancel the studio in the textarea
-            var cancelWork = document.getElementById('cancelWork');
-            cancelWork.onclick = clear;
-            // filter the old works
+            // FILTER OLD WORKS
             $('#works').on('click', '#filterWorks .label', function() {
                 filterWorks( this );
             });
 
-            $('#works').on('click', '.add span', function() {
-                console.log( this );
+            // --------------------
+            // NEW WORK STUFF
+            // --------------------
+            // grab the new work
+            var saveWork = document.getElementById('saveWork');
+            // console.log( saveWork );
+            // var workImage = document.getElementById('workImage');
+            // workImage.addEventListener('change', function() {
+                saveWork.removeAttribute('disabled');
+                // saveWork.onclick = gatherData;
+            // }, false);
+
+            // SAVE
+            $('#works').on('click', '#saveWork', function() {
+                var id = parseInt( setId( this ) );// will return ID, make sure its a number
+                var section = getChosenSection( id ); // get section
+                var formData = getFormData( this ); // get form data
+                    var work = formData[0]; // new Work object
+                    var file = formData[1]; // file data
+                if( file ) { // check to see if we have a new file
+                    var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
+                }
+                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                var index = getIndex( localData, id );
+                saveData(id, work, section, index); // send data off to be saved
             });
+            // CANCEL
+            var cancelWork = document.getElementById('cancelWork');
+            cancelWork.onclick = clear;
 
-            // delete a work
-            $('#works').on('click', '#lastWork .js-delete', function() {
-                deleteSingleWork( this );
-            });
-
-            // delete a work
-            $('#works').on('click', '#oldWorks .js-delete', function() {
-                deleteSingleWork( this );
-            });
-
-            displayFilterCount();
-
-            // change state of save button after adding content to any field in a single work
-            $('#works').on('change', '#oldWorks [id^=form-] :input', function() {
-                $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
-                $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
-            });
-
-            $('#works').on('change', '#oldWorks [id^=addRelated-]', function() {
-                $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
-                $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
-            });
-
+            // --------------------
+            // LAST WORK STUFF
+            // --------------------
+            // ACTIVATE BUTTONS
             $('#works').on('change', '#lastWork [id^=addRelated-]', function() {
                 $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
                 $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
@@ -59,11 +61,11 @@ define(['data','delete','display','save'], function (require) {
                 $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
                 $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
             });
-
+            // SAVE
             $('#works').on('click', '#lastWork .js-save', function() {
                 updateOldWork(this);
             });
-
+            // CANCEL
             $('#works').on('click', '#lastWork .js-cancel', function() {
                 var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
                 applyOldData( data );
@@ -71,7 +73,38 @@ define(['data','delete','display','save'], function (require) {
                 $(this).siblings('.js-save').prop('disabled', true);
                 $(this).prop('disabled', true);
             });
+            // DELETE
+            $('#works').on('click', '#lastWork .js-delete', function() {
+                deleteSingleWork( this );
+            });
 
+            // --------------------
+            // OLD WORK STUFF
+            // --------------------
+            // ACTIVATE BUTTONS
+            $('#works').on('change', '#oldWorks [id^=addRelated-]', function() {
+                $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+            $('#works').on('change', '#oldWorks [id^=form-] :input', function() {
+                $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+            // SAVE
+            $('#oldWorks').on('click', '.js-save', function() {
+                var id = parseInt(getId( this )); // will return ID, make sure its a number
+                var section = getSection( this ); // get section
+                var formData = getFormData( this ); // get form data
+                    var work = formData[0]; // new Work object
+                    var file = formData[1]; // file data
+                if( file ) { // check to see if we have a new file
+                    var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
+                }
+                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                var index = getIndex( localData, id );
+                saveData(id, work, section, index); // send data off to be saved
+            });
+            // CANCEL
             $('#works').on('click', '#oldWorks .js-cancel', function() {
                 var mod = $(this).parents('.module-section');
                 var id = parseInt($(mod).attr('id'));
@@ -92,37 +125,10 @@ define(['data','delete','display','save'], function (require) {
                 $(this).siblings('.js-save').prop('disabled', true);
                 $(this).prop('disabled', true);
             });
-
-            // grab the new work
-            var saveWork = document.getElementById('saveWork');
-            saveWork.onclick = addWork;
-
-            // grab the old work and save it
-            $('#oldWorks').on('click', '.js-save', function() {
-                var id = parseInt(getId( this )); // will return ID, make sure its a number
-                var section = getSection( this ); // get section
-                var formData = getFormData( this ); // get form data
-                    var work = formData[0]; // new Work object
-                    var file = formData[1]; // file data
-                if( file ) { // check to see if we have a new file
-                    var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
-                }
-                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
-                var index = getIndex( localData, id );
-                saveData(id, work, section, index); // send data off to be saved
-
-                // compare new data with old localStorage data
-                // send off new combined data
-
-                // updateOldWork(this);
-                // gatherData;
+            // DELETE
+            $('#works').on('click', '#oldWorks .js-delete', function() {
+                deleteSingleWork( this );
             });
-
-            var workImage = document.getElementById('workImage');
-            workImage.addEventListener('change', function() {
-                saveWork.removeAttribute('disabled');
-                saveWork.onclick = gatherData;
-            }, false);
 
             break;
         case 'studio':

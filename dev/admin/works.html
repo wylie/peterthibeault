@@ -32,7 +32,7 @@
 		</div>
 
 		<h2 class="header">add new works</h1>
-		<div class="module-section" id="addNewWork">
+		<div class="module-section">
 			<div class="inner-section">
 				<h3 class="subheader">choose a section:</h2>
 				<ul class="list filter inline" id="addWorkCategory">
@@ -63,46 +63,46 @@
 				</ul>
 			</div>
 
-			<div class="inner-section">
-				<h3 class="subheader">choose an image:</h2>
-				<input class="studio-add" id="workImage" size="25" name="workImage" type="file" accept="image/*"/>
-				<div class="status" id="upload"><span class="status-bar" id="process"></span></div>
-			</div>
-
-			<div class="inner-section">
-				<h3 class="subheader">add some info:</h2>
-				<ul class="list module-list" id="addWorkInfo">
-					<!-- <li class="module-list"><h4>TITLE</h4></li> -->
-					<li class="module-list-item"><input class="form-input" id="newTitle" name="workname" type="text" placeholder="title" /></li>
-					<!-- <li class="module-list"><h4>YEAR</h4></li> -->
-					<li class="module-list-item"><input class="form-input" id="newYear" name="year" type="text" placeholder="year" /></li>
-					<!-- <li class="module-list"><h4>MEDIA</h4></li> -->
-					<li class="module-list-item"><input class="form-input" id="newMedia" name="media" type="text" placeholder="media" /></li>
-					<!-- <li class="module-list"><h4>DESCRIPTION</h4></li> -->
-					<li class="module-list-item"><textarea class="form-input" id="newDescription" name="description" type="text" rows="5" placeholder="description"></textarea></li>
-					<!-- <li class="module-list"><h4>DIMENSIONS</h4></li> -->
-					<li class="module-list-item"><!--D --><input class="form-input dimension" id="newDimension_d" name="dimension_d" type="text" placeholder="d" /><!-- x W --><input class="form-input dimension" id="newDimension_w" name="dimension_w" type="text" placeholder="w"/><!--  x H --><input class="form-input dimension last" id="newDimension_h" name="dimension_h" type="text" class="form-input" placeholder="h" /></li>
-					<!-- <li class="module-list"><h4>AVAILABLE</h4></li> -->
-					<li class="module-list-item">
-						<ul class="list filter inline available" id="availableToBuy">
-							<li class="list-item">
-								<input class="available input" type="radio" name="available" id="yes">
-								<label class="available label" for="yes">available</label>
-							</li>
-							<li class="list-item">
-								<input class="available input" type="radio" name="available" id="no" checked>
-								<label class="available label" for="no">not available</label>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<div class="module-save">
-					<div class="msg error"></div>
-					<button class="btn btn__save" id="saveWork" type="submit" name="edit" value="save" disabled>save</button>
-					<button class="btn btn__cancel" id="cancelWork" type="submit" name="edit" value="cancel">cancel</button>
-					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
-					<input type="hidden" name="submitted" value="true" />
+			<form>
+				<div class="inner-section add">
+					<h3 class="subheader">choose an image:</h2>
+					<ul class="list inline images">
+						<li class="list-item add">
+							<input class="studio-add input" id="workImage" size="25" name="workImage" type="file" accept="image/*"/>
+							<div class="status" id="upload"><span class="status-bar" id="process"></span></div>
+						</li>
+					</ul>
 				</div>
+
+				<div class="inner-section">
+					<h3 class="subheader">add some info:</h2>
+					<ul class="list module-list" id="addWorkInfo">
+						<li class="module-list-item"><input class="form-input js-title" id="newTitle" name="workname" type="text" placeholder="title" /></li>
+						<li class="module-list-item"><input class="form-input js-year" id="newYear" name="year" type="text" placeholder="year" /></li>
+						<li class="module-list-item"><input class="form-input js-media" id="newMedia" name="media" type="text" placeholder="media" /></li>
+						<li class="module-list-item"><textarea class="form-input js-description" id="newDescription" name="description" type="text" rows="5" placeholder="description"></textarea></li>
+						<li class="module-list-item"><input class="form-input js-depth dimension" id="newDimension_d" name="dimension_d" type="text" placeholder="d" /><input class="form-input js-width dimension" id="newDimension_w" name="dimension_w" type="text" placeholder="w"/><input class="form-input js-height dimension last" id="newDimension_h" name="dimension_h" type="text" class="form-input" placeholder="h" /></li>
+						<li class="module-list-item">
+							<ul class="list filter inline available" id="availableToBuy">
+								<li class="list-item">
+									<input class="available input js-yes" type="radio" name="available" id="yes">
+									<label class="available label" for="yes">available</label>
+								</li>
+								<li class="list-item">
+									<input class="available input js-no" type="radio" name="available" id="no" checked>
+									<label class="available label" for="no">not available</label>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</form>
+			<div class="module-save">
+				<div class="msg error"></div>
+				<button class="btn btn__save" id="saveWork" type="submit" name="edit" value="save">save</button>
+				<button class="btn btn__cancel" id="cancelWork" type="submit" name="edit" value="cancel">cancel</button>
+				<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
+				<input type="hidden" name="submitted" value="true" />
 			</div>
 		</div>
 

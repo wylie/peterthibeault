@@ -463,25 +463,30 @@ function getFormData( elem ) {
     var id = parseInt( $( elem ).parents('.module-section').attr('id') );
     var form = $( elem ).parent().siblings('form');
     // get the stuff from the form
-    var title = $(form[0]).children('[id^=title-]').val();
-    var year = $(form[0]).children('[id^=year-]').val();
-    var media = $(form[0]).children('[id^=media-]').val();
-    var description = $(form[0]).children('[id^=description-]').val();
-    var depth = $(form[0]).children('[id^=dimension_d-]').val();
-    var width = $(form[0]).children('[id^=dimension_w-]').val();
-    var height = $(form[0]).children('[id^=dimension_h-]').val();
+    var title = $('#form-' + id).find('.js-title').val();
+    var year = $('#form-' + id).find('.js-year').val();
+    var media = $('#form-' + id).find('.js-media').val();
+    var description = $('#form-' + id).find('.js-description').val();
+    var depth = $('#form-' + id).find('.js-depth').val();
+    var width = $('#form-' + id).find('.js-width').val();
+    var height = $('#form-' + id).find('.js-height').val();
     // check if available or not
-    if( $(form[0]).children('[id^=yes-]:checked').val() ) {
+    if( $('#form-' + id).find('.js-yes:checked').val() ) {
         var available = true;
-    } else if( $(form[0]).children('[id^=no-]:checked').val() )  {
+    } else if( $('#form-' + id).find('.js-no:checked').val() )  {
         var available = false;
     }
     // do image stuff
-    var newImgInput = $(form[0]).children('.related').children('.add').children('.input'); // get the new image input
-    var images = $(form[0]).children('.related').children().length - 1; // minus 1 for the add button
+    var newImgInput = $('#form-' + id).find('.add').children('.input'); // get the new image input
+    var images = $('#form-' + id).find('.js-img').length; // minus 1 for the add button
+    if( (images === 0) && (newImgInput[0].files[0]) ) {
+        var images = 0;
+    } else if( (images === 0) && (newImgInput[0].files[0]) ) {
+        var images = 1;
+    }
+
     if( newImgInput[0].files[0] ) {
         var newImg = 1; // if we are uploading a new image
-        // uploadImage( newImgInput[0].files[0] );
     } else {
         var newImg = 0; // if we aren't uploading a new image
     }
@@ -520,7 +525,7 @@ function uploadImage( id, img, file ) {
     var fd = new FormData();
     fd.append('workImage', file);
     fd.append('id', id);
-    fd.append('num', img );
+    fd.append('num', img - 1 );
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'functions/uploadwork.php', true);
@@ -530,14 +535,14 @@ function uploadImage( id, img, file ) {
             var uploadProcess = document.getElementById('process-' + id);
             uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
             if(percentComplete === 100) {
-                console.log( 'progress…' );
+                console.log( 'image upload is in progress…' );
             }
         }
     };
 
     xhr.onload = function() {
         if (this.status == 200) {
-            console.log( 'SUCCESS!!' );
+            console.log( 'success!' );
         };
     };
     xhr.send(fd);
@@ -552,11 +557,26 @@ function getIndex( data, id ) {
     // --------------------
     for( key in data ) {
         for(var i = 0; i < data[key].length; i++) {
-            if( data[key][i].id === id ) {
-                var index = i;
+            if( data[key][i].id !== id ) {
+                if( data[key][i].id === id ) {
+                    var index = i;
+                    return index;
+                }
+                var index = data[key].length;
                 return index;
+            // }
+
+            // if( data[key][i].id === id ) {
+            //     var index = i;
+            //     return index;
+            // } else if( data[key][i].id !== id ) {
+            //     var index = data[key].length;
+            //     return index;
+            // } else {
+            //     console.log( 'nothing matches!' );
             }
         }
+        // return index;
     }
 }
 
@@ -583,6 +603,7 @@ function saveData( id, data, section, index ) {
     // --------------------
     var msg = createMsg( id ); // generate the messaging element
     var data = encodeURIComponent( JSON.stringify( data ) ); // encode the data
+    console.log('saveIndex.php?data=' + data + '&section=' + section + '&index=' + index);
     $.ajax({
         type: 'GET',
         url: 'functions/saveIndex.php?data=' + data + '&section=' + section + '&index=' + index,
@@ -590,7 +611,7 @@ function saveData( id, data, section, index ) {
         success: function(ret){
             msg.classList.add('success');
             msg.innerHTML = 'Your ' + section + ' has been added!';
-            console.log( 'SUCCESS!' );
+            console.log( 'success!' );
         },
         error: function(ret){
             msg.classList.add('error');
@@ -602,7 +623,44 @@ function saveData( id, data, section, index ) {
                 reloadData(section);
                 msg.remove();
             },2000);
-            console.log( 'COMPLETE!' );
+            console.log( 'complete!' );
         }
     });
+}
+
+function setId( elem ) {
+    // PARAMS: 1
+    // - ELEM: this, the element clicked on
+    // - RETURN: number, id
+    // --------------------
+    var today = new Date();
+    // create an id form the date
+    var id = today.getTime();
+    var par = $(elem).parents('.module-section');
+    var form = $(elem).parents('.module-section').children('form');
+    var images = $(elem).parents('.module-section').find('.status-bar');
+    images[0].setAttribute('id', 'process-' + id);
+    par[0].setAttribute('id', id);
+    form[0].setAttribute('id', 'form-' + id);
+
+    return id;
+}
+
+function getChosenSection( elem ) {
+    // PARAMS: 0
+    // - RETURN: string, the section chosen
+    // --------------------
+    // var section = document.getElementById('addWorkCategory');
+    var setSection = $('#addWorkCategory');
+    var childs = $(setSection[0]).children()
+    for(var i = 0; i < childs.length; i++) {
+        if( $(childs[i]).children('[id$=Add]:checked').val() === 'on' ) {
+            var label = $(childs[i]).children('label');
+            for(var j = 0; j < label.length; j++) {
+                if( label[j].innerHTML !== undefined ) {
+                    return label[j].innerHTML;
+                }
+            }
+        }
+    }
 }

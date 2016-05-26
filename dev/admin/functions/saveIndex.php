@@ -37,17 +37,20 @@ $file = "../../data/" . $section . ".json";
 $fileData = file_get_contents($file);
 // encode the contents of the file
 $json_encode = json_encode($fileData);
-// decode the data
+// decode the new data
 $data = json_decode($data, true);
+// decode the old data
 $json = json_decode($fileData, true);
 
 // loop through the file
 foreach ($json[$section] as $key => $val) {
     // find the matching index in the JSON data
-    if ($key == $index) {
-        // add that index to the JSON data
-        $json[$section][$key] = $data;
-    }
+}
+if($index > $key) {
+    array_push($json[$section], $data);
+} else {
+    // add that index to the JSON data
+    $json[$section][$key] = $data;
 }
 
 // fix the indexing
