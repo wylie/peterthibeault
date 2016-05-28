@@ -23,22 +23,15 @@ define(['data','delete','display','save'], function (require) {
             // NEW WORK STUFF
             // --------------------
             // ACTIVATE BUTTONS
-
-            // $('#works').on('change', 'form #workImage', function() {
-            // $('#works').on('change', 'form #workImage, form #newTitle', function() {
-            //     $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
-            //     $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
-            // });
-            // grab the new work
-            var saveWork = document.getElementById('saveWork');
-            // console.log( saveWork );
-            // var workImage = document.getElementById('workImage');
-            // workImage.addEventListener('change', function() {
-                // saveWork.removeAttribute('disabled');
-                // saveWork.onclick = gatherData;
-            // }, false);
-
+            // this is definitely not pretty, but it works. will want to refactor
+            $('#works').on('change', 'form #workImage', function() {
+                $('#works').on('change', 'form #newTitle', function() {
+                    $('#saveWork').prop('disabled', false);
+                    $('#cancelWork').prop('disabled', false);
+                });
+            });
             // SAVE
+            var saveWork = document.getElementById('saveWork');
             $('#works').on('click', '#saveWork', function() {
                 var id = parseInt( setId( this ) );// will return ID, make sure its a number
                 var section = getChosenSection( id ); // get section
@@ -61,30 +54,30 @@ define(['data','delete','display','save'], function (require) {
             // LAST WORK STUFF
             // --------------------
             // ACTIVATE BUTTONS
-            $('#works').on('change', '#lastWork [id^=addRelated-]', function() {
-                $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
-                $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
-            });
-            $('#works').on('change', '#lastWork [id^=form-] :input', function() {
-                $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
-                $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
-            });
+            // $('#works').on('change', '#lastWork [id^=addRelated-]', function() {
+            //     $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+            //     $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            // });
+            // $('#works').on('change', '#lastWork [id^=form-] :input', function() {
+            //     $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
+            //     $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            // });
             // SAVE
-            $('#works').on('click', '#lastWork .js-save', function() {
-                updateOldWork(this);
-            });
+            // $('#works').on('click', '#lastWork .js-save', function() {
+            //     updateOldWork(this);
+            // });
             // CANCEL
-            $('#works').on('click', '#lastWork .js-cancel', function() {
-                var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
-                applyOldData( data );
-                // re-disable the buttons
-                $(this).siblings('.js-save').prop('disabled', true);
-                $(this).prop('disabled', true);
-            });
+            // $('#works').on('click', '#lastWork .js-cancel', function() {
+            //     var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
+            //     applyOldData( data );
+            //     // re-disable the buttons
+            //     $(this).siblings('.js-save').prop('disabled', true);
+            //     $(this).prop('disabled', true);
+            // });
             // DELETE
-            $('#works').on('click', '#lastWork .js-delete', function() {
-                deleteSingleWork( this );
-            });
+            // $('#works').on('click', '#lastWork .js-delete', function() {
+            //     deleteSingleWork( this );
+            // });
 
             // --------------------
             // OLD WORK STUFF
