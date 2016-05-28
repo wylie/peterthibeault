@@ -104,6 +104,12 @@ module.exports = function(grunt) {
 					},
 					{
 						expand: true,
+						src: 'dev/admin/templates/*',
+						dest: 'dist/admin/templates/',
+						flatten: true
+					},
+					{
+						expand: true,
 						src: 'dev/admin/resume/*',
 						dest: 'dist/admin/resume/',
 						flatten: true
@@ -211,6 +217,14 @@ module.exports = function(grunt) {
 			},
 			adminjs: {
 				files: ['dev/admin/js/*'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
+			admintemplates: {
+				files: ['dev/admin/templates/*'],
 				tasks: ['copy'],
 				options: {
 					spawn: false,
