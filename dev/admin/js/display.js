@@ -183,10 +183,10 @@ function displayWorks() {
             labelAvailable2.setAttribute('for', 'no-' + data[key][j].id);
             labelAvailable2.innerHTML = 'not available';
 
-            if( data[key][j].available === false ) {
+            if( data[key][j].available === true ) {
                 inputAvailable1.setAttribute('checked', 'checked');
             }
-            if( data[key][j].available === true ) {
+            if( data[key][j].available === false ) {
                 inputAvailable2.setAttribute('checked', 'checked');
             }
 
