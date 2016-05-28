@@ -16,128 +16,127 @@
 
 	<ul class="list nav inline center">
 		<!-- <li class="list-item"><a class="txt-link" href="nav.html">Nav</a></li> -->
-		<li class="list-item"><a class="txt-link active" href="works.html">Works</a></li>
-		<li class="list-item"><a class="txt-link" href="studio.html">Studio</a></li>
-		<li class="list-item"><a class="txt-link" href="news.html">News</a></li>
-		<li class="list-item"><a class="txt-link" href="cv.html">CV</a></li>
+		<li class="list-item"><a class="txt-link active" href="works.html">works</a></li>
+		<li class="list-item"><a class="txt-link" href="studio.html">studio</a></li>
+		<li class="list-item"><a class="txt-link" href="news.html">news</a></li>
+		<li class="list-item"><a class="txt-link" href="cv.html">cv</a></li>
 		<!-- <li class="list-item"><a class="txt-link" href="contact.html">Contact</a></li> -->
 	</ul>
 
 	<section class="module">
-		<h1 class="header">Works</h1>
+		<h1 class="header">works</h1>
 
 		<div class="module-section">
-			<h2 class="subheader">Stats:</h2>
+			<h2 class="subheader">stats:</h2>
 			<p>You have a total of <span id="dbNum"></span> items in the database!</p>
 		</div>
 
-		<h2 class="header">Add New Works</h1>
-		<div class="module-section" id="addNewWork">
+		<h2 class="header">add new works</h1>
+		<div class="module-section">
 			<div class="inner-section">
-				<h3 class="subheader">Choose A Section:</h2>
+				<h3 class="subheader">choose a section:</h2>
 				<ul class="list filter inline" id="addWorkCategory">
 					<li class="list-item">
 						<input class="input" type="radio" name="section" id="furnishingsAdd">
-						<label class="label" for="furnishingsAdd">Furnishings</label>
+						<label class="label" for="furnishingsAdd">furnishings</label>
 					</li>
 					<li class="list-item">
 						<input class="input" type="radio" name="section" id="sculptureAdd">
-						<label class="label" for="sculptureAdd">Sculpture</label>
+						<label class="label" for="sculptureAdd">sculpture</label>
 					</li>
 					<li class="list-item">
 						<input class="input" type="radio" name="section" id="drawingAdd">
-						<label class="label" for="drawingAdd">Drawing</label>
+						<label class="label" for="drawingAdd">drawing</label>
 					</li>
 					<li class="list-item">
 						<input class="input" type="radio" name="section" id="paintingAdd">
-						<label class="label" for="paintingAdd">Painting</label>
+						<label class="label" for="paintingAdd">painting</label>
 					</li>
 					<li class="list-item">
 						<input class="input" type="radio" name="section" id="designAdd">
-						<label class="label" for="designAdd">Design</label>
+						<label class="label" for="designAdd">design</label>
 					</li>
 					<li class="list-item">
 						<input class="input" type="radio" name="section" id="studentsAdd">
-						<label class="label" for="studentsAdd">Students</label>
+						<label class="label" for="studentsAdd">students</label>
 					</li>
 				</ul>
 			</div>
 
-			<div class="inner-section">
-				<h3 class="subheader">Choose An Image:</h2>
-				<!-- <input size="25" id="newWorkImage" name="main_image" type="file" /> -->
-				<input class="studio-add" id="workImage" size="25" name="workImage" type="file" accept="image/*"/>
-				<div class="status" id="upload"><span class="status-bar" id="uploadProcess"></span></div>
-			</div>
-
-			<div class="inner-section">
-				<h3 class="subheader">Add Some Info:</h2>
-				<ul class="list module-list" id="addWorkInfo">
-					<li class="module-list"><h4>TITLE</h4></li>
-					<li class="module-list-item"><input class="form-input" id="newTitle" name="workname" type="text" /></li>
-					<li class="module-list"><h4>YEAR</h4></li>
-					<li class="module-list-item"><input class="form-input" id="newYear" name="year" type="text" /></li>
-					<li class="module-list"><h4>MEDIA</h4></li>
-					<li class="module-list-item"><input class="form-input" id="newMedia" name="media" type="text" /></li>
-					<li class="module-list"><h4>DESCRIPTION</h4></li>
-					<li class="module-list-item"><textarea class="form-input" id="newDescription" name="description" type="text" rows="5"></textarea></li>
-					<li class="module-list"><h4>DIMENSIONS</h4></li>
-					<li class="module-list-item"><input class="form-input dimension" id="newDimension_d" name="dimension_d" type="text" style="width: 25px;" />D x <input class="form-input dimension" id="newDimension_w" name="dimension_w" type="text" style="width: 25px;"/>W x <input class="form-input dimension" id="newDimension_h" name="dimension_h" type="text" style="width: 25px;" class="form-input" />H</li>
-					<li class="module-list"><h4>AVAILABLE</h4></li>
-					<li class="module-list-item">
-						<ul class="list filter inline available" id="availableToBuy">
-							<li class="list-item">
-								<input class="available input" type="radio" name="available" id="yes">
-								<label class="available label" for="yes">Yes</label>
-							</li>
-							<li class="list-item">
-								<input class="available input" type="radio" name="available" id="no" checked>
-								<label class="available label" for="no">No</label>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<div class="module-save">
-					<div class="msg error"></div>
-					<button class="save button" id="saveWork" type="submit" name="edit" value="save" disabled>Save</button>
-					<button class="cancel button" id="cancelWork" type="submit" name="edit" value="cancel">Cancel</button>
-					<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
-					<input type="hidden" name="submitted" value="true" />
+			<form>
+				<div class="inner-section add">
+					<h3 class="subheader">choose an image:</h2>
+					<ul class="list inline images">
+						<li class="list-item add">
+							<input class="studio-add input" id="workImage" size="25" name="workImage" type="file" accept="image/*"/>
+							<div class="status" id="upload"><span class="status-bar" id="process"></span></div>
+						</li>
+					</ul>
 				</div>
+
+				<div class="inner-section">
+					<h3 class="subheader">add some info:</h2>
+					<ul class="list module-list" id="addWorkInfo">
+						<li class="module-list-item"><input class="form-input js-title" id="newTitle" name="workname" type="text" placeholder="title" /></li>
+						<li class="module-list-item"><input class="form-input js-year" id="newYear" name="year" type="text" placeholder="year" /></li>
+						<li class="module-list-item"><input class="form-input js-media" id="newMedia" name="media" type="text" placeholder="media" /></li>
+						<li class="module-list-item"><textarea class="form-input js-description" id="newDescription" name="description" type="text" rows="5" placeholder="description"></textarea></li>
+						<li class="module-list-item"><input class="form-input js-depth dimension" id="newDimension_d" name="dimension_d" type="text" placeholder="d" /><input class="form-input js-width dimension" id="newDimension_w" name="dimension_w" type="text" placeholder="w"/><input class="form-input js-height dimension last" id="newDimension_h" name="dimension_h" type="text" class="form-input" placeholder="h" /></li>
+						<li class="module-list-item">
+							<ul class="list filter inline available" id="availableToBuy">
+								<li class="list-item">
+									<input class="available input js-yes" type="radio" name="available" id="yes">
+									<label class="available label" for="yes">available</label>
+								</li>
+								<li class="list-item">
+									<input class="available input js-no" type="radio" name="available" id="no" checked>
+									<label class="available label" for="no">not available</label>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</form>
+			<div class="module-save">
+				<div class="msg error"></div>
+				<button class="btn btn__save" id="saveWork" type="submit" name="edit" value="save" disabled="disabled">save</button>
+				<button class="btn btn__cancel" id="cancelWork" type="reset" name="edit" value="cancel">cancel</button>
+				<input type="hidden" name="id" value="<?php echo $works_entry_id; ?>" />
+				<input type="hidden" name="submitted" value="true" />
 			</div>
 		</div>
 
-		<h2 class="header">Manage Old Works</h1>
+		<h2 class="header">manage old works</h1>
 		<div class="module-section">
-			<h2 class="subheader">Filter By Section</h2>
+			<h2 class="subheader">filter by section</h2>
 			<ul class="list filter inline" id="filterWorks">
 				<li class="list-item">
 					<input class="input" type="radio" name="filterSection" id="furnishings">
-					<label class="label" for="furnishings">Furnishings</label>
+					<label class="label" for="furnishings">furnishings</label>
 				</li>
 				<li class="list-item">
 					<input class="input" type="radio" name="filterSection" id="sculpture">
-					<label class="label" for="sculpture">Sculpture</label>
+					<label class="label" for="sculpture">sculpture</label>
 				</li>
 				<li class="list-item">
 					<input class="input" type="radio" name="filterSection" id="drawing">
-					<label class="label" for="drawing">Drawing</label>
+					<label class="label" for="drawing">drawing</label>
 				</li>
 				<li class="list-item">
 					<input class="input" type="radio" name="filterSection" id="painting">
-					<label class="label" for="painting">Painting</label>
+					<label class="label" for="painting">painting</label>
 				</li>
 				<li class="list-item">
 					<input class="input" type="radio" name="filterSection" id="design">
-					<label class="label" for="design">Design</label>
+					<label class="label" for="design">design</label>
 				</li>
 				<li class="list-item">
 					<input class="input" type="radio" name="filterSection" id="students">
-					<label class="label" for="students">Students</label>
+					<label class="label" for="students">students</label>
 				</li>
 				<li class="list-item">
 					<input class="input" type="radio" name="filterSection" id="all" checked="checked" />
-					<label class="label" for="all">Display all</label>
+					<label class="label" for="all">display all</label>
 				</li>
 			</ul>
 

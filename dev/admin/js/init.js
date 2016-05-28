@@ -7,36 +7,106 @@ define(['data','delete','display','save'], function (require) {
 
     switch(page) {
         case 'works':
+            // get data
             getData(['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students']);
+            // display stuff
             displayWorks();
+            displayFilterCount();
+            // displayLastSaved();
 
-            var lastWork = sessionStorage.getItem('lastWork');
-            if( lastWork ) {
-                displayLastSaved( lastWork );
-            }
-
-            // cancel the studio in the textarea
-            var cancelWork = document.getElementById('cancelWork');
-            cancelWork.onclick = clear;
-            // filter the old works
-            $('#filterWorks').on('click', '.label', function() {
+            // FILTER OLD WORKS
+            $('#works').on('click', '#filterWorks .label', function() {
                 filterWorks( this );
             });
 
-            // delete a work
-            $('#oldWorks').on('click', '.delete.button', function() {
-                deleteSingleWork( this );
+            // --------------------
+            // NEW WORK STUFF
+            // --------------------
+            // ACTIVATE BUTTONS
+            // this is definitely not pretty, but it works. will want to refactor
+            $('#works').on('change', 'form #workImage', function() {
+                $('#works').on('change', 'form #newTitle', function() {
+                    $('#saveWork').prop('disabled', false);
+                    $('#cancelWork').prop('disabled', false);
+                });
             });
-
-            displayFilterCount();
-
-            // change state of save button after adding content to any field in a single work
-            $('[id^=form-]').on('change', ':input', function() {
-                $(this).parent().siblings('.module-save').children('.save').prop('disabled', false);
-                $(this).parent().siblings('.module-save').children('.cancel').prop('disabled', false);
+            // SAVE
+            var saveWork = document.getElementById('saveWork');
+            $('#works').on('click', '#saveWork', function() {
+                var id = parseInt( setId( this ) );// will return ID, make sure its a number
+                var section = getChosenSection( id ); // get section
+                var formData = getFormData( this ); // get form data
+                    var work = formData[0]; // new Work object
+                    var file = formData[1]; // file data
+                if( file ) { // check to see if we have a new file
+                    var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
+                }
+                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                var index = getIndex( section, localData, id );
+                console.log( index );
+                saveData(id, work, section, index); // send data off to be saved
             });
+            // CANCEL
+            var cancelWork = document.getElementById('cancelWork');
+            cancelWork.onclick = clear;
 
-            $('#oldWorks').on('click', '.cancel.button', function() {
+            // --------------------
+            // LAST WORK STUFF
+            // --------------------
+            // ACTIVATE BUTTONS
+            // $('#works').on('change', '#lastWork [id^=addRelated-]', function() {
+            //     $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+            //     $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            // });
+            // $('#works').on('change', '#lastWork [id^=form-] :input', function() {
+            //     $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
+            //     $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            // });
+            // SAVE
+            // $('#works').on('click', '#lastWork .js-save', function() {
+            //     updateOldWork(this);
+            // });
+            // CANCEL
+            // $('#works').on('click', '#lastWork .js-cancel', function() {
+            //     var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
+            //     applyOldData( data );
+            //     // re-disable the buttons
+            //     $(this).siblings('.js-save').prop('disabled', true);
+            //     $(this).prop('disabled', true);
+            // });
+            // DELETE
+            // $('#works').on('click', '#lastWork .js-delete', function() {
+            //     deleteSingleWork( this );
+            // });
+
+            // --------------------
+            // OLD WORK STUFF
+            // --------------------
+            // ACTIVATE BUTTONS
+            $('#works').on('change', '#oldWorks [id^=addRelated-]', function() {
+                $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+            $('#works').on('change', '#oldWorks [id^=form-] :input', function() {
+                $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+            // SAVE
+            $('#oldWorks').on('click', '.js-save', function() {
+                var id = parseInt(getId( this )); // will return ID, make sure its a number
+                var section = getSection( this ); // get section
+                var formData = getFormData( this ); // get form data
+                    var work = formData[0]; // new Work object
+                    var file = formData[1]; // file data
+                if( file ) { // check to see if we have a new file
+                    var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
+                }
+                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                var index = getIndex( section, localData, id );
+                saveData(id, work, section, index); // send data off to be saved
+            });
+            // CANCEL
+            $('#works').on('click', '#oldWorks .js-cancel', function() {
                 var mod = $(this).parents('.module-section');
                 var id = parseInt($(mod).attr('id'));
                 var classes = mod[0].classList;
@@ -53,31 +123,19 @@ define(['data','delete','display','save'], function (require) {
                     }
                 }
                 // re-disable the buttons
-                $(this).siblings('.save').prop('disabled', true);
+                $(this).siblings('.js-save').prop('disabled', true);
                 $(this).prop('disabled', true);
             });
-
-            // grab the new work
-            var saveWork = document.getElementById('saveWork');
-            saveWork.onclick = addWork;
-
-            // grab the old work
-            $('#oldWorks').on('click', '.save.button', function() {
-                updateOldWork(this);
+            // DELETE
+            $('#works').on('click', '#oldWorks .js-delete', function() {
+                deleteSingleWork( this );
             });
-
-            var saveWork = document.getElementById('saveWork');
-            var workImage = document.getElementById('workImage');
-            workImage.addEventListener('change', function() {
-                saveWork.removeAttribute('disabled');
-                saveWork.onclick = gatherData;
-            }, false);
 
             break;
         case 'studio':
             getData(['studio']);
             displayStudio();
-            $('#oldStudio').on('click', '.delete', function() {
+            $('#oldStudio').on('click', '.js-delete', function() {
                 getThis('studio', this);
             });
             // cancel the studio in the textarea
@@ -94,7 +152,7 @@ define(['data','delete','display','save'], function (require) {
         case 'news':
             getData(['news']);
             displayNews();
-            $('#oldNews').on('click', '.delete', function() {
+            $('#oldNews').on('click', '.js-delete', function() {
                 getThis('news', this);
             });
             // cancel the news in the textarea
@@ -118,3 +176,7 @@ define(['data','delete','display','save'], function (require) {
         }
 
 });
+
+function doIt(  ) {
+    console.log( 'x' );
+}

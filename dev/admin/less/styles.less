@@ -45,10 +45,12 @@ h4 {
 }
 .header {
 	margin: 20px 0;
+	text-transform: capitalize;
 }
 .subheader {
 	font-size: 1em;
 	margin: 0 0 20px;
+	text-transform: capitalize;
 }
 .module-divider {
 	border-color: black;
@@ -76,10 +78,13 @@ h4 {
 
 .list {
 	list-style-type: none;
-	.group;
 	&.inline {
 		.list-item {
-			float: left;
+			display: inline-block;
+			vertical-align: middle;
+			&.add {
+				width: 100%;
+			}
 		}
 	}
 	&.center {
@@ -90,12 +95,35 @@ h4 {
 		}
 	}
 	&.related {
-		margin-left: -5px;
-		margin-right: -5px;
-		.group;
+		margin: 15px -5px;
 		.list-item {
 			height: auto;
-	    padding: 5px 5px 0 5px;
+			max-width: 75px;
+			padding: 5px 5px 0 5px;
+			&.add {
+				width: 75px;
+				height: 75px;
+				padding: 0;
+				// overflow: hidden;
+				background-color: #ccc;
+				.label {
+					cursor: pointer;
+					width: 75px;
+					display: block;
+					text-align: center;
+					transform: translateY(-50%);
+					top: 50%;
+					font-size: 100px;
+					position: relative;
+					opacity: .5;
+					&:hover {
+						opacity: 1;
+					}
+				}
+				.related-add {
+					display: none;
+				}
+			}
 		}
 	}
 	.studio-img-thmb {
@@ -158,12 +186,13 @@ h4 {
 	.group;
 	.list-item {
 		display: block;
-    float: left;
+		float: left;
 		width: percentage((100/7)/100);
-    text-align: center;
+		text-align: center;
 		.txt-link {
 			padding: 10px;
 			display: block;
+			text-transform: uppercase;
 			&.active {
 				background-color: #ccc;
 			}
@@ -264,8 +293,8 @@ input#price {
 		width: 33%;
 	}
 }
-#oldWorks .module-save {
-	margin: 20px 0 0;
+.module-save {
+	// margin: 20px 0 0;
 	.cancel.button {
 		width: 100%;
 	    margin-bottom: 2%;
@@ -379,6 +408,8 @@ input#price {
 		float: left;
 		padding: 10px;
 		text-align: center;
+		text-transform: uppercase;
+		.group;
 		&:hover {
 			text-decoration: underline;
 		}
@@ -420,9 +451,11 @@ input#price {
 	position: relative;
 	background-color: #fff;
 	.group;
+	&,
 	&.work {
 		.group;
 		display: inline-block;
+		width: 100%;
 		.heading {
 	    margin: 10px 0 0;
 		}
@@ -430,13 +463,29 @@ input#price {
 	.form-input {
 		width: 100%;
 		font-size: 18px;
-		margin-top: 5px;
+		margin-top: 15px;
 		border: 2px solid #ccc;
 		padding: 5px;
+		&::-webkit-input-placeholder {
+			text-transform: uppercase;
+		}
+		&:-moz-placeholder { /* Firefox 18- */
+			text-transform: uppercase;
+		}
+		&::-moz-placeholder {  /* Firefox 19+ */
+			text-transform: uppercase;
+		}
+		&:-ms-input-placeholder {
+		   text-transform: uppercase;
+		}
 		&.dimension {
-			width: 25% !important;
-			display: inline-block;
-			margin-right: 10px;
+			width: 32%;
+		    display: inline-block;
+		    margin-right: 2%;
+			&.last {
+				.group;
+				margin-right: 0;
+			}
 		}
 	}
 	.inner-section {
@@ -453,12 +502,12 @@ input#price {
 }
 .studio {
 	.date {
-    position: absolute;
-    color: #fff;
-    text-shadow: 0px 0px 3px #000;
-    top: 30px;
-    left: 30px;
-    font-size: 20px;
+	    position: absolute;
+	    color: #fff;
+	    text-shadow: 0px 0px 3px #000;
+	    top: 30px;
+	    left: 30px;
+	    font-size: 20px;
 	}
 }
 
@@ -513,14 +562,61 @@ input#price {
 	&,
 	& .label {
 	    width: 100%;
+		text-transform: uppercase;
 	}
 	.list-item {
 		width: 50%;
+		float: left;
 	}
 	& {
-		margin-bottom: 20px;
+		margin: 15px 0;
 	}
 	.label {
 		margin: 0;
+	}
+}
+
+///
+// BEM STUFF
+///
+.btn {
+	border: none;
+	width: 49%;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	cursor: pointer;
+	margin-top: 2%;
+	float: left;
+	text-transform: uppercase;
+	&[disabled] {
+	    background-color: #ccc;
+	    color: #aaa;
+	    cursor: default;
+	}
+	// block modifiers
+	&_wide {
+		width: 100%;
+	}
+	&_right {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin-top: 0;
+		width: 75px;
+	}
+	// elements
+	&__save {
+	    background-color: #1DB91C;
+		float: left;
+	}
+	&__cancel {
+		background-color: #ccc;
+		float: right;
+	}
+	&__delete {
+    	background-color: red;
+		float: right;
 	}
 }

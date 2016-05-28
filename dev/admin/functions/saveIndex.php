@@ -22,31 +22,33 @@ function customError($errno, $errstr) {
 }
 set_error_handler("customError");
 
+// get the data
+$data = $_GET["data"];
 // get the section
 $section = $_GET["section"];
 // get the index passed in
 $index = $_GET["index"];
 // make sure that the index is a number…
 $index = intval($index);
-// get the data
-$myData = $_GET["data"];
+
 // get the file we want to edit
-$myFile = "../../data/" . $section . ".json";
+$file = "../../data/" . $section . ".json";
 // get the contents of that file
-$fileData = file_get_contents($myFile);
-// encode the contents of the file
-$json_encode = json_encode($fileData);
-// decode the data
-$myData = json_decode($myData, true);
+$fileData = file_get_contents($file);
+// decode the new data
+$data = json_decode($data, true);
+// decode the old data
 $json = json_decode($fileData, true);
 
-// loop through the file
-foreach ($json[$section] as $key => $val) {
-    // find the matching index in the JSON data
-    if ($key == $index) {
-        // add that index to the JSON data
-        $json[$section][$key] = $myData;
-    }
+$len = sizeof($json[$section]);
+
+// set the desired index of the old data with the new data
+if( $index < $len) {
+    $json[$section][$index] = array_replace( $json[$section][$index], $data );
+    $action = 'updated';
+} else {
+    $json[$section][$index] = $data;
+    $action = 'added';
 }
 
 // fix the indexing
@@ -54,13 +56,15 @@ $json[$section] = array_values(array_filter($json[$section]));
 // encode the date again
 $json = json_encode($json);
 // open the file
-$fileHandle = fopen($myFile, "w");
+$fileHandle = fopen($file, "w");
 // write the file
 fwrite($fileHandle, $json);
 // close the file
 fclose($fileHandle);
 
 $json = json_encode(array(
+  'action' => $action,
+  'data' => $data,
   'section' => $section,
   'index' => $index
 ));

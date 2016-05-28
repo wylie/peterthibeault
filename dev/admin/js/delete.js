@@ -102,33 +102,72 @@ function deleteSingleWork( x ) {
     // get the classes
     var parClasses = $(par).attr('class');
     // get the id
-    var parId = parseInt($(par).attr('id'));
-    // create an array with the classes
-    var parClasses = parClasses.split(' ');
-    // loop through the class array
-    for(var i = 0; i < parClasses.length; i++) {
-        // now split each class to find the one that contains js-
-        var parClass = parClasses[i].split('-');
-        // if the first part of the class equals js…
-        if( parClass[0] === 'js' ) {
-            // that's the section
-            var section = parClass[1];
-            // get the section from localStorage
-            var sectionData = JSON.parse( localStorage.getItem( section) );
-            // loop through the data
-            for(var j = 0; j < sectionData[section].length; j++) {
-                // make the id a number…
-                sectionId = parseInt(sectionData[section][j].id);
-                // find out if the id matches the one in the data
-                if( parId === sectionId ) {
-                    var oldWorks = document.getElementById('oldWorks');
-                    oldWorks.innerHTML = '';
-                    deleteSingleIndex(sectionId, section, j);
+    var parId = $(par).attr('id');
+    if( isNaN(parId) ) {
+        var parId = parId.split('-');
+    }
+    if( parId[0] === 'single' ) {
+        // create an array with the classes
+        var parClasses = parClasses.split(' ');
+        // loop through the class array
+        for(var i = 0; i < parClasses.length; i++) {
+            // now split each class to find the one that contains js-
+            var parClass = parClasses[i].split('-');
+            // if the first part of the class equals js…
+            if( parClass[0] === 'js' ) {
+                // that's the section
+                var section = parClass[1];
+                // get the section from localStorage
+                var sectionData = JSON.parse( localStorage.getItem( section) );
+                // loop through the data
+                for(var j = 0; j < sectionData[section].length; j++) {
+                    // make the id a number…
+                    sectionId = parseInt(sectionData[section][j].id);
+                    // find out if the id matches the one in the data
+                    if( parseInt( parId[1] ) === sectionId ) {
+                        // if( sessionStorage.getItem( 'lastData' ) ) {
+                        var lastWork = document.getElementById('lastWork');
+                        lastWork.innerHTML = '';
+                        sessionStorage.removeItem( 'lastData' );
+                        sessionStorage.removeItem( 'lastSection' );
+                        deleteSingleIndex( parseInt( parId[1] ), section, j );
+                        // }
+                    }
                 }
             }
         }
+    } else {
+        // create an array with the classes
+        var parClasses = parClasses.split(' ');
+        // loop through the class array
+        for(var i = 0; i < parClasses.length; i++) {
+            // now split each class to find the one that contains js-
+            var parClass = parClasses[i].split('-');
+            // if the first part of the class equals js…
+            if( parClass[0] === 'js' ) {
+                // that's the section
+                var section = parClass[1];
+                // get the section from localStorage
+                var sectionData = JSON.parse( localStorage.getItem( section) );
+                // loop through the data
+                for(var j = 0; j < sectionData[section].length; j++) {
+                    // make the id a number…
+                    sectionId = parseInt(sectionData[section][j].id);
+                    // find out if the id matches the one in the data
+                    if( parseInt(parId) === sectionId ) {
+                        deleteSingleIndex(sectionId, section, j);
+                        setTimeout(function(){
+                            var oldWorks = document.getElementById('oldWorks');
+                            oldWorks.innerHTML = '';
+                        },1000);
+                    }
+                }
+            }
+        }
+
     }
 }
+
 // DELETE SINGLE INDEX
 function deleteSingleIndex(id, section, index) {
     var msgDiv = document.createElement('div');
@@ -136,8 +175,6 @@ function deleteSingleIndex(id, section, index) {
     msgDiv.setAttribute('id', 'msg-' + id);
     $('#' + id + ' .module-save').append(msgDiv);
     var msg = document.getElementById('msg-' + id);
-
-
 
     $.ajax({
         type: 'GET',

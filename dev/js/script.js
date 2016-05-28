@@ -258,7 +258,7 @@ function buildModule(nav, data) {
 	// create a list for the first column
 	var infoUl1 = document.createElement('ul');
 	infoUl1.setAttribute('class', 'sidebar-items-list group col4');
-	infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading">TITLE</li><li class="sidebar-list-item" data-info="name"></li><li class="sidebar-list-heading">MEDIA</li><li class="sidebar-list-item" data-info="media"></li><li class="sidebar-list-heading">DESCRIPTION</li><li class="sidebar-list-item" data-info="description"></li><li class="sidebar-list-heading">DIMENSIONS</li><li class="sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
+	infoUl1.innerHTML = '<li class="sidebar-header"><h2 class="sidebar-list-heading" title="Learn more about this piece">INFO</h2></li><li class="sidebar-list-heading" data-heading="title">TITLE</li><li class="sidebar-list-item" data-info="title"></li><li class="sidebar-list-heading" data-heading="year">YEAR</li><li class="sidebar-list-item" data-info="year"></li><li class="sidebar-list-heading" data-heading="media">MEDIA</li><li class="sidebar-list-item" data-info="media"></li><li class="sidebar-list-heading" data-heading="description">DESCRIPTION</li><li class="sidebar-list-item" data-info="description"></li><li class="sidebar-list-heading" data-heading="dimension">DIMENSIONS</li><li class="sidebar-list-item" data-info="dimension"><span data-info="height">&#34</span> H x <span data-info="width">&#34</span> W x <span data-info="depth">&#34</span> D</li>';
 	infoDiv.appendChild(infoUl1);
 	// create a list for the first column
 	var infoUl2 = document.createElement('ul');
@@ -472,27 +472,60 @@ function heroImg( section, id, index ) {
 
 function heroInfo( section, id, index ) {
 	var data = JSON.parse(localStorage.getItem( section.toLowerCase() ) );
-	var title = $( '#' + section + '-tray [data-info="name"]' );
-	var media = $( '#' + section + '-tray [data-info="media"]' );
-	var desription = $( '#' + section + '-tray [data-info="description"]' );
-	var height =  $( '#' + section + '-tray [data-info="height"]' );
-	var width =  $( '#' + section + '-tray [data-info="width"]' );
-	var depth =  $( '#' + section + '-tray [data-info="depth"]' );
-	if( section === 'news' ) {
-		// do nothing
-	} else if( section === 'studio' ) {
+	if( ( section === 'news' ) || ( section === 'studio' ) ) {
 		// do nothing
 	} else {
-		title[0].innerHTML = data[index].title;
-		media[0].innerHTML = data[index].media;
-		if( data[index].desription === undefined) {
-			desription[0].innerHTML = '';
+		if( data[index].title ) {
+			var title = $( '#' + section + '-tray [data-info="title"]' );
+			$( '#' + section + '-tray [data-heading="title"]' ).removeClass('hidden');
+			$( '#' + section + '-tray [data-info="title"]' ).removeClass('hidden');
+			title[0].innerHTML = data[index].title;
 		} else {
-			desription[0].innerHTML = data[index].desription;
+			$( '#' + section + '-tray [data-heading="title"]' ).addClass('hidden');
+			$( '#' + section + '-tray [data-info="title"]' ).addClass('hidden');
 		}
-		height[0].innerHTML = data[index].dimension_h;
-		width[0].innerHTML = data[index].dimension_w;
-		depth[0].innerHTML = data[index].dimension_d;
+		if( data[index].media ) {
+			var media = $( '#' + section + '-tray [data-info="media"]' );
+			$( '#' + section + '-tray [data-heading="media"]' ).removeClass('hidden');
+			$( '#' + section + '-tray [data-info="media"]' ).removeClass('hidden').innerHTML = data[index].media;
+			media[0].innerHTML = data[index].media;
+		} else {
+			$( '#' + section + '-tray [data-heading="media"]' ).addClass('hidden');
+			$( '#' + section + '-tray [data-info="media"]' ).addClass('hidden');
+		}
+		if( data[index].year ) {
+			var year = $( '#' + section + '-tray [data-info="year"]' );
+			$( '#' + section + '-tray [data-heading="year"]' ).removeClass('hidden');
+			$( '#' + section + '-tray [data-info="year"]' ).removeClass('hidden').innerHTML = data[index].year;
+			year[0].innerHTML = data[index].year;
+		} else {
+			$( '#' + section + '-tray [data-heading="year"]' ).addClass('hidden');
+			$( '#' + section + '-tray [data-info="year"]' ).addClass('hidden');
+		}
+		if( data[index].desription ) {
+			var description = $( '#' + section + '-tray [data-info="description"]' );
+			$( '#' + section + '-tray [data-heading="description"]' ).removeClass('hidden');
+			$( '#' + section + '-tray [data-info="description"]' ).removeClass('hidden').innerHTML = data[index].desription;
+			description[0].innerHTML = data[index].description;
+		} else {
+			$( '#' + section + '-tray [data-heading="description"]' ).addClass('hidden');
+			$( '#' + section + '-tray [data-info="description"]' ).addClass('hidden');
+		}
+		if( data[index].dimension_h || data[index].dimension_w || data[index].dimension_d ) {
+			$( '#' + section + '-tray [data-heading="dimension"]' ).removeClass('hidden');
+			$( '#' + section + '-tray [data-info="dimension"]' ).removeClass('hidden');
+
+			var height =  $( '#' + section + '-tray [data-info="height"]' );
+			var width =  $( '#' + section + '-tray [data-info="width"]' );
+			var depth =  $( '#' + section + '-tray [data-info="depth"]' );
+
+			height[0].innerHTML = data[index].dimension_h;
+			width[0].innerHTML = data[index].dimension_w;
+			depth[0].innerHTML = data[index].dimension_d;
+		} else {
+			$( '#' + section + '-tray [data-heading="dimension"]' ).addClass('hidden');
+			$( '#' + section + '-tray [data-info="dimension"]' ).addClass('hidden');
+		}
 	}
 }
 
