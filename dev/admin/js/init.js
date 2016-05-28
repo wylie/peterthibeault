@@ -54,30 +54,30 @@ define(['data','delete','display','save'], function (require) {
             // LAST WORK STUFF
             // --------------------
             // ACTIVATE BUTTONS
-            // $('#works').on('change', '#lastWork [id^=addRelated-]', function() {
-            //     $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
-            //     $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
-            // });
-            // $('#works').on('change', '#lastWork [id^=form-] :input', function() {
-            //     $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
-            //     $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
-            // });
+            $('#works').on('change', '#lastWork [id^=addRelated-]', function() {
+                $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
+            $('#works').on('change', '#lastWork [id^=form-] :input', function() {
+                $(this).parent().siblings('.module-save').children('.js-save').prop('disabled', false);
+                $(this).parent().siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            });
             // SAVE
-            // $('#works').on('click', '#lastWork .js-save', function() {
-            //     updateOldWork(this);
-            // });
+            $('#works').on('click', '#lastWork .js-save', function() {
+                updateOldWork(this);
+            });
             // CANCEL
-            // $('#works').on('click', '#lastWork .js-cancel', function() {
-            //     var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
-            //     applyOldData( data );
-            //     // re-disable the buttons
-            //     $(this).siblings('.js-save').prop('disabled', true);
-            //     $(this).prop('disabled', true);
-            // });
+            $('#works').on('click', '#lastWork .js-cancel', function() {
+                var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
+                applyOldData( data );
+                // re-disable the buttons
+                $(this).siblings('.js-save').prop('disabled', true);
+                $(this).prop('disabled', true);
+            });
             // DELETE
-            // $('#works').on('click', '#lastWork .js-delete', function() {
-            //     deleteSingleWork( this );
-            // });
+            $('#works').on('click', '#lastWork .js-delete', function() {
+                deleteSingleWork( this );
+            });
 
             // --------------------
             // OLD WORK STUFF
