@@ -22,9 +22,8 @@ function customError($errno, $errstr) {
 }
 set_error_handler("customError");
 
-$data = $_GET["data"];
 $section = $_GET["section"];
-$index = $_GET["index"];
+$myData = $_GET["data"];
 
 $myFile = "../../data/" . $section . ".json";
 $fileData = file_get_contents($myFile);

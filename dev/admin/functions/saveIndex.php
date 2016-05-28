@@ -35,22 +35,19 @@ $index = intval($index);
 $file = "../../data/" . $section . ".json";
 // get the contents of that file
 $fileData = file_get_contents($file);
-// encode the contents of the file
-$json_encode = json_encode($fileData);
 // decode the new data
 $data = json_decode($data, true);
 // decode the old data
 $json = json_decode($fileData, true);
 
-// loop through the file
-foreach ($json[$section] as $key => $val) {
-    // find the matching index in the JSON data
-}
-if($index > $key) {
-    array_push($json[$section], $data);
+$len = sizeof($json[$section]);
+echo $len;
+
+// set the desired index of the old data with the new data
+if( $index < $len) {
+    $json[$section][$index] = array_replace( $json[$section][$index], $data );
 } else {
-    // add that index to the JSON data
-    $json[$section][$key] = $data;
+    $json[$section][$index] = $data;
 }
 
 // fix the indexing
