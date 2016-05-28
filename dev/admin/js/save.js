@@ -80,7 +80,6 @@ function uploadWorkImg(age, section, today, timeId, fd, file) {
             if(percentComplete === 100) {
                 // do something… or do nothing!
                 console.log( 'SUCCESS!!' );
-                var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
                 console.log( JSON.stringify(data ) );
                 applyOldData( data );
             }
@@ -149,9 +148,6 @@ function addWork(section, today, id, file) {
         var newWork = new Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date);
         // stringify the news
     	var stringWork = JSON.stringify(newWork);
-        // set the last added work to sessionStorage
-        sessionStorage.setItem('lastSection', section);
-        sessionStorage.setItem('lastData', stringWork);
         // do something with the news
         return stringWork;
     }
@@ -202,9 +198,6 @@ function addOldWork(section, today, id, file) {
         var newWork = new Work(id, title, year, media, description, dimension_d, dimension_w, dimension_h, available, images, date);
         // stringify the news
     	var stringWork = JSON.stringify(newWork);
-        // set the last added work to sessionStorage
-        sessionStorage.setItem('lastSection', section);
-        sessionStorage.setItem('lastData', stringWork);
         // do something with the news
         return stringWork;
     }

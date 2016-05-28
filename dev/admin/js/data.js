@@ -92,9 +92,6 @@ function reloadData(section) {
                     oldWorks.innerHTML = '';
                     displayWorks();
                     displayFilterCount();
-                    $('#lastWork').remove();
-                    var data = JSON.parse( sessionStorage.getItem( 'lastData' ) );
-                    displayLastSaved( data );
             break;
         }
     },300);

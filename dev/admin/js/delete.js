@@ -125,13 +125,7 @@ function deleteSingleWork( x ) {
                     sectionId = parseInt(sectionData[section][j].id);
                     // find out if the id matches the one in the data
                     if( parseInt( parId[1] ) === sectionId ) {
-                        // if( sessionStorage.getItem( 'lastData' ) ) {
-                        var lastWork = document.getElementById('lastWork');
-                        lastWork.innerHTML = '';
-                        sessionStorage.removeItem( 'lastData' );
-                        sessionStorage.removeItem( 'lastSection' );
                         deleteSingleIndex( parseInt( parId[1] ), section, j );
-                        // }
                     }
                 }
             }
