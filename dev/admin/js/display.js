@@ -162,26 +162,26 @@ function displayWorks() {
             input7.setAttribute('id', 'dimension_h-' + data[key][j].id);
             input7.setAttribute('type', 'text');
             input7.setAttribute('value', data[key][j].dimension_h);
-            // NO
+            // YES
             var inputAvailable1 = document.createElement('input');
-            inputAvailable1.setAttribute('class', 'available input js-no');
+            inputAvailable1.setAttribute('class', 'available input js-yes');
             inputAvailable1.setAttribute('type', 'radio');
             inputAvailable1.setAttribute('name', 'available-' + data[key][j].id);
-            inputAvailable1.setAttribute('id', 'no-' + data[key][j].id);
+            inputAvailable1.setAttribute('id', 'yes-' + data[key][j].id);
             var labelAvailable1 = document.createElement('label');
             labelAvailable1.setAttribute('class', 'available label');
-            labelAvailable1.setAttribute('for', 'no-' + data[key][j].id);
-            labelAvailable1.innerHTML = 'not available';
-            // YES
+            labelAvailable1.setAttribute('for', 'yes-' + data[key][j].id);
+            labelAvailable1.innerHTML = 'available';
+            // NO
             var inputAvailable2 = document.createElement('input');
-            inputAvailable2.setAttribute('class', 'available input js-yes');
+            inputAvailable2.setAttribute('class', 'available input js-no');
             inputAvailable2.setAttribute('type', 'radio');
             inputAvailable2.setAttribute('name', 'available-' + data[key][j].id);
-            inputAvailable2.setAttribute('id', 'yes-' + data[key][j].id);
+            inputAvailable2.setAttribute('id', 'no-' + data[key][j].id);
             var labelAvailable2 = document.createElement('label');
             labelAvailable2.setAttribute('class', 'available label');
-            labelAvailable2.setAttribute('for', 'yes-' + data[key][j].id);
-            labelAvailable2.innerHTML = 'available';
+            labelAvailable2.setAttribute('for', 'no-' + data[key][j].id);
+            labelAvailable2.innerHTML = 'not available';
 
             if( data[key][j].available === false ) {
                 inputAvailable1.setAttribute('checked', 'checked');

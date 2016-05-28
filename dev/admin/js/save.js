@@ -548,35 +548,24 @@ function uploadImage( id, img, file ) {
     xhr.send(fd);
     return true;
 }
-
-function getIndex( data, id ) {
-    // PARAMS: 2
+// function getIndex( section, localData, id );
+function getIndex( section, data, id ) {
+    // PARAMS: 3
+    // - SECTION: the current section
     // - DATA: localStorage data of section
     // - ID: number, the id of the item editing
     // - RETURN: number,  index of item clicked
     // --------------------
-    for( key in data ) {
-        for(var i = 0; i < data[key].length; i++) {
-            if( data[key][i].id !== id ) {
-                if( data[key][i].id === id ) {
-                    var index = i;
-                    return index;
-                }
-                var index = data[key].length;
-                return index;
-            // }
-
-            // if( data[key][i].id === id ) {
-            //     var index = i;
-            //     return index;
-            // } else if( data[key][i].id !== id ) {
-            //     var index = data[key].length;
-            //     return index;
-            // } else {
-            //     console.log( 'nothing matches!' );
-            }
+    for(var i = 0; i < data[section].length; i++) {
+        var dataId = data[section][i].id;
+        if( dataId === id ) {
+            var index = i;
+            return index;
         }
-        // return index;
+    }
+    if( dataId !== id ) {
+        var index = data[section].length;
+        return index;
     }
 }
 
@@ -593,6 +582,11 @@ function createMsg( id ) {
     return msg;
 }
 
+
+function Section( data ) {
+	this.data = data
+}
+
 function saveData( id, data, section, index ) {
     // PARAMS: 4
     // - ID: id of piece being saved
@@ -602,6 +596,12 @@ function saveData( id, data, section, index ) {
     // - RETURN: ???
     // --------------------
     var msg = createMsg( id ); // generate the messaging element
+    // console.log( data );
+
+    // var data = new Section( data );
+    // data = section.push( data );
+    // console.log( data );
+
     var data = encodeURIComponent( JSON.stringify( data ) ); // encode the data
     console.log('saveIndex.php?data=' + data + '&section=' + section + '&index=' + index);
     $.ajax({
@@ -610,20 +610,17 @@ function saveData( id, data, section, index ) {
         dataType: 'JSON',
         success: function(ret){
             msg.classList.add('success');
-            msg.innerHTML = 'Your ' + section + ' has been added!';
-            console.log( 'success!' );
+            msg.innerHTML = 'Your ' + ret.section + ' has been ' + ret.action + '!';
         },
         error: function(ret){
             msg.classList.add('error');
-            msg.innerHTML = 'Your ' + section + ' has not been added!';
-            console.log( 'ERROR!' );
+            msg.innerHTML = 'Your ' + ret.section + ' has not been ' + ret.action + '!';
         },
-        complete: function() {
+        complete: function(ret) {
             setTimeout(function(){
                 reloadData(section);
                 msg.remove();
             },2000);
-            console.log( 'complete!' );
         }
     });
 }

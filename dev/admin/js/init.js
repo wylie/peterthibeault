@@ -22,12 +22,19 @@ define(['data','delete','display','save'], function (require) {
             // --------------------
             // NEW WORK STUFF
             // --------------------
+            // ACTIVATE BUTTONS
+
+            // $('#works').on('change', 'form #workImage', function() {
+            // $('#works').on('change', 'form #workImage, form #newTitle', function() {
+            //     $(this).parents('form').siblings('.module-save').children('.js-save').prop('disabled', false);
+            //     $(this).parents('form').siblings('.module-save').children('.js-cancel').prop('disabled', false);
+            // });
             // grab the new work
             var saveWork = document.getElementById('saveWork');
             // console.log( saveWork );
             // var workImage = document.getElementById('workImage');
             // workImage.addEventListener('change', function() {
-                saveWork.removeAttribute('disabled');
+                // saveWork.removeAttribute('disabled');
                 // saveWork.onclick = gatherData;
             // }, false);
 
@@ -42,7 +49,8 @@ define(['data','delete','display','save'], function (require) {
                     var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
                 }
                 var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
-                var index = getIndex( localData, id );
+                var index = getIndex( section, localData, id );
+                console.log( index );
                 saveData(id, work, section, index); // send data off to be saved
             });
             // CANCEL
@@ -101,7 +109,7 @@ define(['data','delete','display','save'], function (require) {
                     var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
                 }
                 var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
-                var index = getIndex( localData, id );
+                var index = getIndex( section, localData, id );
                 saveData(id, work, section, index); // send data off to be saved
             });
             // CANCEL

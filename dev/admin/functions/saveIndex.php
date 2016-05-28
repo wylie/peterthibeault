@@ -41,13 +41,14 @@ $data = json_decode($data, true);
 $json = json_decode($fileData, true);
 
 $len = sizeof($json[$section]);
-echo $len;
 
 // set the desired index of the old data with the new data
 if( $index < $len) {
     $json[$section][$index] = array_replace( $json[$section][$index], $data );
+    $action = 'updated';
 } else {
     $json[$section][$index] = $data;
+    $action = 'added';
 }
 
 // fix the indexing
@@ -62,6 +63,7 @@ fwrite($fileHandle, $json);
 fclose($fileHandle);
 
 $json = json_encode(array(
+  'action' => $action,
   'data' => $data,
   'section' => $section,
   'index' => $index
