@@ -50,9 +50,7 @@
             break;
           case 'image/png':
               $src = imagecreatefrompng($img);
-              echo "\n\n $src: ";
-              echo $src;
-              echo "\n\n";
+              $msg = $src;
               break;
           default:
             die("Unknown filetype");
@@ -63,7 +61,7 @@
     $tmp = $_FILES['workImage']['tmp_name'];
 
     $img_info = getimagesize($tmp);
-    print_r( $img_info[mime] );
+    $msg = $img_info[mime];
 
     $name = getName($_FILES['workImage']['name']);
     $image_ext = getExtension($name);

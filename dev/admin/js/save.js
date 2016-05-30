@@ -259,10 +259,9 @@ function uploadImage( id, img, file ) {
     xhr.onload = function() {
         if (this.status == 200) {
             var ret = JSON.parse(this.response);
-            // console.log( ret.msg );
-            console.log( this.response );
+            console.log( ret.msg );
         } else {
-            console.log( this.response );
+            console.log( ret.msg );
         };
     };
     xhr.send(fd);
