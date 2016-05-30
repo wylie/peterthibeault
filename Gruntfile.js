@@ -76,7 +76,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						flatten: true,
-						src: 'bower_components/jquery/dist/jquery.js',
+						src: 'node_modules/jquery/dist/jquery.js',
 						dest: 'dist/js',
 						filter: 'isFile'
 					}
@@ -100,6 +100,12 @@ module.exports = function(grunt) {
 						expand: true,
 						src: 'dev/admin/js/*',
 						dest: 'dist/admin/js/',
+						flatten: true
+					},
+					{
+						expand: true,
+						src: 'dev/admin/templates/*',
+						dest: 'dist/admin/templates/',
 						flatten: true
 					},
 					{
@@ -217,6 +223,14 @@ module.exports = function(grunt) {
 					livereload: false
 				}
 			},
+			admintemplates: {
+				files: ['dev/admin/templates/*'],
+				tasks: ['copy'],
+				options: {
+					spawn: false,
+					livereload: false
+				}
+			},
 			adminphp: {
 				files: ['dev/admin/functions/*.php'],
 				tasks: ['copy'],
@@ -233,6 +247,17 @@ module.exports = function(grunt) {
 					livereload: false
 				}
 			}
+		},
+		handlebars: {
+			options: {
+				namespace: false,
+				wrapped: false
+			},
+			compile: {
+				files: {
+					'dist/admin/js/templates.js': ['dev/admin/templates/*.js']
+				}
+			}
 		}
 
 	});
@@ -241,6 +266,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-express');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-handlebars');
 
 	grunt.registerTask('default', [
 		'build',

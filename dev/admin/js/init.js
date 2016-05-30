@@ -9,6 +9,7 @@ define(['data','delete','display','save'], function (require) {
         case 'works':
             // get data
             getData(['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students']);
+
             // display stuff
             displayWorks();
             displayFilterCount();
@@ -104,7 +105,25 @@ define(['data','delete','display','save'], function (require) {
             break;
         case 'studio':
             getData(['studio']);
-            displayStudio();
+
+            // get the data
+            var data = JSON.parse( localStorage.getItem( 'studio' ) );
+
+            // HANDLEBARS!
+            var studioTemp = function(response){
+                // compile the tamplate
+                var template = Handlebars.compile( response );
+                // put the data into the template and onto the page
+                $("#oldStudio").html(template(data));
+            };
+            // get the template
+            $.ajax({
+                type: 'GET',
+                url: "templates/old-studio.hbs",
+                dataType: 'HTML',
+            }).done( studioTemp );
+
+            // displayStudio();
             $('#oldStudio').on('click', '.js-delete', function() {
                 getThis('studio', this);
             });
@@ -121,7 +140,24 @@ define(['data','delete','display','save'], function (require) {
             break;
         case 'news':
             getData(['news']);
-            displayNews();
+
+            // get the data
+            var data = JSON.parse( localStorage.getItem( 'news' ) );
+
+            // HANDLEBARS!
+            var newsTemp = function(response){
+                // compile the tamplate
+                var template = Handlebars.compile( response );
+                // put the data into the template and onto the page
+                $("#oldNews").html(template(data));
+            };
+            // get the template
+            $.ajax({
+                type: 'GET',
+                url: "templates/old-news.hbs",
+                dataType: 'HTML',
+            }).done( newsTemp );
+
             $('#oldNews').on('click', '.js-delete', function() {
                 getThis('news', this);
             });
