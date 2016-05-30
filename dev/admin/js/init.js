@@ -119,7 +119,7 @@ define(['data','delete','display','save'], function (require) {
             // get the template
             $.ajax({
                 type: 'GET',
-                url: "templates/old-studio.js",
+                url: "templates/old-studio.hbs",
                 dataType: 'HTML',
             }).done( studioTemp );
 
@@ -154,7 +154,7 @@ define(['data','delete','display','save'], function (require) {
             // get the template
             $.ajax({
                 type: 'GET',
-                url: "templates/old-news.js",
+                url: "templates/old-news.hbs",
                 dataType: 'HTML',
             }).done( newsTemp );
 
