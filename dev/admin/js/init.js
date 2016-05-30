@@ -24,12 +24,12 @@ define(['data','delete','display','save'], function (require) {
             // --------------------
             // ACTIVATE BUTTONS
             // this is definitely not pretty, but it works. will want to refactor
-            $('#works').on('change', 'form #workImage', function() {
-                $('#works').on('change', 'form #newTitle', function() {
+            // $('#works').on('change', 'form #workImage', function() {
+            //     $('#works').on('change', 'form #newTitle', function() {
                     $('#saveWork').prop('disabled', false);
                     $('#cancelWork').prop('disabled', false);
-                });
-            });
+            //     });
+            // });
             // SAVE
             var saveWork = document.getElementById('saveWork');
             $('#works').on('click', '#saveWork', function() {
@@ -41,10 +41,10 @@ define(['data','delete','display','save'], function (require) {
                 if( file ) { // check to see if we have a new file
                     var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
                 }
-                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
-                var index = getIndex( section, localData, id );
-                console.log( index );
-                saveData(id, work, section, index); // send data off to be saved
+                // var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                // var index = getIndex( section, localData, id );
+                // console.log( index );
+                // saveData(id, work, section, index); // send data off to be saved
             });
             // CANCEL
             var cancelWork = document.getElementById('cancelWork');

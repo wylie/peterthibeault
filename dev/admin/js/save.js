@@ -244,7 +244,7 @@ function uploadImage( id, img, file ) {
     fd.append('num', img - 1 );
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'functions/uploadwork.php', true);
+    xhr.open('POST', 'functions/upload.php', true);
     xhr.upload.onprogress = function(e) {
         if (e.lengthComputable) {
             var percentComplete = (e.loaded / e.total) * 100;
@@ -258,7 +258,11 @@ function uploadImage( id, img, file ) {
 
     xhr.onload = function() {
         if (this.status == 200) {
-            console.log( 'success!' );
+            var ret = JSON.parse(this.response);
+            // console.log( ret.msg );
+            console.log( this.response );
+        } else {
+            console.log( this.response );
         };
     };
     xhr.send(fd);
