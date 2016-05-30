@@ -5,31 +5,26 @@
     $num = $_REQUEST['num'];
     $value = 750;
 
-    echo $key;
-    // echo 'file: ' . $_FILES['workImage'];
-
     $image = $_FILES['workImage']['name'];
     $number = $_FILES['workImage']['number'];
     $image_tmp = $_FILES['workImage']['tmp_name'];
     $image_type = $_FILES['workImage']['type'];
 
     function getName($str) {
-        $parts = explode('.',$str);
-        $imgName = str_replace(' ', '_',$parts[0]);
+        $regex = "/(\s|\.[^.pngPNG|^.jpgJPG|^.gifGIF])/";
+        $imgName = stripslashes(strtolower(preg_replace($regex, '_', $str)));
         return $imgName;
     }
     function getExtension($str) {
         $parts = explode('.',$str);
-        $extension = $parts[1];
-        return $extension;
+        $ext = strtolower($parts[1]);
+        return $ext;
     }
 
-    $image_name = stripslashes($image);
-    $name = getName($image_name);
+    $name = getName($image);
     $image_ext = getExtension($image_name);
-    $ext = strtolower($image_ext);
     $output_folder = "../../img/works/";
-    $new_file_name = strtolower($_REQUEST['id'] . $key . $num . '.' . $ext);
+    $new_file_name = $_REQUEST['id'] . $key . $num . '.' . $ext;
     $new_file_location = $output_folder . $new_file_name;
 
     move_uploaded_file($image_tmp, $new_file_location);

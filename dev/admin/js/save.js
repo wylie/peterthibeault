@@ -298,11 +298,6 @@ function createMsg( id ) {
     return msg;
 }
 
-
-function Section( data ) {
-	this.data = data
-}
-
 function saveData( id, data, section, index ) {
     // PARAMS: 4
     // - ID: id of piece being saved
