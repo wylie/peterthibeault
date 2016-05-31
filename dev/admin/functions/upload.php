@@ -58,35 +58,37 @@
     }
 
     $size = $_FILES['workImage']['size'];
-    $tmp = $_FILES['workImage']['tmp_name'];
+    $image_tmp = $_FILES['workImage']['tmp_name'];
 
-    $img_info = getimagesize($tmp);
+    $img_info = getimagesize($image_tmp);
     $msg = $img_info[mime];
 
     $name = getName($_FILES['workImage']['name']);
     $image_ext = getExtension($name);
 
     $new_file_name = $id . $key . $num . $image_ext;
-    // echo $tmp;
+    // echo $image_tmp;
     // echo "\n\n";
-    // if( move_uploaded_file( $tmp, $path . $new_file_name ) ) {
-    // if( convertImage( $tmp, $path . $new_file_name, $quality ) ) {
-    convert( $tmp, $img_info );
-    // if( convert( $tmp, $img_info ) ) {
-        // $msg = "Success, your image uploaded!";
-    // } else {
-        // $msg = "Failed, your image did not upload!";
-    // }
+    // if( move_uploaded_file( $image_tmp, $path . $new_file_name ) ) {
+    // if( convertImage( $image_tmp, $path . $new_file_name, $quality ) ) {
+
+    $image_convert = imagecreatefrompng($image_tmp);
+    imagejpeg($image_convert, $new_file_name, $quality);
+    move_uploaded_file( $image_convert, $path . $new_file_name );
+    imagedestroy($image_convert);
+
+    // convert( $image_tmp, $img_info );
 
     $json = json_encode(array(
         'msg' => $msg,
-        'image_tmp' => $tmp,
+        'image_convert' => $image_convert,
+        'image_tmp' => $image_tmp,
         'extension' => $ext,
         'id' => $num,
         'name' => $name,
         'newFileName' => $new_file_name
     ));
 
-    // echo $json;
+    echo $json;
 
 ?>
