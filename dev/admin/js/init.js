@@ -5,13 +5,31 @@ define(['data','delete','display','save'], function (require) {
     var elements = document.getElementsByTagName('body');
     var page = elements[0].id;
 
+    var worksArr = ['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students'];
+
     switch(page) {
         case 'works':
             // get data
             getData(['furnishings', 'sculpture', 'drawing', 'painting', 'design', 'students']);
 
+            var data = JSON.parse( localStorage.getItem( 'sculpture' ) );
+
+            // HANDLEBARS!
+            var workTemp = function(response){
+                // compile the tamplate
+                var template = Handlebars.compile( response );
+                // put the data into the template and onto the page
+                $("#oldWorks").html(template( data ));
+            };
+            // get the template
+            $.ajax({
+                type: 'GET',
+                url: "templates/old-works.hbs",
+                dataType: 'HTML',
+            }).done( workTemp );
+
             // display stuff
-            displayWorks();
+            // displayWorks();
             displayFilterCount();
 
             // FILTER OLD WORKS

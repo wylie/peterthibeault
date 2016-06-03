@@ -1,0 +1,39 @@
+{{#sculpture}}
+    <div class="module-section work works js-{{sculpture}}" id="{{id}}">
+        <span class="date">last modified: {{date}}</span>
+        <form id="form-{{id}}">
+            <img class="studio-img" src="../img/works/{{id}}_l-0.jpg">
+            <input class="form-input js-title" placeholder="TITLE" id="title-{{id}}" type="text" value="{{title}}">
+            <input class="form-input js-year" placeholder="YEAR" id="year-{{id}}" type="text" value="{{year}}">
+            <input class="form-input js-media" placeholder="MEDIA" id="media-{{id}}" type="text" value="{{media}}">
+            <textarea class="form-input js-description" placeholder="DESCRIPTION" id="description-{{id}}" type="text">{{description}}</textarea>
+            <input class="form-input dimension js-depth" placeholder="D" id="dimension_d-{{id}}" type="text" value="{{dimension_d}}">
+            <input class="form-input dimension js-width" placeholder="W" id="dimension_w-{{id}}" type="text" value="{{dimension_w}}">
+            <input class="form-input dimension last js-height" placeholder="H" id="dimension_h-{{id}}" type="text" value="{{dimension_h}}">
+            <input class="available input js-yes" type="radio" name="available-{{id}}" id="yes-{{id}}">
+            <label class="available label" for="yes-{{id}}">available</label>
+            <input class="available input js-no" type="radio" name="available-{{id}}" id="no-{{id}}" checked="checked">
+            <label class="available label" for="no-{{id}}">not available</label>
+            <ul class="list inline related" id="images-{{id}}">
+                {{#list images}}
+                <li class="list-item js-img">
+                    <img class="studio-img-thmb active" src="../img/works/{{id}}_l-0.jpg" data-imgid="0">
+                </li>
+                {{/list}}
+                <li class="list-item add" title="add more images">
+                    <label class="label" for="addRelated-{{id}}">+</label>
+                    <input class="input related-add" id="addRelated-{{id}}" size="25" name="{{id}}" type="file" accept="image/*">
+                </li>
+            </ul>
+            <div class="status" id="upload-{{id}}">
+                <span class="status-bar" id="process-{{id}}">
+                </span>
+            </div>
+        </form>
+        <div class="module-save">
+            <button class="btn btn_wide btn__cancel js-cancel" disabled="disabled" type="submit" name="edit" value="save">cancel</button>
+            <button class="btn btn__save js-save" id="saveOld-{{id}}" disabled="disabled" type="submit" name="edit" value="save">save</button>
+            <button class="btn btn__delete js-delete" id="deleteOld-{{id}}" type="submit" name="edit" value="delete">delete</button>
+        </div>
+    </div>
+{{/sculpture}}
