@@ -1,5 +1,6 @@
 {{#sculpture}}
     <div class="module-section work works js-{{sculpture}}" id="{{id}}">
+        {{@index}}
         <span class="date">last modified: {{date}}</span>
         <form id="form-{{id}}">
             <img class="studio-img" src="../img/works/{{id}}_l-0.jpg">
@@ -15,11 +16,9 @@
             <input class="available input js-no" type="radio" name="available-{{id}}" id="no-{{id}}" checked="checked">
             <label class="available label" for="no-{{id}}">not available</label>
             <ul class="list inline related" id="images-{{id}}">
-                {{#list images}}
                 <li class="list-item js-img">
                     <img class="studio-img-thmb active" src="../img/works/{{id}}_l-0.jpg" data-imgid="0">
                 </li>
-                {{/list}}
                 <li class="list-item add" title="add more images">
                     <label class="label" for="addRelated-{{id}}">+</label>
                     <input class="input related-add" id="addRelated-{{id}}" size="25" name="{{id}}" type="file" accept="image/*">
