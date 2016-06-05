@@ -3,19 +3,19 @@ function gatherData() {
     var page = $('body').attr('id');
     var section = sessionStorage.getItem( 'section' );
     switch(page) {
-        case 'works':
-            var workImg = document.getElementById('workImage');
-            if( workImg.files[0] ) {
-                var today = new Date();
-                var timeId = today.getTime();
-                var file = workImg.files[0];
-                var fd = new FormData();
-                fd.append('workImage', file);
-                fd.append('id', timeId);
-                fd.append('num', 0);
-                uploadWorkImg(section, today, timeId, fd, file);
-            }
-            break;
+        // case 'works':
+        //     var workImg = document.getElementById('workImage');
+        //     if( workImg.files[0] ) {
+        //         var today = new Date();
+        //         var timeId = today.getTime();
+        //         var file = workImg.files[0];
+        //         var fd = new FormData();
+        //         fd.append('workImage', file);
+        //         fd.append('id', timeId);
+        //         fd.append('num', 0);
+        //         uploadWorkImg(section, today, timeId, fd, file);
+        //     }
+        //     break;
         case 'studio':
             var studioImg = document.getElementById('studioImage');
             if( studioImg.files[0] ) {
