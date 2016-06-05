@@ -3,6 +3,5 @@
 requirejs(['config'], function (config) {
     requirejs(['jquery']);
     requirejs(['handlebars']);
-    requirejs(['handlebarsintl']);
     requirejs(['init']);
 });

@@ -19,7 +19,7 @@ function gatherData() {
         case 'studio':
             var studioImg = document.getElementById('studioImage');
             if( studioImg.files[0] ) {
-                var today = new Date();
+                var today = getDate();
                 var timeId = today.getTime();
                 var file = studioImg.files[0];
                 var fd = new FormData();
@@ -30,7 +30,7 @@ function gatherData() {
             break;
         case 'news':
             // get today's date
-            var today = new Date();
+            var today = getDate();
             // create an id
             var id = today.getTime();
             // grab the news content
@@ -86,10 +86,6 @@ function saveStuff(section, data) {
 }
 
 
-// function ajaxSuccess () {
-//   console.log(this.responseText);
-// }
-
 function uploadStudioImg(today, timeId, fd, file) {
     var stringStudio = addStudio(today, timeId, fd, file);
     var fileName = file.name;
@@ -124,7 +120,7 @@ function addStudio(today, id, fd, file) {
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
     var imgSuff = fileArr[imgIndex];
-    // grab the news content
+    // grab the studio image
     var studioImage = document.getElementById('studioImage').value;
     // get the error div
     var studioErr = $('.msg.error');
@@ -135,11 +131,11 @@ function addStudio(today, id, fd, file) {
     } else {
         // clear the error when new is entrered
         $(studioErr).text('');
-        // build out the news
+        // build out the studio
         var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, today);
-        // stringify the news
+        // stringify the studio data
         var stringStudio = JSON.stringify(newStudio);
-        // do something with the news
+        // do something with the studio
         return stringStudio;
     }
 }
@@ -310,14 +306,8 @@ function saveData( id, data, section, index ) {
     // - RETURN: ???
     // --------------------
     var msg = createMsg( id ); // generate the messaging element
-    // console.log( data );
-
-    // var data = new Section( data );
-    // data = section.push( data );
-    // console.log( data );
 
     var data = encodeURIComponent( JSON.stringify( data ) ); // encode the data
-    console.log('saveIndex.php?data=' + data + '&section=' + section + '&index=' + index);
     $.ajax({
         type: 'GET',
         url: 'functions/saveIndex.php?data=' + data + '&section=' + section + '&index=' + index,
