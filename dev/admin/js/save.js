@@ -234,34 +234,42 @@ function uploadImage( id, img, file ) {
     // - FILE: file data from getFormData()
     // - RETURN: boolean, true
     // --------------------
-    var fd = new FormData();
-    fd.append('workImage', file);
-    fd.append('id', id);
-    fd.append('num', img - 1 );
+    // figure out the image extension
+    // TODO: remove this in favor of image conversion
+    var imgType = file.type;
+    var imgTypeArr = imgType.split('/');
+    var ext = imgTypeArr[1];
+    if( ext !== 'jpg' ) {
+        var msg = createMsg( id ); // generate the messaging element
+        msg.classList.add('error');
+        msg.innerHTML = 'Please upload a JPG image only';
+        return 'false';
+    } else {
+        var fd = new FormData();
+        fd.append('workImage', file);
+        fd.append('id', id);
+        fd.append('num', img - 1 );
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'functions/upload.php', true);
-    xhr.upload.onprogress = function(e) {
-        if (e.lengthComputable) {
-            var percentComplete = (e.loaded / e.total) * 100;
-            var uploadProcess = document.getElementById('process-' + id);
-            uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
-            if(percentComplete === 100) {
-                console.log( 'image upload is in progress…' );
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'functions/upload.php', true);
+        xhr.upload.onprogress = function(e) {
+            if (e.lengthComputable) {
+                var percentComplete = (e.loaded / e.total) * 100;
+                var uploadProcess = document.getElementById('process-' + id);
+                uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
+                if(percentComplete === 100) {
+                    console.log( 'image upload is in progress…' );
+                }
             }
-        }
-    };
+        };
 
-    xhr.onload = function() {
-        if (this.status == 200) {
+        xhr.onload = function() {
             var ret = JSON.parse(this.response);
             console.log( ret.msg );
-        } else {
-            console.log( ret.msg );
         };
-    };
-    xhr.send(fd);
-    return true;
+        xhr.send(fd);
+        return 'true';
+    }
 }
 // function getIndex( section, localData, id );
 function getIndex( section, data, id ) {

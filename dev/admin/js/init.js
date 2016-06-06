@@ -40,11 +40,12 @@ define(['data','delete','display','save'], function (require) {
                     var file = formData[1]; // file data
                 if( file ) { // check to see if we have a new file
                     var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
+                    if( image === 'true' ) {
+                        var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                        var index = getIndex( section, localData, id );
+                        saveData(id, work, section, index); // send data off to be saved
+                    }
                 }
-                // var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
-                // var index = getIndex( section, localData, id );
-                // console.log( index );
-                // saveData(id, work, section, index); // send data off to be saved
             });
             // CANCEL
             var cancelWork = document.getElementById('cancelWork');
@@ -71,10 +72,12 @@ define(['data','delete','display','save'], function (require) {
                     var file = formData[1]; // file data
                 if( file ) { // check to see if we have a new file
                     var image = uploadImage( work.id, work.images, file ); // upload the image. returns true if complete
+                    if( image === 'true' ) {
+                        var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
+                        var index = getIndex( section, localData, id );
+                        saveData(id, work, section, index); // send data off to be saved
+                    }
                 }
-                var localData = JSON.parse(localStorage.getItem( section )); // get the localStorage for this items section
-                var index = getIndex( section, localData, id );
-                saveData(id, work, section, index); // send data off to be saved
             });
             // CANCEL
             $('#works').on('click', '#oldWorks .js-cancel', function() {

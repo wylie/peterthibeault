@@ -1,94 +1,70 @@
 <?php
 
-    $quality = 100;
-    $path = "../../img/works/";
-    $id = $_REQUEST['id'];
-    $key = '_l-';
-    $num = $_REQUEST['num'];
+  $key = '_l.';
+  $value = 750;
 
-    function getName( $str ) {
-        $regex = "/(\s|\.[^.pngPNG|^.jpgJPG|^.gifGIF])/";
-        $imgName = stripslashes( strtolower( preg_replace( $regex, '_', $str ) ) );
-        return $imgName;
-    }
-    function getExtension($str) {
-        $parts = explode('.',$str);
-        $ext = strtolower($parts[1]);
-        $ext = '.' . strtolower($parts[1]);
-        return $ext;
-    }
-    function convertImage( $originalImage, $outputImage, $quality ) {
-        $exploded = explode( '.',$originalImage );
-        $ext = $exploded[count( $exploded ) - 1];
+  echo 'file: ' . $_FILES['studioImage'];
 
-        if( preg_match('/jpg|jpeg/i',$ext) ) {
-            $imageTmp = imagecreatefromjpeg( $originalImage );
-        } else if( preg_match('/png/i',$ext) ) {
-            $imageTmp = imagecreatefrompng( $originalImage );
-        } else if( preg_match('/gif/i',$ext) ) {
-            $imageTmp = imagecreatefromgif( $originalImage );
-        } else if( preg_match('/bmp/i',$ext) ) {
-            $imageTmp = imagecreatefrombmp( $originalImage );
-        } else {
-            return 0;
-        }
+  $image = $_FILES['studioImage']['name'];
+  $image_tmp = $_FILES['studioImage']['tmp_name'];
+  $image_type = $_FILES['studioImage']['type'];
 
-        // quality is a value from 0 (worst) to 100 (best)
-        imagejpeg( $imageTmp, $outputImage, $quality );
-        imagedestroy( $imageTmp );
+  function getName($str) {
+      $parts = explode('.',$str);
+      $imgName = str_replace(' ', '_',$parts[0]);
+      return $imgName;
+  }
+  function getExtension($str) {
+      $parts = explode('.',$str);
+      $extension = $parts[1];
+      return $extension;
+  }
 
-        return 1;
-    }
+  $image_name = stripslashes($image);
+  $name = getName($image_name);
+  $image_ext = getExtension($image_name);
+  $ext = strtolower($image_ext);
+  $output_folder = "../../img/studio/";
+  $new_file_name = strtolower($_REQUEST['id'] . $key . $ext);
+  $new_file_location = $output_folder . $new_file_name;
 
-    function convert( $img, $img_info ) {
-        switch ($img_info[mime]) {
-          case IMAGETYPE_GIF:
-              $src = imagecreatefromgif($img);
-              break;
-          case IMAGETYPE_JPEG:
-            $src = imagecreatefromjpeg($img);
-            break;
-          case 'image/png':
-              $src = imagecreatefrompng($img);
-              $msg = $src;
-              break;
-          default:
-            die("Unknown filetype");
-        }
-    }
+  move_uploaded_file($image_tmp, $new_file_location);
 
-    $size = $_FILES['workImage']['size'];
-    $image_tmp = $_FILES['workImage']['tmp_name'];
+  if($ext == 'jpg' || $ext == 'jpeg' ) {
+      $ext = 'jpg';
+      $src = imagecreatefromjpeg($new_file_location);
+  } else if($ext == 'png') {
+      $src = imagecreatefrompng($new_file_location);
+  } else {
+      $src = imagecreatefromgif($new_file_location);
+  }
 
-    $img_info = getimagesize($image_tmp);
-    $msg = $img_info[mime];
+  list($width,$height) = getimagesize($new_file_location);
 
-    $name = getName($_FILES['workImage']['name']);
-    $image_ext = getExtension($name);
+  // width of the main image
+  $new_width = $value;
+  $new_height = ($height / $width) * $new_width;
+  $img_dest = imagecreatetruecolor($new_width,$new_height);
 
-    $new_file_name = $id . $key . $num . $image_ext;
-    // echo $image_tmp;
-    // echo "\n\n";
-    // if( move_uploaded_file( $image_tmp, $path . $new_file_name ) ) {
-    // if( convertImage( $image_tmp, $path . $new_file_name, $quality ) ) {
+  imagecopyresampled($img_dest,$src,0,0,0,0,$new_width,$new_height,$width,$height);
+  $resized_location = $output_folder . $new_file_name;
+  imagejpeg($img_dest,$resized_location,100);
+  imagedestroy($src);
+  imagedestroy($img_dest);
 
-    $image_convert = imagecreatefrompng($image_tmp);
-    imagejpeg($image_convert, $new_file_name, $quality);
-    move_uploaded_file( $image_convert, $path . $new_file_name );
-    imagedestroy($image_convert);
+  echo '$resized_location: ' . $resized_location;
 
-    // convert( $image_tmp, $img_info );
+  $file_content = file_get_contents($resized_location);
+  $data_url = 'data:image/jpeg;base64,' . base64_encode($file_content);
 
-    $json = json_encode(array(
-        'msg' => $msg,
-        'image_convert' => $image_convert,
-        'image_tmp' => $image_tmp,
-        'extension' => $ext,
-        'id' => $num,
-        'name' => $name,
-        'newFileName' => $new_file_name
-    ));
+  $json = json_encode(array(
+    'dataUrl' => $data_url,
+    'extension' => $ext,
+    'id' => $_REQUEST['id'],
+    'name' => $image,
+    'newFileName' => $new_file_name,
+    'type' => $image_type
+  ));
 
-    echo $json;
-
+  echo $json;
 ?>
