@@ -3,23 +3,23 @@ function gatherData() {
     var page = $('body').attr('id');
     var section = sessionStorage.getItem( 'section' );
     switch(page) {
-        case 'works':
-            var workImg = document.getElementById('workImage');
-            if( workImg.files[0] ) {
-                var today = new Date();
-                var timeId = today.getTime();
-                var file = workImg.files[0];
-                var fd = new FormData();
-                fd.append('workImage', file);
-                fd.append('id', timeId);
-                fd.append('num', 0);
-                uploadWorkImg(section, today, timeId, fd, file);
-            }
-            break;
+        // case 'works':
+        //     var workImg = document.getElementById('workImage');
+        //     if( workImg.files[0] ) {
+        //         var today = new Date();
+        //         var timeId = today.getTime();
+        //         var file = workImg.files[0];
+        //         var fd = new FormData();
+        //         fd.append('workImage', file);
+        //         fd.append('id', timeId);
+        //         fd.append('num', 0);
+        //         uploadWorkImg(section, today, timeId, fd, file);
+        //     }
+        //     break;
         case 'studio':
             var studioImg = document.getElementById('studioImage');
             if( studioImg.files[0] ) {
-                var today = new Date();
+                var today = getDate();
                 var timeId = today.getTime();
                 var file = studioImg.files[0];
                 var fd = new FormData();
@@ -30,7 +30,7 @@ function gatherData() {
             break;
         case 'news':
             // get today's date
-            var today = new Date();
+            var today = getDate();
             // create an id
             var id = today.getTime();
             // grab the news content
@@ -86,10 +86,6 @@ function saveStuff(section, data) {
 }
 
 
-// function ajaxSuccess () {
-//   console.log(this.responseText);
-// }
-
 function uploadStudioImg(today, timeId, fd, file) {
     var stringStudio = addStudio(today, timeId, fd, file);
     var fileName = file.name;
@@ -124,7 +120,7 @@ function addStudio(today, id, fd, file) {
     var fileArr = fileName.split('.');
     var imgIndex = fileArr.length - 1;
     var imgSuff = fileArr[imgIndex];
-    // grab the news content
+    // grab the studio image
     var studioImage = document.getElementById('studioImage').value;
     // get the error div
     var studioErr = $('.msg.error');
@@ -135,11 +131,11 @@ function addStudio(today, id, fd, file) {
     } else {
         // clear the error when new is entrered
         $(studioErr).text('');
-        // build out the news
+        // build out the studio
         var newStudio = new Studio(id, '../img/studio/' + id + '_l.' + imgSuff, today);
-        // stringify the news
+        // stringify the studio data
         var stringStudio = JSON.stringify(newStudio);
-        // do something with the news
+        // do something with the studio
         return stringStudio;
     }
 }
@@ -238,31 +234,42 @@ function uploadImage( id, img, file ) {
     // - FILE: file data from getFormData()
     // - RETURN: boolean, true
     // --------------------
-    var fd = new FormData();
-    fd.append('workImage', file);
-    fd.append('id', id);
-    fd.append('num', img - 1 );
+    // figure out the image extension
+    // TODO: remove this in favor of image conversion
+    var imgType = file.type;
+    var imgTypeArr = imgType.split('/');
+    var ext = imgTypeArr[1];
+    if( ext !== 'jpg' ) {
+        var msg = createMsg( id ); // generate the messaging element
+        msg.classList.add('error');
+        msg.innerHTML = 'Please upload a JPG image only';
+        return 'false';
+    } else {
+        var fd = new FormData();
+        fd.append('workImage', file);
+        fd.append('id', id);
+        fd.append('num', img - 1 );
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'functions/uploadwork.php', true);
-    xhr.upload.onprogress = function(e) {
-        if (e.lengthComputable) {
-            var percentComplete = (e.loaded / e.total) * 100;
-            var uploadProcess = document.getElementById('process-' + id);
-            uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
-            if(percentComplete === 100) {
-                console.log( 'image upload is in progress…' );
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'functions/upload.php', true);
+        xhr.upload.onprogress = function(e) {
+            if (e.lengthComputable) {
+                var percentComplete = (e.loaded / e.total) * 100;
+                var uploadProcess = document.getElementById('process-' + id);
+                uploadProcess.setAttribute('style', 'width: ' + percentComplete + '%;');
+                if(percentComplete === 100) {
+                    console.log( 'image upload is in progress…' );
+                }
             }
-        }
-    };
-
-    xhr.onload = function() {
-        if (this.status == 200) {
-            console.log( 'success!' );
         };
-    };
-    xhr.send(fd);
-    return true;
+
+        xhr.onload = function() {
+            var ret = JSON.parse(this.response);
+            console.log( ret.msg );
+        };
+        xhr.send(fd);
+        return 'true';
+    }
 }
 // function getIndex( section, localData, id );
 function getIndex( section, data, id ) {
@@ -307,14 +314,8 @@ function saveData( id, data, section, index ) {
     // - RETURN: ???
     // --------------------
     var msg = createMsg( id ); // generate the messaging element
-    // console.log( data );
-
-    // var data = new Section( data );
-    // data = section.push( data );
-    // console.log( data );
 
     var data = encodeURIComponent( JSON.stringify( data ) ); // encode the data
-    console.log('saveIndex.php?data=' + data + '&section=' + section + '&index=' + index);
     $.ajax({
         type: 'GET',
         url: 'functions/saveIndex.php?data=' + data + '&section=' + section + '&index=' + index,
