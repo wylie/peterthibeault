@@ -11,12 +11,9 @@ export const GlobalStyle = createGlobalStyle`
   body {
     width: 100%;
     height: 100%;
-
-    font-family: "Grand Hotel", Arial, Helvetica, cursive;
     font-size: 1em;
     color: #fff;
-
-    background: #64abba;
+    background: #ccc;
   }
 `
 

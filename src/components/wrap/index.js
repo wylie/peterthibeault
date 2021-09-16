@@ -1,24 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 
-import List from "../list";
-import Divider from "../divider";
-
-import { StyledWrap } from "./styled.js";
-
-import { feels } from "../../data/feels.js";
-import { felt } from "../../data/felt.js";
+const Div = styled.div`
+  color: red;
+`;
 
 const Wrap = () => {
   return (
-    <StyledWrap>
-      <Divider text="How Do You Feel?" />
-      <List theme="primary" data={feels} />
-      <Divider text="Previous Feels" />
-      <List theme="secondary" data={felt} />
-    </StyledWrap>
-  );
+    <Div>Something here!</Div>
+  )
 };
-
-Wrap.displayName = "Wrap";
 
 export default Wrap;
