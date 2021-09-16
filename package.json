@@ -1,8 +1,8 @@
 {
-  "name": "ifeelblank",
+  "name": "peterthibeault",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://wylie.github.io/ifeelblank/",
+  "homepage": "https://wylie.github.io/peterthibeault/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
