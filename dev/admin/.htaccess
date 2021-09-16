@@ -1,4 +1,0 @@
-#AuthType Basic  
-#AuthName "restricted area"  
-#AuthUserFile /home/wylie/webapps/peterthibeault/admin/.htpasswd
-#require valid-user
