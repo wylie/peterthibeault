@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+import data from "../../data/wylie_thibeault.json"
+
 const Div = styled.div`
   color: red;
 `;
 
-const Wrap = () => {
+// console.log(data);
+
+const Wrap = ({children}) => {
   return (
-    <Div>Something here!</Div>
+    <Div>{children}</Div>
   )
 };
 

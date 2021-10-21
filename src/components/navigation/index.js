@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import data from "../../data/wylie_thibeault.json"
+
 const Ul = styled.ul`
   color: red;
 `;
@@ -8,12 +10,16 @@ const Li = styled.li`
   color: red;
 `;
 
-const Wrap = () => {
+const Navigation = () => {
   return (
     <Ul>
-      <Li>one</Li>
+      {data.map(item => (
+        <Li key={item.name}>
+          {item.name}
+        </Li>
+      ))}
     </Ul>
   )
 };
 
-export default Wrap;
+export default Navigation;
