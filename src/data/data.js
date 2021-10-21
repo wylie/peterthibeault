@@ -22,31 +22,31 @@ export const data = {
     entries: [
       {
         id: 1,
-        image_src: "../img/studio/first_studio_24_l.jpg",
+        image_src: "first_studio_24_l",
         description: false,
         date_entered: "2012-09-30"
       },
       {
         id: 3,
-        image_src: "../img/studio/pa310164_782_l.jpg",
+        image_src: "pa310164_782_l",
         description: false,
         date_entered: "2012-10-31"
       },
       {
         id: 4,
-        image_src: "../img/studio/pa310166_537_l.jpg",
+        image_src: "pa310166_537_l",
         description: false,
         date_entered: "2012-10-31"
       },
       {
         id: 7,
-        image_src: "../img/studio/26806091_5rm56x_980_l.jpg",
+        image_src: "26806091_5rm56x_980_l",
         description: false,
         date_entered: "2012-12-03"
       },
       {
         id: 15,
-        image_src: "../img/studio/studio_575_l.jpg",
+        image_src: "studio_575_l",
         description: false,
         date_entered: "2012-12-03"
       }
@@ -70,7 +70,7 @@ export const data = {
         dimension_w: "24\"",
         dimension_h: "8'",
         available: false,
-        image_src: "../img/works/rotating-toys-371_0_l.jpg",
+        image_src: "rotating-toys-371_0_l",
         related_images: 6,
         date_entered: "2012-10-01"
       },
@@ -90,7 +90,7 @@ export const data = {
         dimension_w: "10'",
         dimension_h: "3'",
         available: false,
-        image_src: "../img/works/untitled--1970_0_l.jpg",
+        image_src: "untitled--1970_0_l",
         related_images: 0,
         date_entered: "2012-10-01"
       },
@@ -110,7 +110,7 @@ export const data = {
         dimension_w: "24\"",
         dimension_h: "19\"",
         available: true,
-        image_src: "../img/works/untitled-804_0_l.jpg",
+        image_src: "untitled-804_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -130,7 +130,7 @@ export const data = {
         dimension_w: "24\"",
         dimension_h: "19\"",
         available: true,
-        image_src: "../img/works/untitled-838_0_l.jpg",
+        image_src: "untitled-838_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -150,7 +150,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/boggle-lamps-564_0_l.jpg",
+        image_src: "boggle-lamps-564_0_l",
         related_images: 1,
         date_entered: "2015-03-17"
       },
@@ -170,7 +170,7 @@ export const data = {
         dimension_w: "42\"",
         dimension_h: "16\"",
         available: true,
-        image_src: "../img/works/untitled-10_0_l.jpg",
+        image_src: "untitled-10_0_l",
         related_images: 0,
         date_entered: "2012-10-04"
       },
@@ -190,7 +190,7 @@ export const data = {
         dimension_w: "19\"",
         dimension_h: "24\"",
         available: true,
-        image_src: "../img/works/untitled-646_0_l.jpg",
+        image_src: "untitled-646_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -210,7 +210,7 @@ export const data = {
         dimension_w: "19",
         dimension_h: "24",
         available: false,
-        image_src: "../img/works/untitled-935_0_l.jpg",
+        image_src: "untitled-935_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -230,7 +230,7 @@ export const data = {
         dimension_w: "24",
         dimension_h: "19",
         available: false,
-        image_src: "../img/works/untitled-474_0_l.jpg",
+        image_src: "untitled-474_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -250,7 +250,7 @@ export const data = {
         dimension_w: "24\"",
         dimension_h: "19\"",
         available: true,
-        image_src: "../img/works/untitled-384_0_l.jpg",
+        image_src: "untitled-384_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -270,7 +270,7 @@ export const data = {
         dimension_w: "24\"",
         dimension_h: "19\"",
         available: true,
-        image_src: "../img/works/untitled-667_0_l.jpg",
+        image_src: "untitled-667_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -290,7 +290,7 @@ export const data = {
         dimension_w: "48\"",
         dimension_h: "34\"",
         available: false,
-        image_src: "../img/works/chest-645_0_l.jpg",
+        image_src: "chest-645_0_l",
         related_images: 1,
         date_entered: "2012-10-08"
       },
@@ -310,7 +310,7 @@ export const data = {
         dimension_w: "19",
         dimension_h: "26",
         available: false,
-        image_src: "../img/works/untitled-998_0_l.jpg",
+        image_src: "untitled-998_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -330,7 +330,7 @@ export const data = {
         dimension_w: "22\"",
         dimension_h: "84\"",
         available: false,
-        image_src: "../img/works/golden-key-cabinet-473_0_l.jpg",
+        image_src: "golden-key-cabinet-473_0_l",
         related_images: 0,
         date_entered: "2012-10-09"
       },
@@ -350,7 +350,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/cohasset-coffee-tables-25_0_l.jpg",
+        image_src: "cohasset-coffee-tables-25_0_l",
         related_images: 0,
         date_entered: "2015-03-17"
       },
@@ -370,7 +370,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/stools-151_0_l.jpg",
+        image_src: "stools-151_0_l",
         related_images: 0,
         date_entered: "2015-03-17"
       },
@@ -390,7 +390,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/dictionary-stands-654_0_l.jpg",
+        image_src: "dictionary-stands-654_0_l",
         related_images: 0,
         date_entered: "2015-03-17"
       },
@@ -410,7 +410,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/sideboard-cabinets-550_0_l.jpg",
+        image_src: "sideboard-cabinets-550_0_l",
         related_images: 2,
         date_entered: "2015-03-17"
       },
@@ -430,7 +430,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/a-box-upon-the-land-30_0_l.jpg",
+        image_src: "a-box-upon-the-land-30_0_l",
         related_images: 0,
         date_entered: "2015-03-17"
       },
@@ -450,7 +450,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/ash-ark-988_0_l.jpg",
+        image_src: "ash-ark-988_0_l",
         related_images: 2,
         date_entered: "2015-03-17"
       },
@@ -470,7 +470,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/keyworth-bed-686_0_l.jpg",
+        image_src: "keyworth-bed-686_0_l",
         related_images: 1,
         date_entered: "2015-03-17"
       },
@@ -490,7 +490,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/trestle-table-751_0_l.jpg",
+        image_src: "trestle-table-751_0_l",
         related_images: 1,
         date_entered: "2015-03-17"
       },
@@ -510,7 +510,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/cube-desk-clock-702_0_l.jpg",
+        image_src: "cube-desk-clock-702_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -530,7 +530,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/candle-sticks-357_0_l.jpg",
+        image_src: "candle-sticks-357_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -550,7 +550,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/candle-sticks-ii-121_0_l.jpg",
+        image_src: "candle-sticks-ii-121_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -570,7 +570,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/cohasset-game-table-740_0_l.jpg",
+        image_src: "cohasset-game-table-740_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -590,7 +590,7 @@ export const data = {
         dimension_w: "20",
         dimension_h: "96",
         available: false,
-        image_src: "../img/works/monument-to-american-capital-502_0_l.jpg",
+        image_src: "monument-to-american-capital-502_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -610,7 +610,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/storytellers-couch-257_0_l.jpg",
+        image_src: "storytellers-couch-257_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -630,7 +630,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/cambridge-credenza-132_0_l.jpg",
+        image_src: "cambridge-credenza-132_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -650,7 +650,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/-115_0_l.jpg",
+        image_src: "-115_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -670,7 +670,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/cohasset-dining-table-682_0_l.jpg",
+        image_src: "cohasset-dining-table-682_0_l",
         related_images: 3,
         date_entered: "2015-03-18"
       },
@@ -690,7 +690,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/baby-blocks-blanket-box-796_0_l.jpg",
+        image_src: "baby-blocks-blanket-box-796_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -710,7 +710,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/bank-lobby-display-case-230_0_l.jpg",
+        image_src: "bank-lobby-display-case-230_0_l",
         related_images: 2,
         date_entered: "2015-03-18"
       },
@@ -730,7 +730,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/bank-lobby-torchieres-33_0_l.jpg",
+        image_src: "bank-lobby-torchieres-33_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -750,7 +750,7 @@ export const data = {
         dimension_w: "16",
         dimension_h: "82",
         available: false,
-        image_src: "../img/works/block-power-clock-tower-ii-678_0_l.jpg",
+        image_src: "block-power-clock-tower-ii-678_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -770,7 +770,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/outdoor-umbrella-table-242_0_l.jpg",
+        image_src: "outdoor-umbrella-table-242_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -790,7 +790,7 @@ export const data = {
         dimension_w: "16\"",
         dimension_h: "16\"",
         available: false,
-        image_src: "../img/works/game-board-wall-clock-133_0_l.jpg",
+        image_src: "game-board-wall-clock-133_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -810,7 +810,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/brookline-home-office-484_0_l.jpg",
+        image_src: "brookline-home-office-484_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -830,7 +830,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/desktop-clock-421_0_l.jpg",
+        image_src: "desktop-clock-421_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -850,7 +850,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/gameboard-wall-clock-482_0_l.jpg",
+        image_src: "gameboard-wall-clock-482_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -870,7 +870,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/desk-lamp-500_0_l.jpg",
+        image_src: "desk-lamp-500_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -890,7 +890,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/domino-wall-clock-377_0_l.jpg",
+        image_src: "domino-wall-clock-377_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -910,7 +910,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/cohasset-lamp-stand-59_0_l.jpg",
+        image_src: "cohasset-lamp-stand-59_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -930,7 +930,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/seedy-cd-cabinet-184_0_l.jpg",
+        image_src: "seedy-cd-cabinet-184_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -950,7 +950,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/game-board-wall-clock-755_0_l.jpg",
+        image_src: "game-board-wall-clock-755_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -970,7 +970,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/outdoor-umbrella-table-ii-736_0_l.jpg",
+        image_src: "outdoor-umbrella-table-ii-736_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -990,7 +990,7 @@ export const data = {
         dimension_w: "14\"",
         dimension_h: "78\"",
         available: true,
-        image_src: "../img/works/truss-clock-769_0_l.jpg",
+        image_src: "truss-clock-769_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1010,7 +1010,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/block-power-clock-tower-i-107_0_l.jpg",
+        image_src: "block-power-clock-tower-i-107_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -1030,7 +1030,7 @@ export const data = {
         dimension_w: "20\"",
         dimension_h: "75\"",
         available: true,
-        image_src: "../img/works/the-situational-museum-870_0_l.jpg",
+        image_src: "the-situational-museum-870_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1050,7 +1050,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/new-jersey-clock-tower-255_0_l.jpg",
+        image_src: "new-jersey-clock-tower-255_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1070,7 +1070,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/obelisk-clock-tower-934_0_l.jpg",
+        image_src: "obelisk-clock-tower-934_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1090,7 +1090,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/a-toy-tower-for-a-tall-tot-523_0_l.jpg",
+        image_src: "a-toy-tower-for-a-tall-tot-523_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -1110,7 +1110,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/game-board-pendulum-wall-clock-967_0_l.jpg",
+        image_src: "game-board-pendulum-wall-clock-967_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1130,7 +1130,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/wall-sconce-1-of-a-pair-506_0_l.jpg",
+        image_src: "wall-sconce-1-of-a-pair-506_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1150,7 +1150,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/wall-shelving-with-collection-556_0_l.jpg",
+        image_src: "wall-shelving-with-collection-556_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -1170,7 +1170,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/desktop-clock-816_0_l.jpg",
+        image_src: "desktop-clock-816_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1190,7 +1190,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/mantle-clock-958_0_l.jpg",
+        image_src: "mantle-clock-958_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1210,7 +1210,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/mantle-clock-297_0_l.jpg",
+        image_src: "mantle-clock-297_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1230,7 +1230,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/fidelity-wall-pieces-234_0_l.jpg",
+        image_src: "fidelity-wall-pieces-234_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1250,7 +1250,7 @@ export const data = {
         dimension_w: "14\"",
         dimension_h: "14\"",
         available: false,
-        image_src: "../img/works/black-ball-276_0_l.jpg",
+        image_src: "black-ball-276_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1270,7 +1270,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/bank-conference-room-wall-relief-54_0_l.jpg",
+        image_src: "bank-conference-room-wall-relief-54_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -1290,7 +1290,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/health-club-wall-relief-559_0_l.jpg",
+        image_src: "health-club-wall-relief-559_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1310,7 +1310,7 @@ export const data = {
         dimension_w: "22'",
         dimension_h: "11'",
         available: false,
-        image_src: "../img/works/hasbro-hq-wall-sculpture-591_0_l.jpg",
+        image_src: "hasbro-hq-wall-sculpture-591_0_l",
         related_images: 2,
         date_entered: "2015-03-18"
       },
@@ -1330,7 +1330,7 @@ export const data = {
         dimension_w: "35'",
         dimension_h: "8'",
         available: false,
-        image_src: "../img/works/c-46-ri-airport-wall-relief-648_0_l.jpg",
+        image_src: "c-46-ri-airport-wall-relief-648_0_l",
         related_images: 2,
         date_entered: "2015-03-18"
       },
@@ -1350,7 +1350,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/red-square-yellow-circle-blue-triangle-18_0_l.jpg",
+        image_src: "red-square-yellow-circle-blue-triangle-18_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1370,7 +1370,7 @@ export const data = {
         dimension_w: "84\"",
         dimension_h: "15\"",
         available: true,
-        image_src: "../img/works/toroidal-entropy-583_0_l.jpg",
+        image_src: "toroidal-entropy-583_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1390,7 +1390,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/keyport-conference-room-wall-relief-with-granite-wall-shelf-759_0_l.jpg",
+        image_src: "keyport-conference-room-wall-relief-with-granite-wall-shelf-759_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1410,7 +1410,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/aib-gallery-sculptural-drawing-installation-603_0_l.jpg",
+        image_src: "aib-gallery-sculptural-drawing-installation-603_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -1430,7 +1430,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/astra-zeneca-wall-relief-622_0_l.jpg",
+        image_src: "astra-zeneca-wall-relief-622_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1450,7 +1450,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/sailing-along-on-land-in-the-air-at-sea-20_0_l.jpg",
+        image_src: "sailing-along-on-land-in-the-air-at-sea-20_0_l",
         related_images: 3,
         date_entered: "2015-03-18"
       },
@@ -1470,7 +1470,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: true,
-        image_src: "../img/works/coal-fire-278_0_l.jpg",
+        image_src: "coal-fire-278_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1490,7 +1490,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: true,
-        image_src: "../img/works/isosaki-lamp-184_0_l.jpg",
+        image_src: "isosaki-lamp-184_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1510,7 +1510,7 @@ export const data = {
         dimension_w: "8'",
         dimension_h: "30\"",
         available: true,
-        image_src: "../img/works/knifish-601_0_l.jpg",
+        image_src: "knifish-601_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       },
@@ -1530,7 +1530,7 @@ export const data = {
         dimension_w: false,
         dimension_h: false,
         available: false,
-        image_src: "../img/works/cohasset-dining-table-rendering-301_0_l.jpg",
+        image_src: "cohasset-dining-table-rendering-301_0_l",
         related_images: 1,
         date_entered: "2015-03-18"
       },
@@ -1550,7 +1550,7 @@ export const data = {
         dimension_w: "10'",
         dimension_h: "8'",
         available: false,
-        image_src: "../img/works/trade-show-exhibit-866_0_l.jpg",
+        image_src: "trade-show-exhibit-866_0_l",
         related_images: 0,
         date_entered: "2015-03-18"
       }

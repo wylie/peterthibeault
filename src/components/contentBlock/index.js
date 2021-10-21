@@ -14,6 +14,7 @@ const Div = styled.div`
   }
 `;
 
+
 const ContentBlock = () => {
   return (
     <>
@@ -24,12 +25,16 @@ const ContentBlock = () => {
       ))}
       {studio.entries.map(item => (
         <Div key={item.id}>
-          <img src={item.image_src} alt="" />
+          <p children={item.date_entered} />
+          {/* <img src={item.image_src} alt="" /> */}
+          {/* <img src={require(item.image_src)} alt="" /> */}
+          <img src={`${process.env.PUBLIC_URL}/img/studio/${item.image_src}.jpg`} alt="" />
         </Div>
       ))}
       {works.entries.map(item => (
         <Div key={item.id}>
           {item.workname}
+          <img src={`${process.env.PUBLIC_URL}/img/works/${item.image_src}.jpg`} alt="" />
         </Div>
       ))}
     </>
