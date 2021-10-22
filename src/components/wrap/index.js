@@ -1,17 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import data from "../../data/wylie_thibeault.json"
-
 const Div = styled.div`
-  color: red;
+  display: flex;
+  width: 1180px;
 `;
-
-// console.log(data);
 
 const Wrap = ({children}) => {
   return (
-    <Div>{children}</Div>
+    <Div>
+      {children}
+    </Div>
   )
 };
 
